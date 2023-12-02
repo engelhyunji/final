@@ -1,6 +1,7 @@
 import React from "react";
 import Headers from "../Headers/Headers";
 import Footer from "../Footer/Footer";
+import PropTypes from 'prop-types';
 
 const Layout = ({ children }) => {
     return (
@@ -12,5 +13,8 @@ const Layout = ({ children }) => {
     );
 };
 
-export default Layout;
+Layout.propTypes = {
+    children: PropTypes.node.isRequired,
+};
 
+export default Layout;

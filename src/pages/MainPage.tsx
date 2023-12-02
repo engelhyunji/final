@@ -1,9 +1,10 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import React from 'react'
 
 const MainPage = () => {
-  return (
-    <div>MainPage</div>
-  )
+    console.log('MainPage rendered')
+    return <div>MainPage</div>
 }
 
 export default MainPage
