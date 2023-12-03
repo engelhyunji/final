@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { userLogin } from '../../apis/api/user';
+import * as St from './style';
 
 
 const Login: React.FC = () => {
@@ -15,32 +16,30 @@ const Login: React.FC = () => {
     };
 
     return (
-      <div>
+      <St.LoginContainer>
+        <St.LoginBox>
         <h2>로그인</h2>
-        <form>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
+        <St.LoginForm onSubmit={(e) => e.preventDefault()}>
+            <St.LoginInput
               type="text"
               id="email"
+              placeholder='이메일'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
+            <St.LoginInput
               type="password"
               id="password"
+              placeholder='비밀번호'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
-          <button type="button" onClick={handleLogin}>
+          <St.LoginBtn type="button" onClick={handleLogin}>
             로그인하기
-          </button>
-        </form>
-      </div>
+          </St.LoginBtn>
+        </St.LoginForm>
+        </St.LoginBox>
+      </St.LoginContainer>
     );
 };
 
