@@ -3,9 +3,11 @@ import { userLogin } from '../../apis/api/user'
 import * as St from './style'
 import NoLineLink from '../NoLineLink'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 const Login: React.FC = () => {
     const navigete = useNavigate()
+    const { login } = useAuth();
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -17,6 +19,7 @@ const Login: React.FC = () => {
         }
         await userLogin(email, password);
         navigete('/');
+        login(); // isLogin 상태변경
     }
 
     return (

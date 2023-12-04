@@ -6,3 +6,9 @@ export const HeaderContainer = styled.div`
     display: flex;
     justify-content: space-between;
 `
+
+export const LogoutBtn = styled.button`
+    border: none;
+    padding: 6px 10px;
+    border-radius: 10px;
+`
