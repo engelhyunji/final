@@ -29,13 +29,11 @@ const Signup: React.FC = () => {
             alert('정보를 모두 입력해주세요😺');
             return;
         }
-        try {
+
             await userSignup(userData);
             console.log('회원가입 정보:', userData);
             navigete('/login');
-        } catch (error) {
-            console.error('회원가입 실패:', error);
-        }
+
     }
 
     return (

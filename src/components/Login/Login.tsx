@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { userLogin } from '../../apis/api/user'
 import * as St from './style'
 import NoLineLink from '../NoLineLink'
+import { useNavigate } from 'react-router-dom'
 
 const Login: React.FC = () => {
+    const navigete = useNavigate()
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -12,7 +15,8 @@ const Login: React.FC = () => {
             alert('이메일 비밀번호를 입력해주세요🐶')
             return
         }
-        await userLogin(email, password)
+        await userLogin(email, password);
+        navigete('/');
     }
 
     return (
@@ -40,8 +44,8 @@ const Login: React.FC = () => {
                     </St.LoginBtn>
                 </St.LoginForm>
                 <St.GoSignupDiv>
-                <St.NotUserP>아직 회원이 아니시면</St.NotUserP>
-                <NoLineLink to="/signup">회원가입</NoLineLink>
+                    <St.NotUserP>아직 회원이 아니시면</St.NotUserP>
+                    <NoLineLink to="/signup">회원가입</NoLineLink>
                 </St.GoSignupDiv>
             </St.LoginBox>
         </St.LoginContainer>
