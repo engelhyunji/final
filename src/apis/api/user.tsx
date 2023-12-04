@@ -30,3 +30,14 @@ export const userLogin = async (email: string, password: string) => {
     
 }
 
+// 가게 조회 (다른파일로 옮길 예정) - 적용 중
+export const getShops = async () => {
+
+    try {
+        const res = await instance.get('/shops');
+        const shops = res.data;
+        return shops;
+    } catch (error) {
+        console.log('가게 조회 : error',error);
+    }
+}
