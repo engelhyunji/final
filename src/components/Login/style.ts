@@ -31,3 +31,11 @@ export const LoginBtn = styled.button`
     border: none;
     border-radius: 20px;
 `
+
+export const GoSignupDiv = styled.div`
+    text-align: center;
+`
+
+export const NotUserP = styled.p`
+    margin-bottom: 20px;
+`
