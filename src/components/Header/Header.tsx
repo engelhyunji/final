@@ -1,25 +1,21 @@
-import React, { useState } from "react";
-import NoLineLink from "../NoLineLink";
-import * as St from './style';
-
+import React from 'react'
+import NoLineLink from '../NoLineLink'
+import * as St from './style'
+import { useAuth } from '../../context/AuthContext'
 
 const Header: React.FC = () => {
-    const [isLogin, setIsLogin] = useState(false);
+    const { isLogin, logout } = useAuth();
 
-    const handleLogout = () => {
-        setIsLogin(false);
-    };
     return (
         <St.HeaderContainer>
-            <NoLineLink to = "/"><h1>와르와르</h1></NoLineLink>
-            <NoLineLink to = "/login">
-                {isLogin ? "로그아웃" : "로그인"}
+            <NoLineLink to="/">
+                <h1>와르와르</h1>
             </NoLineLink>
-            {isLogin && (
-                <button onClick={handleLogout}>로그아웃</button>
-            )}
+            {isLogin ? 
+            <St.LogoutBtn onClick={logout}>로그아웃</St.LogoutBtn>
+            : <NoLineLink to="/login">로그인</NoLineLink>}
         </St.HeaderContainer>
-        );
-};
+    )
+}
 
-export default Header;
+export default Header
