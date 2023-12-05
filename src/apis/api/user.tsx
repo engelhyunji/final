@@ -16,7 +16,7 @@ export const userSignup = async (userData: UserData) => {
         await instance.post('/user/signup', userData);
         navigate('/login');
     } catch (error) {
-        console.log('회원가입 : error',error);
+        console.log('회원가입 : error 메세지',error);
     }
 }
 
@@ -38,7 +38,7 @@ export const userLogin = async (email: string, password: string) => {
         localStorage.setItem('accessToken', token); // localStorage에 토큰 저장
         navigate('/');
     } catch (error) {
-        console.log('로그인 실패 : error',error);
+        console.log('로그인 실패 : error 메세지',error);
     }
     
 }
