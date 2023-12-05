@@ -1,7 +1,8 @@
 import React, { ReactNode } from "react";
-import Headers from "../Headers/Headers";
+import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import PropTypes from 'prop-types';
+import { AuthProvider } from "../../context/AuthContext";
 
 interface LayoutProps {
     children: ReactNode;
@@ -9,11 +10,11 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
-        <div>
-            <Headers />
+        <AuthProvider>
+            <Header />
             {children}
             <Footer />
-        </div>
+        </AuthProvider>
     );
 };
 
