@@ -19,6 +19,7 @@ export const BannerContainer = styled.div`
 `
 
 export const BtnContainer = styled.div`
+    margin: 30px;
 `
 
 export const ShopBtn = styled.button`
