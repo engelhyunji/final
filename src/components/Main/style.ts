@@ -8,16 +8,32 @@ export const MainContainer = styled.div`
     align-items: center;
 `
 
-export const TopContainer = styled.div`
-    max-width: 1280px;
-    margin: 100px;
+export const BannerContainer = styled.div`
+    width: 100%;
+    height: 500px;
+    background-color: #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `
 
-export const ShopsContainer = styled.div`
-    max-width: 1280px;
-    margin: 100px;
+export const BtnContainer = styled.div`
 `
 
-export const ShopsH2 = styled.h2`
+export const ShopBtn = styled.button`
+`
 
+export const PetBtn = styled.button`
+`
+
+
+export const TopWrapper = styled.div`
+    max-width: 1280px;
+    margin: 50px;
+`
+
+export const ShopsWrapper = styled.div`
+    max-width: 1280px;
+    margin: 100px;
 `
