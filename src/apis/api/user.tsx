@@ -9,7 +9,7 @@ export const userSignup = async (userData: UserData) => {
         await instance.post('/user/signup', userData);
         alert('회원가입이 완료되었습니다🐕')
     } catch (error) {
-        console.log('회원가입 : error',error);
+        console.log('회원가입 : error 메세지',error);
     }
 }
 
@@ -25,7 +25,7 @@ export const userLogin = async (email: string, password: string) => {
         const token = res.headers.authorization; // 서버 응답의 headers에서 토큰 추출
         localStorage.setItem('accessToken', token); // localStorage에 토큰 저장
     } catch (error) {
-        console.log('로그인 실패 : error',error);
+        console.log('로그인 실패 : error 메세지',error);
     }
     
 }
