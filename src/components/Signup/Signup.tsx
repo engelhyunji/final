@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { userSignup } from '../../apis/api/user'
 import * as St from './style'
+import { useNavigate } from 'react-router-dom'
 
-interface UserData {
+export interface UserData {
     nickname: string
     phoneNumber: string
     email: string
@@ -10,6 +11,7 @@ interface UserData {
 }
 
 const Signup: React.FC = () => {
+    const navigete = useNavigate();
     const [userData, setUserData] = useState<UserData>({
         nickname: '',
         phoneNumber: '',
@@ -18,24 +20,20 @@ const Signup: React.FC = () => {
     })
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target
-        setUserData((prevData) => ({ ...prevData, [name]: value }))
-    }
+        const { name, value } = e.target;
+        setUserData((prevData) => ({ ...prevData, [name]: value }));
+    };
 
     const handleSignUp = async () => {
-        // 간단한 유효성 검사
         if (!userData.nickname || !userData.phoneNumber || !userData.email || !userData.password) {
-            alert('모두 입력해주세요😺')
-            return
+            alert('정보를 모두 입력해주세요😺');
+            return;
         }
-        try {
-            // 회원가입 정보를 직접 처리
-            await userSignup(userData)
-            console.log('회원가입 정보:', userData)
-        } catch (error) {
-            console.error('회원가입 실패:', error)
-            // 실패 시 추가적인 처리를 할 수 있습니다.
-        }
+
+            await userSignup(userData);
+            console.log('회원가입 정보:', userData);
+            navigete('/login');
+
     }
 
     return (

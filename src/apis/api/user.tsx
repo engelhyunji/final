@@ -1,42 +1,29 @@
-import { useNavigate } from "react-router-dom";
+import { UserData } from "../../components/Signup/Signup";
 import instance from "../instance";
 
-interface UserData {
-    nickname: string;
-    phoneNumber: string;
-    email: string;
-    password: string;
-}
 
-
+// 회원가입 - 완료
 export const userSignup = async (userData: UserData) => {
-    const navigate = useNavigate();
 
     try {
         await instance.post('/user/signup', userData);
-        navigate('/login');
+        alert('회원가입이 완료되었습니다🐕')
     } catch (error) {
         console.log('회원가입 : error 메세지',error);
     }
 }
 
+// 로그인 - 완료
 export const userLogin = async (email: string, password: string) => {
-    const navigate = useNavigate();
 
     try {
         const res = await instance.post('/user/login', {
             email,
             password
-        },
-        {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        console.log('로그인 성공 : res',res);
-        const token = res.data.accessToken; // 서버 응답의 data에서 토큰 추출
+        },);
+        alert('로그인이 완료되었습니다🐕')
+        const token = res.headers.authorization; // 서버 응답의 headers에서 토큰 추출
         localStorage.setItem('accessToken', token); // localStorage에 토큰 저장
-        navigate('/');
     } catch (error) {
         console.log('로그인 실패 : error 메세지',error);
     }
