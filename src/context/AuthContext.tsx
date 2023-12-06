@@ -18,7 +18,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const logout = () => {
         setIsLogin(false);
-        localStorage.removeItem('token'); // 인가용 토큰 삭제
+        localStorage.removeItem('accessToken'); // 인가용 토큰 삭제
+        console.log('localStorage.getItem(accessToken) 토큰삭제 확인',localStorage.getItem('accessToken')); // 토큰 삭제 확인
     };
 
     return <AuthContext.Provider value={{ isLogin, login, logout }}>{children}</AuthContext.Provider>
