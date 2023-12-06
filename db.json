@@ -1,0 +1,114 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "pets": [
+    {
+      "id": 1,
+      "petId": 1,
+      "petName": "시루",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "id": 2,
+      "petId": 2,
+      "petName": "루이",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "id": 3,
+      "petId": 3,
+      "petName": "맥스",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "id": 4,
+      "petId": 4,
+      "petName": "벤지",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "id": 5,
+      "petId": 5,
+      "petName": "쿠키",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "id": 6,
+      "petId": 6,
+      "petName": "체리",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "id": 7,
+      "petId": 7,
+      "petName": "두리",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "id": 8,
+      "petId": 8,
+      "petName": "코코",
+      "imageUrl": "png,jpg,jpeg"
+    }
+  ],
+  "shops": [
+    {
+      "shopId": 1,
+      "id": 1,
+      "shopName": "왈왈굿 미용실",
+      "shopTime": "영업시간",
+      "shopTel": "01033333333",
+      "shopAddress": "서울시 마포구 와우산로 11길 33 와로알빌딩 1층",
+      "shopType": "미용",
+      "shopDescribe": "안녕하세요 30년 경력의 강아지 미용전문 어쩌구",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "shopId": 2,
+      "id": 2,
+      "shopName": "왈왈굿2 미용실",
+      "shopTime": "영업시간2",
+      "shopTel": "01033333333",
+      "shopAddress": "서울시 마포구 와우산로 11길 33 와로알빌딩 1층",
+      "shopType": "미용2",
+      "shopDescribe": "안녕하세요 30년 경력의 강아지 미용전문 어쩌구2",
+      "imageUrl": "png,jpg,jpeg"
+    }
+  ],
+  "data": [
+    {
+      "idx": 1,
+      "title": "Sample Title 1"
+    },
+    {
+      "idx": 2,
+      "title": "Sample Title 2"
+    },
+    {
+      "idx": 3,
+      "title": "Sample Title 3"
+    }
+  ],
+  "pagination": {
+    "endPage": 5,
+    "nextBlock": 2,
+    "prevBlock": 1,
+    "startPage": 1,
+    "totalPageCnt": 10
+  }
+}
