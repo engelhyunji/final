@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import axios, { AxiosResponse } from 'axios'
+import * as ST from './style'
 
 interface PetDetails {
     id: number
@@ -92,25 +93,25 @@ const Pet: React.FC = () => {
     }
 
     return (
-        <div>
-            <p>애견 정보 추가</p>
+        <ST.Content>
+            <ST.Text>애견 정보 추가</ST.Text>
             {registrationStatus && <p>{registrationStatus}</p>}
-            <form onSubmit={handleSubmit}>
-                <label>
+            <ST.Form onSubmit={handleSubmit}>
+                <ST.Label>
                     Pet Name:
-                    <input type="text" value={petName} onChange={handlePetNameChange} />
-                </label>
+                    <ST.Input type="text" value={petName} onChange={handlePetNameChange} />
+                </ST.Label>
                 <br />
-                <label>
+                <ST.Label>
                     Image:
-                    <input type="file" multiple accept="image/*" onChange={handleImageFileChange} />
-                </label>
+                    <ST.Input type="file" multiple accept="image/*" onChange={handleImageFileChange} />
+                </ST.Label>
                 <br />
-                {imageUrl && <img src={imageUrl} alt="Pet" />}
-                <button type="submit" value="Send">
+                <ST.Wrap>{imageUrl && <ST.Image src={imageUrl} alt="Pet" />}</ST.Wrap>
+                <ST.Button type="submit" value="Send">
                     Add Pet
-                </button>
-            </form>
+                </ST.Button>
+            </ST.Form>
             {petDetails && (
                 <div>
                     <p>Pet Details</p>
@@ -118,7 +119,7 @@ const Pet: React.FC = () => {
                     <p>Pet Image: {petDetails.imageUrl}</p>
                 </div>
             )}
-        </div>
+        </ST.Content>
     )
 }
 

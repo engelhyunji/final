@@ -1,14 +1,17 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
-    width: 100%;
-    padding: 20px;
     display: flex;
     justify-content: space-between;
-`
+    padding: 16px;
+    background-color: #fff;
+    color: #fff;
+`;
 
 export const LogoutBtn = styled.button`
+    background-color: #6ca399;
+    color: #fff;
     border: none;
-    padding: 6px 10px;
-    border-radius: 10px;
-`
+    padding: 8px 16px;
+    cursor: pointer;
+`;
