@@ -7,6 +7,7 @@ import PetPage from '../pages/PetPage'
 import LoginPage from '../pages/LoginPage'
 import MainPage from '../pages/MainPage'
 import SignupPage from '../pages/SignupPage'
+import MyPage from '../pages/MyPage'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 const queryClient = new QueryClient()
@@ -22,6 +23,7 @@ const AppRoutes = () => {
                         <Route path="/pet" element={<PetPage />} />
                         <Route path="/shops" element={<ShopsPage />} />
                         <Route path="/signup" element={<SignupPage />} />
+                        <Route path="/my/:id" element={<MyPage />} />
                     </Routes>
                 </Layout>
             </Router>
