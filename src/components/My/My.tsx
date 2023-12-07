@@ -1,0 +1,102 @@
+import { useNavigate } from 'react-router-dom'
+import { Pet, Shop, getDetailPet, getDetailShop } from '../../apis/api/api'
+import * as St from './style'
+import React, { useState, useEffect } from 'react'
+
+interface MyPageProps {
+    id: number
+}
+
+const My: React.FC<MyPageProps> = ({ id }) => {
+    const navigate = useNavigate();
+    const [shops, setShops] = useState<Shop[]>([])
+    const [pets, setPets] = useState<Pet[]>([])
+    // const [displayedItems, setDisplayedItems] = useState<(Shop | Pet)[]>([])
+
+    useEffect(() => {
+        // 사용자가 등록한 가게 정보
+        getDetailShop(id)
+            .then((shopData) => {
+                if (shopData) {
+                    setShops([shopData]);
+                } else {
+                    // 가게 정보가 없을 경우
+                }
+            })
+            .catch((error) => console.error('shop 정보 불러오기 오류:', error))
+
+        // 사용자가 등록한 동물 정보
+        getDetailPet(id)
+            .then((petData) => {
+                if (petData) {
+                    setPets([petData]);
+                } else {
+                    // 애완동물 정보가 없을 경우
+                }
+            })
+            .catch((error) => console.error('pet 정보 불러오기 오류:', error))
+    }, [id])
+
+    // shops 또는 pets가 추가될 때 displayedItems을 업데이트
+    // useEffect(() => {
+    //     if (shops.length > 0) {
+    //         setDisplayedItems(shops)
+    //     } else if (pets.length > 0) {
+    //         setDisplayedItems(pets)
+    //     }
+    // }, [shops, pets])
+
+    return (
+        <St.MyContainer>
+            <St.TitleH2>마이 페이지</St.TitleH2>
+
+            {shops.length > 0 && (
+                <St.ShopNPetSection>
+                    <St.TitleH3>마이 샵</St.TitleH3>
+                    <ul>
+                        {shops.map((shop) => (
+                            <li key={shop.id}>
+                                <img src={shop.imageUrl} alt={shop.shopName} />
+                                <p>가게 이름: {shop.shopName}</p>
+                                <p>가게 시간: {shop.shopTime}</p>
+                                <p>연락처: {shop.shopTel}</p>
+                                <p>주소: {shop.shopAddress}</p>
+                                <p>유형: {shop.shopType}</p>
+                                <p>소개: {shop.shopDescribe}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </St.ShopNPetSection>
+            )}
+
+            {pets.length > 0 && (
+                <St.ShopNPetSection>
+                    <St.TitleH3>마이 펫</St.TitleH3>
+                    <ul>
+                        {pets.map((pet) => (
+                            <li key={pet.id}>
+                                <img src={pet.imageUrl} alt={pet.petName} />
+                                <p>반려동물 이름: {pet.petName}</p>
+                                <p>반려동물 생일: {pet.petBirth}</p>
+                                <p>반려동물 특이사항: {pet.petInfo}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </St.ShopNPetSection>
+            )}
+
+            {shops.length === 0 && pets.length === 0 && (
+                <St.ShopNPetSection>
+                    등록된 샵 또는 펫 정보가 없습니다.
+                    <br /> 내 가게 또는 반려동물을 등록해보세요!
+                    <St.BtnContainer>
+                        <St.ShopBtn onClick={() => {navigate('/shops')}}>Shop</St.ShopBtn>
+                        <St.PetBtn onClick={() => {navigate('/pet')}}>Pet</St.PetBtn>
+                    </St.BtnContainer>
+                </St.ShopNPetSection>
+            )}
+        </St.MyContainer>
+    )
+}
+
+export default My;
