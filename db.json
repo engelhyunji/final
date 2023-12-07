@@ -9,17 +9,44 @@
     {
       "id": 2,
       "petId": 2,
-      "petName": "시루",
+      "petName": "루이",
       "imageUrl": "png,jpg,jpeg"
     },
     {
       "id": 3,
       "petId": 3,
-      "petName": "시루",
+      "petName": "맥스",
       "imageUrl": "png,jpg,jpeg"
     },
     {
-      "id": 4
+      "id": 4,
+      "petId": 4,
+      "petName": "벤지",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "id": 5,
+      "petId": 5,
+      "petName": "쿠키",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "id": 6,
+      "petId": 6,
+      "petName": "체리",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "id": 7,
+      "petId": 7,
+      "petName": "두리",
+      "imageUrl": "png,jpg,jpeg"
+    },
+    {
+      "id": 8,
+      "petId": 8,
+      "petName": "코코",
+      "imageUrl": "png,jpg,jpeg"
     }
   ],
   "shops": [
@@ -44,21 +71,27 @@
       "shopType": "미용2",
       "shopDescribe": "안녕하세요 30년 경력의 강아지 미용전문 어쩌구2",
       "imageUrl": "png,jpg,jpeg"
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "id": 7
     }
-  ]
+  ],
+  "data": [
+    {
+      "idx": 1,
+      "title": "Sample Title 1"
+    },
+    {
+      "idx": 2,
+      "title": "Sample Title 2"
+    },
+    {
+      "idx": 3,
+      "title": "Sample Title 3"
+    }
+  ],
+  "pagination": {
+    "endPage": 5,
+    "nextBlock": 2,
+    "prevBlock": 1,
+    "startPage": 1,
+    "totalPageCnt": 10
+  }
 }

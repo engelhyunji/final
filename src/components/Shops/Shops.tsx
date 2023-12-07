@@ -1,72 +1,54 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
-import axios from 'axios'
+import instance from '../../apis/instance'
+import * as ST from './style'
 
-interface PetDetails {
-    shopId: number
-    Id: number
+interface ShopDetails {
     shopName: string
     shopTime: string
     shopTel: string
     shopAddress: string
     shopType: string
     shopDescribe: string
-    imageUrl: null // 이미지 타입 string은 아니고, 어떤걸까??
+    imageUrl: string
 }
 
 const Shops: React.FC = () => {
-    const [shopName, setShopName] = useState<string>('')
-    const [shopTime, setShopTime] = useState<string>('')
-    const [shopTel, setShopTel] = useState<string>('')
-    const [shopAddress, setShopAddress] = useState<string>('')
-    const [shopType, setShopType] = useState<string>('')
-    const [shopDescribe, setShopDescribe] = useState<string>('')
+    const [shopRequestDto, setShopRequestDto] = useState<ShopDetails>({
+        shopName: '',
+        shopTime: '',
+        shopTel: '',
+        shopAddress: '',
+        shopType: '',
+        shopDescribe: '',
+        imageUrl: '', 
+    })
+
     const [imageUrl, setImageUrl] = useState<string | null>(null)
-    const [petDetails, setPetDetails] = useState<PetDetails | null>(null)
+    const [shopDetails, setShopDetails] = useState<ShopDetails | null>(null)
     const [registrationStatus, setRegistrationStatus] = useState<string | null>(null)
 
     useEffect(() => {
-        fetchPetDetails()
+        fetchShopDetails()
     }, [])
 
-    const fetchPetDetails = async () => {
+    const fetchShopDetails = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_URL2}/shops`, {
-                headers: {
-                    Authorization: `${localStorage.getItem('accesstoken')}`,
-                    'Content-Type': 'application/json',
-                },
-            })
+            const response = await instance.get('/shops')
 
             if (response.data && response.data.length > 0) {
-                setPetDetails(response.data[0])
+                setShopDetails(response.data[0])
             }
         } catch (error) {
-            console.error('Error fetching pet details:', error)
+            console.error('Error fetching shop details:', error)
         }
     }
 
-    const handleShopNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setShopName(e.target.value)
-    }
-
-    const handleShopTimeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setShopTime(e.target.value)
-    }
-
-    const handleShopTelChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setShopTel(e.target.value)
-    }
-
-    const handleShopAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setShopAddress(e.target.value)
-    }
-
-    const handleShopTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setShopType(e.target.value)
-    }
-
-    const handleShopDescribeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setShopDescribe(e.target.value)
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
+        setShopRequestDto((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }))
     }
 
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -83,40 +65,31 @@ const Shops: React.FC = () => {
         e.preventDefault()
 
         const formData = new FormData()
-        formData.append('shopName', shopName)
-        formData.append('shopTime', shopTime)
-        formData.append('shopTel', shopTel)
-        formData.append('shopAddress', shopAddress)
-        formData.append('shopType', shopType)
-        formData.append('shopDescribe', shopDescribe)
-
+        Object.entries(shopRequestDto).forEach(([key, value]) => {
+            formData.append(key, value)
+        })
         if (imageUrl) {
-            formData.append('imageUrl', imageUrl)
+            formData.append('image', imageUrl)
         }
 
-        const formDataObject: any = {}
-        formData.forEach((value, key) => {
-            formDataObject[key] = value
-        })
-
-        console.log('formDataObject:', formDataObject)
-
         try {
-            const response = await axios.post(`${import.meta.env.VITE_APP_SERVER_URL2}/shops`, formData, {
+            const response = await instance.post('/shops', formData, {
                 headers: {
-                    Authorization: `${localStorage.getItem('accesstoken')}`,
                     'Content-Type': 'multipart/form-data',
                 },
             })
 
-            setPetDetails(response.data)
-            setShopName('')
-            setShopTime('')
-            setShopTel('')
-            setShopAddress('')
-            setShopType('')
-            setShopDescribe('')
-            setImageUrl(null)
+            setShopDetails(response.data)
+            setShopRequestDto({
+                shopName: '',
+                shopTime: '',
+                shopTel: '',
+                shopAddress: '',
+                shopType: '',
+                shopDescribe: '',
+                imageUrl: '',
+            })
+            setImageUrl('')
             setRegistrationStatus('가게 정보 등록 성공!')
         } catch (error) {
             console.error('Error adding shop:', error.response ? error.response.data : error.message)
@@ -125,64 +98,74 @@ const Shops: React.FC = () => {
     }
 
     return (
-        <div>
-            <p>가게 정보 추가</p>
+        <ST.Content>
+            <ST.Text>가게 정보 추가</ST.Text>
             {registrationStatus && <p>{registrationStatus}</p>}
-            <form onSubmit={handleSubmit}>
-                <label>
+            <ST.Form onSubmit={handleSubmit}>
+                <ST.Label>
                     Shop Name:
-                    <input type="text" value={shopName} onChange={handleShopNameChange} />
-                </label>
+                    <ST.Input type="text" name="shopName" value={shopRequestDto.shopName} onChange={handleChange} />
+                </ST.Label>
                 <br />
-                <label>
+                <ST.Label>
                     Shop Time:
-                    <input type="text" value={shopTime} onChange={handleShopTimeChange} />
-                </label>
+                    <ST.Input type="text" name="shopTime" value={shopRequestDto.shopTime} onChange={handleChange} />
+                </ST.Label>
                 <br />
-                <label>
+                <ST.Label>
                     Shop Tel:
-                    <input type="text" value={shopTel} onChange={handleShopTelChange} />
-                </label>
+                    <ST.Input type="text" name="shopTel" value={shopRequestDto.shopTel} onChange={handleChange} />
+                </ST.Label>
                 <br />
-                <label>
+                <ST.Label>
                     Shop Address:
-                    <input type="text" value={shopAddress} onChange={handleShopAddressChange} />
-                </label>
+                    <ST.Input
+                        type="text"
+                        name="shopAddress"
+                        value={shopRequestDto.shopAddress}
+                        onChange={handleChange}
+                    />
+                </ST.Label>
                 <br />
-                <label>
+                <ST.Label>
                     Shop Type:
-                    <input type="text" value={shopType} onChange={handleShopTypeChange} />
-                </label>
+                    <ST.Input type="text" name="shopType" value={shopRequestDto.shopType} onChange={handleChange} />
+                </ST.Label>
                 <br />
-                <label>
+                <ST.Label>
                     Shop Describe:
-                    <input type="text" value={shopDescribe} onChange={handleShopDescribeChange} />
-                </label>
+                    <ST.Input
+                        type="text"
+                        name="shopDescribe"
+                        value={shopRequestDto.shopDescribe}
+                        onChange={handleChange}
+                    />
+                </ST.Label>
                 <br />
-                <label>
+                <ST.Label>
                     Image:
-                    <input type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleImageFileChange} />
-                </label>
+                    <ST.Input type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleImageFileChange} />
+                </ST.Label>
                 <br />
-                {imageUrl && <img src={imageUrl} alt="Shop" />}
-                <button type="submit" value="Send">
+                <ST.Wrap>{imageUrl && <ST.Image src={imageUrl} alt="Shop" />}</ST.Wrap>
+                <ST.Button type="submit" value="Send">
                     Add Shop
-                </button>
-            </form>
+                </ST.Button>
+            </ST.Form>
 
-            {petDetails && (
+            {shopDetails && (
                 <div>
                     <p>Shop Details</p>
-                    <p>Shop Name: {petDetails.shopName}</p>
-                    <p>shopTime: {petDetails.shopTime}</p>
-                    <p>shopTel: {petDetails.shopTel}</p>
-                    <p>shopAddres: {petDetails.shopAddress}</p>
-                    <p>shopType: {petDetails.shopType}</p>
-                    <p>shopDescribe: {petDetails.shopDescribe}</p>
-                    <p>Shop Image: {petDetails.imageUrl}</p>
+                    <p>Shop Name: {shopDetails.shopName}</p>
+                    <p>Shop Time: {shopDetails.shopTime}</p>
+                    <p>Shop Tel: {shopDetails.shopTel}</p>
+                    <p>Shop Address: {shopDetails.shopAddress}</p>
+                    <p>Shop Type: {shopDetails.shopType}</p>
+                    <p>Shop Describe: {shopDetails.shopDescribe}</p>
+                    <p>Shop Image: {shopDetails.imageUrl}</p>
                 </div>
             )}
-        </div>
+        </ST.Content>
     )
 }
 
