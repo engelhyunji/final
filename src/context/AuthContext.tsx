@@ -10,7 +10,11 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps | undefined>(undefined)
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [isLogin, setIsLogin] = useState(false);
+    const [isLogin, setIsLogin] = useState(() => {
+        // 페이지 로드 시 토큰 확인
+        const storedToken = localStorage.getItem('accessToken');
+        return !!storedToken; // 토큰 존재하면 true, 아니면 false
+    });
 
     const login = () => {
         setIsLogin(true);
@@ -18,7 +22,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const logout = () => {
         setIsLogin(false);
-        localStorage.removeItem('token'); // 인가용 토큰 삭제
+        localStorage.removeItem('accessToken'); // 인가용 토큰 삭제
+        console.log('localStorage.getItem(accessToken) 토큰삭제 확인',localStorage.getItem('accessToken')); // 토큰 삭제 확인
     };
 
     return <AuthContext.Provider value={{ isLogin, login, logout }}>{children}</AuthContext.Provider>

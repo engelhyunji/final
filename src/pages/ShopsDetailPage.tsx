@@ -1,8 +1,8 @@
 import React from 'react'
-import PetDetail from '../components/Pet/PetDetail'
+import ShopsDetail from '../components/Shops/ShopsDetail'
 
 const ShopsDetailPage = () => {
-    return <PetDetail />
+    return <ShopsDetail />
 }
 
 export default ShopsDetailPage

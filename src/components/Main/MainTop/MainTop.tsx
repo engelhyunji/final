@@ -1,12 +1,8 @@
 import React from 'react'
-import * as St from './style'
+import * as ST from './style'
 
 const MainTop: React.FC = () => {
-    return (
-            <St.TopContainer>
-                오픈 API 내용 
-            </St.TopContainer>
-    )
+    return <ST.TopContainer>오픈 API 내용</ST.TopContainer>
 }
 
-export default MainTop;
+export default MainTop

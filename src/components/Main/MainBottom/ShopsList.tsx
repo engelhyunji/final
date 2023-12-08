@@ -1,12 +1,12 @@
 import React from 'react'
-import * as St from './style'
+import * as ST from './style'
 
 const ShopsList: React.FC = () => {
     return (
-            <St.ShopsContainer>
-                <St.ShopsH2>Shop 목록</St.ShopsH2>
-            </St.ShopsContainer>
+        <ST.ShopsContainer>
+            <ST.ShopsH2>Shop 목록</ST.ShopsH2>
+        </ST.ShopsContainer>
     )
 }
 
-export default ShopsList;
+export default ShopsList
