@@ -6,10 +6,10 @@ import { useParams } from 'react-router-dom';
 
 const MyPage = () => {
     const param = useParams();
-    const id = Number(param.id);
+    const userId = Number(param.userId);
     console.log('param',param);
-    console.log('param.id',param.id);
-    return <My id={id}/>;
+    console.log('param.userId',param.userId);
+    return <My userId={userId}/>;
 }
 
 export default MyPage;

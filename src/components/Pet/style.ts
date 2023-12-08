@@ -15,7 +15,7 @@ export const Text = styled.div`
     font-weight: bold;
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
     max-width: 400px;
     width: 100%;
     padding: 20px;

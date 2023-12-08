@@ -1,12 +1,8 @@
-import React from "react";
-import * as St from './style'
-
+import React from 'react'
+import * as ST from './style'
 
 const Footer: React.FC = () => {
-    return (
-    <St.FooterContainer>
-        Footer
-    </St.FooterContainer>);
-};
+    return <ST.FooterContainer>Footer</ST.FooterContainer>
+}
 
-export default Footer;
+export default Footer

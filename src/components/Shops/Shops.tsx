@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import instance from '../../apis/instance'
 import * as ST from './style'
 
-interface ShopDetails {
+interface ShopPostData {
     shopName: string
     shopTime: string
     shopTel: string
@@ -13,19 +13,18 @@ interface ShopDetails {
 }
 
 const Shops: React.FC = () => {
-    const [shopRequestDto, setShopRequestDto] = useState<ShopDetails>({
+    const [shopRequestDto, setShopRequestDto] = useState<ShopPostData>({
         shopName: '',
         shopTime: '',
         shopTel: '',
         shopAddress: '',
         shopType: '',
         shopDescribe: '',
-        imageUrl: '', 
+        imageUrl: '',
     })
 
     const [imageUrl, setImageUrl] = useState<string | null>(null)
-    const [shopDetails, setShopDetails] = useState<ShopDetails | null>(null)
-    const [registrationStatus, setRegistrationStatus] = useState<string | null>(null)
+    const [shopDetails, setShopDetails] = useState<ShopPostData | null>(null)
 
     useEffect(() => {
         fetchShopDetails()
@@ -43,7 +42,7 @@ const Shops: React.FC = () => {
         }
     }
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target
         setShopRequestDto((prevData) => ({
             ...prevData,
@@ -53,13 +52,19 @@ const Shops: React.FC = () => {
 
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
+            console.log('e.target.files[0] 파일확인', e.target.files[0])
             const reader = new FileReader()
             reader.onload = () => {
-                setImageUrl(reader.result as string)
+                const imageUrlValue = reader.result as string
+                setImageUrl(imageUrlValue)
+                console.log('imageUrl 값확인 ', imageUrlValue)
             }
             reader.readAsDataURL(e.target.files[0])
         }
     }
+    useEffect(() => {
+        console.log('상태 업데이트가 완료된 후', imageUrl)
+    }, [imageUrl])
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -69,7 +74,8 @@ const Shops: React.FC = () => {
             formData.append(key, value)
         })
         if (imageUrl) {
-            formData.append('image', imageUrl)
+            // formData.append('image', imageUrl)
+            formData.append('imageUrl', imageUrl)
         }
 
         try {
@@ -90,66 +96,40 @@ const Shops: React.FC = () => {
                 imageUrl: '',
             })
             setImageUrl('')
-            setRegistrationStatus('가게 정보 등록 성공!')
         } catch (error) {
-            console.error('Error adding shop:', error.response ? error.response.data : error.message)
-            setRegistrationStatus('가게 정보 등록 실패 다시 시도.')
+            console.error('가게 등록 에러 :', error)
         }
     }
 
     return (
         <ST.Content>
-            <ST.Text>가게 정보 추가</ST.Text>
-            {registrationStatus && <p>{registrationStatus}</p>}
+            <ST.Text>가게 등록</ST.Text>
             <ST.Form onSubmit={handleSubmit}>
-                <ST.Label>
-                    Shop Name:
-                    <ST.Input type="text" name="shopName" value={shopRequestDto.shopName} onChange={handleChange} />
-                </ST.Label>
-                <br />
-                <ST.Label>
-                    Shop Time:
-                    <ST.Input type="text" name="shopTime" value={shopRequestDto.shopTime} onChange={handleChange} />
-                </ST.Label>
-                <br />
-                <ST.Label>
-                    Shop Tel:
-                    <ST.Input type="text" name="shopTel" value={shopRequestDto.shopTel} onChange={handleChange} />
-                </ST.Label>
-                <br />
-                <ST.Label>
-                    Shop Address:
-                    <ST.Input
-                        type="text"
-                        name="shopAddress"
-                        value={shopRequestDto.shopAddress}
-                        onChange={handleChange}
-                    />
-                </ST.Label>
-                <br />
-                <ST.Label>
-                    Shop Type:
-                    <ST.Input type="text" name="shopType" value={shopRequestDto.shopType} onChange={handleChange} />
-                </ST.Label>
-                <br />
-                <ST.Label>
-                    Shop Describe:
-                    <ST.Input
-                        type="text"
-                        name="shopDescribe"
-                        value={shopRequestDto.shopDescribe}
-                        onChange={handleChange}
-                    />
-                </ST.Label>
-                <br />
-                <ST.Label>
-                    Image:
-                    <ST.Input type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleImageFileChange} />
-                </ST.Label>
-                <br />
+                <ST.Label>가게 이름 </ST.Label>
+                <ST.Input type="text" name="shopName" value={shopRequestDto.shopName} onChange={handleChange} />
+                <ST.Label>영업 시간</ST.Label>
+                <ST.Input type="text" name="shopTime" value={shopRequestDto.shopTime} onChange={handleChange} />
+                <ST.Label>연락처</ST.Label>
+                <ST.Input type="text" name="shopTel" value={shopRequestDto.shopTel} onChange={handleChange} />
+                <ST.Label>주소</ST.Label>
+                <ST.Input type="text" name="shopAddress" value={shopRequestDto.shopAddress} onChange={handleChange} />
+                <ST.Label>가게 유형</ST.Label>
+                <ST.SelectContainer>
+                    <ST.Select name="shopType" value={shopRequestDto.shopType} onChange={handleChange}>
+                        <option value="">가게 유형을 선택해주세요</option>
+                        <option value="GROOMING">GROOMING</option>
+                        <option value="HOSPITAL">HOSPITAL</option>
+                        <option value="CAFE">CAFE</option>
+                        <option value="ETC">ETC</option>
+                    </ST.Select>
+                </ST.SelectContainer>
+                <ST.Label>소개글</ST.Label>
+                <ST.Input type="text" name="shopDescribe" value={shopRequestDto.shopDescribe} onChange={handleChange} />
+                <ST.Label>이미지</ST.Label>
+                <ST.Input type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleImageFileChange} />
                 <ST.Wrap>{imageUrl && <ST.Image src={imageUrl} alt="Shop" />}</ST.Wrap>
                 <ST.Button type="submit" value="Send">
-                    Add Shop
+                    등록하기
                 </ST.Button>
             </ST.Form>
 

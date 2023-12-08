@@ -43,7 +43,7 @@ const AppRoutes = () => {
                         {/* 수정 페이지 modify */}
                         <Route path="/shops/modify/:id" element={<ShopsModifyPage />} />
                         <Route path="/signup" element={<SignupPage />} />
-                        <Route path="/my/:id" element={<MyPage />} />
+                        <Route path="/my/:userId" element={<MyPage />} />
                     </Routes>
                 </Layout>
             </Router>

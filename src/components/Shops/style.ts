@@ -15,7 +15,7 @@ export const Text = styled.div`
     font-weight: bold;
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
     max-width: 400px;
     width: 100%;
     padding: 20px;
@@ -40,6 +40,23 @@ export const Input = styled.input`
     border: 1px solid #ccc;
     border-radius: 7px;
     box-sizing: border-box;
+`;
+
+export const SelectContainer = styled.div`
+    height: 5vh;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    box-sizing: border-box;
+`;
+
+export const Select = styled.select`
+    width: 98%;
+    padding: 8px;
+    outline: none;
+    border: none;
+    background-color: transparent;
 `;
 
 export const Button = styled.button`
