@@ -11,7 +11,12 @@ interface NoLineLinkProps extends LinkProps {
 const NoLineLink: React.FC<NoLineLinkProps> = ({ to, children, ...rest }) => (
     <Link
         to={to}
-        style={{ textDecoration: 'none', color: '#6ca399', display: 'inline-block', margin: '0 10px' }}
+        style={{
+            textDecoration: 'none',
+            color: '#6ca399',
+            display: 'inline-block',
+            margin: '0 7px',
+        }}
         {...rest}
     >
         {children}

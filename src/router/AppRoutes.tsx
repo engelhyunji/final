@@ -31,15 +31,15 @@ const AppRoutes = () => {
                         <Route path="/petlist" element={<PetListPage />} />
                         {/* 상세 페이지 detail */}
                         <Route path="/pets/:id" element={<PetDetailPage />} />
-                        {/* 수정 페이지 modify */}
+                        {/* 수정 + 삭제 페이지 modify */}
                         <Route path="/pet/modify/:id" element={<PetModifyPage />} />
                         {/* 생성 페이지 create */}
                         <Route path="/shops" element={<ShopsPage />} />
-                        {/* 목록 페이지 create */}
+                        {/* 목록 페이지 list */}
                         <Route path="/shopslist" element={<ShopsListPage />} />
-                        {/* 상세 페이지 detail */}
+                        {/* 상세 + 댓글 페이지 detail */}
                         <Route path="/shops/:id" element={<ShopsDetailPage />} />
-                        {/* 수정 페이지 modify */}
+                        {/* 수정 + 삭제 페이지 modify */}
                         <Route path="/shops/modify/:id" element={<ShopsModifyPage />} />
                         <Route path="/signup" element={<SignupPage />} />
                     </Routes>

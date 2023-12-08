@@ -9,19 +9,24 @@ const Header: React.FC = () => {
     return (
         <St.HeaderContainer>
             <NoLineLink to="/">
-                <h1>와르와르</h1>
+                <h5>와르와르</h5>
             </NoLineLink>
             <div>
                 <NoLineLink to="/pet">
-                    <h1>애견 등록</h1>
+                    <h5>애견 등록</h5>
                 </NoLineLink>
                 <NoLineLink to="/shops">
-                    <h1>가게 등록</h1>
+                    <h5>가게 등록</h5>
+                </NoLineLink>
+                <NoLineLink to="/petlist">
+                    <h5>애견 전체조회</h5>
                 </NoLineLink>
                 {isLogin ? (
                     <St.LogoutBtn onClick={logout}>로그아웃</St.LogoutBtn>
                 ) : (
-                    <NoLineLink to="/login">로그인</NoLineLink>
+                    <NoLineLink to="/login">
+                        <h5>로그인</h5>
+                    </NoLineLink>
                 )}
             </div>
         </St.HeaderContainer>
