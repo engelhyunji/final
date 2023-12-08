@@ -92,8 +92,8 @@ const Shops: React.FC = () => {
             setImageUrl('')
             setRegistrationStatus('가게 정보 등록 성공!')
         } catch (error) {
-            console.error('Error adding shop:', error.response ? error.response.data : error.message)
-            setRegistrationStatus('가게 정보 등록 실패 다시 시도.')
+            console.error('가게 등록 에러 :', error)
+            setRegistrationStatus('가게 정보 등록 실패.')
         }
     }
 

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { Pet, Shop, getDetailPet, getDetailShop } from '../../apis/api/api'
-import * as St from './style'
+import * as ST from './style'
 import React, { useState, useEffect } from 'react'
 
 interface MyPageProps {
@@ -47,12 +47,12 @@ const My: React.FC<MyPageProps> = ({ userId }) => {
     // }, [shops, pets])
 
     return (
-        <St.MyContainer>
-            <St.TitleH2>마이 페이지</St.TitleH2>
+        <ST.MyContainer>
+            <ST.TitleH2>마이 페이지</ST.TitleH2>
 
             {shops.length > 0 && (
-                <St.ShopNPetSection>
-                    <St.TitleH3>마이 샵</St.TitleH3>
+                <ST.ShopNPetSection>
+                    <ST.TitleH3>마이 샵</ST.TitleH3>
                     <ul>
                         {shops.map((shop) => (
                             <li key={shop.userId}>
@@ -66,12 +66,12 @@ const My: React.FC<MyPageProps> = ({ userId }) => {
                             </li>
                         ))}
                     </ul>
-                </St.ShopNPetSection>
+                </ST.ShopNPetSection>
             )}
 
             {pets.length > 0 && (
-                <St.ShopNPetSection>
-                    <St.TitleH3>마이 펫</St.TitleH3>
+                <ST.ShopNPetSection>
+                    <ST.TitleH3>마이 펫</ST.TitleH3>
                     <ul>
                         {pets.map((pet) => (
                             <li key={pet.userId}>
@@ -82,20 +82,20 @@ const My: React.FC<MyPageProps> = ({ userId }) => {
                             </li>
                         ))}
                     </ul>
-                </St.ShopNPetSection>
+                </ST.ShopNPetSection>
             )}
 
             {shops.length === 0 && pets.length === 0 && (
-                <St.ShopNPetSection>
+                <ST.ShopNPetSection>
                     등록된 샵 또는 펫 정보가 없습니다.
                     <br /> 내 가게 또는 반려동물을 등록해보세요!
-                    <St.BtnContainer>
-                        <St.ShopBtn onClick={() => {navigate('/shops')}}>Shop</St.ShopBtn>
-                        <St.PetBtn onClick={() => {navigate('/pet')}}>Pet</St.PetBtn>
-                    </St.BtnContainer>
-                </St.ShopNPetSection>
+                    <ST.BtnContainer>
+                        <ST.ShopBtn onClick={() => {navigate('/shops')}}>Shop</ST.ShopBtn>
+                        <ST.PetBtn onClick={() => {navigate('/pet')}}>Pet</ST.PetBtn>
+                    </ST.BtnContainer>
+                </ST.ShopNPetSection>
             )}
-        </St.MyContainer>
+        </ST.MyContainer>
     )
 }
 
