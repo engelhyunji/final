@@ -10,7 +10,11 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps | undefined>(undefined)
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [isLogin, setIsLogin] = useState(false);
+    const [isLogin, setIsLogin] = useState(() => {
+        // 페이지 로드 시 토큰 확인
+        const storedToken = localStorage.getItem('accessToken');
+        return !!storedToken; // 토큰 존재하면 true, 아니면 false
+    });
 
     const login = () => {
         setIsLogin(true);
