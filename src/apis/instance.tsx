@@ -1,8 +1,7 @@
 import axios from 'axios'
 
-
 const instance = axios.create({
-    baseURL: import.meta.env.VITE_APP_SERVER_URL,
+    baseURL: import.meta.env.VITE_APP_SERVER_URL2,
 })
 
 // Axios 인터셉터 요청 전 수행

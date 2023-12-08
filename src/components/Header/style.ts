@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const HeaderContainer = styled.div`
     display: flex;
@@ -6,7 +6,7 @@ export const HeaderContainer = styled.div`
     padding: 16px;
     background-color: #fff;
     color: #fff;
-`;
+`
 
 export const LogoutBtn = styled.button`
     background-color: #6ca399;
@@ -14,4 +14,4 @@ export const LogoutBtn = styled.button`
     border: none;
     padding: 8px 16px;
     cursor: pointer;
-`;
+`

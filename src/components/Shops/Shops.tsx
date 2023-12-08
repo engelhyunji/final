@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
-import instance from '../../apis/instance'
+import axios from 'axios'
 import * as ST from './style'
 
 interface ShopDetails {
@@ -20,7 +20,7 @@ const Shops: React.FC = () => {
         shopAddress: '',
         shopType: '',
         shopDescribe: '',
-        imageUrl: '', 
+        imageUrl: '',
     })
 
     const [imageUrl, setImageUrl] = useState<string | null>(null)
@@ -33,11 +33,13 @@ const Shops: React.FC = () => {
 
     const fetchShopDetails = async () => {
         try {
-            const response = await instance.get('/shops')
+            const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_URL2}/shops`)
 
             if (response.data && response.data.length > 0) {
                 setShopDetails(response.data[0])
             }
+
+            console.log(response)
         } catch (error) {
             console.error('Error fetching shop details:', error)
         }
@@ -72,28 +74,39 @@ const Shops: React.FC = () => {
             formData.append('image', imageUrl)
         }
 
+        console.log(imageUrl)
         try {
-            const response = await instance.post('/shops', formData, {
+            const response = await axios.post(`${import.meta.env.VITE_APP_SERVER_URL2}/shops`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             })
 
-            setShopDetails(response.data)
-            setShopRequestDto({
-                shopName: '',
-                shopTime: '',
-                shopTel: '',
-                shopAddress: '',
-                shopType: '',
-                shopDescribe: '',
-                imageUrl: '',
-            })
-            setImageUrl('')
-            setRegistrationStatus('가게 정보 등록 성공!')
+            console.log(response)
+            if (response.status === 200) {
+                setShopDetails(response.data)
+                setShopRequestDto({
+                    shopName: '',
+                    shopTime: '',
+                    shopTel: '',
+                    shopAddress: '',
+                    shopType: '',
+                    shopDescribe: '',
+                    imageUrl: '',
+                })
+                setImageUrl('')
+                setRegistrationStatus('가게 정보 등록 성공!')
+            } else if (response.status === 400) {
+                console.error('Bad request. Validation error:', response.data)
+                setRegistrationStatus('가게 정보 등록 실패. 입력값을 확인하세요.')
+            } else {
+                console.error('Unexpected status code:', response.status)
+                setRegistrationStatus('가게 정보 등록 실패. 다시 시도하세요.')
+            }
         } catch (error) {
             console.error('Error adding shop:', error.response ? error.response.data : error.message)
-            setRegistrationStatus('가게 정보 등록 실패 다시 시도.')
+            setRegistrationStatus('가게 정보 등록 실패. 다시 시도하세요.')
+            console.log('등록실패')
         }
     }
 
