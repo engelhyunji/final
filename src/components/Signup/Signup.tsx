@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { userSignup } from '../../apis/api/user'
 import * as St from './style'
 import { useNavigate } from 'react-router-dom'
+import instance from '../../apis/instance'
 
 export interface UserData {
     nickname: string
@@ -11,13 +11,23 @@ export interface UserData {
 }
 
 const Signup: React.FC = () => {
-    const navigete = useNavigate();
+    const navigate = useNavigate();
     const [userData, setUserData] = useState<UserData>({
         nickname: '',
         phoneNumber: '',
         email: '',
         password: '',
     })
+
+    const userSignup = async (userData: UserData) => {
+        try {
+            await instance.post('/user/signup', userData);
+            alert('회원가입이 완료되었습니다🐕')
+            navigate('/login');
+        } catch (error) {
+            console.log('회원가입 : error 메세지',error);
+        }
+    }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -29,11 +39,8 @@ const Signup: React.FC = () => {
             alert('정보를 모두 입력해주세요😺');
             return;
         }
-
             await userSignup(userData);
             console.log('회원가입 정보:', userData);
-            navigete('/login');
-
     }
 
     return (

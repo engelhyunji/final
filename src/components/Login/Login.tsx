@@ -1,16 +1,34 @@
 import React, { useState } from 'react'
-import { userLogin } from '../../apis/api/user'
 import * as St from './style'
 import NoLineLink from '../NoLineLink'
-import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
+import instance from '../../apis/instance'
 
 const Login: React.FC = () => {
-    const navigete = useNavigate()
+    const navigate = useNavigate();
     const { login } = useAuth();
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    // navigate 사용을 위해 컴포넌트 내로 이사.
+    const userLogin = async (email: string, password: string) => {
+        try {
+            const res = await instance.post('/user/login', {
+                email,
+                password
+            },);
+            login(); // isLogin 상태변경
+            alert('로그인이 완료되었습니다🐕');
+            navigate('/');
+
+            const token = res.headers.authorization; // 서버 응답의 headers에서 토큰 추출
+            localStorage.setItem('accessToken', token);
+        } catch (error) {
+            console.log('로그인 실패 : error 메세지',error);
+        }  
+    };
 
     const handleLogin = async () => {
         if (!email || !password) {
@@ -18,8 +36,6 @@ const Login: React.FC = () => {
             return
         }
         await userLogin(email, password);
-        navigete('/');
-        login(); // isLogin 상태변경
     }
 
     return (
