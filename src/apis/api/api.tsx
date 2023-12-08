@@ -1,7 +1,7 @@
 import instance from "../instance";
 
 export interface Shop {
-    id: number,
+    userId: number,
     shopName: string,
     shopTime: string,
     shopTel: string,
@@ -12,18 +12,18 @@ export interface Shop {
 }
 
 export interface Pet {
-    id: number,
+    userId: number,
     petName: string,
     petBirth: string,
     petInfo: string,
     imageUrl: string
 }
 
-// 가게 상세 조회
-export const getDetailShop = async (id: number) => {
+// Shop 상세 조회
+export const getDetailShop = async () => {
 
     try {
-        const res = await instance.get('/shops/mypage/{id}');
+        const res = await instance.get('/shops/mypage');
         const shop: Shop = res.data;
         return shop;
     } catch (error) {
@@ -32,10 +32,10 @@ export const getDetailShop = async (id: number) => {
 }
 
 // Pet 상세 조회
-export const getDetailPet = async (id: number) => {
+export const getDetailPet = async () => {
 
     try {
-        const res = await instance.get('/pets/mypage/{id}');
+        const res = await instance.get('/pets/mypage');
         const pet: Pet = res.data;
         return pet;
     } catch (error) {

@@ -4,10 +4,10 @@ import * as St from './style'
 import React, { useState, useEffect } from 'react'
 
 interface MyPageProps {
-    id: number
+    userId: number
 }
 
-const My: React.FC<MyPageProps> = ({ id }) => {
+const My: React.FC<MyPageProps> = ({ userId }) => {
     const navigate = useNavigate();
     const [shops, setShops] = useState<Shop[]>([])
     const [pets, setPets] = useState<Pet[]>([])
@@ -15,7 +15,7 @@ const My: React.FC<MyPageProps> = ({ id }) => {
 
     useEffect(() => {
         // 사용자가 등록한 가게 정보
-        getDetailShop(id)
+        getDetailShop()
             .then((shopData) => {
                 if (shopData) {
                     setShops([shopData]);
@@ -26,7 +26,7 @@ const My: React.FC<MyPageProps> = ({ id }) => {
             .catch((error) => console.error('shop 정보 불러오기 오류:', error))
 
         // 사용자가 등록한 동물 정보
-        getDetailPet(id)
+        getDetailPet()
             .then((petData) => {
                 if (petData) {
                     setPets([petData]);
@@ -35,7 +35,7 @@ const My: React.FC<MyPageProps> = ({ id }) => {
                 }
             })
             .catch((error) => console.error('pet 정보 불러오기 오류:', error))
-    }, [id])
+    }, [userId])
 
     // shops 또는 pets가 추가될 때 displayedItems을 업데이트
     // useEffect(() => {
@@ -55,7 +55,7 @@ const My: React.FC<MyPageProps> = ({ id }) => {
                     <St.TitleH3>마이 샵</St.TitleH3>
                     <ul>
                         {shops.map((shop) => (
-                            <li key={shop.id}>
+                            <li key={shop.userId}>
                                 <img src={shop.imageUrl} alt={shop.shopName} />
                                 <p>가게 이름: {shop.shopName}</p>
                                 <p>가게 시간: {shop.shopTime}</p>
@@ -74,7 +74,7 @@ const My: React.FC<MyPageProps> = ({ id }) => {
                     <St.TitleH3>마이 펫</St.TitleH3>
                     <ul>
                         {pets.map((pet) => (
-                            <li key={pet.id}>
+                            <li key={pet.userId}>
                                 <img src={pet.imageUrl} alt={pet.petName} />
                                 <p>반려동물 이름: {pet.petName}</p>
                                 <p>반려동물 생일: {pet.petBirth}</p>
