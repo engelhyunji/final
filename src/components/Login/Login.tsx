@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import * as ST from './style'
 import NoLineLink from '../NoLineLink'
 import { useAuth } from '../../context/AuthContext'
@@ -12,7 +12,14 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    // navigate 사용을 위해 컴포넌트 내로 이사.
+    const idRef = useRef<HTMLInputElement | null>(null);
+
+    useEffect(() => {
+        if (idRef.current) {
+            idRef.current.focus();
+        };
+    }, []);
+
     const userLogin = async (email: string, password: string) => {
         try {
             const res = await instance.post('/user/login', {
@@ -46,6 +53,7 @@ const Login: React.FC = () => {
                     <ST.LoginInput
                         type="text"
                         id="email"
+                        ref={idRef}
                         placeholder="이메일"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -53,7 +61,7 @@ const Login: React.FC = () => {
                     <ST.LoginInput
                         type="password"
                         id="password"
-                        autoComplete="current-password" // 비밀번호 입력 필드에 대한 자동 완성
+                        autoComplete="current-password"
                         placeholder="비밀번호"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
