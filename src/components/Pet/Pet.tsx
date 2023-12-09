@@ -97,7 +97,7 @@ const Pet: React.FC = () => {
                 setRegistrationStatus('서버 응답이 올바르지 않습니다.')
             }
         } catch (error) {
-            console.error('Error adding pet:', error.response ? error.response.data : error.message)
+            console.error('Error adding pet:', error)
             setRegistrationStatus('애견 정보 등록 실패 다시 시도.')
         }
     }
