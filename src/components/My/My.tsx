@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Pet, Shop, getDetailPet, getDetailShop } from '../../apis/api/api'
+import { Pet, Shop, getMyShop, getMyPet } from '../../apis/api/api'
 import * as ST from './style'
 import React, { useState, useEffect } from 'react'
 
@@ -11,40 +11,31 @@ const My: React.FC<MyPageProps> = ({ userId }) => {
     const navigate = useNavigate();
     const [shops, setShops] = useState<Shop[]>([])
     const [pets, setPets] = useState<Pet[]>([])
-    // const [displayedItems, setDisplayedItems] = useState<(Shop | Pet)[]>([])
 
     useEffect(() => {
         // 사용자가 등록한 가게 정보
-        getDetailShop()
+        getMyShop()
             .then((shopData) => {
                 if (shopData) {
-                    setShops([shopData]);
+                    setShops(shopData);
                 } else {
-                    // 가게 정보가 없을 경우
+                    console.log('가게 없음');
                 }
             })
             .catch((error) => console.error('shop 정보 불러오기 오류:', error))
 
         // 사용자가 등록한 동물 정보
-        getDetailPet()
+        getMyPet()
             .then((petData) => {
                 if (petData) {
-                    setPets([petData]);
+                    setPets(petData);
                 } else {
-                    // 애완동물 정보가 없을 경우
+                    console.log('펫 없음');
                 }
             })
             .catch((error) => console.error('pet 정보 불러오기 오류:', error))
     }, [userId])
 
-    // shops 또는 pets가 추가될 때 displayedItems을 업데이트
-    // useEffect(() => {
-    //     if (shops.length > 0) {
-    //         setDisplayedItems(shops)
-    //     } else if (pets.length > 0) {
-    //         setDisplayedItems(pets)
-    //     }
-    // }, [shops, pets])
 
     return (
         <ST.MyContainer>

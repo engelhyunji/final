@@ -1,15 +1,16 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import * as ST from './style'
+import instance from '../../apis/instance'
 
-interface ShopPostData {
+export interface ShopPostData {
     shopName: string
     shopTime: string
     shopTel: string
     shopAddress: string
     shopType: string
     shopDescribe: string
-    imageUrl: string
+    // imageUrl: string
 }
 
 const Shops: React.FC = () => {
@@ -20,29 +21,11 @@ const Shops: React.FC = () => {
         shopAddress: '',
         shopType: '',
         shopDescribe: '',
-        imageUrl: '',
+        // imageUrl: '',
     })
 
-    const [imageUrl, setImageUrl] = useState<string | null>(null)
-    const [shopDetails, setShopDetails] = useState<ShopPostData | null>(null)
-
-    useEffect(() => {
-        fetchShopDetails()
-    }, [])
-
-    const fetchShopDetails = async () => {
-        try {
-            const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_URL2}/shops`)
-
-            if (response.data && response.data.length > 0) {
-                setShopDetails(response.data[0])
-            }
-
-            console.log(response)
-        } catch (error) {
-            console.error('Error fetching shop details:', error)
-        }
-    }
+    const [imgUrl, setImgUrl] = useState<string | null>(null)
+    const [uploadImage, setUploadImage] = useState<File | null>(null)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target
@@ -52,43 +35,54 @@ const Shops: React.FC = () => {
         }))
     }
 
+    // const imgChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    //     setUploadImage(e.target.files?.[0])
+    // }
+
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0]
             console.log('e.target.files[0] 파일확인', e.target.files[0])
             const reader = new FileReader()
             reader.onload = () => {
-                const imageUrlValue = reader.result as string
-                setImageUrl(imageUrlValue)
-                console.log('imageUrl 값확인 ', imageUrlValue)
+                const result = reader.result as string
+                console.log('파일리더(미리보기) :', result)
+
+                // 이미지 업데이트
+                setImgUrl(result)
+                setUploadImage(file)
+
+                console.log('uploadImage 값확인 ', uploadImage)
             }
             reader.readAsDataURL(e.target.files[0])
         }
     }
     useEffect(() => {
-        console.log('상태 업데이트가 완료된 후', imageUrl)
-    }, [imageUrl])
+        console.log('uploadImage 업데이트 확인', uploadImage)
+    }, [uploadImage])
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const formData = new FormData()
+        // 나머지 데이터
         Object.entries(shopRequestDto).forEach(([key, value]) => {
-            formData.append(key, value)
-        })
-        if (imageUrl) {
-            // formData.append('image', imageUrl)
-            formData.append('imageUrl', imageUrl)
+            formData.append(key, value);
+        });
+
+        // 이미지 파일
+        if (uploadImage) {
+            formData.append('imageUrl', uploadImage)
         }
 
-        console.log(imageUrl)
         try {
-            const response = await axios.post(`${import.meta.env.VITE_APP_SERVER_URL2}/shops`, formData, {
+            const response = await instance.post(`/shops`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             })
+            console.log('가게 등록 response :', response.data)
 
-            setShopDetails(response.data)
             setShopRequestDto({
                 shopName: '',
                 shopTime: '',
@@ -96,9 +90,9 @@ const Shops: React.FC = () => {
                 shopAddress: '',
                 shopType: '',
                 shopDescribe: '',
-                imageUrl: '',
             })
-            setImageUrl('')
+            setImgUrl(null) // 이미지 초기화
+            setUploadImage(null)
         } catch (error) {
             console.error('가게 등록 에러 :', error)
         }
@@ -130,24 +124,11 @@ const Shops: React.FC = () => {
                 <ST.Input type="text" name="shopDescribe" value={shopRequestDto.shopDescribe} onChange={handleChange} />
                 <ST.Label>이미지</ST.Label>
                 <ST.Input type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleImageFileChange} />
-                <ST.Wrap>{imageUrl && <ST.Image src={imageUrl} alt="Shop" />}</ST.Wrap>
+                <ST.Wrap>{imgUrl && <ST.Image src={imgUrl} alt="Shop" />}</ST.Wrap>
                 <ST.Button type="submit" value="Send">
                     등록하기
                 </ST.Button>
             </ST.Form>
-
-            {shopDetails && (
-                <div>
-                    <p>Shop Details</p>
-                    <p>Shop Name: {shopDetails.shopName}</p>
-                    <p>Shop Time: {shopDetails.shopTime}</p>
-                    <p>Shop Tel: {shopDetails.shopTel}</p>
-                    <p>Shop Address: {shopDetails.shopAddress}</p>
-                    <p>Shop Type: {shopDetails.shopType}</p>
-                    <p>Shop Describe: {shopDetails.shopDescribe}</p>
-                    <p>Shop Image: {shopDetails.imageUrl}</p>
-                </div>
-            )}
         </ST.Content>
     )
 }

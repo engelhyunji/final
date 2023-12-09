@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import * as ST from './style'
 import { useNavigate } from 'react-router-dom'
 import instance from '../../apis/instance'
@@ -18,6 +18,14 @@ const Signup: React.FC = () => {
         email: '',
         password: '',
     })
+
+    const nickRef = useRef<HTMLInputElement | null>(null);
+
+    useEffect(() => {
+        if (nickRef.current) {
+            nickRef.current.focus();
+        };
+    }, []);
 
     const userSignup = async (userData: UserData) => {
         try {
@@ -52,6 +60,7 @@ const Signup: React.FC = () => {
                     <ST.SignupInput
                         type="text"
                         id="nickname"
+                        ref={nickRef}
                         placeholder="닉네임 입력"
                         name="nickname"
                         value={userData.nickname}
