@@ -1,6 +1,7 @@
 import instance from "../instance";
 
 export interface Shop {
+    shopId: number,
     userId: number,
     shopName: string,
     shopTime: string,
@@ -12,6 +13,11 @@ export interface Shop {
 }
 
 export interface ShopDetails {
+    shopResponseDto: shopResponseDto,
+    reviews: Review[]
+}
+export interface shopResponseDto {
+    shopId: number,
     userId: number,
     shopName: string,
     shopTime: string,
@@ -19,7 +25,7 @@ export interface ShopDetails {
     shopAddress: string,
     shopType: string,
     shopDescribe: string,
-    imageUrl: string,
+    imageUrls: string,
     reviews: Review[] 
 }
 
@@ -57,7 +63,7 @@ export const getDetailShop = async (shopId: number) => {
 
     try {
         const res = await instance.get(`/shops/${shopId}`);
-        const shop: ShopDetails = res.data;
+        const shop: ShopDetails = res.data.data;
         return shop;
     } catch (error) {
         console.log('가게 조회 : error',error);

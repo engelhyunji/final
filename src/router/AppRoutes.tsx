@@ -39,7 +39,7 @@ const AppRoutes = () => {
                         {/* 목록 페이지 list */}
                         <Route path="/shopslist" element={<ShopsListPage />} />
                         {/* 상세 + 댓글 페이지 detail */}
-                        <Route path="/shops/:userId" element={<ShopsDetailPage />} />
+                        <Route path="/shops/:shopId" element={<ShopsDetailPage />} />
                         {/* 수정 + 삭제 페이지 modify */}
                         <Route path="/shops/modify/:id" element={<ShopsModifyPage />} />
                         <Route path="/signup" element={<SignupPage />} />

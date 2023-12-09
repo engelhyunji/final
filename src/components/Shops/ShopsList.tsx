@@ -53,14 +53,16 @@ const PetList: React.FC = () => {
                 <thead>
                     <tr>
                         <th>뷰</th>
+                        <th>shopId (확인용)</th>
                         <th>Shop 이름</th>
                         <th>위치</th>
                     </tr>
                 </thead>
                 <tbody>
                     {currentShops.map((shop, index) => (
-                        <tr key={index} onClick={()=>navigate(`/shops/${shop.userId}`)}>
+                        <tr key={index} onClick={()=>navigate(`/shops/${shop.shopId}`)}>
                             <td><img src={shop.imageUrl} alt={`${shop.shopName} img`}/></td>
+                            <td>{shop.shopId}</td>
                             <td className="shop-name">{shop.shopName}</td>
                             <td>{shop.shopAddress}</td> 
                         </tr>
