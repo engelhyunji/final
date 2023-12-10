@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-// import dayjs from 'dayjs'
+import * as ST from './style'
 import { Pagination, Table, Button, Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Shop, getShops } from '../../apis/api/api'
@@ -61,7 +61,7 @@ const PetList: React.FC = () => {
                 <tbody>
                     {currentShops.map((shop, index) => (
                         <tr key={index} onClick={()=>navigate(`/shops/${shop.shopId}`)}>
-                            <td><img src={shop.imageUrl} alt={`${shop.shopName} img`}/></td>
+                            <td><ST.thumImg src={shop.imageUrls[0]} alt={`${shop.shopName} img`}/></td>
                             <td>{shop.shopId}</td>
                             <td className="shop-name">{shop.shopName}</td>
                             <td>{shop.shopAddress}</td> 

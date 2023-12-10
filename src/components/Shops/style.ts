@@ -85,3 +85,15 @@ export const Image = styled.img`
     height: 100%;
     object-fit: cover; 
 `;
+
+// =====ShopList 컴포넌트======
+export const thumImg = styled.img`
+    max-width:300px;
+    height: 300px;
+`
+
+// =====ShopDetail 컴포넌트======
+export const detailImg = styled.img`
+    max-width:300px;
+    height: 300px;
+`

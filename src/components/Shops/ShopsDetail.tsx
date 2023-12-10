@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import * as ST from './style'
 import { ShopDetails, getDetailShop } from '../../apis/api/api'
 import { useQuery } from 'react-query'
+import Reviews from './Reviews/Reviews'
 
 const ShopsDetail: React.FC = () => {
     const navigate = useNavigate()
@@ -33,7 +35,7 @@ const ShopsDetail: React.FC = () => {
 
                     <div className="pet-wrapper">
                         <p>
-                            <img
+                            <ST.detailImg
                                 src={detailShopData.shopResponseDto.imageUrls[0]}
                                 alt={detailShopData.shopResponseDto.shopName}
                             />
@@ -49,19 +51,7 @@ const ShopsDetail: React.FC = () => {
                         </button>
                         <button onClick={() => navigate('/shopslist')}>목록으로</button>
                     </div>
-                    <div>
-                        <h3>후기</h3>
-                        <ul>
-                            {detailShopData.reviews.map((review, index) => (
-                                <li key={index}>
-                                    <p>작성자 : {review.nickname}</p>
-                                    <p>{review.comment}</p>
-                                    <p>추천수 : {review.likeCount}</p>
-                                    <p>작성 날짜 : {review.createdAt}</p>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    <Reviews detailShopData={detailShopData} />
                 </>
             ) : (
                 <div>가게 상세보기 에러</div>
