@@ -27,11 +27,14 @@ const Login: React.FC = () => {
                 password,
             })
             login() // isLogin 상태변경
-            alert('로그인이 완료되었습니다🐕')
+            alert(`${res.data.nickname}님 로그인이 완료되었습니다🐕`)
             navigate('/')
 
-            const token = res.headers.authorization // 서버 응답의 headers에서 토큰 추출
+            const token = res.headers.authorization // 서버 응답 headers에서 토큰 추출
             localStorage.setItem('accessToken', token)
+
+            console.log('로그인 res.data', res.data);
+            // return res.data;
         } catch (error) {
             console.log('로그인 실패 : error 메세지', error)
         }
