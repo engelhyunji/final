@@ -42,16 +42,13 @@ const My: React.FC = () => {
                     setShops(shopData);
                 }
             })
-            .catch((error) => console.error('shop 삭제 업데이트 에러', error));
+            .catch((error) => console.error('shop 삭제 에러', error));
         },
     })
 
-    // [삭제] 함수(알림창 confirm하면 삭제)
-    const RemoveHandler = (e: number) => {
-        const DeleteMassage = `${shops[e].shopName} 가게를 삭제하시겠습니까?`;
-        if (window.confirm(DeleteMassage)) {
-            // dispatch(removeBook(book.id));
-            mutation.mutate(shops[e].shopId)
+    const DeleteHandler = (idx: number) => {
+        if (window.confirm(`${shops[idx].shopName} 가게를 삭제하시겠습니까?`)) {
+            mutation.mutate(shops[idx].shopId)
         }
     }
 
@@ -64,7 +61,7 @@ const My: React.FC = () => {
                     <ST.TitleH3>마이 샵</ST.TitleH3>
                     <ul>
                         {shops.map((shop) => (
-                            <li key={shop.shopId}>
+                            <li key={shop.shopId} onClick={() => navigate(`/shops/${shop.shopId}`)}>
                                 <ST.MyShopImg src={shop.imageUrls[0]} alt={shop.shopName} />
                                 <p>가게 이름: {shop.shopName}</p>
                                 <p>가게 시간: {shop.shopTime}</p>
@@ -72,7 +69,7 @@ const My: React.FC = () => {
                                 <p>주소: {shop.shopAddress}</p>
                                 <p>유형: {shop.shopType}</p>
                                 <p>소개: {shop.shopDescribe}</p>
-                                <button onClick={() => RemoveHandler(shops.indexOf(shop))}>삭제</button>
+                                <button onClick={() => DeleteHandler(shops.indexOf(shop))}>삭제</button>
                             </li>
                             
                         ))}

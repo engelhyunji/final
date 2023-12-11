@@ -69,7 +69,6 @@ export const getDetailShop = async (shopId: number) => {
     }
 }
 
-
 // 마이페이지 Shop 조회
 export const getMyShop = async () => {
     try {
