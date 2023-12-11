@@ -33,7 +33,9 @@ const Login: React.FC = () => {
             const token = res.headers.authorization // 서버 응답 headers에서 토큰 추출
             localStorage.setItem('accessToken', token)
 
-            console.log('로그인 res.data', res.data);
+            const nickname = res.data.nickname;
+            localStorage.setItem('nickname', nickname);
+            // console.log('로그인 res.data', res.data);
             // return res.data;
         } catch (error) {
             console.log('로그인 실패 : error 메세지', error)
