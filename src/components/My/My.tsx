@@ -9,7 +9,6 @@ const My: React.FC = () => {
     const [shops, setShops] = useState<Shop[]>([])
     const [pets, setPets] = useState<Pet[]>([])
 
-
     useEffect(() => {
         getMyShop()
             .then((shopData) => {
@@ -37,12 +36,12 @@ const My: React.FC = () => {
     const mutation = useMutation(deleteShop, {
         onSuccess: () => {
             getMyShop()
-            .then((shopData) => {
-                if (shopData) {
-                    setShops(shopData);
-                }
-            })
-            .catch((error) => console.error('shop 삭제 에러', error));
+                .then((shopData) => {
+                    if (shopData) {
+                        setShops(shopData)
+                    }
+                })
+                .catch((error) => console.error('shop 삭제 에러', error))
         },
     })
 
@@ -61,20 +60,20 @@ const My: React.FC = () => {
                     <ST.TitleH3>마이 샵</ST.TitleH3>
                     <ul>
                         {shops.map((shop) => (
-                            <li key={shop.shopId} onClick={() => navigate(`/shops/${shop.shopId}`)}>
-                                <ST.MyShopImg src={shop.imageUrls[0]} alt={shop.shopName} />
-                                <p>가게 이름: {shop.shopName}</p>
-                                <p>가게 시간: {shop.shopTime}</p>
-                                <p>연락처: {shop.shopTel}</p>
-                                <p>주소: {shop.shopAddress}</p>
-                                <p>유형: {shop.shopType}</p>
-                                <p>소개: {shop.shopDescribe}</p>
-                                <button onClick={() => DeleteHandler(shops.indexOf(shop))}>삭제</button>
-                            </li>
-                            
+                                <li key={shop.shopId}>
+                                    <div onClick={() => navigate(`/shops/${shop.shopId}`)}>
+                                        <ST.MyShopImg src={shop.imageUrls[0]} alt={shop.shopName} />
+                                        <p>가게 이름: {shop.shopName}</p>
+                                        <p>가게 시간: {shop.shopTime}</p>
+                                        <p>연락처: {shop.shopTel}</p>
+                                        <p>주소: {shop.shopAddress}</p>
+                                        <p>유형: {shop.shopType}</p>
+                                        <p>소개: {shop.shopDescribe}</p>
+                                    </div>
+                                    <button onClick={() => DeleteHandler(shops.indexOf(shop))}>삭제</button>
+                                </li>
                         ))}
                     </ul>
-                    
                 </ST.ShopNPetSection>
             )}
 
