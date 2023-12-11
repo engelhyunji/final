@@ -17,7 +17,7 @@ const ShopsDetail: React.FC = () => {
     useEffect(() => {
         if (isSuccess && data) {
             setDetailShopData(data)
-            console.log('디테일 성공 data : ', data)
+            console.log('디테일 쿼리 성공 data : ', data)
         }
     }, [isSuccess, data])
 
@@ -46,7 +46,7 @@ const ShopsDetail: React.FC = () => {
                     </div>
 
                     <div className="grid-2">
-                        <button onClick={() => navigate(`/shops/modify/${detailShopData.shopResponseDto.userId}`)}>
+                        <button onClick={() => navigate(`/shops/modify/${shopId}`)}>
                             수정
                         </button>
                         <button onClick={() => navigate('/shopslist')}>목록으로</button>

@@ -10,7 +10,7 @@ import SignupPage from '../pages/SignupPage'
 import PetDetailPage from '../pages/PetDetailPage'
 import PetModifyPage from '../pages/PetModifyPage'
 import ShopsDetailPage from '../pages/ShopsDetailPage'
-import ShopsModifyPage from '../pages/PetModifyPage'
+import ShopsModifyPage from '../pages/ShopsModifyPage'
 import PetListPage from '../pages/PetListPage'
 import ShopsListPage from '../pages/ShopsListPage'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -41,7 +41,7 @@ const AppRoutes = () => {
                         {/* 상세 + 댓글 페이지 detail */}
                         <Route path="/shops/:shopId" element={<ShopsDetailPage />} />
                         {/* 수정 + 삭제 페이지 modify */}
-                        <Route path="/shops/modify/:id" element={<ShopsModifyPage />} />
+                        <Route path="/shops/modify/:shopId" element={<ShopsModifyPage />} />
                         <Route path="/signup" element={<SignupPage />} />
                         <Route path="/my" element={<MyPage />} />
                     </Routes>
