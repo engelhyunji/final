@@ -19,11 +19,13 @@ const ShopsModify: React.FC = () => {
     })
 
     const [imgUrl, setImgUrl] = useState<string | null>(null)
-    const [uploadImage, setUploadImage] = useState<File | null>(null)
+    const [uploadImage, setUploadImage] = useState<File | string>('')
+    const [initialImgLoaded, setInitialImgLoaded] = useState(false);
+
 
     useQuery(['detailShopData', Number(shopId)], () => getDetailShop(Number(shopId)), {
         onSuccess: (data) => {
-            console.log('상품 디테일 불러오기 data', data)
+            console.log('상품 디테일 불러오기 data', data?.shopResponseDto)
             // shopResponseDto(받은 값)에서 ShopPostData 형식으로 변환
             const transformedShopData: ShopPostData | null = data?.shopResponseDto
                 ? {
@@ -35,6 +37,13 @@ const ShopsModify: React.FC = () => {
                     shopDescribe: data.shopResponseDto.shopDescribe,
                 }
                 : null
+                if (data?.shopResponseDto?.imageUrls) {
+                    // 기존 미리보기 제일 처음에만 담음
+                    if (!initialImgLoaded) {
+                        setImgUrl(data?.shopResponseDto?.imageUrls);
+                        setInitialImgLoaded(true);
+                    }
+                }
 
             if (transformedShopData) {
                 setShopRequestDto(transformedShopData)
@@ -53,22 +62,23 @@ const ShopsModify: React.FC = () => {
         }))
     }
 
-    const handleImageFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            const file = e.target.files[0]
-            const reader = new FileReader()
-            reader.onload = () => {
-                const result = reader.result as string
+    const handleImageFileChange = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            if (e.target.files && e.target.files.length > 0) {
+                const file = e.target.files[0]
+                const reader = new FileReader()
+                reader.onload = () => {
+                    const result = reader.result as string
 
-                // 이미지 업데이트
-                setImgUrl(result)
-                setUploadImage(file)
+                    // 이미지 업데이트
+                    setImgUrl(result)
+                    setUploadImage(file)
+                }
+                reader.readAsDataURL(e.target.files[0])
             }
-            reader.readAsDataURL(e.target.files[0])
-        }
-    },
-    [setImgUrl, setUploadImage]
-);
+        },
+        [setImgUrl, setUploadImage],
+    )
 
     useEffect(() => {
         console.log('uploadImage 업데이트 확인', uploadImage)
@@ -96,7 +106,6 @@ const ShopsModify: React.FC = () => {
             })
             console.log('가게 등록 response :', response.data)
             navigate('/shopslist')
-
         } catch (error) {
             console.error('가게 등록 에러 :', error)
         }
@@ -106,6 +115,9 @@ const ShopsModify: React.FC = () => {
         <ST.Container>
             <ST.Text>가게 등록</ST.Text>
             <ST.Form onSubmit={handleSubmit}>
+                <ST.Label>이미지</ST.Label>
+                <ST.Input type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleImageFileChange} />
+                <ST.Wrap>{imgUrl && <ST.Image src={imgUrl} alt="ShopImg" />}</ST.Wrap>
                 <ST.Label>가게 이름 </ST.Label>
                 <ST.Input type="text" name="shopName" value={shopRequestDto.shopName} onChange={handleChange} />
                 <ST.Label>영업 시간</ST.Label>
@@ -126,10 +138,9 @@ const ShopsModify: React.FC = () => {
                 </ST.SelectContainer>
                 <ST.Label>소개글</ST.Label>
                 <ST.Input type="text" name="shopDescribe" value={shopRequestDto.shopDescribe} onChange={handleChange} />
-                <ST.Label>이미지</ST.Label>
-                <ST.Input type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleImageFileChange} />
-                <ST.Wrap>{imgUrl && <ST.Image src={imgUrl} alt="ShopImg" />}</ST.Wrap>
+
                 <ST.Button type="submit">등록하기</ST.Button>
+                <ST.Button onClick={() => navigate(-1)}>취소</ST.Button>
             </ST.Form>
         </ST.Container>
     )
