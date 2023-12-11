@@ -25,7 +25,7 @@ const PetList: React.FC = () => {
                 const data = await getShops();
                 if (data && Array.isArray(data)) {
                     // data가 null 또는 undefined가 아니고 배열일 때만
-                    setShopList([...data].reverse());
+                    setShopList([...data]);
                     console.error('있으면 반환된 data', data);
                 } else { // 반환된 데이터가 배열이 아니거나 null/undefined
                     console.error('실패 반환된 data', data);

@@ -38,17 +38,14 @@ const Shops: React.FC = () => {
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0]
-            console.log('e.target.files[0] 파일확인', e.target.files[0])
+            // console.log('e.target.files[0] 파일확인', e.target.files[0])
             const reader = new FileReader()
             reader.onload = () => {
                 const result = reader.result as string
-                console.log('파일리더(미리보기) :', result)
 
                 // 이미지 업데이트
                 setImgUrl(result)
                 setUploadImage(file)
-
-                console.log('uploadImage 값확인 ', uploadImage)
             }
             reader.readAsDataURL(e.target.files[0])
         }
@@ -96,7 +93,7 @@ const Shops: React.FC = () => {
     }
 
     return (
-        <ST.Content>
+        <ST.Container>
             <ST.Text>가게 등록</ST.Text>
             <ST.Form onSubmit={handleSubmit}>
                 <ST.Label>가게 이름 </ST.Label>
@@ -121,12 +118,12 @@ const Shops: React.FC = () => {
                 <ST.Input type="text" name="shopDescribe" value={shopRequestDto.shopDescribe} onChange={handleChange} />
                 <ST.Label>이미지</ST.Label>
                 <ST.Input type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleImageFileChange} />
-                <ST.Wrap>{imgUrl && <ST.Image src={imgUrl} alt="Shop" />}</ST.Wrap>
-                <ST.Button type="submit" value="Send">
+                <ST.Wrap>{imgUrl && <ST.Image src={imgUrl} alt="ShopImg" />}</ST.Wrap>
+                <ST.Button type="submit">
                     등록하기
                 </ST.Button>
             </ST.Form>
-        </ST.Content>
+        </ST.Container>
     )
 }
 

@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
-export const Content = styled.div`
-    justify-content: center;
+export const Container = styled.div`
+    width: 1000px;
+    background-color: #eee;
+    flex-direction: column;
+    align-items: center;
     display: flex;
-    margin-top: 10%;
 `;
 
-export const Text = styled.div`
+export const Text = styled.h2`
     justify-content: space-between;
     display: flex;
-    margin-top: 10%;
-    margin-right: 20px;
-    margin-bottom: 3vh;
+    margin: 30px;
     font-weight: bold;
 `;
 
@@ -97,3 +97,4 @@ export const detailImg = styled.img`
     max-width:300px;
     height: 300px;
 `
+//=====Modify 컴포넌트=====
