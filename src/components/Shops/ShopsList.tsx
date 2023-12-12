@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-// import dayjs from 'dayjs'
+import * as ST from './style'
 import { Pagination, Table, Button, Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Shop, getShops } from '../../apis/api/api'
@@ -25,7 +25,7 @@ const PetList: React.FC = () => {
                 const data = await getShops();
                 if (data && Array.isArray(data)) {
                     // data가 null 또는 undefined가 아니고 배열일 때만
-                    setShopList([...data].reverse());
+                    setShopList([...data]);
                     console.error('있으면 반환된 data', data);
                 } else { // 반환된 데이터가 배열이 아니거나 null/undefined
                     console.error('실패 반환된 data', data);
@@ -53,14 +53,16 @@ const PetList: React.FC = () => {
                 <thead>
                     <tr>
                         <th>뷰</th>
+                        <th>shopId (확인용)</th>
                         <th>Shop 이름</th>
                         <th>위치</th>
                     </tr>
                 </thead>
                 <tbody>
                     {currentShops.map((shop, index) => (
-                        <tr key={index} onClick={()=>navigate(`/shops/${shop.userId}`)}>
-                            <td><img src={shop.imageUrl} alt={`${shop.shopName} img`}/></td>
+                        <tr key={index} onClick={()=>navigate(`/shops/${shop.shopId}`)}>
+                            <td><ST.thumImg src={shop.imageUrls[0]} alt={`${shop.shopName} img`}/></td>
+                            <td>{shop.shopId}</td>
                             <td className="shop-name">{shop.shopName}</td>
                             <td>{shop.shopAddress}</td> 
                         </tr>

@@ -4,7 +4,9 @@ import * as ST from './style'
 import { useAuth } from '../../context/AuthContext'
 
 const Header: React.FC = () => {
-    const { isLogin, logout } = useAuth()
+    const { isLogin, logout } = useAuth();
+
+    const nickname = localStorage.getItem('nickname');
 
     return (
         <ST.HeaderContainer>
@@ -22,7 +24,12 @@ const Header: React.FC = () => {
                     <h5>애견 전체조회</h5>
                 </NoLineLink>
                 {isLogin ? (
-                    <ST.LogoutBtn onClick={logout}>로그아웃</ST.LogoutBtn>
+                    <>
+                        <NoLineLink to={'/my'}>
+                            <h5>{nickname}님의 마이페이지</h5>
+                        </NoLineLink>
+                        <ST.LogoutBtn onClick={logout}>로그아웃</ST.LogoutBtn>
+                    </>
                 ) : (
                     <NoLineLink to="/login">
                         <h5>로그인</h5>
