@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import * as ST from './style'
 import NoLineLink from '../NoLineLink'
 import { useAuth } from '../../context/AuthContext'
@@ -12,7 +12,14 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    // navigate 사용을 위해 컴포넌트 내로 이사.
+    const idRef = useRef<HTMLInputElement | null>(null);
+
+    useEffect(() => {
+        if (idRef.current) {
+            idRef.current.focus();
+        };
+    }, []);
+
     const userLogin = async (email: string, password: string) => {
         try {
             const res = await instance.post('/user/login', {
@@ -20,11 +27,16 @@ const Login: React.FC = () => {
                 password,
             })
             login() // isLogin 상태변경
-            alert('로그인이 완료되었습니다🐕')
+            alert(`${res.data.nickname}님 로그인이 완료되었습니다🐕`)
             navigate('/')
 
-            const token = res.headers.authorization // 서버 응답의 headers에서 토큰 추출
+            const token = res.headers.authorization // 서버 응답 headers에서 토큰 추출
             localStorage.setItem('accessToken', token)
+
+            const nickname = res.data.nickname;
+            localStorage.setItem('nickname', nickname);
+            // console.log('로그인 res.data', res.data);
+            // return res.data;
         } catch (error) {
             console.log('로그인 실패 : error 메세지', error)
         }
@@ -46,6 +58,7 @@ const Login: React.FC = () => {
                     <ST.LoginInput
                         type="text"
                         id="email"
+                        ref={idRef}
                         placeholder="이메일"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -53,7 +66,7 @@ const Login: React.FC = () => {
                     <ST.LoginInput
                         type="password"
                         id="password"
-                        autoComplete="current-password" // 비밀번호 입력 필드에 대한 자동 완성
+                        autoComplete="current-password"
                         placeholder="비밀번호"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}

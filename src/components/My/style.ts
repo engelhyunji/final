@@ -21,6 +21,12 @@ export const TitleH2 = styled.h2`
 export const TitleH3 = styled.h3`
     font-size: 20px;
 `
+
+export const MyShopImg = styled.img`
+    max-width:300px;
+    height: 300px;
+`
+
 export const BtnContainer = styled.div`
     margin: 30px;
     display: flex;

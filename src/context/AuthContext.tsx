@@ -1,5 +1,5 @@
 // 로그인 상태 전역으로 관리
-import React, { createContext, useContext, useState, ReactNode } from 'react'
+import React, { createContext, useContext, useState, ReactNode, useMemo } from 'react'
 
 interface AuthContextProps {
     isLogin: boolean
@@ -7,7 +7,8 @@ interface AuthContextProps {
     logout: () => void
 }
 
-const AuthContext = createContext<AuthContextProps | undefined>(undefined)
+
+export const AuthContext = createContext<AuthContextProps | undefined>(undefined)
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isLogin, setIsLogin] = useState(() => {
@@ -26,7 +27,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         console.log('localStorage.getItem(accessToken) 토큰삭제 확인', localStorage.getItem('accessToken')) // 토큰 삭제 확인
     }
 
-    return <AuthContext.Provider value={{ isLogin, login, logout }}>{children}</AuthContext.Provider>
+    const value = useMemo(() => ({ isLogin, login, logout }), [isLogin, login, logout])
+
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
 export const useAuth = () => {

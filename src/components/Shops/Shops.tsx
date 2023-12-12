@@ -14,6 +14,7 @@ export interface ShopPostData {
 }
 
 const Shops: React.FC = () => {
+    const navigate = useNavigate()
     const [shopRequestDto, setShopRequestDto] = useState<ShopPostData>({
         shopName: '',
         shopTime: '',
@@ -67,8 +68,8 @@ const Shops: React.FC = () => {
         const formData = new FormData()
         // 나머지 데이터
         Object.entries(shopRequestDto).forEach(([key, value]) => {
-            formData.append(key, value);
-        });
+            formData.append(key, value)
+        })
 
         // 이미지 파일
         if (uploadImage) {
@@ -99,7 +100,7 @@ const Shops: React.FC = () => {
     }
 
     return (
-        <ST.Content>
+        <ST.Container>
             <ST.Text>가게 등록</ST.Text>
             <ST.Form onSubmit={handleSubmit}>
                 <ST.Label>가게 이름 </ST.Label>
@@ -129,7 +130,7 @@ const Shops: React.FC = () => {
                     등록하기
                 </ST.Button>
             </ST.Form>
-        </ST.Content>
+        </ST.Container>
     )
 }
 
