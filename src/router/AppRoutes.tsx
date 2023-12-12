@@ -1,5 +1,4 @@
 // AppRoutes.jsx
-import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from '../components/Layout/Layout'
 import ShopsPage from '../pages/ShopsPage'
@@ -31,9 +30,9 @@ const AppRoutes = () => {
                         {/* 목록 페이지 list */}
                         <Route path="/petlist" element={<PetListPage />} />
                         {/* 상세 페이지 detail */}
-                        <Route path="/pets/:id" element={<PetDetailPage />} />
+                        <Route path="/pet/:petId" element={<PetDetailPage />} />
                         {/* 수정 + 삭제 페이지 modify */}
-                        <Route path="/pet/modify/:id" element={<PetModifyPage />} />
+                        <Route path="/modify/:petId" element={<PetModifyPage />} />
                         {/* 생성 페이지 create */}
                         <Route path="/shops" element={<ShopsPage />} />
                         {/* 목록 페이지 list */}

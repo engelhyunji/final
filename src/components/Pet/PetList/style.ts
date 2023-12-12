@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const Content = styled.div`
     justify-content: center;
-    display: flex;
+    /* display: flex; */
     margin-top: 10%;
+    border: 1px solid #9ac8af;
 `
 
 export const Text = styled.div`
@@ -105,8 +106,28 @@ export const Wrap = styled.div`
     overflow: hidden;
 `
 
+export const List = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); // 그리드 레이아웃 적용
+    grid-gap: 20px;
+    padding: 20px;
+`
+
+export const ListItem = styled.div`
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff; // 백그라운드 색상 추가
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); // 그림자 효과 추가
+    transition: transform 0.3s ease-in-out; // 부드러운 호버 효과
+
+    &:hover {
+        transform: scale(1.05); // 호버 시 아이템 확대
+    }
+`
+
 export const Image = styled.img`
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 250px;
+    object-fit: cover; // 이미지 비율 유지
 `

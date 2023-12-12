@@ -1,5 +1,4 @@
-import React from 'react'
-import PetDetail from '../components/Pet/PetDetail'
+import PetDetail from '../components/Pet/PetDetail/PetDetail'
 
 const PetDetailPage = () => {
     return <PetDetail />

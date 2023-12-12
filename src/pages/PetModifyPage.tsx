@@ -1,7 +1,8 @@
-import React from 'react'
+import PetModify from "../components/Pet/PetModify/PetModify"
+
 
 const PetModifyPage = () => {
-    return <PetModifyPage />
+    return <PetModify />
 }
 
 export default PetModifyPage
