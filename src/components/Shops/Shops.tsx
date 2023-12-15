@@ -69,7 +69,7 @@ const Shops: React.FC = () => {
         }
 
         try {
-            const response = await instance.post(`/shops`, formData, {
+            const response = await instance.post(`/api/shops`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

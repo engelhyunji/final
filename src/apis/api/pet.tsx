@@ -13,7 +13,7 @@ export interface PetDetails {
 // Pet 등록
 export const fetchPetDetails = async () => {
     try {
-        const response = await instance.get<PetDetails>('/pets/mypage')
+        const response = await instance.get<PetDetails>('/api/pets/mypage')
         return response.data
     } catch (error) {
         console.error('Error fetching pet details:', error)
@@ -24,7 +24,7 @@ export const fetchPetDetails = async () => {
 // Pet 상세 조회
 export const fetchPetDetail = async (petId: string): Promise<PetDetails> => {
     try {
-        const response = await instance.get<PetDetails>(`/pets/${petId}`)
+        const response = await instance.get<PetDetails>(`/api/pets/${petId}`)
         return response.data
     } catch (error) {
         console.error('Error fetching pet details:', error)

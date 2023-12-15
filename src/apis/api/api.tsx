@@ -50,7 +50,7 @@ export interface Pet {
 // Shop 목록 조회
 export const getShops = async () => {
     try {
-        const res = await instance.get('/shops');
+        const res = await instance.get('/api/shops');
         const shop: Shop[] = res.data.data;
         return shop;
     } catch (error) {
@@ -61,7 +61,7 @@ export const getShops = async () => {
 // Shop 상세 조회
 export const getDetailShop = async (shopId: number) => {
     try {
-        const res = await instance.get(`/shops/${shopId}`);
+        const res = await instance.get(`/api/shops/${shopId}`);
         const shop: ShopDetails = res.data.data;
         return shop;
     } catch (error) {
@@ -72,7 +72,7 @@ export const getDetailShop = async (shopId: number) => {
 // 마이페이지 Shop 조회
 export const getMyShop = async () => {
     try {
-        const res = await instance.get(`/shops/mypage`);
+        const res = await instance.get(`/api/shops/mypage`);
         const shop: Shop[] = res.data.data;
         return shop;
     } catch (error) {
@@ -83,7 +83,7 @@ export const getMyShop = async () => {
 // 마이페이지 Pet 조회
 export const getMyPet = async () => {
     try {
-        const res = await instance.get(`/pets/mypage`);
+        const res = await instance.get(`/api/pets/mypage`);
         const pet: Pet[] = res.data.data;
         return pet;
     } catch (error) {
@@ -94,7 +94,7 @@ export const getMyPet = async () => {
 // (마이페이지) Shop 삭제
 export const deleteShop = async (shopId: number) => {
     try {
-        await instance.delete(`/shops/${shopId}`);
+        await instance.delete(`/api/shops/${shopId}`);
     } catch (error) {
         console.log('shop 삭제에러 :',error);
     }
