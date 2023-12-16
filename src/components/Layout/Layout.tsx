@@ -13,7 +13,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <AuthProvider>
             <Header />
             {children}
-            <Footer />
+            {/* <Footer /> */}
         </AuthProvider>
     );
 };
