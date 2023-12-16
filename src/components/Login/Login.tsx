@@ -41,7 +41,7 @@ const Login: React.FC = () => {
                 let expireAtDate = dayjs().add(60, 'minute').format('YYYY-MM-DD HH:mm:ss')
                 localStorage.setItem('expireAt', expireAtDate)
 
-                const refreshToken = res.headers["refresh-token"]
+                const refreshToken = res.headers['refresh-token']
                 localStorage.setItem('Refresh-Token', refreshToken)
                 // console.log('로그인 시 accessToken 확인', refreshToken)
                 // console.log('로그인 시 refreshToken 확인', token)
@@ -63,32 +63,40 @@ const Login: React.FC = () => {
     return (
         <ST.LoginContainer>
             <ST.LoginBox>
-                <h2>로그인</h2>
+                <ST.LoginTitleH2>로그인</ST.LoginTitleH2>
+                <ST.LoginP>간단히 로그인하고 더 많은 서비스를 즐겨보세요!</ST.LoginP>
                 <ST.LoginForm onSubmit={(e) => e.preventDefault()}>
-                    <ST.LoginInput
-                        type="text"
-                        id="email"
-                        ref={idRef}
-                        placeholder="이메일"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <ST.LoginInput
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        placeholder="비밀번호"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                    <ST.LoginInputBox>
+                        <ST.LoginLabel>이메일</ST.LoginLabel>
+                        <ST.LoginInput
+                            type="text"
+                            id="email"
+                            ref={idRef}
+                            placeholder="이메일을 입력해주세요"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </ST.LoginInputBox>
+                    <ST.LoginInputBox>
+                        <ST.LoginLabel>비밀번호</ST.LoginLabel>
+                        <ST.LoginInput
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            placeholder="비밀번호를 입력해주세요"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </ST.LoginInputBox>
                     <ST.LoginBtn type="button" onClick={handleLogin}>
                         로그인하기
                     </ST.LoginBtn>
                 </ST.LoginForm>
-                <ST.GoSignupDiv>
-                    <ST.NotUserP>아직 회원이 아니시면</ST.NotUserP>
-                    <NoLineLink to="/signup">회원가입</NoLineLink>
-                </ST.GoSignupDiv>
+                    <ST.LoginP>아직 회원이 아니신가요 ? 
+                    <ST.NotUserP onClick={() => navigate('/signup')}> 회원가입하러 가기</ST.NotUserP>
+                    </ST.LoginP>
+                    <ST.NotUserP onClick={() => navigate('/signup')}> ..이메일 찾기 / 비밀번호 찾기</ST.NotUserP>
+
             </ST.LoginBox>
         </ST.LoginContainer>
     )
