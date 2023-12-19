@@ -37,7 +37,7 @@ const Login: React.FC = () => {
                 localStorage.setItem('accessToken', token)
 
                 // accessToken 만료시간(60분) 저장
-                let expireAtDate = dayjs().add(60, 'minute').format('YYYY-MM-DD HH:mm:ss')
+                const expireAtDate = dayjs().add(60, 'minute').format('YYYY-MM-DD HH:mm:ss')
                 localStorage.setItem('expireAt', expireAtDate)
 
                 const refreshToken = res.headers['refresh-token']
