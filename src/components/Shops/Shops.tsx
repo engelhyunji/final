@@ -2,6 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 // import axios from 'axios'
 import * as ST from './style'
 import instance from '../../apis/instance'
+import { useNavigate } from 'react-router-dom'
 
 export interface ShopPostData {
     shopName: string
@@ -10,11 +11,10 @@ export interface ShopPostData {
     shopAddress: string
     shopType: string
     shopDescribe: string
-    // imageUrl: string
 }
 
 const Shops: React.FC = () => {
-    // const navigate = useNavigate()
+    const navigate = useNavigate();
     const [shopRequestDto, setShopRequestDto] = useState<ShopPostData>({
         shopName: '',
         shopTime: '',
@@ -22,7 +22,6 @@ const Shops: React.FC = () => {
         shopAddress: '',
         shopType: '',
         shopDescribe: '',
-        // imageUrl: '',
     })
 
     const [imgUrl, setImgUrl] = useState<string | null>(null)
@@ -36,24 +35,17 @@ const Shops: React.FC = () => {
         }))
     }
 
-    // const imgChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    //     setUploadImage(e.target.files?.[0])
-    // }
-
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0]
-            console.log('e.target.files[0] 파일확인', e.target.files[0])
+            // console.log('e.target.files[0] 파일확인', e.target.files[0])
             const reader = new FileReader()
             reader.onload = () => {
                 const result = reader.result as string
-                console.log('파일리더(미리보기) :', result)
 
                 // 이미지 업데이트
                 setImgUrl(result)
                 setUploadImage(file)
-
-                console.log('uploadImage 값확인 ', uploadImage)
             }
             reader.readAsDataURL(e.target.files[0])
         }
@@ -68,8 +60,8 @@ const Shops: React.FC = () => {
         const formData = new FormData()
         // 나머지 데이터
         Object.entries(shopRequestDto).forEach(([key, value]) => {
-            formData.append(key, value)
-        })
+            formData.append(key, value);
+        });
 
         // 이미지 파일
         if (uploadImage) {
@@ -77,23 +69,16 @@ const Shops: React.FC = () => {
         }
 
         try {
-            const response = await instance.post(`/shops`, formData, {
+            const response = await instance.post(`/api/shops`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             })
             console.log('가게 등록 response :', response.data)
+            navigate('/shopslist')
 
-            setShopRequestDto({
-                shopName: '',
-                shopTime: '',
-                shopTel: '',
-                shopAddress: '',
-                shopType: '',
-                shopDescribe: '',
-            })
-            setImgUrl(null) // 이미지 초기화
-            setUploadImage(null)
+            // setImgUrl(null) // 이미지 초기화
+            // setUploadImage(null)
         } catch (error) {
             console.error('가게 등록 에러 :', error)
         }
@@ -125,8 +110,8 @@ const Shops: React.FC = () => {
                 <ST.Input type="text" name="shopDescribe" value={shopRequestDto.shopDescribe} onChange={handleChange} />
                 <ST.Label>이미지</ST.Label>
                 <ST.Input type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleImageFileChange} />
-                <ST.Wrap>{imgUrl && <ST.Image src={imgUrl} alt="Shop" />}</ST.Wrap>
-                <ST.Button type="submit" value="Send">
+                <ST.Wrap>{imgUrl && <ST.Image src={imgUrl} alt="ShopImg" />}</ST.Wrap>
+                <ST.Button type="submit">
                     등록하기
                 </ST.Button>
             </ST.Form>

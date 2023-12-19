@@ -24,7 +24,7 @@ const PetModify: React.FC = () => {
 
     const fetchPetDetail = async (id: number) => {
         try {
-            const response = await instance.get<PetDetails>(`/pets/${id}`)
+            const response = await instance.get<PetDetails>(`/api/pets/${id}`)
             setPetDetail(response.data)
             setLoading(false)
         } catch (error) {

@@ -3,9 +3,13 @@ import { Pet, Shop, getMyShop, getMyPet, deleteShop } from '../../apis/api/api'
 import * as ST from './style'
 import React, { useState, useEffect } from 'react'
 import { useMutation } from 'react-query'
+import instance from '../../apis/instance'
+import { useAuth } from '../../context/AuthContext'
 
 const My: React.FC = () => {
+    const { logout } = useAuth()
     const navigate = useNavigate()
+    const nickname = localStorage.getItem('nickname')
     const [shops, setShops] = useState<Shop[]>([])
     const [pets, setPets] = useState<Pet[]>([])
 
@@ -46,14 +50,30 @@ const My: React.FC = () => {
     })
 
     const DeleteHandler = (idx: number) => {
-        if (window.confirm(`${shops[idx].shopName} 가게를 삭제하시겠습니까?`)) {
+        if (confirm(`${shops[idx].shopName} 가게를 삭제하시겠습니까?`)) {
             mutation.mutate(shops[idx].shopId)
         }
     }
 
+    const LeaveUserHandler = async () => {
+        if (confirm('정말로 탈퇴하실건가요?😿')) {
+            const password = prompt('비밀번호를 입력하시면 회원탈퇴가 완료됩니다🙊')
+            if (password) {
+                try{
+                await instance.delete('/api/user/delete', { data: { password } })
+                logout()
+                } catch (err){
+                    console.log(err)
+                    alert('탈퇴실패 비밀번호가 틀렸습니다')
+                }
+            }
+        }
+        
+    }
+
     return (
         <ST.MyContainer>
-            <ST.TitleH2>마이 페이지</ST.TitleH2>
+            <ST.TitleH2>{nickname}님의 마이 페이지</ST.TitleH2>
 
             {shops.length > 0 && (
                 <ST.ShopNPetSection>
@@ -95,7 +115,7 @@ const My: React.FC = () => {
 
             {shops.length === 0 && pets.length === 0 && (
                 <ST.ShopNPetSection>
-                    등록된 샵 또는 펫 정보가 없습니다.
+                    등록된 SHOP 또는 PET 정보가 없습니다.
                     <br /> 내 가게 또는 반려동물을 등록해보세요!
                     <ST.BtnContainer>
                         <ST.ShopBtn
@@ -115,6 +135,8 @@ const My: React.FC = () => {
                     </ST.BtnContainer>
                 </ST.ShopNPetSection>
             )}
+
+            <span onClick={LeaveUserHandler}>회원탈퇴</span>
         </ST.MyContainer>
     )
 }

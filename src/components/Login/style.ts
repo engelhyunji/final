@@ -2,40 +2,73 @@ import styled from "styled-components";
 
 export const LoginContainer = styled.div`
     width: 100%;
+    height: 130vh;
 `
 
 export const LoginBox = styled.div`
-    margin: 100px auto;
-    width: 300px;
+    width: 728px;
+    height: 890px;
+    margin: 72px auto;
+    padding-top: 120px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 `
+
+export const LoginTitleH2 = styled.h2`
+    text-align: center;
+    font-size: 24px;
+    font-family: Pretendard-Bold;
+`
+
+export const LoginP = styled.p`
+    text-align: center;
+    margin: 20px 0 50px;
+    color: #aaa;
+    font-family: Pretendard-regular;
+`
+
 export const LoginForm = styled.form`
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin: 50px auto;
+    align-items: center;
+    gap: 16px;
+`
+
+export const LoginInputBox = styled.p`
+    width: 474px;
+    height: 85px;
+`
+
+export const LoginLabel = styled.label`
+    font-size: 16px;
+    font-family: Pretendard-Bold;
+    margin-bottom: 16px;
 `
 
 export const LoginInput = styled.input`
-    height: 36px;
+    width: 474px;
+    height: 51px;
     padding: 0 16px;
-    background-color: #eee;
-    border: none;
-    border-radius: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: Pretendard-regular;
+    font-size: 14px;
 `
 
 export const LoginBtn = styled.button`
-    height: 36px;
-    padding: 0 16px;
-    background-color: #bbb;
+    width: 180px;
+    height: 51px;
+    margin: 30px 0 16px;
+    color: #fff;
+    font-family: Pretendard-medium;
+    background-color: #00BD8F;
     border: none;
-    border-radius: 20px;
+    border-radius: 8px;
 `
 
-export const GoSignupDiv = styled.div`
-    text-align: center;
-`
-
-export const NotUserP = styled.p`
-    margin-bottom: 20px;
+export const NotUserP = styled.span`
+    color: #000;
+    font-family: Pretendard-medium;
+    cursor: pointer;
 `

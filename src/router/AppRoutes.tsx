@@ -15,6 +15,7 @@ import ShopsListPage from '../pages/ShopsListPage'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import MyPage from '../pages/MyPage'
 import MapPage from '../pages/MapPage'
+import ChatListPage from '../pages/Chat/ChatListPage'
 
 const queryClient = new QueryClient()
 
@@ -26,6 +27,7 @@ const AppRoutes = () => {
                     <Routes>
                         <Route path="/" element={<MainPage />} />
                         <Route path="/login" element={<LoginPage />} />
+
                         {/* 생성 페이지 create */}
                         <Route path="/pet" element={<PetPage />} />
                         {/* 목록 페이지 list */}
@@ -34,6 +36,7 @@ const AppRoutes = () => {
                         <Route path="/pet/:petId" element={<PetDetailPage />} />
                         {/* 수정 + 삭제 페이지 modify */}
                         <Route path="/modify/:petId" element={<PetModifyPage />} />
+
                         {/* 생성 페이지 create */}
                         <Route path="/shops" element={<ShopsPage />} />
                         {/* 목록 페이지 list */}
@@ -43,8 +46,13 @@ const AppRoutes = () => {
                         {/* 수정 + 삭제 페이지 modify */}
                         <Route path="/shops/modify/:shopId" element={<ShopsModifyPage />} />
                         <Route path="/map" element={<MapPage />} />
+
                         <Route path="/signup" element={<SignupPage />} />
                         <Route path="/my" element={<MyPage />} />
+
+                        <Route path="/chatlist" element={<ChatListPage />} />
+                        {/* <Route path="/chat" element={<ChatRoomPage />} />
+                        <Route path="/chat/:roomId" element={<ChatRoomPage />} /> */}
                     </Routes>
                 </Layout>
             </Router>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { ShopDetails } from '../../../apis/api/api'
-import { useMutation, useQueryClient } from 'react-query'
+import { Review, ShopDetails } from '../../../apis/api/api'
 import { useParams } from 'react-router-dom'
 import { addReview, cancelRecommendReview, deleteReview, recommendReview } from '../../../apis/api/review'
+// import useShopMutation from '../../../hooks/detailShopMutaion'
+import { useMutation, useQueryClient } from 'react-query'
 import { AxiosError } from 'axios'
 
 interface ReviewsProps {
@@ -11,19 +12,24 @@ interface ReviewsProps {
 
 const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     const { shopId } = useParams()
-    const [comment, setComment] = useState('')
-    const [recommend, setRecommend] = useState<{ [key: number]: boolean }>({});
-
-    // undefined 일 때 0 -> 다른 방법 모색 필요
-    const currentShopId = shopId ? +shopId : 0
-
     const queryClient = useQueryClient()
 
-    const mutation = useMutation<void, AxiosError, { shopId: number; comment: string }>(
+    const [comment, setComment] = useState('')
+    const [recommend, setRecommend] = useState<{ [key: number]: boolean }>({})
+
+    // shopId가 undefined 일 때 경고창
+    const currentShopId = shopId ? +shopId : 0 && alert('가게를 찾을 수 없습니다')
+
+    // const [addReviewMutation] = useShopMutation(({ shopId, comment }) => addReview(shopId, comment))
+    // const [deleteReviewMutation] = useShopMutation(({ shopId, reviewId }) => deleteReview(shopId, reviewId))
+    // const [recommendMutation] = useShopMutation((reviewId) => recommendReview(reviewId))
+    // const [cancelRecommendMutation] = useShopMutation((reviewId) => cancelRecommendReview(reviewId))
+    const addReviewMutation = useMutation<void, AxiosError, { shopId: number; comment: string }>(
         ({ shopId, comment }) => addReview(shopId, comment),
         {
             onSuccess: () => {
                 queryClient.invalidateQueries('detailShopData')
+                alert(`${detailShopData.shopResponseDto.shopName}에 후기가 등록되었습니다🙉`)
             },
             onError: (error) => {
                 console.error('후기추가 Mutation 에러 :', error)
@@ -32,7 +38,7 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
         },
     )
 
-    const deleteMutation = useMutation<void, AxiosError, { shopId: number; reviewId: number }>(
+    const deleteReviewMutation = useMutation<void, AxiosError, { shopId: number; reviewId: number }>(
         ({ shopId, reviewId }) => deleteReview(shopId, reviewId),
         {
             onSuccess: () => {
@@ -41,16 +47,13 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
         },
     )
 
-    const recommendMutation = useMutation<void, AxiosError, number >(
-        (reviewId) => recommendReview(reviewId),
-        {
-            onSuccess: () => {
-                queryClient.invalidateQueries('detailShopData')
-            },
+    const recommendMutation = useMutation<void, AxiosError, number>((reviewId) => recommendReview(reviewId), {
+        onSuccess: () => {
+            queryClient.invalidateQueries('detailShopData')
         },
-    )
+    })
 
-    const cancelRecommendMutation = useMutation<void, AxiosError, number >(
+    const cancelRecommendMutation = useMutation<void, AxiosError, number>(
         (reviewId) => cancelRecommendReview(reviewId),
         {
             onSuccess: () => {
@@ -60,27 +63,46 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     )
 
     const onSubmit = (shopId: number, comment: string) => {
-        mutation.mutate({ shopId, comment })
-        alert(`${detailShopData.shopResponseDto.shopName}에 후기가 등록되었습니다🙉`)
+        addReviewMutation.mutate({ shopId, comment })
         setComment('')
     }
 
     // 리뷰 추천 초기 상태 확인 필요,, 수정해야함
     const RecommendHandler = (reviewId: number) => {
-        const newRecommendState = { ...recommend };
-        if (newRecommendState[reviewId] === false) {
-            recommendMutation.mutate(reviewId);
-            newRecommendState[reviewId] = true;
+        const newRecommendState = { ...recommend }
+        if (newRecommendState[reviewId] === undefined || newRecommendState[reviewId] === false) {
+            recommendMutation.mutate(reviewId)
+            newRecommendState[reviewId] = true
         } else {
-            cancelRecommendMutation.mutate(reviewId);
-            newRecommendState[reviewId] = false;
+            cancelRecommendMutation.mutate(reviewId)
+            newRecommendState[reviewId] = false
         }
-        setRecommend(newRecommendState);
+        setRecommend(newRecommendState)
     }
 
     const DeleteHandler = (shopId: number, reviewId: number) => {
         if (window.confirm('후기를 삭제하시겠습니까?')) {
-            deleteMutation.mutate({ shopId, reviewId })
+            deleteReviewMutation.mutate({ shopId, reviewId })
+        }
+    }
+
+    // 후기 작성 시간 표시
+    const getTimeGap = (review: Review) => {
+        const targetDate = new Date(review.createdAt)
+        const MsGap = Date.now() - Number(targetDate)
+        const MnGap = Math.floor(MsGap / 60000)
+        const HrGap = Math.floor(MsGap / 3600000)
+
+        if (MsGap < 0) {
+            return <p>0분전</p>
+        }
+        if (HrGap > 24) {
+            return <p>{review.createdAt}</p>
+        }
+        if (MnGap > 60) {
+            return <p>{HrGap}시간 전</p>
+        } else {
+            return <p>{MnGap}분 전</p>
         }
     }
 
@@ -97,6 +119,7 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
             <ul>
                 {detailShopData.reviews.map((review) => (
                     <li key={review.reviewId}>
+                        <p>리뷰Id : {review.reviewId}</p>
                         <p>작성자 : {review.nickname}</p>
                         <p>{review.comment}</p>
                         <p>
@@ -105,7 +128,10 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
                                 {recommend[review.reviewId] ? '취소' : '추천!'}
                             </button>
                         </p>
-                        <p>작성 날짜 : {review.createdAt}</p>
+                        <div>
+                            {/* 작성 날짜 : {review.createdAt.slice(0, 10)} */}
+                            {getTimeGap(review)}
+                        </div>
                         <p>
                             <button onClick={() => DeleteHandler(currentShopId, review.reviewId)}>삭제</button>
                         </p>

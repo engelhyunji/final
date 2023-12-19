@@ -13,7 +13,7 @@ export interface PetDetails {
 // Pet 조회
 export const fetchPets = async (): Promise<{ message: string; data: PetDetails[] } | null> => {
     try {
-        const response = await instance.get<{ message: string; data: PetDetails[] }>('/pets')
+        const response = await instance.get<{ message: string; data: PetDetails[] }>('/api/pets')
 
         if (response.status === 200) {
             return response.data
