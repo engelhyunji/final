@@ -31,4 +31,3 @@ export const fetchPetDetail = async (petId: string): Promise<PetDetails> => {
         throw error
     }
 }
-

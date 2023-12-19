@@ -14,6 +14,7 @@ import PetListPage from '../pages/PetListPage'
 import ShopsListPage from '../pages/ShopsListPage'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import MyPage from '../pages/MyPage'
+import MapPage from '../pages/MapPage'
 
 const queryClient = new QueryClient()
 
@@ -41,6 +42,7 @@ const AppRoutes = () => {
                         <Route path="/shops/:shopId" element={<ShopsDetailPage />} />
                         {/* 수정 + 삭제 페이지 modify */}
                         <Route path="/shops/modify/:shopId" element={<ShopsModifyPage />} />
+                        <Route path="/map" element={<MapPage />} />
                         <Route path="/signup" element={<SignupPage />} />
                         <Route path="/my" element={<MyPage />} />
                     </Routes>

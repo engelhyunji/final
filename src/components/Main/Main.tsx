@@ -3,38 +3,45 @@ import * as ST from './style'
 import MainTop from './MainTop/MainTop'
 import ShopsList from './MainBottom/ShopsList'
 import { useNavigate } from 'react-router-dom'
+import Category from './Category/Category'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 const Main: React.FC = () => {
     const navigate = useNavigate()
+
     return (
         <ST.MainContainer>
             <ST.BannerContainer>
-                메인이 될 이미지?
-                <br /> 내 가게 또는 반려동물을 등록하세요
+                <ST.Text>메인 이미지 넣기.</ST.Text>
+                <ST.Text>내 가게 또는 반려동물 등록.</ST.Text>
                 <ST.BtnContainer>
                     <ST.ShopBtn
                         onClick={() => {
                             navigate('/shops')
                         }}
                     >
-                        Shop
+                        가게 등록
                     </ST.ShopBtn>
                     <ST.PetBtn
                         onClick={() => {
                             navigate('/pet')
                         }}
                     >
-                        Pet
+                        애완동물 등록
                     </ST.PetBtn>
                 </ST.BtnContainer>
             </ST.BannerContainer>
 
             <ST.TopWrapper>
-                <MainTop />
+                <Category />
             </ST.TopWrapper>
             <ST.ShopsWrapper>
                 <ShopsList />
             </ST.ShopsWrapper>
+            <ST.TopWrapper>
+                <MainTop />
+            </ST.TopWrapper>
         </ST.MainContainer>
     )
 }

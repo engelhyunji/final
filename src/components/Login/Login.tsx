@@ -12,13 +12,13 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const idRef = useRef<HTMLInputElement | null>(null);
+    const idRef = useRef<HTMLInputElement | null>(null)
 
     useEffect(() => {
         if (idRef.current) {
-            idRef.current.focus();
-        };
-    }, []);
+            idRef.current.focus()
+        }
+    }, [])
 
     const userLogin = async (email: string, password: string) => {
         try {
@@ -33,8 +33,8 @@ const Login: React.FC = () => {
             const token = res.headers.authorization // 서버 응답 headers에서 토큰 추출
             localStorage.setItem('accessToken', token)
 
-            const nickname = res.data.nickname;
-            localStorage.setItem('nickname', nickname);
+            const nickname = res.data.nickname
+            localStorage.setItem('nickname', nickname)
             // console.log('로그인 res.data', res.data);
             // return res.data;
         } catch (error) {

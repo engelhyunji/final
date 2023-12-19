@@ -32,15 +32,21 @@ const PetDetail: React.FC = () => {
     }
 
     return (
-        <ST.Content>
-            <ST.Text>{pet.petName} 상세 정보</ST.Text>
-            <div>
-                {pet.imageUrls && pet.imageUrls[0] && <img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />}
-            </div>
-            <div>
-                <p>
-                    <Link to={`/modify/${pet.petId}`}>수정 페이지로 이동</Link>
-                </p>
+        <ST.ProfileContainer>
+            <ST.Wrap>
+            <ST.Posts>
+            <ST.Name>{pet.petName} 상세 정보</ST.Name>
+            <ST.ImgCard>
+                <ST.PetItem>
+                    <ST.Img>
+                        {pet.imageUrls && pet.imageUrls[0] && (
+                            <img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
+                        )}
+                    </ST.Img>
+                </ST.PetItem>
+            </ST.ImgCard>
+
+            <ST.Text>
                 <p>
                     <ST.DetailLabel>애완동물 성별:</ST.DetailLabel> {pet.petGender === 'MALE' ? '남아' : '여아'}
                 </p>
@@ -51,8 +57,14 @@ const PetDetail: React.FC = () => {
                 <p>
                     <ST.DetailLabel>Info:</ST.DetailLabel> {pet.petInfo}
                 </p>
-            </div>
-        </ST.Content>
+
+                <p>
+                    <Link to={`/modify/${pet.petId}`}>수정 페이지로 이동</Link>
+                </p>
+            </ST.Text>
+            </ST.Posts>
+            </ST.Wrap>
+        </ST.ProfileContainer>
     )
 }
 

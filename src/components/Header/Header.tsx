@@ -23,6 +23,9 @@ const Header: React.FC = () => {
                 <NoLineLink to="/petlist">
                     <h5>애견 전체조회</h5>
                 </NoLineLink>
+                <NoLineLink to="/shopslist">
+                    <h5>가게 전체조회</h5>
+                </NoLineLink>
                 {isLogin ? (
                     <>
                         <NoLineLink to={'/my'}>

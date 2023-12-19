@@ -19,13 +19,13 @@ const Signup: React.FC = () => {
         password: '',
     })
 
-    const nickRef = useRef<HTMLInputElement | null>(null);
+    const nickRef = useRef<HTMLInputElement | null>(null)
 
     useEffect(() => {
         if (nickRef.current) {
-            nickRef.current.focus();
-        };
-    }, []);
+            nickRef.current.focus()
+        }
+    }, [])
 
     const userSignup = async (userData: UserData) => {
         try {
