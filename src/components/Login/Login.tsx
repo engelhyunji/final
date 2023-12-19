@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as ST from './style'
-import NoLineLink from '../NoLineLink'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import instance from '../../apis/instance'
 import dayjs from 'dayjs'
+import axios from 'axios'
 
 const Login: React.FC = () => {
     const navigate = useNavigate()
@@ -23,13 +22,13 @@ const Login: React.FC = () => {
 
     const userLogin = async (email: string, password: string) => {
         try {
-            const res = await instance.post('/api/user/login', {
+            const res = await axios.post(`${import.meta.env.VITE_APP_SERVER_URL}/api/user/login`, {
                 email,
                 password,
             })
             if (res) {
                 login() // isLogin 상태변경
-                const nickname = res.data.data
+                const nickname = res.data.result.nickname
                 localStorage.setItem('nickname', nickname)
                 alert(`${nickname}님 로그인이 완료되었습니다🐕`)
                 navigate('/')
@@ -43,8 +42,8 @@ const Login: React.FC = () => {
 
                 const refreshToken = res.headers['refresh-token']
                 localStorage.setItem('Refresh-Token', refreshToken)
-                // console.log('로그인 시 accessToken 확인', refreshToken)
-                // console.log('로그인 시 refreshToken 확인', token)
+                // console.log('로그인 시 refreshToken 확인', refreshToken)
+                // console.log('로그인 시 accessToken 확인', token)
                 // console.log('로그인 시 expireAtDate 확인', expireAtDate)
             }
         } catch (error) {

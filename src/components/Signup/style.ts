@@ -56,6 +56,27 @@ export const SignupInput = styled.input`
     font-family: Pretendard-regular;
     font-size: 14px;
 `
+export const SignupInputDiv = styled.div`
+    width: 474px;
+    height: 51px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: Pretendard-regular;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+`
+
+export const SignupCodeInput = styled.input`
+    width: 310px;
+    height: 49px;
+    padding: 0 16px;
+    /* color: transparent; */
+    border: transparent;
+    border-radius: 8px;
+    font-family: Pretendard-regular;
+    font-size: 14px;
+`
 
 export const SignupEBtn = styled.button`
     width: 478px;
