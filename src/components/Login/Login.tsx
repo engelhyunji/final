@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as ST from './style'
-import NoLineLink from '../NoLineLink'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import instance from '../../apis/instance'
+import dayjs from 'dayjs'
+import axios from 'axios'
 
 const Login: React.FC = () => {
     const navigate = useNavigate()
@@ -12,31 +12,40 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const idRef = useRef<HTMLInputElement | null>(null);
+    const idRef = useRef<HTMLInputElement | null>(null)
 
     useEffect(() => {
         if (idRef.current) {
-            idRef.current.focus();
-        };
-    }, []);
+            idRef.current.focus()
+        }
+    }, [])
 
     const userLogin = async (email: string, password: string) => {
         try {
-            const res = await instance.post('/user/login', {
+            const res = await axios.post(`${import.meta.env.VITE_APP_SERVER_URL}/api/user/login`, {
                 email,
                 password,
             })
-            login() // isLogin 상태변경
-            alert(`${res.data.nickname}님 로그인이 완료되었습니다🐕`)
-            navigate('/')
+            if (res) {
+                login() // isLogin 상태변경
+                const nickname = res.data.result.nickname
+                localStorage.setItem('nickname', nickname)
+                alert(`${nickname}님 로그인이 완료되었습니다🐕`)
+                navigate('/')
 
-            const token = res.headers.authorization // 서버 응답 headers에서 토큰 추출
-            localStorage.setItem('accessToken', token)
+                const token = res.headers.authorization // 서버 응답 headers에서 토큰 추출
+                localStorage.setItem('accessToken', token)
 
-            const nickname = res.data.nickname;
-            localStorage.setItem('nickname', nickname);
-            // console.log('로그인 res.data', res.data);
-            // return res.data;
+                // accessToken 만료시간(60분) 저장
+                let expireAtDate = dayjs().add(60, 'minute').format('YYYY-MM-DD HH:mm:ss')
+                localStorage.setItem('expireAt', expireAtDate)
+
+                const refreshToken = res.headers['refresh-token']
+                localStorage.setItem('Refresh-Token', refreshToken)
+                // console.log('로그인 시 refreshToken 확인', refreshToken)
+                // console.log('로그인 시 accessToken 확인', token)
+                // console.log('로그인 시 expireAtDate 확인', expireAtDate)
+            }
         } catch (error) {
             console.log('로그인 실패 : error 메세지', error)
         }
@@ -53,32 +62,40 @@ const Login: React.FC = () => {
     return (
         <ST.LoginContainer>
             <ST.LoginBox>
-                <h2>로그인</h2>
+                <ST.LoginTitleH2>로그인</ST.LoginTitleH2>
+                <ST.LoginP>간단히 로그인하고 더 많은 서비스를 즐겨보세요!</ST.LoginP>
                 <ST.LoginForm onSubmit={(e) => e.preventDefault()}>
-                    <ST.LoginInput
-                        type="text"
-                        id="email"
-                        ref={idRef}
-                        placeholder="이메일"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <ST.LoginInput
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        placeholder="비밀번호"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                    <ST.LoginInputBox>
+                        <ST.LoginLabel>이메일</ST.LoginLabel>
+                        <ST.LoginInput
+                            type="text"
+                            id="email"
+                            ref={idRef}
+                            placeholder="이메일을 입력해주세요"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </ST.LoginInputBox>
+                    <ST.LoginInputBox>
+                        <ST.LoginLabel>비밀번호</ST.LoginLabel>
+                        <ST.LoginInput
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            placeholder="비밀번호를 입력해주세요"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </ST.LoginInputBox>
                     <ST.LoginBtn type="button" onClick={handleLogin}>
                         로그인하기
                     </ST.LoginBtn>
                 </ST.LoginForm>
-                <ST.GoSignupDiv>
-                    <ST.NotUserP>아직 회원이 아니시면</ST.NotUserP>
-                    <NoLineLink to="/signup">회원가입</NoLineLink>
-                </ST.GoSignupDiv>
+                    <ST.LoginP>아직 회원이 아니신가요 ? 
+                    <ST.NotUserP onClick={() => navigate('/signup')}> 회원가입하러 가기</ST.NotUserP>
+                    </ST.LoginP>
+                    <ST.NotUserP onClick={() => navigate('/signup')}> ..이메일 찾기 / 비밀번호 찾기</ST.NotUserP>
+
             </ST.LoginBox>
         </ST.LoginContainer>
     )

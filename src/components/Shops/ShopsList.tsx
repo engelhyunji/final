@@ -4,6 +4,7 @@ import * as ST from './style'
 import { Pagination, Table, Button, Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Shop, getShops } from '../../apis/api/api'
+import { useQuery } from 'react-query'
 
 const PetList: React.FC = () => {
     const navigate = useNavigate();
@@ -19,25 +20,19 @@ const PetList: React.FC = () => {
         setPage(page)
     }
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const data = await getShops();
-                if (data && Array.isArray(data)) {
-                    // data가 null 또는 undefined가 아니고 배열일 때만
-                    setShopList([...data]);
-                    console.error('있으면 반환된 data', data);
-                } else { // 반환된 데이터가 배열이 아니거나 null/undefined
-                    console.error('실패 반환된 data', data);
-                }
-            } catch (error) {
-                console.error('getShops fetchData 에러 :', error);
+    useQuery('getShops', getShops, {
+        onSuccess: (data) => {
+            if (data) {
+                setShopList([...data]);
+                console.error('있으면 반환된 data', data);
+            } else { // 반환된 데이터가 배열이 아니거나 null/undefined
+                console.error('실패 시 data', data);
             }
+        },
+        onError: (error) => {
+            console.error('getShops 에러 :', error);
         }
-
-        getData();
-    }, [])
-
+    })
 
     useEffect(() => {
         const reversedShops = [...shopList].reverse()

@@ -57,7 +57,7 @@ const Pet: React.FC = () => {
         imageFiles.forEach((file) => formData.append('imageUrl', file))
 
         try {
-            const response = await instance.post<PetDetails>('/pets', formData, {
+            const response = await instance.post<PetDetails>('/api/pets', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

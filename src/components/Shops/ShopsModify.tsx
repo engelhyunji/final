@@ -80,9 +80,9 @@ const ShopsModify: React.FC = () => {
         [setImgUrl, setUploadImage],
     )
 
-    useEffect(() => {
-        console.log('uploadImage 업데이트 확인', uploadImage)
-    }, [uploadImage])
+    // useEffect(() => {
+    //     console.log('uploadImage 업데이트 확인', uploadImage)
+    // }, [uploadImage])
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -95,11 +95,11 @@ const ShopsModify: React.FC = () => {
 
         // 이미지 파일
         if (uploadImage) {
-            formData.append('imageUrl', uploadImage)
+            formData.append('imageUrl', uploadImage);
         }
 
         try {
-            const response = await instance.put(`/shops/${shopId}`, formData, {
+            const response = await instance.put(`/api/shops/${shopId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
