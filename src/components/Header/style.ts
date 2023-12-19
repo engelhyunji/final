@@ -4,6 +4,8 @@ export const HeaderWrap = styled.div`
     width: 100%;
     height: 88px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,7 +46,7 @@ export const GNBDiv = styled.div`
 export const LogoutBtn = styled.button`
     margin-left: 20px;
     font-family: Pretendard-Medium;
-    background-color: #6ca399;
+    background-color: #00BD8F;
     color: #fff;
     border: none;
     padding: 8px 16px;

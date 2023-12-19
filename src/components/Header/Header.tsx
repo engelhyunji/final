@@ -5,12 +5,10 @@ import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 const Header: React.FC = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const { isLogin, logout } = useAuth()
 
-    const nickname = localStorage.getItem('nickname')
-
-    const logoUrl = '../../../../public/임시 로고.png'
+    const logoUrl = './임시 로고.png'
 
     return (
         <ST.HeaderWrap>
@@ -20,19 +18,25 @@ const Header: React.FC = () => {
                     <ST.LogoH1>와르와르</ST.LogoH1>
                 </ST.Logo>
                 <ST.GNBDiv>
-                    <NoLineLink to="/pet">
-                        <h5>PET등록</h5>
-                    </NoLineLink>
-                    <NoLineLink to="/shops">
-                        <h5>SHOP등록</h5>
-                    </NoLineLink>
                     <NoLineLink to="/petlist">
-                        <h5>PET목록</h5>
+                        <h5>PET 목록</h5>
+                    </NoLineLink>
+                    <NoLineLink to="/shopslist">
+                        <h5>SHOP 목록</h5>
                     </NoLineLink>
                     {isLogin ? (
                         <>
+                            <NoLineLink to="/pet">
+                                <h5>PET등록</h5>
+                            </NoLineLink>
+                            <NoLineLink to="/shops">
+                                <h5>SHOP등록</h5>
+                            </NoLineLink>
+                            <NoLineLink to="/chat/room">
+                                <h5>채팅목록</h5>
+                            </NoLineLink>
                             <NoLineLink to={'/my'}>
-                                <h5>{nickname}님의 마이페이지</h5>
+                                <h5>마이페이지</h5>
                             </NoLineLink>
                             <ST.LogoutBtn onClick={logout}>로그아웃</ST.LogoutBtn>
                         </>

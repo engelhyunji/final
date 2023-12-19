@@ -1,31 +1,21 @@
-// import { UserData } from "../../components/Signup/Signup";
-// import instance from "../instance";
+import instance from "../instance";
 
 
-// // 회원가입 - navigate 사용을 위해 이사 !!
-// export const userSignup = async (userData: UserData) => {
-    
-//     try {
-//         await instance.post('/user/signup', userData);
-//         alert('회원가입이 완료되었습니다🐕')
-//     } catch (error) {
-//         console.log('회원가입 : error 메세지',error);
-//     }
-// }
+export const postEmail = async (email: string) => {
+    try {
+        await instance.post('/api/user/email', {email})
+        alert('이메일로 인증코드가 발송되었습니다.')
+    } catch (err) {
+        console.log('이메일 전송에러 :', err)
+    }
+}
 
-// // 로그인 - navigate 사용을 위해 이사 !!
-// export const userLogin = async (email: string, password: string) => {
+export const postCode = async (email: string, verificationCode: string) => {
+    try {
+        await instance.post('/api/user/email/verify', {email, verificationCode})
+        alert('이메일이 인증되었습니다.')
+    } catch (err) {
+        console.log('이메일과 인증코드 전송에러 :', err)
+    }
+}
 
-//     try {
-//         const res = await instance.post('/user/login', {
-//             email,
-//             password
-//         },);
-//         alert('로그인이 완료되었습니다🐕')
-//         const token = res.headers.authorization; // 서버 응답의 headers에서 토큰 추출
-//         localStorage.setItem('accessToken', token);
-//     } catch (error) {
-//         console.log('로그인 실패 : error 메세지',error);
-//     }
-    
-// }
