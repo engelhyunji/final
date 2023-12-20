@@ -4,6 +4,7 @@ export const Content = styled.div`
     justify-content: center;
     display: flex;
     margin-top: 10%;
+    overflow-y: auto;
 `
 
 export const Text = styled.div`

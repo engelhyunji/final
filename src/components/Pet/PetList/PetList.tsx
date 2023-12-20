@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { fetchPets } from '../../../apis/api/petlist'
 import { PetDetails } from '../../../apis/api/petlist'
 // import { useAuth } from '../../../context/AuthContext'
+import * as ST from './style'
 
 const PetList: React.FC = () => {
     // const { nickname } = useAuth() // useAuth 훅을 사용하여 nickname 가져오기
@@ -24,7 +25,7 @@ const PetList: React.FC = () => {
         const result = await fetchPets()
 
         if (result) {
-            setPets(result.data)
+            setPets(result.data || [])
         } else {
             setError('펫 목록을 불러오는 데 실패했습니다.')
         }
@@ -49,37 +50,46 @@ const PetList: React.FC = () => {
     }
 
     return (
-        <div>
-            <p>애완동물 목록</p>
-            {/* <p>로그인한 사용자: {nickname}</p> */}
-            <button onClick={handleFetchPetsClick}>전체 조회</button>
-            <div>
-                {pets.map((pet) => (
-                    <div key={pet.petId} onClick={() => handlePetClick(pet.petId)}>
-                        {/* 이미지가 배열 형태로 저장되어 있다면, 첫 번째 이미지만 표시 */}
-                        {pet.imageUrls && pet.imageUrls[0] && (
-                            <img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
-                        )}
-
-                        <div>
-                            <p>
-                                <label>애완동물 이름:</label> {pet.petName}
-                            </p>
-                            <p>
-                                <label>애완동물 성별:</label> {pet.petGender === 'MALE' ? '남아' : '여아'}
-                            </p>
-                            <p>
-                                <label>애완동물 종류:</label>{' '}
-                                {pet.petKind === 'SMALL' ? '소형견' : pet.petKind === 'MEDIUM' ? '중형견' : '대형견'}
-                            </p>
-                            <p>
-                                <label>애완동물 특이사항:</label> {pet.petInfo}
-                            </p>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
+        <ST.Back>
+            <ST.Wrap>
+                <ST.ProfileContainer>
+                    <ST.Name>애완동물 전체 목록</ST.Name>
+                    {/* <p>로그인한 사용자: {nickname}</p> */}
+                    <ST.Button onClick={handleFetchPetsClick}>전체 조회</ST.Button>
+                    <ST.Posts>
+                        <ST.ImgCard>
+                            {pets.map((pet) => (
+                                <ST.PetItem key={pet.petId} onClick={() => handlePetClick(pet.petId)}>
+                                    {/* 이미지가 배열 형태로 저장되어 있다면, 첫 번째 이미지만 표시 */}
+                                    {pet.imageUrls && pet.imageUrls[0] && (
+                                        <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
+                                    )}
+                                    {/* <ST.Content> */}
+                                    <ST.Text>
+                                        <label>애완동물 이름:</label> {pet.petName}
+                                    </ST.Text>
+                                    {/* <ST.Text>
+                                            <label>애완동물 성별:</label> {pet.petGender === 'MALE' ? '남아' : '여아'}
+                                        </ST.Text> */}
+                                    {/* <ST.Text>
+                                            <label>애완동물 종류:</label>{' '}
+                                            {pet.petKind === 'SMALL'
+                                                ? '소형견'
+                                                : pet.petKind === 'MEDIUM'
+                                                  ? '중형견'
+                                                  : '대형견'}
+                                        </ST.Text> */}
+                                    {/* <ST.Text>
+                                            <label>애완동물 특이사항:</label> {pet.petInfo}
+                                        </ST.Text> */}
+                                    {/* </ST.Content> */}
+                                </ST.PetItem>
+                            ))}
+                        </ST.ImgCard>
+                    </ST.Posts>
+                </ST.ProfileContainer>
+            </ST.Wrap>
+        </ST.Back>
     )
 }
 
