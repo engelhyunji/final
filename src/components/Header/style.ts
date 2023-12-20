@@ -5,7 +5,7 @@ export const HeaderWrap = styled.div`
     height: 88px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
     position: relative;
-    z-index: 1;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
