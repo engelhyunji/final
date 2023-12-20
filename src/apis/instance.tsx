@@ -28,13 +28,13 @@ instance.interceptors.request.use(
                 {},
                 {
                     headers: {
-                        Authorization: token,
+                        // Authorization: token,
                         'Refresh-Token': refreshToken,
                     },
                 },
             )
-            // console.log('만료되고 리프레시 있으면 post 응답', response)
-            // console.log('만료되고 리프레시 있으면 리프레시:', refreshToken)
+            console.log('만료되고 리프레시 있으면 post 응답', response)
+            console.log('만료되고 리프레시 있으면 리프레시:', refreshToken)
 
             if (response.headers) {
                 let expireAtDate = dayjs().add(60, 'minute').format('YYYY-MM-DD HH:mm:ss')
