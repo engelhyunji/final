@@ -32,7 +32,7 @@ const Signup: React.FC = () => {
     }, [])
 
     const emailVerify = async (email: UserData['email']) => {
-        // email 정규식
+        // email 형식 유효성 (정규식)
         const emailEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i
         if (emailEx.test(email)) {
             try {

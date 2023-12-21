@@ -41,10 +41,12 @@ export interface Review {
 export interface Pet {
     userId: number,
     petId: number,
+    nickname: string,
+    petGender: string,
     petName: string,
-    petBirth: string,
+    petKind: string,
     petInfo: string,
-    imageUrl: string
+    imageUrls: string[]
 }
 
 // Shop 목록 조회

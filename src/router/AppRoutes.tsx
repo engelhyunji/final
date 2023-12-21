@@ -16,6 +16,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import MyPage from '../pages/MyPage'
 import MapPage from '../pages/MapPage'
 import ChatListPage from '../pages/Chat/ChatListPage'
+import ChatRoomPage from '../pages/Chat/ChatRoomPage'
 
 const queryClient = new QueryClient()
 
@@ -50,9 +51,9 @@ const AppRoutes = () => {
                         <Route path="/signup" element={<SignupPage />} />
                         <Route path="/my" element={<MyPage />} />
 
-                        <Route path="/chatlist" element={<ChatListPage />} />
-                        {/* <Route path="/chat" element={<ChatRoomPage />} />
-                        <Route path="/chat/:roomId" element={<ChatRoomPage />} /> */}
+                        <Route path="/chat/room" element={<ChatListPage />} />
+                        <Route path="/chat/room/enter/" element={<ChatRoomPage />} />
+                        <Route path="/chat/room/enter/:roomId" element={<ChatRoomPage />} />
                     </Routes>
                 </Layout>
             </Router>

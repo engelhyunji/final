@@ -4,7 +4,6 @@ import dayjs from 'dayjs'
 // 토큰 만료를 한 번만 표시하기 위한 플래그
 let isTokenExpired = false
 
-
 const instance = axios.create({
     baseURL: import.meta.env.VITE_APP_SERVER_URL,
 })
@@ -21,20 +20,19 @@ instance.interceptors.request.use(
 
         // accessToken 만료 남은 시간
         const expiredAtDate = dayjs(expireAt).diff(dayjs())
-        // console.log('만료 남은 시간:', expiredAtDate)
         if (expiredAtDate < 0 && refreshToken) {
             const response = await axios.post(
                 `${import.meta.env.VITE_APP_SERVER_URL}/api/user/reissue`,
                 {},
                 {
                     headers: {
-                        Authorization: token,
+                        // Authorization: token,
                         'Refresh-Token': refreshToken,
                     },
                 },
             )
-            // console.log('만료되고 리프레시 있으면 post 응답', response)
-            // console.log('만료되고 리프레시 있으면 리프레시:', refreshToken)
+            console.log('만료되고 리프레시 있으면 post 응답', response)
+            console.log('만료되고 리프레시 있으면 리프레시:', refreshToken)
 
             if (response.headers) {
                 const expireAtDate = dayjs().add(60, 'minute').format('YYYY-MM-DD HH:mm:ss')
@@ -50,6 +48,8 @@ instance.interceptors.request.use(
             //     alert("response.data 가 없어서?")
             //     console.log(response.data)
             // }
+        } else if (expiredAtDate < 0 && !refreshToken) {
+            localStorage.clear()
         } else {
             if (token) {
                 config.headers.Authorization = `${token}`
@@ -76,9 +76,9 @@ instance.interceptors.response.use(
             // 경고창을 한 번만 표시하기 위해 플래그 설정
             isTokenExpired = true
             // 모든 정보 삭제
-            localStorage.clear();
+            localStorage.clear()
 
-            alert('토큰이 만료되었습니다. 다시 로그인해주세요.')
+            alert('로그인이 만료되었습니다. 다시 로그인해주세요.')
             window.location.href = '/'
         }
         return Promise.reject(error)

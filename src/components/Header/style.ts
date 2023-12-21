@@ -3,9 +3,10 @@ import styled from 'styled-components'
 export const HeaderWrap = styled.div`
     width: 100%;
     height: 88px;
+    background-color: #fff;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
     position: relative;
-    z-index: 1;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,6 +61,7 @@ export const LogoutBtn = styled.button`
     background-color: #00BD8F;
     color: #fff;
     border: none;
+    border-radius: 8px;
     padding: 8px 16px;
     cursor: pointer;
 `

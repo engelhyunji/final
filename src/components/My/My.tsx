@@ -13,6 +13,7 @@ const My: React.FC = () => {
     const [shops, setShops] = useState<Shop[]>([])
     const [pets, setPets] = useState<Pet[]>([])
 
+
     useEffect(() => {
         getMyShop()
             .then((shopData) => {
@@ -52,6 +53,7 @@ const My: React.FC = () => {
     const DeleteHandler = (idx: number) => {
         if (confirm(`${shops[idx].shopName} 가게를 삭제하시겠습니까?`)) {
             mutation.mutate(shops[idx].shopId)
+            setShops([])
         }
     }
 
@@ -59,16 +61,15 @@ const My: React.FC = () => {
         if (confirm('정말로 탈퇴하실건가요?😿')) {
             const password = prompt('비밀번호를 입력하시면 회원탈퇴가 완료됩니다🙊')
             if (password) {
-                try{
-                await instance.delete('/api/user/delete', { data: { password } })
-                logout()
-                } catch (err){
+                try {
+                    await instance.delete('/api/user/delete', { data: { password } })
+                    logout()
+                } catch (err) {
                     console.log(err)
                     alert('탈퇴실패 비밀번호가 틀렸습니다')
                 }
             }
         }
-        
     }
 
     return (
@@ -78,38 +79,40 @@ const My: React.FC = () => {
             {shops.length > 0 && (
                 <ST.ShopNPetSection>
                     <ST.TitleH3>마이 샵</ST.TitleH3>
-                    <ul>
+                    <ST.MyUl>
                         {shops.map((shop) => (
-                                <li key={shop.shopId}>
-                                    <div onClick={() => navigate(`/shops/${shop.shopId}`)}>
-                                        <ST.MyShopImg src={shop.imageUrls[0]} alt={shop.shopName} />
-                                        <p>가게 이름: {shop.shopName}</p>
-                                        <p>가게 시간: {shop.shopTime}</p>
-                                        <p>연락처: {shop.shopTel}</p>
-                                        <p>주소: {shop.shopAddress}</p>
-                                        <p>유형: {shop.shopType}</p>
-                                        <p>소개: {shop.shopDescribe}</p>
-                                    </div>
-                                    <button onClick={() => DeleteHandler(shops.indexOf(shop))}>삭제</button>
-                                </li>
+                            <li key={shop.shopId}>
+                                <div onClick={() => navigate(`/shops/${shop.shopId}`)}>
+                                    <ST.MyShopImg src={shop.imageUrls[0]} alt={shop.shopName} />
+                                    <p>가게 이름: {shop.shopName}</p>
+                                    <p>가게 시간: {shop.shopTime}</p>
+                                    <p>연락처: {shop.shopTel}</p>
+                                    <p>주소: {shop.shopAddress}</p>
+                                    <p>유형: {shop.shopType}</p>
+                                    <p>소개: {shop.shopDescribe}</p>
+                                </div><ST.BtnContainer>
+                                <ST.MyBtn onClick={() => navigate(`/shops/modify/${shop.shopId}`)}>수정</ST.MyBtn>
+                                <ST.MyBtn onClick={() => DeleteHandler(shops.indexOf(shop))}>삭제</ST.MyBtn>
+                                </ST.BtnContainer>
+                            </li>
                         ))}
-                    </ul>
+                    </ST.MyUl>
                 </ST.ShopNPetSection>
             )}
 
             {pets.length > 0 && (
                 <ST.ShopNPetSection>
                     <ST.TitleH3>마이 펫</ST.TitleH3>
-                    <ul>
+                    <ST.MyUl>
                         {pets.map((pet) => (
                             <li key={pet.petId}>
-                                <img src={pet.imageUrl} alt={pet.petName} />
+                                <ST.MyShopImg src={pet.imageUrls[0]} alt={pet.petName} />
                                 <p>반려동물 이름: {pet.petName}</p>
-                                <p>반려동물 생일: {pet.petBirth}</p>
+                                <p>반려동물 종류: {pet.petKind}</p>
                                 <p>반려동물 특이사항: {pet.petInfo}</p>
                             </li>
                         ))}
-                    </ul>
+                    </ST.MyUl>
                 </ST.ShopNPetSection>
             )}
 
@@ -118,25 +121,25 @@ const My: React.FC = () => {
                     등록된 SHOP 또는 PET 정보가 없습니다.
                     <br /> 내 가게 또는 반려동물을 등록해보세요!
                     <ST.BtnContainer>
-                        <ST.ShopBtn
+                        <ST.MyBtn
                             onClick={() => {
                                 navigate('/shops')
                             }}
                         >
                             Shop
-                        </ST.ShopBtn>
-                        <ST.PetBtn
+                        </ST.MyBtn>
+                        <ST.MyBtn
                             onClick={() => {
                                 navigate('/pet')
                             }}
                         >
                             Pet
-                        </ST.PetBtn>
+                        </ST.MyBtn>
                     </ST.BtnContainer>
                 </ST.ShopNPetSection>
             )}
 
-            <span onClick={LeaveUserHandler}>회원탈퇴</span>
+            <ST.LeaveSpan onClick={LeaveUserHandler}>회원탈퇴</ST.LeaveSpan>
         </ST.MyContainer>
     )
 }

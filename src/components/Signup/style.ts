@@ -9,6 +9,7 @@ export const SignupContainer = styled.div`
 export const SignupBox = styled.div`
     width: 728px;
     height: 993px;
+    background-color: #fff;
     margin: 72px auto;
     padding-top: 120px;
     border-radius: 15px;
@@ -51,6 +52,7 @@ export const SignupInput = styled.input`
     width: 474px;
     height: 51px;
     padding: 0 16px;
+    outline: none;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-family: Pretendard-regular;
@@ -72,6 +74,7 @@ export const SignupCodeInput = styled.input`
     height: 49px;
     padding: 0 16px;
     /* color: transparent; */
+    outline: none;
     border: transparent;
     border-radius: 8px;
     font-family: Pretendard-regular;
