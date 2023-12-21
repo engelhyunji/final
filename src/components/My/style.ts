@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 
 export const MyContainer = styled.div`
-    width: 100%;
-    height: 500px;
+    max-width: 1440px;
+    margin: 0 auto;
     padding: 50px;
     display: flex;
     flex-direction: column;
@@ -22,6 +22,12 @@ export const TitleH2 = styled.h2`
 export const TitleH3 = styled.h3`
     font-size: 20px;
 `
+export const MyUl = styled.ul`
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+`
 
 export const MyShopImg = styled.img`
     max-width:300px;
@@ -35,8 +41,17 @@ export const BtnContainer = styled.div`
     justify-content: center;
 `
 
-export const ShopBtn = styled.button`
+export const MyBtn = styled.button`
+    width: 100px;
+    height: 51px;
+    color: #fff;
+    font-family: Pretendard-medium;
+    background-color: #00bd8f;
+    border: none;
+    border-radius: 8px;
 `
 
-export const PetBtn = styled.button`
+export const LeaveSpan = styled.span`
+    margin: 100px;
+    color: #bbb;
 `
