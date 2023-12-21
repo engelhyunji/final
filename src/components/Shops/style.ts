@@ -20,7 +20,7 @@ export const Text = styled.h2`
     font-family: Pretendard-medium;
 `
 
-export const LoginP = styled.p`
+export const ShopP = styled.p`
     margin: 0 0 50px;
     z-index: 2;
 

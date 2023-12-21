@@ -117,15 +117,15 @@ const Shops: React.FC = () => {
     return (
         <ST.Container>
             <BackWave />
-            <ST.Text>내 가게 등록하기</ST.Text>
-            <ST.LoginP>사장님의 가게를 등록하고 더 많은 매칭 서비스를 이용해 보세요!</ST.LoginP>
+            <ST.Text>Shop 등록하기</ST.Text>
+            <ST.ShopP>사장님의 가게를 등록하고 더 많은 매칭 서비스를 이용해 보세요!</ST.ShopP>
 
             <ST.Form onSubmit={handleSubmit}>
                 <ST.ShopInputBox>
-                    <ST.Label>가게 종류를 알려주세요</ST.Label>
+                    <ST.Label>Shop 종류를 알려주세요</ST.Label>
                     <ST.SelectContainer>
                         <ST.Select name="shopType" value={shopRequestDto.shopType} onChange={handleChange}>
-                            <ST.FirstOption value="">가게 종류를 선택해주세요</ST.FirstOption>
+                            <ST.FirstOption value="">Shop 종류를 선택해주세요</ST.FirstOption>
                             <option value="GROOMING">GROOMING</option>
                             <option value="HOSPITAL">HOSPITAL</option>
                             <option value="CAFE">CAFE</option>
@@ -135,29 +135,29 @@ const Shops: React.FC = () => {
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>가게 이름을 알려주세요</ST.Label>
+                    <ST.Label>Shop 이름을 알려주세요</ST.Label>
                     <ST.Input
                         name="shopName"
                         type="text"
                         value={shopRequestDto.shopName}
                         onChange={handleChange}
-                        placeholder="업장 이름을 입력해주세요"
+                        placeholder="Shop 이름을 입력해주세요"
                     />
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>가게 위치를 알려주세요</ST.Label>
+                    <ST.Label>Shop 위치를 알려주세요</ST.Label>
                     <ST.Input
                         name="shopAddress"
                         type="text"
                         value={shopRequestDto.shopAddress}
                         onChange={handleChange}
-                        placeholder="우편번호"
+                        placeholder="도로명 주소"
                     />
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>가게 전화번호를 알려주세요</ST.Label>
+                    <ST.Label>Shop 전화번호를 알려주세요</ST.Label>
                     <ST.NInputBox>
                         <ST.NInput name="firstN" type="text" value={firstN} onChange={handleChange} />
                         <ST.NSpan />
@@ -168,7 +168,7 @@ const Shops: React.FC = () => {
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>가게 영업시간을 알려주세요</ST.Label>
+                    <ST.Label>Shop 영업시간을 알려주세요</ST.Label>
                     <ST.Input
                         name="shopTime"
                         type="text"
@@ -179,7 +179,7 @@ const Shops: React.FC = () => {
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>가게 한줄소개를 적어주세요</ST.Label>
+                    <ST.Label>Shop 한줄소개를 적어주세요</ST.Label>
                     <ST.Input
                         name="shopDescribe"
                         type="text"
