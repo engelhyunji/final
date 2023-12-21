@@ -51,6 +51,7 @@ export const SignupInput = styled.input`
     width: 474px;
     height: 51px;
     padding: 0 16px;
+    outline: none;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-family: Pretendard-regular;
@@ -72,6 +73,7 @@ export const SignupCodeInput = styled.input`
     height: 49px;
     padding: 0 16px;
     /* color: transparent; */
+    outline: none;
     border: transparent;
     border-radius: 8px;
     font-family: Pretendard-regular;
