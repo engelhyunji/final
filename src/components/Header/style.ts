@@ -27,13 +27,24 @@ export const Logo = styled.div`
 `
 
 export const LogoH1 = styled.h1`
-    font-size: 24px;
-    color: #000000;
+    font-size: 33px;
+    color: white;
     font-family: Pretendard-Bold;
+    text-shadow: 
+        -2px -2px 0 #1dcb8e,  
+        1px -2px 0 #1dcb8e,
+        -1px 1px 0 #1dcb8e,
+        1px 1px 0 #1dcb8e; 
 `
+
 
 export const LogoImg = styled.img`
     width: 56px;
+    margin: 0 20px;
+`
+export const LogoImg1 = styled.img`
+    width: 56px;
+    height: 20px;
     margin: 0 20px;
 `
 

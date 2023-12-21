@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import Slider from 'react-slick' 
+import Slider from 'react-slick'
 
 type CategoryItemProps = {
     $isSelected: boolean
@@ -7,7 +7,7 @@ type CategoryItemProps = {
 
 export const CategoryContainer = styled.div`
     max-width: 1280px;
-    margin: 50px;
+    margin: 200px auto 50px;
     width: 100%;
 `
 
@@ -36,8 +36,8 @@ export const CategoryItem = styled.div<CategoryItemProps>`
     ${(props) =>
         props.$isSelected &&
         css`
-            background-color: #1dcb8e; 
-            color: white; 
+            background-color: #1dcb8e;
+            color: white;
         `}
 `
 
@@ -57,11 +57,11 @@ export const StyledSlide = styled(Slider)`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row; 
-    margin: 0 -10px; 
+    flex-direction: row;
+    margin: 0 -10px;
 
     .slick-slide {
-        margin: 0 10px; 
+        margin: 0 10px;
         transition: transform 0.3s ease;
     }
 
@@ -82,10 +82,10 @@ export const ShopCard = styled.div`
     border: 1px solid #ddd;
     border-radius: 10px;
     width: 100%;
-    max-width: 250px; 
+    max-width: 250px;
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 10px auto;
@@ -96,9 +96,9 @@ export const ShopCard = styled.div`
     }
 
     p {
-        margin-top: 10px; 
-        font-size: 14px; 
-        text-align: center; 
+        margin-top: 10px;
+        font-size: 14px;
+        text-align: center;
     }
 
     img {
@@ -110,12 +110,12 @@ export const ShopCard = styled.div`
 `
 
 export const ShopInfo = styled.div`
-    margin: 0 10px; 
+    margin: 0 10px;
 `
 
 export const StyledSlickSlider = styled(Slider)`
     .slick-slide > div {
-        margin: 0 10px; 
+        margin: 0 10px;
     }
 `
 
@@ -129,23 +129,23 @@ export const ShopImageContainer = styled.img`
     height: auto;
 `
 export const Arrow = styled.div`
-    color: lightgreen; 
-    font-size: 15px; 
-    position: absolute; 
+    color: lightgreen;
+    font-size: 15px;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    cursor: pointer; 
-    z-index: 1; 
+    cursor: pointer;
+    z-index: 1;
 
     &.slick-next {
-        right: -15px; 
+        right: -15px;
     }
 
     &.slick-prev {
-        left: -15px; 
+        left: -15px;
     }
 
     &:hover {
-        color: #1dcb8e; 
+        color: #1dcb8e;
     }
-`;
+`

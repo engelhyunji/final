@@ -65,6 +65,7 @@ const Pet: React.FC = () => {
 
             if (response.status === 200 || response.status === 201) {
                 setRegistrationStatus('애완동물 정보가 성공적으로 등록되었습니다.')
+                alert('애완동물 정보가 성공적으로 등록되었습니다.')
                 resetFormData()
             } else {
                 setRegistrationStatus('애완동물 정보 등록에 실패했습니다.')

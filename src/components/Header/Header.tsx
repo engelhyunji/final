@@ -8,7 +8,8 @@ const Header: React.FC = () => {
     const navigate = useNavigate()
     const { isLogin, logout } = useAuth()
 
-    const logoUrl = './임시 로고.png'
+    const logoUrl = './warwar.png'
+    // const logoUrl1 = './warwar-name.png'
 
     return (
         <ST.HeaderWrap>
@@ -16,6 +17,7 @@ const Header: React.FC = () => {
                 <ST.Logo onClick={() => navigate('/')}>
                     <ST.LogoImg src={logoUrl} alt="logo" />
                     <ST.LogoH1>와르와르</ST.LogoH1>
+                    {/* <ST.LogoImg1 src={logoUrl1} alt="logo" /> */}
                 </ST.Logo>
                 <ST.GNBDiv>
                     <NoLineLink to="/petlist">
@@ -23,6 +25,9 @@ const Header: React.FC = () => {
                     </NoLineLink>
                     <NoLineLink to="/shopslist">
                         <h5>SHOP 목록</h5>
+                    </NoLineLink>
+                    <NoLineLink to="/map">
+                        <h5>MAP</h5>
                     </NoLineLink>
                     {isLogin ? (
                         <>

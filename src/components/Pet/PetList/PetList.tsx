@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from 'react-router-dom'
 import { fetchPets } from '../../../apis/api/petlist'
-import { PetDetails } from '../../../apis/api/petlist'
+import { PetDetails,  } from '../../../apis/api/petlist'
 // import { useAuth } from '../../../context/AuthContext'
 import * as ST from './style'
+
 
 const PetList: React.FC = () => {
     // const { nickname } = useAuth() // useAuth 훅을 사용하여 nickname 가져오기
@@ -19,19 +20,27 @@ const PetList: React.FC = () => {
     }
 
     const fetchPetsData = async () => {
-        setIsLoading(true)
-        setError(null)
-
-        const result = await fetchPets()
-
-        if (result) {
-            setPets(result.data || [])
-        } else {
-            setError('펫 목록을 불러오는 데 실패했습니다.')
+        setIsLoading(true);
+        setError(null);
+    
+        try {
+            const response = await fetchPets();
+            console.log(response)
+    
+            if (response && response.result) {
+                setPets(response.result);
+            } else {
+                setError(response ? response.message : '펫 목록을 불러오는 데 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('API 호출 중 오류 발생:', error);
+            setError('API 호출에 실패했습니다.');
         }
-
-        setIsLoading(false)
-    }
+    
+        setIsLoading(false);
+    };
+    
+    
 
     useEffect(() => {
         fetchPetsData() // 컴포넌트 마운트 시 자동으로 목록을 불러옵니다.
@@ -49,6 +58,8 @@ const PetList: React.FC = () => {
         return <div>오류: {error}</div>
     }
 
+    
+
     return (
         <ST.Back>
             <ST.Wrap>
@@ -65,9 +76,9 @@ const PetList: React.FC = () => {
                                         <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
                                     )}
                                     {/* <ST.Content> */}
-                                    <ST.Text>
+                                    {/* <ST.Text>
                                         <label>애완동물 이름:</label> {pet.petName}
-                                    </ST.Text>
+                                    </ST.Text> */}
                                     {/* <ST.Text>
                                             <label>애완동물 성별:</label> {pet.petGender === 'MALE' ? '남아' : '여아'}
                                         </ST.Text> */}

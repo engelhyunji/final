@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 export const Back = styled.div`
     height: 100vh;
-    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow-y: auto;
+    overflow-x: hidden; 
 `
 
 export const Img = styled.img`
@@ -25,7 +25,7 @@ export const Wrap = styled.div`
     /* width: 80%; */
     /* max-width: 1200px; */
     /* position: absolute; */
-    left: 200vh;
+    /* left: 200vh; */
 `
 
 export const ProfileContainer = styled.div`
@@ -98,17 +98,18 @@ export const Posts = styled.div`
     display: grid;
     margin-right: 100vh;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, minmax(200px, 1fr));
+    grid-template-rows: repeat(3, minmax(400px, 1fr));
     gap: 15px;
     margin: 3%;
+    width: auto;
 `
 
 export const ImgCard = styled.div`
     display: grid;
-    width: 100vh;
-    height: 100vh;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, minmax(200px, 1fr));
+    width: 100vh; // 뷰포트의 높이만큼 너비를 설정
+    // height: 100vh; // 필요에 따라 이 줄을 조정하거나 제거할 수 있습니다.
+    grid-template-columns: repeat(3, 1fr); // 3개의 열로 나눔
+    grid-template-rows: repeat(auto-fill, minmax(450px, 1fr)); // 각 행의 최소 높이를 450px로 설정
     gap: 15px;
     margin: 5px;
 `
@@ -169,6 +170,6 @@ export const Button = styled.div`
 // 카테고리 이미지
 export const Image = styled.img`
     width: 100%;
-    height: 250px;
+    height: 50px;
     object-fit: cover; // 이미지 비율 유지
 `
