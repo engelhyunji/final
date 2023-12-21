@@ -9,6 +9,7 @@ export const SignupContainer = styled.div`
 export const SignupBox = styled.div`
     width: 728px;
     height: 993px;
+    background-color: #fff;
     margin: 72px auto;
     padding-top: 120px;
     border-radius: 15px;

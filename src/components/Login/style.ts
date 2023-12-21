@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const LoginContainer = styled.div`
     width: 100%;
-    height: 130vh;
+    height: 100vh;
 `
 
 export const LoginBox = styled.div`
     width: 728px;
-    height: 890px;
+    height: 750px;
     margin: 72px auto;
     background-color: #fff;
     padding-top: 120px;

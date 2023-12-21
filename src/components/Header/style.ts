@@ -50,6 +50,7 @@ export const LogoutBtn = styled.button`
     background-color: #00BD8F;
     color: #fff;
     border: none;
+    border-radius: 8px;
     padding: 8px 16px;
     cursor: pointer;
 `
