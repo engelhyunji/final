@@ -191,7 +191,6 @@ const Shops: React.FC = () => {
 
                 <ST.ShopInputBox>
                     <ST.Label>사진을 등록해주세요</ST.Label>
-
                     <ST.Input
                         id="image"
                         type="file"

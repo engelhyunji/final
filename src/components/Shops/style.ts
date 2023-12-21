@@ -50,7 +50,7 @@ export const Select = styled.select`
     border: none;
     border-radius: 10px;
 
-    color: #8F8E93;
+    color: #8f8e93;
     font-size: 14px;
     font-family: Pretendard-regular;
 `
@@ -61,7 +61,6 @@ export const FirstOption = styled.option`
 export const ShopInputBox = styled.div`
     margin: 30px 0;
 `
-
 
 export const Label = styled.label`
     margin: 10px 0;
@@ -79,7 +78,7 @@ export const Input = styled.input`
     border-radius: 8px;
 
     &::placeholder {
-        color: #8F8E93;
+        color: #8f8e93;
         font-size: 14px;
         font-family: Pretendard-regular;
     }
@@ -93,7 +92,7 @@ export const NInputBox = styled.div`
 export const NSpan = styled.span`
     width: 10px;
     height: 1px;
-    background-color: #8F8E93;
+    background-color: #8f8e93;
 `
 export const NInput = styled.input`
     width: 30%;
@@ -104,7 +103,7 @@ export const NInput = styled.input`
     border-radius: 8px;
 
     &::placeholder {
-        color: #8F8E93;
+        color: #8f8e93;
         font-size: 14px;
         font-family: Pretendard-regular;
     }
@@ -113,7 +112,7 @@ export const NInput = styled.input`
 export const ImgWrap = styled.div`
     height: 160px;
     border-radius: 8px;
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
 
     color: #787878;
     font-size: 14px;
@@ -143,7 +142,6 @@ export const Image = styled.img`
     object-fit: cover;
 `
 
-
 export const ShopBtn = styled.button`
     width: 180px;
     height: 51px;
@@ -151,7 +149,7 @@ export const ShopBtn = styled.button`
     margin: 0 auto;
     color: #fff;
     font-family: Pretendard-medium;
-    background-color: #00BD8F;
+    background-color: #00bd8f;
     border: none;
     border-radius: 8px;
 `
@@ -159,7 +157,30 @@ export const ShopBtn = styled.button`
 // =====ShopList 컴포넌트======
 export const thumImg = styled.img`
     max-width: 300px;
-    height: 300px;
+    overflow: hidden;
+    /* height: 300px; */
+`
+
+export const TitleBackContainer = styled.div`
+    max-width: 1440px;
+    height: 340px;
+
+    color: #fff;
+    font-family: Pretendard-medium;
+    background-color: #00bd8f;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* position: absolute; */
+    /* z-index: 1; // 제일 뒤로 */
+`
+
+export const ShopDetailH2 = styled.h2`
+    color: #fff;
+    font-family: Pretendard-medium;
+    font-size: 48px;
 `
 
 // =====ShopDetail 컴포넌트======
@@ -167,4 +188,5 @@ export const detailImg = styled.img`
     max-width: 300px;
     height: 300px;
 `
+
 //=====Modify 컴포넌트=====
