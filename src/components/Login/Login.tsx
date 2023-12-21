@@ -30,6 +30,7 @@ const Login: React.FC = () => {
                 login() // isLogin 상태변경
                 const nickname = res.data.result.nickname
                 localStorage.setItem('nickname', nickname)
+                localStorage.setItem('email', res.data.result.email)
                 alert(`${nickname}님 로그인이 완료되었습니다🐕`)
                 navigate('/')
 
