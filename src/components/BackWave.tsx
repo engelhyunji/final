@@ -39,7 +39,7 @@ const STTitleBackContainer = styled.div`
     flex-direction: column;
     position: absolute;
     z-index: 1; // 제일 뒤로
-    width: 100%;
+    width: 1440px;
 `
 
 const STTitleBackP = styled.p`
