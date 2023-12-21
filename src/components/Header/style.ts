@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const HeaderWrap = styled.div`
     width: 100%;
     height: 88px;
+    background-color: #fff;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
     position: relative;
     z-index: 9999;
