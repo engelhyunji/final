@@ -8,7 +8,6 @@ export const EmptyWrap = styled.div`
     align-items: center;
     margin: auto;
 `
-
 export const EmptyText = styled.div`
     font-weight: 400;
     font-size: 18px;
@@ -25,24 +24,48 @@ export const ChatH2 = styled.h2`
     font-weight: 700;
 `
 
-export const ChatLabel = styled.label`
-
+export const ChatInputDiv = styled.div`
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 `
 
-export const ChatNameInput = styled.input`
+export const ChatLabel = styled.label``
 
-`
+export const ChatNameInput = styled.input``
 
-export const ChatBtn = styled.button`
-
-`
-
+export const ChatBtn = styled.button``
 
 export const ChatLists = styled.div`
     width: 100%;
-`;
+`
 
 export const ChatList = styled.div`
     width: 100%;
     margin: 12px 0;
-`;
+`
+
+// =====ChatRoom 컴포넌트======
+export const MessageContainer = styled.div`
+    margin: 30px 0;
+`
+export const MessageInfoContainer = styled.div`
+    margin: 30px 0;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+`
+
+export const MessageListContainer = styled.div`
+    width: 1440px;
+    /* height: 500px; */
+`
+
+export const MessageInputDiv = styled.div`
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+`

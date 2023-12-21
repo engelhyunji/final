@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Review, ShopDetails } from '../../../apis/api/api'
 import { useParams } from 'react-router-dom'
 import { addReview, cancelRecommendReview, deleteReview, recommendReview } from '../../../apis/api/review'
-// import useShopMutation from '../../../hooks/detailShopMutaion'
 import { useMutation, useQueryClient } from 'react-query'
 import { AxiosError } from 'axios'
 
@@ -20,10 +19,6 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     // shopId가 undefined 일 때 경고창
     const currentShopId = shopId ? +shopId : 0 && alert('가게를 찾을 수 없습니다')
 
-    // const [addReviewMutation] = useShopMutation(({ shopId, comment }) => addReview(shopId, comment))
-    // const [deleteReviewMutation] = useShopMutation(({ shopId, reviewId }) => deleteReview(shopId, reviewId))
-    // const [recommendMutation] = useShopMutation((reviewId) => recommendReview(reviewId))
-    // const [cancelRecommendMutation] = useShopMutation((reviewId) => cancelRecommendReview(reviewId))
     const addReviewMutation = useMutation<void, AxiosError, { shopId: number; comment: string }>(
         ({ shopId, comment }) => addReview(shopId, comment),
         {
@@ -81,30 +76,11 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     }
 
     const DeleteHandler = (shopId: number, reviewId: number) => {
-        if (window.confirm('후기를 삭제하시겠습니까?')) {
+        if (confirm('후기를 삭제하시겠습니까?')) {
             deleteReviewMutation.mutate({ shopId, reviewId })
         }
     }
 
-    // 후기 작성 시간 표시
-    const getTimeGap = (review: Review) => {
-        const targetDate = new Date(review.createdAt)
-        const MsGap = Date.now() - Number(targetDate)
-        const MnGap = Math.floor(MsGap / 60000)
-        const HrGap = Math.floor(MsGap / 3600000)
-
-        if (MsGap < 0) {
-            return <p>0분전</p>
-        }
-        if (HrGap > 24) {
-            return <p>{review.createdAt}</p>
-        }
-        if (MnGap > 60) {
-            return <p>{HrGap}시간 전</p>
-        } else {
-            return <p>{MnGap}분 전</p>
-        }
-    }
 
     return (
         <div>
@@ -129,8 +105,7 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
                             </button>
                         </p>
                         <div>
-                            {/* 작성 날짜 : {review.createdAt.slice(0, 10)} */}
-                            {getTimeGap(review)}
+                            작성 날짜 : {review.createdAt.slice(0, 10)}
                         </div>
                         <p>
                             <button onClick={() => DeleteHandler(currentShopId, review.reviewId)}>삭제</button>

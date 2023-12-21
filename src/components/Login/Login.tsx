@@ -30,6 +30,7 @@ const Login: React.FC = () => {
                 login() // isLogin 상태변경
                 const nickname = res.data.result.nickname
                 localStorage.setItem('nickname', nickname)
+                localStorage.setItem('email', res.data.result.email)
                 alert(`${nickname}님 로그인이 완료되었습니다🐕`)
                 navigate('/')
 
@@ -46,7 +47,11 @@ const Login: React.FC = () => {
                 // console.log('로그인 시 accessToken 확인', token)
                 // console.log('로그인 시 expireAtDate 확인', expireAtDate)
             }
-        } catch (error) {
+        } catch (error: any) {
+            if (error.response.status === 403) {
+                console.log('로그인 실패 : error 메세지', error)
+                alert('유효하지 않은 계정입니다')
+            }
             console.log('로그인 실패 : error 메세지', error)
         }
     }
@@ -94,7 +99,7 @@ const Login: React.FC = () => {
                     <ST.LoginP>아직 회원이 아니신가요 ? 
                     <ST.NotUserP onClick={() => navigate('/signup')}> 회원가입하러 가기</ST.NotUserP>
                     </ST.LoginP>
-                    <ST.NotUserP onClick={() => navigate('/signup')}> ..이메일 찾기 / 비밀번호 찾기</ST.NotUserP>
+                    {/* <ST.NotUserP onClick={() => navigate('/signup')}> ..이메일 찾기 / 비밀번호 찾기</ST.NotUserP> */}
 
             </ST.LoginBox>
         </ST.LoginContainer>
