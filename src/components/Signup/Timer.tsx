@@ -15,7 +15,7 @@ const Timer: React.FC<TimerProps> = ({ mm = '0', ss = '0', isRunning }) => {
     const SS = ss ? parseInt(ss) : 0
 
     const count = useRef<number>(MM * 60 + SS)
-    const interval = useRef<number | null>(null)
+    const interval = useRef<NodeJS.Timeout | null>(null)
 
     const [minute, setMinute] = useState<string>(intToString(MM))
     const [second, setSecond] = useState<string>(intToString(SS))
