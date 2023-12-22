@@ -11,9 +11,9 @@ export interface PetDetails {
 }
 
 // Pet 조회
-export const fetchPets = async (): Promise<{ message: string; data: PetDetails[] } | null> => {
+export const fetchPets = async (): Promise<{ message: string; result: PetDetails[] } | null> => {
     try {
-        const response = await instance.get<{ message: string; data: PetDetails[] }>('/api/pets')
+        const response = await instance.get<{ message: string; result: PetDetails[] }>('/api/pets')
 
         if (response.status === 200) {
             return response.data
@@ -23,5 +23,19 @@ export const fetchPets = async (): Promise<{ message: string; data: PetDetails[]
     } catch (error) {
         console.error('에러:', error)
         return null
+    }
+}
+
+
+
+
+// Pet 등록
+export const fetchPetDetails = async () => {
+    try {
+        const response = await instance.get<PetDetails>('/api/pets/mypage')
+        return response.data
+    } catch (error) {
+        console.error('Error fetching pet details:', error)
+        throw error
     }
 }

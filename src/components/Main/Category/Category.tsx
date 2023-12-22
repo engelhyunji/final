@@ -28,8 +28,9 @@ const Category: React.FC = () => {
     useEffect(() => {
         const fetchShops = async () => {
             try {
-                const response = await instance.get<{ data: ShopInfo[] }>('/shops')
-                setShops(response.data.data || []) // 데이터가 없을 경우 빈 배열로 설정
+                const response = await instance.get<{ result: ShopInfo[] }>('/api/shops')
+                setShops(response.data.result || [])
+                console.log('Fetched shops:', response.data.result)
             } catch (error) {
                 console.error('가게 정보를 불러오는데 실패했습니다.', error)
             }
@@ -37,6 +38,10 @@ const Category: React.FC = () => {
 
         fetchShops()
     }, [])
+
+    useEffect(() => {
+        console.log('Current shops state:', shops)
+    }, [shops])
 
     const filteredShops = shops.filter((shop) => shop.shopType === selectedCategory)
 
@@ -51,9 +56,9 @@ const Category: React.FC = () => {
         infinite: true,
         speed: 200,
         slidesToScroll: 1,
-        slidesToShow: 3, // 한 번에 하나의 슬라이드만 보이도록 설정
-        autoplay: true, // 자동 슬라이드 활성화
-        autoplaySpeed: 1700, // 3초마다 슬라이드 넘김
+        slidesToShow: 3, 
+        autoplay: true, 
+        autoplaySpeed: 1700, 
         responsive: [
             {
                 breakpoint: 1024,
@@ -110,7 +115,6 @@ const Category: React.FC = () => {
                     </ST.CategoryItem>
                 ))}
             </ST.CategoryList>
-            <ST.Text>선택 가게 업종: {selectedCategory}</ST.Text>
             <Slider {...settings}>
                 {filteredShops.map((shop, index) => (
                     <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>

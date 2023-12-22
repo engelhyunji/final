@@ -13,7 +13,7 @@ instance.interceptors.request.use(
     async (config) => {
         console.log('요청(토큰)인터셉트 성공!')
         const token = localStorage.getItem('accessToken')
-        let refreshToken = localStorage.getItem('Refresh-Token')
+        const refreshToken = localStorage.getItem('Refresh-Token')
         const expireAt = localStorage.getItem('expireAt')
         // console.log('인터셉터 요청 전 expireAt 확인', expireAt)
         // console.log('인터셉터 요청 전 Refresh-Token 확인', refreshToken)
@@ -35,7 +35,7 @@ instance.interceptors.request.use(
             console.log('만료되고 리프레시 있으면 리프레시:', refreshToken)
 
             if (response.headers) {
-                let expireAtDate = dayjs().add(60, 'minute').format('YYYY-MM-DD HH:mm:ss')
+                const expireAtDate = dayjs().add(60, 'minute').format('YYYY-MM-DD HH:mm:ss')
                 localStorage.setItem('Refresh-Token', response.headers['refresh-token'])
                 localStorage.setItem('accessToken', response.headers.authorization)
                 localStorage.setItem('expireAt', expireAtDate)

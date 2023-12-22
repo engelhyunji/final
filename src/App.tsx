@@ -8,11 +8,16 @@ import isPropValid from '@emotion/is-prop-valid'
 const queryClient = new QueryClient()
 
 const App = () => {
+    // const coords = {
+    //     lat: 33.450701, // 기본 위도
+    //     lng: 126.570667 // 'lng'로 변경
+    // };
+
     return (
         <StyleSheetManager shouldForwardProp={(prop) => isPropValid(prop) && prop !== 'isSelected'}>
             <QueryClientProvider client={queryClient}>
                 <AppRoutes />
-                {/* <MapComponent /> */}
+                {/* <MapComponent coords={coords} /> */}
             </QueryClientProvider>
         </StyleSheetManager>
     )

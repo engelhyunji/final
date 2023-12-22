@@ -1,7 +1,7 @@
 import React from 'react'
 import * as ST from './style'
 import MainTop from './MainTop/MainTop'
-import ShopsList from './MainBottom/ShopsList'
+// import ShopsList from './MainBottom/ShopsList'
 import { useNavigate } from 'react-router-dom'
 import Category from './Category/Category'
 import 'slick-carousel/slick/slick.css'
@@ -13,22 +13,40 @@ const Main: React.FC = () => {
     return (
         <ST.MainContainer>
             <ST.BannerContainer>
-                <ST.Text>메인 이미지 넣기.</ST.Text>
-                <ST.Text>내 가게 또는 반려동물 등록.</ST.Text>
+                {/* <ST.Text>메인 이미지 넣기.</ST.Text> */}
+                {/* <ST.Text>내 가게 또는 반려동물 등록.</ST.Text> */}
+                <ST.Warp>
+                    <ST.Text2>
+                        반려동물과 함께하는 매칭서비스, 와르와르 <br />
+                        <ST.Text3>Shop 또는 Pet을 등록해보세요!</ST.Text3>
+                    </ST.Text2>
+                </ST.Warp>
                 <ST.BtnContainer>
                     <ST.ShopBtn
                         onClick={() => {
                             navigate('/shops')
                         }}
                     >
-                        가게 등록
+                        <ST.Text1>
+                            가게를 운영하는
+                            <br />
+                            사장님이라면?
+                        </ST.Text1>
+                        <br />
+                        <ST.Text>Shop 등록하기</ST.Text>
                     </ST.ShopBtn>
                     <ST.PetBtn
                         onClick={() => {
                             navigate('/pet')
                         }}
                     >
-                        애완동물 등록
+                        <ST.Text1>
+                            귀여운 내새끼를
+                            <br />
+                            키우는 중이라면?
+                        </ST.Text1>
+                        <br />
+                        <ST.Text>애완동물 등록</ST.Text>
                     </ST.PetBtn>
                 </ST.BtnContainer>
             </ST.BannerContainer>
@@ -36,9 +54,7 @@ const Main: React.FC = () => {
             <ST.TopWrapper>
                 <Category />
             </ST.TopWrapper>
-            <ST.ShopsWrapper>
-                <ShopsList />
-            </ST.ShopsWrapper>
+            <ST.ShopsWrapper>{/* <ShopsList /> */}</ST.ShopsWrapper>
             <ST.TopWrapper>
                 <MainTop />
             </ST.TopWrapper>
