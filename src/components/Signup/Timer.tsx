@@ -10,7 +10,7 @@ const intToString = (num: number): string => {
     return String(num).padStart(2, '0')
 }
 
-const Timer: React.FC<TimerProps> = ({ mm = '0', ss = '0', isRunning, }) => {
+const Timer: React.FC<TimerProps> = ({ mm = '0', ss = '0', isRunning }) => {
     const MM = mm ? parseInt(mm) : 0
     const SS = ss ? parseInt(ss) : 0
 
@@ -22,13 +22,12 @@ const Timer: React.FC<TimerProps> = ({ mm = '0', ss = '0', isRunning, }) => {
 
     useEffect(() => {
         if (isRunning) {
-            interval.current = setInterval(() => {
+            interval.current = window.setInterval(() => {
                 count.current -= 1
 
                 setMinute(intToString(Math.floor(count.current / 60)))
                 setSecond(intToString(count.current % 60))
-            }, 1000)
-        } else {
+            }, 1000) as unknown as number;
             if (interval.current) {
                 clearInterval(interval.current)
             }

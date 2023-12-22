@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom' // Removed unused import
+import { useParams, Link } from 'react-router-dom'
 import * as ST from './style'
 import { PetDetails, fetchPetDetail } from '../../../apis/api/pet'
 
@@ -46,7 +46,12 @@ const PetDetail: React.FC = () => {
                                     <img
                                         src={pet.imageUrls[0]}
                                         alt={`${pet.petName} 이미지`}
-                                        style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                                        style={{
+                                            maxWidth: '100%',
+                                            maxHeight: '100%',
+                                            borderRadius: '10px',
+                                            cursor: 'pointer',
+                                        }}
                                     />
                                 )}
                             </ST.Img>
