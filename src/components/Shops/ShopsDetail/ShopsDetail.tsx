@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import * as ST from './style'
-import { ShopDetails, getDetailShop } from '../../apis/api/api'
+import { ShopDetails, getDetailShop } from '../../../apis/api/api'
 import { useQuery } from 'react-query'
-import Reviews from './Reviews/Reviews'
+import Reviews from '../Reviews/Reviews'
 
 const ShopsDetail: React.FC = () => {
     const navigate = useNavigate()

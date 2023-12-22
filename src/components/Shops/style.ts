@@ -154,73 +154,31 @@ export const ShopBtn = styled.button`
     border-radius: 8px;
 `
 
-// =====ShopList 컴포넌트======
-export const thumImg = styled.img`
-    max-width: 300px;
-    overflow: hidden;
-    /* height: 300px; */
-`
+// ======= ShopList 컴포넌트 ========
+// 코드 정리 이사 중
 
-export const TitleBackContainer = styled.div`
-    max-width: 1440px;
-    height: 340px;
+// ======= ShopDetail 컴포넌트 ========
+// 코드 정리 이사 중
 
-    color: #fff;
-    font-family: Pretendard-medium;
-    background-color: #00bd8f;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* position: absolute; */
-    /* z-index: 1; // 제일 뒤로 */
-`
+// ======= Modify 컴포넌트 ========
 
-export const ShopDetailH2 = styled.h2`
-    color: #fff;
-    font-family: Pretendard-medium;
-    font-size: 48px;
-`
-export const ShopListContainer = styled.div`
-    max-width: 358;
-    height: 454px;
-
-    color: #fff;
-    font-family: Pretendard-medium;
-    background-color: #00bd8f;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* position: absolute; */
-    /* z-index: 1; // 제일 뒤로 */
-`
-export const ShopListH3 = styled.h3`
-    margin: 103px 0;
-    font-family: Pretendard-bold;
-    font-size: 30px;
-`
-
-export const ShopBox = styled.div`
-    max-width: 358px;
-    height: 454px;
-    border: none;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    font-family: Pretendard-medium;
+export const ShopBtnBox = styled.div`
+    width: 100%;
+    font-size: 18px;
+    font-family: Pretendard-regular;
     background-color: #fff;
 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 `
 
-// =====ShopDetail 컴포넌트======
-export const detailImg = styled.img`
-    max-width: 300px;
-    height: 300px;
+export const ShopModifyBtn = styled.button`
+    width: 227px;
+    height: 51px;
+    color: #fff;
+    background-color: #00bd8f;
+    border: none;
+    border-radius: 8px;
 `
-
-//=====Modify 컴포넌트=====

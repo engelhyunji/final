@@ -1,5 +1,5 @@
 import React from 'react'
-import ShopsDetail from '../components/Shops/ShopsDetail'
+import ShopsDetail from '../components/Shops/ShopsDetail/ShopsDetail'
 
 const ShopsDetailPage = () => {
     return <ShopsDetail />
