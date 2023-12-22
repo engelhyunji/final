@@ -26,7 +26,7 @@ const MapPage: React.FC = () => {
     return (
         <div>
             <br />
-            <h1>지도 페이지</h1>
+            {/* <h1>지도 페이지</h1> */}
             <br />
             <MapComponent coords={initialCoords} />
         </div>

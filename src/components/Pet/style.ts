@@ -1,98 +1,110 @@
 import styled from 'styled-components'
+import { StatusMessageProps } from './Pet'
 
-export const Content = styled.div`
-    justify-content: center;
-    display: flex;
-    margin-top: 10%;
-    overflow-y: auto;
-`
+export const Container = styled.div`
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
 
-export const Text = styled.div`
-    justify-content: space-between;
     display: flex;
-    margin-top: 10%;
-    margin-right: 20px;
-    margin-bottom: 3vh;
-    font-weight: bold;
+    flex-direction: column;
+    align-items: center;
 `
 
 export const Form = styled.form`
-    max-width: 400px;
-    width: 100%;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    box-sizing: border-box;
+    max-width: 474px;
+    margin: 50px auto;
+    z-index: 2;
+`
+export const Text = styled.h2`
+    margin: 70px 0 20px;
+    position: relative;
+    z-index: 2;
+
+    color: #fff;
+    font-size: 30px;
+    font-family: Pretendard-medium;
 `
 
-export const PetDetailsContainer = styled.form`
-    margin-left: 3vh;
-    max-width: 400px;
-    width: 100%;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    box-sizing: border-box;
+export const LoginP = styled.p`
+    margin: 0 0 50px;
+    z-index: 2;
+
+    color: #fff;
+    text-align: center;
+    font-family: Pretendard-regular;
 `
 
-export const DetailLabel = styled.label`
-    margin-top: 1vh;
-    display: block;
-    margin-bottom: 8px;
+export const PetInputBox = styled.div`
+    margin: 30px 0;
+`
+
+export const FormTitle = styled.h2`
+    text-align: center;
+    margin-bottom: 2rem;
     font-weight: bold;
-    margin-bottom: 4px;
+`
+
+export const FormGroup = styled.div`
+    margin-bottom: 1rem;
 `
 
 export const Label = styled.label`
-    margin-top: 1vh;
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    margin-bottom: 4px;
+    margin: 10px 0;
+    font-family: Pretendard-bold;
+    font-size: 18px;
+`
+
+export const Input = styled.input`
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 `
 
 export const Textarea = styled.textarea`
     width: 100%;
-    height: 100px;
-    resize: vertical;
-`
-
-export const Select = styled.label`
-    width: 100%;
     padding: 0.5rem;
-    margin: 0.5rem 0;
-    font-size: 1rem;
+    margin-bottom: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #fff;
-    color: #333;
-    outline: none;
-    transition: border-color 0.2s;
-
-    &:hover,
-    &:focus {
-        border-color: #66afe9;
-    }
+    height: 100px;
 `
 
-export const Input = styled.input`
-    height: 5vh;
+export const Select = styled.select`
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
     border: 1px solid #ccc;
-    border-radius: 7px;
-    box-sizing: border-box;
+    border-radius: 4px;
 `
 
 export const Button = styled.button`
     width: 100%;
-    padding: 10px;
+    padding: 0.7rem;
     border: none;
-    border-radius: 7px;
-    background-color: #76777c;
+    border-radius: 4px;
+    background-color: #1dcb8e;
     color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
+    margin-top: 1rem;
+
+    &:hover {
+        background-color: #1dcb8e;
+    }
+`
+
+export const StatusMessage = styled.p<StatusMessageProps>`
+    padding: 0.5rem;
+    margin-top: 1rem;
+    text-align: center;
+    color: red;
+    background-color: #fff;
+    border-radius: 4px;
+    display: ${(props) => (props.message ? 'block' : 'none')};
 `
 
 export const Wrap = styled.div`

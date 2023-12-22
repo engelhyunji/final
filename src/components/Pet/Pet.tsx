@@ -4,6 +4,11 @@ import * as ST from './style'
 // import { useAuth } from '../../context/AuthContext'
 import instance from '../../apis/instance'
 import { PetDetails } from '../../apis/api/pet'
+import BackWave from '../BackWave'
+
+export interface StatusMessageProps {
+    message?: string
+}
 
 const Pet: React.FC = () => {
     const [petName, setPetName] = useState<string>('')
@@ -64,8 +69,8 @@ const Pet: React.FC = () => {
             })
 
             if (response.status === 200 || response.status === 201) {
-                setRegistrationStatus('애완동물 정보가 성공적으로 등록되었습니다.')
-                alert('애완동물 정보가 성공적으로 등록되었습니다.')
+                alert('애완동물 정보가 성공적으로 등록되었습니다.🐶')
+
                 resetFormData()
             } else {
                 setRegistrationStatus('애완동물 정보 등록에 실패했습니다.')
@@ -86,18 +91,17 @@ const Pet: React.FC = () => {
     }
 
     return (
-        <ST.Content>
-            <ST.Text>애완동물 정보 추가</ST.Text>
-            {registrationStatus && <p>{registrationStatus}</p>}
+        <ST.Container>
+            <BackWave />
+            <ST.Text>Pet 등록하기</ST.Text>
+            <ST.LoginP>사랑스러운 반려동물을 등록하고 더 많은 매칭 서비스를 이용해보세요!</ST.LoginP>
+
             <ST.Form onSubmit={handleSubmit}>
-                {/* <p>로그인한 사용자: {nickname}</p> */}
-                <ST.Label>
-                    애완동물 이름:
+                <ST.PetInputBox>
+                    <ST.Label>Pet의 이름을 알려주세요</ST.Label>
                     <ST.Input type="text" value={petName} onChange={handlePetNameChange} />
-                </ST.Label>
-                <br />
-                <ST.Label>
-                    애완동물 성별:
+                    <br />
+                    <ST.Label>Pet 성별을 알려주세요</ST.Label>
                     <select className="form-control" value={petGender} onChange={handleGenderChange}>
                         {genderOptions.map((option) => (
                             <option key={option} value={option}>
@@ -105,9 +109,7 @@ const Pet: React.FC = () => {
                             </option>
                         ))}
                     </select>
-                </ST.Label>
-                <ST.Label>
-                    애완동물 종류:
+                    <ST.Label>Pet의 크기를 알려주세요</ST.Label>
                     <select className="form-control" value={petKind} onChange={handleKindChange}>
                         {kindOptions.map((option) => (
                             <option key={option} value={option}>
@@ -115,23 +117,23 @@ const Pet: React.FC = () => {
                             </option>
                         ))}
                     </select>
-                </ST.Label>
-                <ST.Label>
-                    애완동물 특이사항:
+                    <ST.Label>Pet의 특징을 적어주세요</ST.Label>
                     <ST.Textarea value={petInfo} onChange={handleInfoChange} />
-                </ST.Label>
 
-                <br />
-                <ST.Label>
-                    애완동물 사진:
+                    <br />
+                    <ST.Label>사진이 있다면 등록해주세요</ST.Label>
                     <ST.Input type="file" accept="image/*" onChange={handleImageFileChange} />
-                </ST.Label>
+                </ST.PetInputBox>
                 <br />
                 <ST.Wrap> {imagePreviewUrl && <ST.Image src={imagePreviewUrl} alt="Pet Preview" />}</ST.Wrap>
 
+                {registrationStatus && (
+                    <ST.StatusMessage message={registrationStatus}>{registrationStatus}</ST.StatusMessage>
+                )}
+
                 <ST.Button type="submit">Add Pet</ST.Button>
             </ST.Form>
-        </ST.Content>
+        </ST.Container>
     )
 }
 

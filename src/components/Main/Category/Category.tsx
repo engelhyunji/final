@@ -56,9 +56,9 @@ const Category: React.FC = () => {
         infinite: true,
         speed: 200,
         slidesToScroll: 1,
-        slidesToShow: 3, // 한 번에 하나의 슬라이드만 보이도록 설정
-        autoplay: true, // 자동 슬라이드 활성화
-        autoplaySpeed: 1700, // 3초마다 슬라이드 넘김
+        slidesToShow: 3, 
+        autoplay: true, 
+        autoplaySpeed: 1700, 
         responsive: [
             {
                 breakpoint: 1024,
@@ -115,7 +115,6 @@ const Category: React.FC = () => {
                     </ST.CategoryItem>
                 ))}
             </ST.CategoryList>
-            {/* <ST.Text>선택 가게 업종: {selectedCategory}</ST.Text> */}
             <Slider {...settings}>
                 {filteredShops.map((shop, index) => (
                     <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
