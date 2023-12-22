@@ -182,6 +182,40 @@ export const ShopDetailH2 = styled.h2`
     font-family: Pretendard-medium;
     font-size: 48px;
 `
+export const ShopListContainer = styled.div`
+    max-width: 358;
+    height: 454px;
+
+    color: #fff;
+    font-family: Pretendard-medium;
+    background-color: #00bd8f;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* position: absolute; */
+    /* z-index: 1; // 제일 뒤로 */
+`
+export const ShopListH3 = styled.h3`
+    margin: 103px 0;
+    font-family: Pretendard-bold;
+    font-size: 30px;
+`
+
+export const ShopBox = styled.div`
+    max-width: 358px;
+    height: 454px;
+    border: none;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    font-family: Pretendard-medium;
+    background-color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
 
 // =====ShopDetail 컴포넌트======
 export const detailImg = styled.img`

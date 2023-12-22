@@ -47,27 +47,27 @@ const PetList: React.FC = () => {
             <Container className="shop-list">
                 <ST.TitleBackContainer>
                     <ST.ShopDetailH2 className="mb-4">Shop</ST.ShopDetailH2>
-                    <ST.LoginP>내 펫에게 딱 맞는 가게를 찾아 이용해보세요!</ST.LoginP>
+                    <ST.ShopP>내 펫에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
                 </ST.TitleBackContainer>
 
+
+                <ST.ShopListH3>Shop 조회</ST.ShopListH3>
                 <Row>
                     {currentShops.map((shop) => (
                         <Col key={shop.shopId} xs={12} sm={6} md={4} className="mb-4">
-                            <div className="card" onClick={() => navigate(`/shops/${shop.shopId}`)}>
-                                <ST.thumImg src={shop.imageUrls[0]} className="card-img-top" alt={`${shop.shopName} img`} />
+                            <ST.ShopBox className="card" onClick={() => navigate(`/shops/${shop.shopId}`)}>
+                                <ST.thumImg
+                                    src={shop.imageUrls[0]}
+                                    className="card-img-top"
+                                    alt={`${shop.shopName} img`}
+                                />
                                 <div className="card-body">
                                     <h5 className="card-title">{shop.shopName}</h5>
-                                    <p className="card-text">
-                                        영업시간 {shop.shopTime}
-                                    </p>
-                                    <p className="card-text">
-                                        전화번호 {shop.shopTel}
-                                    </p>
-                                    <p className="card-text">
-                                        위치 {shop.shopAddress}
-                                    </p>
+                                    <p className="card-text">영업시간 {shop.shopTime}</p>
+                                    <p className="card-text">전화번호 {shop.shopTel}</p>
+                                    <p className="card-text">위치 {shop.shopAddress}</p>
                                 </div>
-                            </div>
+                            </ST.ShopBox>
                         </Col>
                     ))}
                 </Row>
