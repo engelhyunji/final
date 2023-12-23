@@ -1,4 +1,3 @@
-import React from 'react'
 import ShopsModify from '../components/Shops/ShopsModify'
 
 const ShopsModifyPage = () => {

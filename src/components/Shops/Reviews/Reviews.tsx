@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Review, ShopDetails } from '../../../apis/api/api'
+import { ShopDetails } from '../../../apis/api/api'
 import { useParams } from 'react-router-dom'
 import { addReview, cancelRecommendReview, deleteReview, recommendReview } from '../../../apis/api/review'
 import { useMutation, useQueryClient } from 'react-query'

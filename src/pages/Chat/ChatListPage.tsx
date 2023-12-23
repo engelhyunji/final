@@ -1,4 +1,3 @@
-import React from 'react'
 import ChatList from '../../components/Chat/ChatList'
 
 const ChatListPage = () => {

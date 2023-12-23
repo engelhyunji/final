@@ -28,9 +28,12 @@ export const Form = styled.form`
 `
 
 export const Label = styled.label`
-    display: block;
     margin: 10px 0;
-    font-weight: bold;
+    font-family: Pretendard-bold;
+    font-size: 18px;
+`
+export const PetInputBox = styled.div`
+    margin: 30px 0;
 `
 
 export const Input = styled.input`
@@ -92,4 +95,18 @@ export const Image = styled.img`
     height: auto;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+
+export const Img = styled.div`
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.8;
+    }
 `
+
