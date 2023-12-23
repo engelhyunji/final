@@ -100,7 +100,7 @@ const ChatList: React.FC = () => {
                     chatrooms.map((item) => (
                         <div key={item.roomId}>
                             <ST.ChatList onClick={() => enterRoom(item.roomId)}>
-                                {/* 방 ID: {item.roomId} <br /> */}
+                                방 ID: {item.roomId} <br />
                                 방 이름: {item.name} <br />
                                 방장 : {item.creator.nickname}
                             </ST.ChatList>

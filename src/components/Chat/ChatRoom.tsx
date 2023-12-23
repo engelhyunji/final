@@ -53,12 +53,11 @@ const ChatRoom: React.FC = () => {
         getChatMessages(roomId as string).then((data) => setMessages(data))
         return () => disconnect()
     }, [])
-    
 
     const client = useRef<any>()
     const headers = {
         Authorization: token || '', // 토큰이 없으면 빈 문자열로 설정
-    };
+    }
 
     const disconnect = () => {
         if (!wclient) return
@@ -67,14 +66,13 @@ const ChatRoom: React.FC = () => {
             type: 'QUIT',
             roomId,
             sender: nickname,
-        };
-    
+        }
+
         client.current.publish({
             destination: '/pub/chat/message',
             body: JSON.stringify(quitMessage),
             headers: headers,
-        });
-    
+        })
 
         client.current.deactivate(() => {
             console.log('Disconnected')
@@ -83,13 +81,17 @@ const ChatRoom: React.FC = () => {
     }
 
     const subscribe = () => {
-        client.current.subscribe(`/sub/chat/room/${roomId}`, (message: any) => {
-            console.log('connect !')
-            if (message.body) {
-                const msg = JSON.parse(message.body)
-                setMessages((prevMessages) => [...prevMessages, msg])
-            }
-        })
+        client.current.subscribe(
+            `/sub/chat/room/${roomId}`,
+            (message: any) => {
+                console.log('connect !')
+                if (message.body) {
+                    const msg = JSON.parse(message.body)
+                    setMessages((prevMessages) => [...prevMessages, msg])
+                }
+            },
+            headers,
+        )
     }
 
     const connectWebSocket = () => {
@@ -114,9 +116,7 @@ const ChatRoom: React.FC = () => {
                     headers: headers,
                 })
             },
-            connectHeaders: {
-                Authorization: token || '',
-            },
+            connectHeaders: headers,
             debug: function (str) {
                 console.log(str)
             },
@@ -136,7 +136,7 @@ const ChatRoom: React.FC = () => {
             body: JSON.stringify({ type: 'TALK', roomId, sender: nickname, message }),
             headers: headers,
         })
-        
+
         setMessage('')
     }
 
@@ -145,22 +145,22 @@ const ChatRoom: React.FC = () => {
             <ST.MessageContainer>
                 <ST.MessageInfoContainer>
                     <ST.ChatH2>{room?.name} 채팅방</ST.ChatH2>
-                    {/* <span>방ID: {room?.roomId}</span> */}
+                    <span>방ID: {room?.roomId}</span>
                     <span>개설자: {room?.creator.nickname}</span>
-                    {/* <span>참여자수: {room?.members.length}</span>
-                    <span>참여자: {room?.members.map((member) => member.nickname)}</span> */}
+                    <span>참여자수: {room?.members.length}</span>
+                    <span>참여자: {room?.members.map((member) => member.nickname)}</span>
                     <div>
                         <button onClick={disconnect}>채팅방 나가기</button>
                     </div>
                 </ST.MessageInfoContainer>
-                <ST.MessageListContainer ref={scrollRef}> 
-                <ul>
-                    {messages?.map((msg, index) => (
-                        <li key={index}>
-                            {msg.sender} - {msg.message}
-                        </li>
-                    ))}
-                </ul>
+                <ST.MessageListContainer ref={scrollRef}>
+                    <ul>
+                        {messages?.map((msg, index) => (
+                            <li key={index}>
+                                {msg.sender} - {msg.message}
+                            </li>
+                        ))}
+                    </ul>
                 </ST.MessageListContainer>
             </ST.MessageContainer>
 
@@ -174,8 +174,8 @@ const ChatRoom: React.FC = () => {
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyUp={(e) => {
                         if (e.key === 'Enter') {
-                            e.preventDefault();
-                            publish(message);
+                            e.preventDefault()
+                            publish(message)
                         }
                     }}
                 />
