@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as ST from './style'
 import * as StP from './pageStyle'
-import { Pagination, Container, Row, Col } from 'react-bootstrap'
+import { Pagination, Container, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Shop, getShops } from '../../../apis/api/api'
 import { useQuery } from 'react-query'
@@ -57,6 +57,7 @@ const ShopsList: React.FC = () => {
 
                 <ST.ShopListH3>Shop 조회</ST.ShopListH3>
 
+
                 <ST.StRow>
                     {currentShops.map((shop) => (
                         <Col key={shop.shopId} xs={12} sm={6} md={4} className="mb-4">
@@ -86,13 +87,16 @@ const ShopsList: React.FC = () => {
                 </ST.StRow>
 
                 <StP.pageContainer>
+                    {/* 첫페이지에서는 < Prev 버튼 안보이게 */}
                     {page !== 1 && <Pagination.Prev onClick={() => handlePageChange(page - 1)} />}
+
                     {[...Array(Math.ceil(shopListLength / shopsPerPage))].map((_, i) => (
                         <Pagination.Item key={i} active={i + 1 === page} onClick={() => handlePageChange(i + 1)}>
                             {i + 1}
                         </Pagination.Item>
                     ))}
-                    {/* 마지막 페이지가 아닐 때만 > 버튼 노출 */}
+
+                    {/* 마지막 페이지가 아닐 때만 > Next 버튼 보이게 */}
                     {page !== Math.ceil(shopListLength / shopsPerPage) && (
                         <Pagination.Next onClick={() => handlePageChange(page + 1)} />
                     )}

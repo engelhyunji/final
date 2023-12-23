@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { Row } from 'react-bootstrap'
 
-
 export const Container = styled.div`
     max-width: 1440px;
     margin: 0 auto;
@@ -62,8 +61,7 @@ export const ShopListH3 = styled.h3`
 
 export const StRow = styled(Row)`
     margin: 0 100px;
-`;
-
+`
 
 export const ShopBox = styled.div`
     max-width: 358px;
@@ -73,11 +71,6 @@ export const ShopBox = styled.div`
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     font-family: Pretendard-medium;
     background-color: #fff;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
     &:hover {
         opacity: 0.8;
@@ -94,7 +87,6 @@ export const CardBodyDiv = styled.div`
     width: 100%;
     padding: 26px 36px;
     overflow: hidden;
-
 `
 export const ShopListH4 = styled.h4`
     font-family: Pretendard-bold;
@@ -107,17 +99,18 @@ export const ShopGrid = styled.div`
     font-size: 16px;
     font-family: Pretendard-regular;
 
-    display: inline-block;
-    width: 300px;
-    white-space: nowrap; // 자동 줄바꿈 방지
-    overflow: hidden; // 넘치는 부분 화면에서 숨김
-    text-overflow: ellipsis; // 숨긴 부분 말줄임표(...) 처리
-
     display: grid;
     grid-template-columns: 0.8fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-gap: 8px 10px; // 브라우저 호환 범위 넓히기 위해 작성
     gap: 8px 10px;
+
+    p { // 넘치는 내용 처리
+        display: inline-block;
+        white-space: nowrap; // 자동 줄바꿈 방지
+        overflow: hidden; // 넘치는 부분 화면에서 숨김
+        text-overflow: ellipsis; // 숨긴 부분 말줄임표(...) 처리
+    }
 `
 export const BodyTimeP = styled.p`
     grid-column: 1 / 3;
@@ -144,6 +137,6 @@ export const BodyAddressInfoP = styled.p`
     grid-row: 3 / 4;
 `
 export const CardBodyP = styled.p`
-    grid-column: 1 / 3;
+    grid-column: 1 / 4;
     grid-row: 4 / 5;
 `
