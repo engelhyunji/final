@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Pet, Shop, getMyShop, getMyPet, deleteShop } from '../../apis/api/api'
+import { Pet, Shop, getMyShop, getMyPet, deleteShop, ChatRoom, getMyChatRoom } from '../../apis/api/api'
 import * as ST from './style'
 import React, { useState, useEffect } from 'react'
 import { useMutation } from 'react-query'
@@ -12,7 +12,7 @@ const My: React.FC = () => {
     const nickname = localStorage.getItem('nickname')
     const [shops, setShops] = useState<Shop[]>([])
     const [pets, setPets] = useState<Pet[]>([])
-
+    const [chatRooms, setChatRooms] = useState<ChatRoom[]>([])
 
     useEffect(() => {
         getMyShop()
@@ -36,6 +36,17 @@ const My: React.FC = () => {
                 }
             })
             .catch((error) => console.error('pet 정보 불러오기 오류:', error))
+
+        getMyChatRoom()
+            .then((roomData) => {
+                if (roomData) {
+                    setChatRooms(roomData)
+                    console.log('roomData 확인', roomData)
+                } else {
+                    console.log('룸 없음')
+                }
+            })
+            .catch((error) => console.error('chatRoom 정보 불러오기 오류:', error))
     }, [])
 
     const mutation = useMutation(deleteShop, {
@@ -54,6 +65,12 @@ const My: React.FC = () => {
         if (confirm(`${shops[idx].shopName} 가게를 삭제하시겠습니까?`)) {
             mutation.mutate(shops[idx].shopId)
             setShops([])
+        }
+    }
+
+    const enterRoom = (roomId: string): void => {
+        if (confirm('채팅방에 입장하시겠습니까?')) {
+            navigate(`/chat/room/enter/${roomId}`)
         }
     }
 
@@ -78,7 +95,7 @@ const My: React.FC = () => {
 
             {shops.length > 0 && (
                 <ST.ShopNPetSection>
-                    <ST.TitleH3>마이 샵</ST.TitleH3>
+                    <ST.TitleH3>마이 SHOP</ST.TitleH3>
                     <ST.MyUl>
                         {shops.map((shop) => (
                             <li key={shop.shopId}>
@@ -90,9 +107,10 @@ const My: React.FC = () => {
                                     <p>주소: {shop.shopAddress}</p>
                                     <p>유형: {shop.shopType}</p>
                                     <p>소개: {shop.shopDescribe}</p>
-                                </div><ST.BtnContainer>
-                                <ST.MyBtn onClick={() => navigate(`/shops/modify/${shop.shopId}`)}>수정</ST.MyBtn>
-                                <ST.MyBtn onClick={() => DeleteHandler(shops.indexOf(shop))}>삭제</ST.MyBtn>
+                                </div>
+                                <ST.BtnContainer>
+                                    <ST.MyBtn onClick={() => navigate(`/shops/modify/${shop.shopId}`)}>수정</ST.MyBtn>
+                                    <ST.MyBtn onClick={() => DeleteHandler(shops.indexOf(shop))}>삭제</ST.MyBtn>
                                 </ST.BtnContainer>
                             </li>
                         ))}
@@ -102,14 +120,29 @@ const My: React.FC = () => {
 
             {pets.length > 0 && (
                 <ST.ShopNPetSection>
-                    <ST.TitleH3>마이 펫</ST.TitleH3>
+                    <ST.TitleH3>마이 PET</ST.TitleH3>
                     <ST.MyUl>
                         {pets.map((pet) => (
-                            <li key={pet.petId}>
+                            <li key={pet.petId} onClick={() => navigate(`/pet/${pet.petId}`)}>
                                 <ST.MyShopImg src={pet.imageUrls[0]} alt={pet.petName} />
                                 <p>반려동물 이름: {pet.petName}</p>
                                 <p>반려동물 종류: {pet.petKind}</p>
                                 <p>반려동물 특이사항: {pet.petInfo}</p>
+                            </li>
+                        ))}
+                    </ST.MyUl>
+                </ST.ShopNPetSection>
+            )}
+
+            {chatRooms.length > 0 && (
+                <ST.ShopNPetSection>
+                    <ST.TitleH3>마이 채팅방</ST.TitleH3>
+                    <ST.MyUl>
+                        {chatRooms.map((chatroom) => (
+                            <li key={chatroom.roomId} onClick={() => enterRoom(chatroom.roomId)}>
+                                <p>방 ID: {chatroom.roomId}</p>
+                                <p>방 이름: {chatroom.name}</p>
+                                <p>개설자: {chatroom.creator.nickname}</p>
                             </li>
                         ))}
                     </ST.MyUl>
