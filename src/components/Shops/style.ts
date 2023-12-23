@@ -62,21 +62,14 @@ export const StDropdown = styled(Dropdown)`
         color: #8f8e93;
 
         &:hover {
-            background-color: #eee;
+            filter: brightness(95%);
         }
 
         &:after {
-            content: '';
             position: absolute;
             top: 45%;
             right: 16px;
             display: inline-block;
-            width: 0;
-            height: 0;
-            /* border-style: solid; */
-            /* border-width: 5px 0 5px 5px;
-            border-color: transparent transparent transparent #8f8e93; 오른쪽 방향으로 이동 */
-            margin-left: 5px; /* 이동 거리 조절 */
         }
     }
 
