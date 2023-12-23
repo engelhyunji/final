@@ -27,7 +27,7 @@ const Header: React.FC = () => {
                         <h5>SHOP 목록</h5>
                     </NoLineLink>
                     <NoLineLink to="/map">
-                        <h5>MAP</h5>
+                        <h5>지도</h5>
                     </NoLineLink>
                     {isLogin ? (
                         <>
@@ -38,7 +38,7 @@ const Header: React.FC = () => {
                                 <h5>SHOP등록</h5>
                             </NoLineLink>
                             <NoLineLink to="/chat/room">
-                                <h5>채팅목록</h5>
+                                <h5>채팅</h5>
                             </NoLineLink>
                             <NoLineLink to={'/my'}>
                                 <h5>마이페이지</h5>
