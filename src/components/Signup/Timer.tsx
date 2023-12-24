@@ -14,28 +14,28 @@ const Timer: React.FC<TimerProps> = ({ mm = '0', ss = '0', isRunning }) => {
     const MM = mm ? parseInt(mm) : 0
     const SS = ss ? parseInt(ss) : 0
 
+    // 타이머 카운트 값 저장
     const count = useRef<number>(MM * 60 + SS)
-    const interval = useRef<NodeJS.Timeout | null>(null)
+    // 실행 중인 타이머 ID 저장
+    const interval = useRef<number | null>(null)
 
     const [minute, setMinute] = useState<string>(intToString(MM))
     const [second, setSecond] = useState<string>(intToString(SS))
 
     useEffect(() => {
-        if (isRunning) {
+        if (isRunning && !interval.current) {
             interval.current = window.setInterval(() => {
                 count.current -= 1
 
                 setMinute(intToString(Math.floor(count.current / 60)))
                 setSecond(intToString(count.current % 60))
-            }, 1000) as unknown as number;
-            if (interval.current) {
-                clearInterval(interval.current)
-            }
+            }, 1000) as unknown as number
         }
 
         return () => {
             if (interval.current) {
                 clearInterval(interval.current)
+                interval.current = null
             }
         }
     }, [isRunning])
