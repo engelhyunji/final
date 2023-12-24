@@ -13,13 +13,12 @@ const NoLineLink: React.FC<NoLineLinkProps> = ({ to, children, ...rest }) => (
         to={to}
         style={{
             textDecoration: 'none',
-            width: '80px',
             color: '#000000',
             display: 'inline-block',
             textAlign: 'center',
             fontWeight: 'bold',
             fontFamily: 'Pretendard-SemiBold',
-            marginLeft: '20px',
+            marginLeft: '36px',
         }}
         {...rest}
     >
