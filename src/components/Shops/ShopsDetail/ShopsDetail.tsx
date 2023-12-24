@@ -40,7 +40,7 @@ const ShopsDetail: React.FC = () => {
                                 alt={detailShopData.shopResponseDto.shopName}
                             />
                         </p>
-                        <p>영업시간 : {detailShopData.shopResponseDto.shopAddress}</p>
+                        <p>주소 : {detailShopData.shopResponseDto.shopAddress}</p>
                         <p>영업시간 : {detailShopData.shopResponseDto.shopTime}</p>
                         <p>연락처 : {detailShopData.shopResponseDto.shopTel}</p>
                         <p>소개 : {detailShopData.shopResponseDto.shopDescribe}</p>
