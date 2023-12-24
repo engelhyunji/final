@@ -56,7 +56,7 @@ const ChatRoom: React.FC = () => {
 
     const client = useRef<any>()
     const headers = {
-        Authorization: token || '', // 토큰이 없으면 빈 문자열로 설정
+        Authorization: token || '', // 토큰이 없으면 빈 문자열로
     }
 
     const disconnect = () => {
@@ -71,7 +71,10 @@ const ChatRoom: React.FC = () => {
         client.current.publish({
             destination: '/pub/chat/message',
             body: JSON.stringify(quitMessage),
-            headers: headers,
+            headers: {
+                Authorization: token || '',
+                roomId: roomId || '',
+            },
         })
 
         client.current.deactivate(() => {
@@ -96,10 +99,9 @@ const ChatRoom: React.FC = () => {
 
     const connectWebSocket = () => {
         client.current = new Stomp.Client({
-            brokerURL: 'ws://52.78.115.3:8080/ws',
+            // brokerURL: 'ws://3.37.121.136:8080/ws',
             // brokerURL: 'ws://52.79.74.205:8080/ws',
-            // brokerURL: 'ws://54.180.94.139:8080/ws',
-            // brokerURL: 'ws://15.164.219.13/ws-stomp',
+            brokerURL: 'ws://54.180.94.139:8080/ws',
             onConnect: () => {
                 console.log('success')
                 subscribe()
@@ -113,7 +115,10 @@ const ChatRoom: React.FC = () => {
                 client.current.publish({
                     destination: '/pub/chat/message',
                     body: JSON.stringify(enterMessage),
-                    headers: headers,
+                    headers: {
+                        Authorization: token || '',
+                        roomId: roomId || '',
+                    },
                 })
             },
             connectHeaders: headers,
@@ -140,9 +145,12 @@ const ChatRoom: React.FC = () => {
         setMessage('')
     }
 
+
+
     return (
         <ST.ChatContainer id="app">
             <ST.MessageContainer>
+
                 <ST.MessageInfoContainer>
                     <ST.ChatH2>{room?.name} 채팅방</ST.ChatH2>
                     <span>방ID: {room?.roomId}</span>
@@ -153,15 +161,21 @@ const ChatRoom: React.FC = () => {
                         <button onClick={disconnect}>채팅방 나가기</button>
                     </div>
                 </ST.MessageInfoContainer>
+
                 <ST.MessageListContainer ref={scrollRef}>
-                    <ul>
-                        {messages?.map((msg, index) => (
-                            <li key={index}>
-                                {msg.sender} - {msg.message}
-                            </li>
+                    <ST.MessageUl>
+                        {/* 내 메세지, 받은 메세지 스타일 따로 지정 */}
+                        {messages?.map((msg, idx) => (
+                            <ST.MessageLi key={idx} className={msg.sender !== nickname ? 'otherChat' : 'myChat'}>
+                                <ST.MessageDiv className={msg.sender !== nickname ? 'otherMsg' : 'myMsg'}>
+                                    {msg.sender !== nickname && <p>{msg.sender}</p>}
+                                    <span>{msg.message}</span>
+                                </ST.MessageDiv>
+                            </ST.MessageLi>
                         ))}
-                    </ul>
+                    </ST.MessageUl>
                 </ST.MessageListContainer>
+
             </ST.MessageContainer>
 
             <ST.MessageInputDiv>

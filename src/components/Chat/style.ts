@@ -63,8 +63,48 @@ export const MessageListContainer = styled.div`
     /* height: 500px; */
 `
 
-export const MessageInputDiv = styled.div`
+export const MessageUl = styled.ul`
+    width: 60%;
+    /* height: 500px; */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #eee;
+`
 
+export const MessageLi = styled.li`
+    &.otherChat {
+        text-align: left;
+    }
+
+    &.myChat {
+        text-align: right;
+    }
+`
+
+export const MessageDiv = styled.div`
+    margin: 10px;
+
+    &.otherMsg {
+        span {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+    }
+
+    &.myMsg {
+        span {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background-color: #00bd8f;
+        }
+    }
+`
+
+// 메세지 입력
+export const MessageInputDiv = styled.div`
     display: flex;
     align-items: center;
     gap: 12px;
