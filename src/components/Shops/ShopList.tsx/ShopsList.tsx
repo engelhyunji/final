@@ -10,6 +10,9 @@ import { useQuery } from 'react-query'
 const ShopsList: React.FC = () => {
     const navigate = useNavigate()
 
+    // 현재 활성화된 카테고리(스타일 설정용)
+    const [nowCategory, setNowCategory] = useState('ALL');
+
     // 서버에서 받은 전체 목록
     const [shopList, setShopList] = useState<Shop[]>([])
     // 페이지네이션을 통해 보여줄 목록
@@ -66,6 +69,9 @@ const ShopsList: React.FC = () => {
                 }
             })
         }
+
+        // 현재 활성화된 카테고리 저장
+        setNowCategory(type);
     }
 
     return (
@@ -79,11 +85,11 @@ const ShopsList: React.FC = () => {
                 <ST.ShopListH3>Shop 조회</ST.ShopListH3>
 
                 <ST.ShopCategoryUl>
-                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('ALL')}>모든 Shop</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('GROOMING')}>Pet 미용</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('HOSPITAL')}>Pet 병원</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('CAFE')}>Pet 카페</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('ETC')}>기타</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('ALL')} className={nowCategory === 'ALL' ? 'active' : ''}>모든 Shop</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('GROOMING')} className={nowCategory === 'GROOMING' ? 'active' : ''}>Pet 미용</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('HOSPITAL')} className={nowCategory === 'HOSPITAL' ? 'active' : ''}>Pet 병원</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('CAFE')} className={nowCategory === 'CAFE' ? 'active' : ''}>Pet 카페</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('ETC')} className={nowCategory === 'ETC' ? 'active' : ''}>기타</ST.ShopCategoryLi>
                 </ST.ShopCategoryUl>
 
                 <ST.StRow>
@@ -106,7 +112,7 @@ const ShopsList: React.FC = () => {
                                         <ST.BodyAddressInfoP className="card-text">
                                             {shop.shopAddress}
                                         </ST.BodyAddressInfoP>
-                                        <ST.CardBodyP className="card-text">#해쉬태그예정 #hashtag</ST.CardBodyP>
+                                        <ST.CardBodyP className="card-text">#hashtag</ST.CardBodyP>
                                     </ST.ShopGrid>
                                 </ST.CardBodyDiv>
                             </ST.ShopBox>

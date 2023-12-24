@@ -90,6 +90,7 @@ export const ShopCategoryUl = styled.ul`
 `
 
 export const ShopCategoryLi = styled.li`
+    cursor: pointer;
     width: 165px;
     height: 100%;
 
@@ -103,7 +104,6 @@ export const ShopCategoryLi = styled.li`
     align-items: center;
 
     &:hover,
-    &:active,
     &.active {
         color: #1d1d1b;
         border-bottom: 1px solid #000;
