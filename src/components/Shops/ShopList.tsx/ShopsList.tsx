@@ -4,7 +4,7 @@ import * as ST from './style'
 import * as StP from './pageStyle'
 import { Pagination, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Shop, getShops } from '../../../apis/api/api'
+import { Shop, getShopType, getShops } from '../../../apis/api/api'
 import { useQuery } from 'react-query'
 
 const ShopsList: React.FC = () => {
@@ -18,6 +18,7 @@ const ShopsList: React.FC = () => {
     const [page, setPage] = useState<number>(1)
     // 페이지 당 목록 개수
     const shopsPerPage: number = 6
+
     const indexOfLastShop: number = page * shopsPerPage
     const indexOfFirstShop: number = indexOfLastShop - shopsPerPage
     const shopListLength = shopList.length
@@ -47,23 +48,42 @@ const ShopsList: React.FC = () => {
         setCurrentShops(reversedShops.slice(indexOfFirstShop, indexOfLastShop))
     }, [shopList, page])
 
+    // 카테고리 별 API호출
+    const roomTypeHandler = (type: string) => {
+        // 모두 보기
+        if (type === 'ALL') {
+            getShops().then((data) => {
+                if (data) {
+                    setShopList([...data])
+                }
+            })
+
+            // 카테고리 클릭 시
+        } else {
+            getShopType(type).then((data) => {
+                if (data) {
+                    setShopList([...data])
+                }
+            })
+        }
+    }
+
     return (
         <ST.Container>
+            <ST.TitleBackContainer>
+                <ST.ShopListH2>Shop</ST.ShopListH2>
+                <ST.ShopP>내 펫에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
+            </ST.TitleBackContainer>
 
-                <ST.TitleBackContainer>
-                    <ST.ShopListH2>Shop</ST.ShopListH2>
-                    <ST.ShopP>내 펫에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
-                </ST.TitleBackContainer>
-
-                <ST.ShopListContainer>
+            <ST.ShopListContainer>
                 <ST.ShopListH3>Shop 조회</ST.ShopListH3>
 
                 <ST.ShopCategoryUl>
-                    <ST.ShopCategoryLi>모든 Shop</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi>Pet 미용</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi>Pet 병원</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi>Pet 카페</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi>기타</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('ALL')}>모든 Shop</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('GROOMING')}>Pet 미용</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('HOSPITAL')}>Pet 병원</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('CAFE')}>Pet 카페</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('ETC')}>기타</ST.ShopCategoryLi>
                 </ST.ShopCategoryUl>
 
                 <ST.StRow>
@@ -109,9 +129,7 @@ const ShopsList: React.FC = () => {
                         <Pagination.Next onClick={() => handlePageChange(page + 1)} />
                     )}
                 </StP.pageContainer>
-
-                </ST.ShopListContainer>
-
+            </ST.ShopListContainer>
         </ST.Container>
     )
 }
@@ -121,5 +139,5 @@ export default ShopsList
 const cardCol = {
     padding: '0px',
     margin: '0px',
-    width: '29.8%',
+    width: '358px',
 }

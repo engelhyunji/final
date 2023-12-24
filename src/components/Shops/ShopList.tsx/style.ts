@@ -64,6 +64,7 @@ export const ShopP = styled.p`
 
 export const ShopListContainer = styled.div`
     max-width: 1200px;
+    min-width: 800px;
 
     font-family: Pretendard-medium;
 
@@ -112,7 +113,7 @@ export const ShopCategoryLi = styled.li`
 export const StRow = styled(Row)`
     max-width: 1200px;
     margin: 0 auto;
-    column-gap: 5.2%;
+    column-gap: 63px;
     row-gap: 20px;
 `
 

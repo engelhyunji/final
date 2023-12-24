@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const pageContainer = styled.div`
     max-width: 230px;
-    margin: 82px auto;
+    margin: 60px auto;
 
     display: flex;
     justify-content: center;
