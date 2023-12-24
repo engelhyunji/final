@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as ST from './style'
 import * as StP from './pageStyle'
-import { Pagination, Container, Col } from 'react-bootstrap'
+import { Pagination, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Shop, getShops } from '../../../apis/api/api'
 import { useQuery } from 'react-query'
@@ -49,18 +49,26 @@ const ShopsList: React.FC = () => {
 
     return (
         <ST.Container>
-            <Container className="shop-list">
+
                 <ST.TitleBackContainer>
-                    <ST.ShopListH2 className="mb-4">Shop</ST.ShopListH2>
+                    <ST.ShopListH2>Shop</ST.ShopListH2>
                     <ST.ShopP>내 펫에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
                 </ST.TitleBackContainer>
 
+                <ST.ShopListContainer>
                 <ST.ShopListH3>Shop 조회</ST.ShopListH3>
 
+                <ST.ShopCategoryUl>
+                    <ST.ShopCategoryLi>모든 Shop</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi>Pet 미용</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi>Pet 병원</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi>Pet 카페</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi>기타</ST.ShopCategoryLi>
+                </ST.ShopCategoryUl>
 
                 <ST.StRow>
                     {currentShops.map((shop) => (
-                        <Col key={shop.shopId} xs={12} sm={6} md={4} className="mb-4">
+                        <Col key={shop.shopId} xs={12} sm={6} md={4} className="mb-4" style={cardCol}>
                             <ST.ShopBox className="card" onClick={() => navigate(`/shops/${shop.shopId}`)}>
                                 <ST.thumImg
                                     src={shop.imageUrls[0]}
@@ -101,9 +109,17 @@ const ShopsList: React.FC = () => {
                         <Pagination.Next onClick={() => handlePageChange(page + 1)} />
                     )}
                 </StP.pageContainer>
-            </Container>
+
+                </ST.ShopListContainer>
+
         </ST.Container>
     )
 }
 
 export default ShopsList
+
+const cardCol = {
+    padding: '0px',
+    margin: '0px',
+    width: '29.8%',
+}
