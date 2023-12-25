@@ -1,4 +1,4 @@
-// import React from 'react'
+import React from 'react'
 import * as ST from './style'
 
 const Footer: React.FC = () => {

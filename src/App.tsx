@@ -1,5 +1,6 @@
 import AppRoutes from './router/AppRoutes'
 import './App.css'
+import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { StyleSheetManager } from 'styled-components'
 import isPropValid from '@emotion/is-prop-valid'

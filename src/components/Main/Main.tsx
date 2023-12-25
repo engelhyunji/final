@@ -61,6 +61,7 @@
 
 // export default Main
 import * as ST from './style'
+import React from 'react';
 import MainTop from './MainTop/MainTop'
 import { useNavigate } from 'react-router-dom'
 import Category from './Category/Category'

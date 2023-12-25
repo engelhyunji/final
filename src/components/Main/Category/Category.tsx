@@ -3,9 +3,9 @@ import * as ST from './style'
 import Slider from 'react-slick'
 import instance from '../../../apis/instance'
 import '../../../index.css'
-import { Image } from '../../Pet/PetList/style'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { Image } from '../../Pet/PetDetail/style';
 
 type ShopType = 'GROOMING' | 'HOSPITAL' | 'CAFE' | 'ETC'
 

@@ -1,21 +1,22 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import React from 'react';
 import Layout from '../components/Layout/Layout'
 import ShopsPage from '../pages/ShopsPage'
 import PetPage from '../pages/PetPage'
 import LoginPage from '../pages/LoginPage'
 import MainPage from '../pages/MainPage'
 import SignupPage from '../pages/SignupPage'
-import PetDetailPage from '../pages/PetDetailPage'
-import PetModifyPage from '../pages/PetModifyPage'
-import ShopsDetailPage from '../pages/ShopsDetailPage'
-import ShopsModifyPage from '../pages/ShopsModifyPage'
-import PetListPage from '../pages/PetListPage'
-import ShopsListPage from '../pages/ShopsListPage'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import MyPage from '../pages/MyPage'
-import MapPage from '../pages/MapPage'
-import ChatListPage from '../pages/Chat/ChatListPage'
-import ChatRoomPage from '../pages/Chat/ChatRoomPage'
+import PetDetailPage from '../pages/PetDetailPage';
+import PetListPage from '../pages/PetListPage';
+import PetModifyPage from '../pages/PetModifyPage';
+import ShopsListPage from '../pages/ShopsListPage';
+import ShopsDetailPage from '../pages/ShopsDetailPage';
+import ShopsModifyPage from '../pages/ShopsModifyPage';
+import MapPage from '../pages/MapPage';
+import MyPage from '../pages/MyPage';
+import ChatListPage from '../pages/Chat/ChatListPage';
+import ChatRoomPage from '../pages/Chat/ChatRoomPage';
 
 const queryClient = new QueryClient()
 

@@ -1,5 +1,5 @@
-import PetModify from "../components/Pet/PetModify/PetModify"
-
+import React from 'react';
+import PetModify from '../components/Pet/PetModify/PetModify';
 
 const PetModifyPage = () => {
     return <PetModify />
