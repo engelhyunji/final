@@ -119,9 +119,9 @@ const ChatRoom: React.FC = () => {
 
     const connectWebSocket = () => {
         client.current = new Stomp.Client({
-            // brokerURL: 'ws://3.37.121.136:8080/ws',
             // brokerURL: 'ws://52.79.74.205:8080/ws',
-            brokerURL: 'ws://54.180.94.139:8080/ws',
+            // brokerURL: 'ws://54.180.94.139:8080/ws',
+            brokerURL: 'ws://3.37.121.136:8080/ws',
             onConnect: () => {
                 console.log('success')
                 subscribe()
