@@ -15,12 +15,9 @@ const Header: React.FC = () => {
             <ST.HeaderContainer>
                 <ST.Logo onClick={() => navigate('/')}>
                     <ST.LogoImg src={logoUrl} alt="logo" />
-<<<<<<< HEAD
                     <ST.LogoH1>와르와르</ST.LogoH1>
-=======
                     {/* <ST.LogoH1>와르와르</ST.LogoH1> */}
                     {/* <ST.LogoImg1 src={logoUrl1} alt="logo" /> */}
->>>>>>> 5c1f7577f3432fe65a81deac856ccecd79dd0f7c
                 </ST.Logo>
                 <ST.GNBDiv>
                     <NoLineLink to="/petlist">
