@@ -97,7 +97,7 @@ export const Text1 = styled.h2`
     margin-top: 20px;
     font-size: 20px;
 `
-export const Text2 = styled.h2`
+export const Text2 = styled.div`
     color: aliceblue;
     margin-top: 20px;
     font-size: 25px;
