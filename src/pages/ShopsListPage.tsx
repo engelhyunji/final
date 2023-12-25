@@ -1,4 +1,3 @@
-import React from 'react'
 import ShopsList from '../components/Shops/ShopList.tsx/ShopsList'
 
 const ShopsListPage = () => {

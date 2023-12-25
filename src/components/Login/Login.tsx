@@ -86,17 +86,12 @@ const Login: React.FC = () => {
                         <ST.LoginInput
                             type="password"
                             id="password"
+                            autoComplete="current-password"
                             placeholder="비밀번호를 입력해주세요"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    handleLogin()
-                                }
-                            }}
                         />
                     </ST.LoginInputBox>
-                    
                     <ST.LoginBtn type="button" onClick={handleLogin}>
                         로그인하기
                     </ST.LoginBtn>
