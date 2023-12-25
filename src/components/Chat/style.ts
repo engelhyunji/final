@@ -15,13 +15,27 @@ export const EmptyText = styled.div`
 `
 
 export const ChatContainer = styled.div`
-    max-width: 1280px;
-    margin: 50px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 150px;
+    font-family: Pretendard-regular;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+`
+
+export const ChatListTitleWrap = styled.div`
+    margin: 50px 0 0;
 `
 
 export const ChatH2 = styled.h2`
     font-size: 20px;
     font-weight: 700;
+`
+export const ChatH3 = styled.h3`
+    font-size: 16px;
+    font-weight: 600;
 `
 
 export const ChatInputDiv = styled.div`
@@ -35,20 +49,45 @@ export const ChatLabel = styled.label``
 
 export const ChatNameInput = styled.input``
 
-export const ChatBtn = styled.button``
+export const ChatBtn = styled.button`
+    width: 100px;
+    height: 34px;
+    color: #fff;
+    font-family: Pretendard-medium;
+    background-color: #00bd8f;
+    border: none;
+    border-radius: 8px;
+`
 
 export const ChatLists = styled.div`
     width: 100%;
 `
 
+export const ChatListContainer = styled.div`
+    width: 100%;
+    margin: 20px 0 30px;
+`
+
 export const ChatList = styled.div`
     width: 100%;
-    margin: 12px 0;
+    margin: 10px 0;
 `
+export const ChatDelBtn = styled.button`
+    width: 100px;
+    height: 34px;
+    color: #FD4141;
+    font-family: Pretendard-medium;
+    background-color: #eee;
+    border: none;
+    border-radius: 8px;
+`
+
+
 
 // =====ChatRoom 컴포넌트======
 export const MessageContainer = styled.div`
-    margin: 30px 0;
+    max-width: 1200px;
+    margin: 0 auto;
 `
 export const MessageInfoContainer = styled.div`
     margin: 30px 0;
@@ -58,14 +97,130 @@ export const MessageInfoContainer = styled.div`
     gap: 12px;
 `
 
-export const MessageListContainer = styled.div`
-    width: 1440px;
-    /* height: 500px; */
+export const ChatLeaveBtn = styled.button`
+    width: 120px;
+    height: 34px;
+    color: #FD4141;
+    font-family: Pretendard-medium;
+    background-color: #eee;
+    border: none;
+    border-radius: 8px;
 `
 
-export const MessageInputDiv = styled.div`
+export const MessageListContainer = styled.div`
+    width: 100%;
+    /* background-color: #fff; */
+    display: flex;
+`
 
+export const MessageUl = styled.ul`
+    width: 840px;
+    height: 65vh;
+    overflow-y: auto;
+
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #eee;
+
+    box-shadow: inset -10px 2px 20px 1px rgba(77, 71, 71, 0.2);
+`
+
+export const MessageLi = styled.li`
+    &.otherChat {
+        text-align: left;
+    }
+
+    &.myChat {
+        text-align: right;
+    }
+`
+
+export const MessageDiv = styled.div`
+    margin: 10px;
+
+    &.otherMsg {
+        span {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+    }
+
+    &.myMsg {
+        span {
+            color: #fff;
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background-color: #00bd8f;
+        }
+    }
+`
+
+export const ChatMemberContainer = styled.div`
+    width: 300px;
+    height: 65vh;
+    overflow-y: auto;
+
+    padding: 30px 20px;
+
+    background-color: #fff;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+`
+
+export const ChatMemberDiv = styled.div`
+    width: 100%;
+    margin: 20px 0;
+`
+export const ChatPetDiv = styled.div`
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+`
+
+export const ChatPetImg = styled.img`
+    width: 30%;
+    border-radius: 50%;
+`
+export const ChatPetInfoDiv = styled.div`
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+`
+
+// 메세지 입력
+export const MessageInputDiv = styled.div`
+    width: 840px;
+    height: 50px;
+    padding: 50px 30px;
+    margin: 10px 0;
+    background-color: #eee;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 12px;
+`
+
+export const MessageInput = styled.input`
+    width: 600px;
+    height: 35px;
+    padding: 10px;
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+`
+export const MyBtn = styled.button`
+    width: 100px;
+    height: 34px;
+    color: #fff;
+    font-family: Pretendard-medium;
+    background-color: #00bd8f;
+    border: none;
+    border-radius: 8px;
 `

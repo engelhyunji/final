@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent, useCallback, useRef } from 'react'
+import React, { useState, useEffect, ChangeEvent, FormEvent, useRef } from 'react'
 import * as ST from './style'
 import instance from '../../apis/instance'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -6,6 +6,7 @@ import { ShopPostData } from './Shops'
 import { getDetailShop } from '../../apis/api/api'
 import { useQuery } from 'react-query'
 import BackWave from '../BackWave'
+import { Dropdown } from 'react-bootstrap'
 
 const ShopsModify: React.FC = () => {
     const { shopId } = useParams()
@@ -20,8 +21,8 @@ const ShopsModify: React.FC = () => {
     })
 
     const [imgUrl, setImgUrl] = useState<string | null>(null)
-    const [uploadImage, setUploadImage] = useState<File | string>('')
-    const [initialImgLoaded, setInitialImgLoaded] = useState(false)
+    const [uploadImage, setUploadImage] = useState<File | null>(null)
+    const [initialDataLoaded, setInitialDataLoaded] = useState(false)
 
     // 전화번호(shopTel) 각 부분
     const [firstN, setFirstN] = useState<string>('')
@@ -30,10 +31,15 @@ const ShopsModify: React.FC = () => {
     const midNInput = useRef<HTMLInputElement>(null)
     const lastNInput = useRef<HTMLInputElement>(null)
 
+    // 영업시간(shopTime) 각 부분
+    const [openTime, setOpenTime] = useState<string>('')
+    const [closeTime, setCloseTime] = useState<string>('')
+
     useQuery(['detailShopData', Number(shopId)], () => getDetailShop(Number(shopId)), {
         onSuccess: (data) => {
             console.log('상품 디테일 불러오기 data', data?.shopResponseDto)
             // shopResponseDto(받은 값)에서 ShopPostData 형식으로 변환
+            // 등록 및 수정에는 받은 데이터와 다른 형식으로 전달하기 때문
             const transformedShopData: ShopPostData | null = data?.shopResponseDto
                 ? {
                       shopName: data.shopResponseDto.shopName,
@@ -44,39 +50,45 @@ const ShopsModify: React.FC = () => {
                       shopDescribe: data.shopResponseDto.shopDescribe,
                   }
                 : null
-            if (data?.shopResponseDto?.imageUrls) {
-                // 기존 미리보기 제일 처음에만 담음
-                if (!initialImgLoaded) {
-                    setImgUrl(data?.shopResponseDto?.imageUrls)
-                    setInitialImgLoaded(true)
-                }
-            }
-
             // 기존 데이터 담기
             if (transformedShopData) {
-                setShopRequestDto(transformedShopData)
+                // 초기에만 기존값이 담기도록
+                if (!initialDataLoaded) {
+                    // 이미지 URL 담기
+                    if (data?.shopResponseDto?.imageUrls) {
+                        setImgUrl(data?.shopResponseDto?.imageUrls)
+                    }
 
-                // shopTel 각 부분 분리 후 담기
-                const telParts = transformedShopData.shopTel.split('-')
-                setFirstN(telParts[0] || '')
-                setMidN(telParts[1] || '')
-                setLastN(telParts[2] || '')
+                    setShopRequestDto(transformedShopData)
+
+                    // shopTel 각 부분 분리 후 담기
+                    const telParts = transformedShopData.shopTel.split('-')
+                    setFirstN(telParts[0] || '')
+                    setMidN(telParts[1] || '')
+                    setLastN(telParts[2] || '')
+
+                    const timeParts = transformedShopData.shopTime.split(' ~ ')
+                    setOpenTime(timeParts[0] || '')
+                    setCloseTime(timeParts[1] || '')
+
+                    // 기존값 담은 후에는 상태변경하여 기존값 다시 들어오지 않게
+                    setInitialDataLoaded(true)
+                }
             }
         },
     })
     // useEffect(() => {
     //     console.log('setShopRequestDto', shopRequestDto)
     // }, [shopRequestDto])
-    
 
-    useEffect(() => {
-        // 전체 전화번호 조합 업데이트
-        const tel = `${firstN}-${midN}-${lastN}`;
-        setShopRequestDto((prevData) => ({
-            ...prevData,
-            shopTel: tel,
-        }));
-    }, [firstN, midN, lastN]);
+    // useEffect(() => {
+    //     // 전체 전화번호 조합 업데이트
+    //     const tel = `${firstN}-${midN}-${lastN}`
+    //     setShopRequestDto((prevData) => ({
+    //         ...prevData,
+    //         shopTel: tel,
+    //     }))
+    // }, [firstN, midN, lastN])
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target
@@ -85,7 +97,6 @@ const ShopsModify: React.FC = () => {
             // 숫자만 최대 4자리 입력 정규식
             const telRegEx = /^[0-9\b -]{0,4}$/
             if (telRegEx.test(value)) {
-
                 // 전화번호(shopTel) 각 부분 업데이트
                 if (name === 'firstN' && value.length < 4) {
                     setFirstN(value)
@@ -98,6 +109,18 @@ const ShopsModify: React.FC = () => {
                 if (name === 'lastN') setLastN(value)
             }
 
+            // 전체 전화번호 조합 업데이트
+            const tel = `${firstN}-${midN}-${lastN}`
+            setShopRequestDto((prevData) => ({
+                ...prevData,
+                shopTel: tel,
+            }))
+
+        // 오픈시간 마감시간 각 업데이트
+        } else if (name === 'openTime' || name === 'closeTime') {
+            if (name === 'openTime') setOpenTime(value)
+            if (name === 'closeTime') setCloseTime(value)
+            
         } else {
             setShopRequestDto((prevData) => ({
                 ...prevData,
@@ -106,27 +129,35 @@ const ShopsModify: React.FC = () => {
         }
     }
 
-    const handleImageFileChange = useCallback(
-        (e: ChangeEvent<HTMLInputElement>) => {
-            if (e.target.files && e.target.files.length > 0) {
-                const file = e.target.files[0]
-                const reader = new FileReader()
-                reader.onload = () => {
-                    const result = reader.result as string
+    useEffect(() => {
+        // 컴포넌트가 렌더링된 후에 실행되어
+        // openTime, closeTime 업데이트된 후에 setShopRequestDto 호출되도록
+        // 전체 영업시간 업데이트
+        const time = `${openTime} ~ ${closeTime}`
+        setShopRequestDto((prevData) => ({
+            ...prevData,
+            shopTime: time,
+        }))
+    }, [openTime, closeTime])
 
-                    // 이미지 업데이트
-                    setImgUrl(result)
-                    setUploadImage(file)
-                }
-                reader.readAsDataURL(e.target.files[0])
+    const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files?.[0]) {
+            setUploadImage(e.target.files[0])
+            const reader = new FileReader()
+            reader.onload = () => {
+                setImgUrl(reader.result as string)
             }
-        },
-        [setImgUrl, setUploadImage],
-    )
+            reader.readAsDataURL(e.target.files[0])
+        }
+    }
 
-    // useEffect(() => {
-    //     console.log('uploadImage 업데이트 확인', uploadImage)
-    // }, [uploadImage])
+    // shopType (드롭다운 토글 값) 업데이트
+    const handleDropdownChange = (value: string) : void => {
+        setShopRequestDto((prevData) => ({
+            ...prevData,
+            shopType: value,
+        }))
+    }
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -148,14 +179,13 @@ const ShopsModify: React.FC = () => {
                     'Content-Type': 'multipart/form-data',
                 },
             })
-            console.log('가게 등록 response :', response.data)
-            navigate('/shopslist')
+            console.log('가게 수정 response :', response.data)
+            navigate(-1)
         } catch (error) {
-            console.error('가게 등록 에러 :', error)
+            console.error('가게 수정 에러 :', error)
         }
     }
 
-    
     return (
         <ST.Container>
             <BackWave />
@@ -164,40 +194,19 @@ const ShopsModify: React.FC = () => {
 
             <ST.Form onSubmit={handleSubmit}>
                 <ST.ShopInputBox>
-                    <ST.Label>수정할 사진을 등록해주세요</ST.Label>
-                    <ST.Input
-                        id="image"
-                        type="file"
-                        accept="image/png, image/jpeg, image/jpg"
-                        onChange={handleImageFileChange}
-                        style={{ display: 'none' }}
-                    />
-                    <ST.ImgWrap>
-                        <ST.ImgLabel htmlFor="image">
-                            {!imgUrl && (
-                                <>
-                                    <p>
-                                        <ST.FileSpan>파일 열기</ST.FileSpan> 혹은 끌어다 놓기
-                                    </p>
-                                    <ST.FileP>파일 형식은 jpg, jpeg, png만 업로드 가능합니다.</ST.FileP>
-                                </>
-                            )}
-                            {imgUrl && <ST.Image src={imgUrl} alt="ShopImg" />}
-                        </ST.ImgLabel>
-                    </ST.ImgWrap>
-                </ST.ShopInputBox>
-
-                <ST.ShopInputBox>
                     <ST.Label>Shop 종류를 알려주세요</ST.Label>
-                    <ST.SelectContainer>
-                        <ST.Select name="shopType" value={shopRequestDto.shopType} onChange={handleChange}>
-                            <ST.FirstOption value="">가게 종류를 선택해주세요</ST.FirstOption>
-                            <option value="GROOMING">GROOMING</option>
-                            <option value="HOSPITAL">HOSPITAL</option>
-                            <option value="CAFE">CAFE</option>
-                            <option value="ETC">ETC</option>
-                        </ST.Select>
-                    </ST.SelectContainer>
+                    <ST.StDropdown>
+                        <Dropdown.Toggle variant="light" id="dropdown-basic">
+                            {shopRequestDto.shopType || 'Shop 종류를 선택해주세요'}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => handleDropdownChange('GROOMING')}>GROOMING</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleDropdownChange('HOSPITAL')}>HOSPITAL</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleDropdownChange('CAFE')}>CAFE</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleDropdownChange('ETC')}>ETC</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </ST.StDropdown>
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
@@ -224,24 +233,22 @@ const ShopsModify: React.FC = () => {
 
                 <ST.ShopInputBox>
                     <ST.Label>Shop 전화번호를 알려주세요</ST.Label>
-                    <ST.NInputBox>
+                    <ST.NnTInputBox>
                         <ST.NInput name="firstN" type="text" value={firstN} onChange={handleChange} />
                         <ST.NSpan />
                         <ST.NInput ref={midNInput} name="midN" type="text" value={midN} onChange={handleChange} />
                         <ST.NSpan />
                         <ST.NInput ref={lastNInput} name="lastN" type="text" value={lastN} onChange={handleChange} />
-                    </ST.NInputBox>
+                    </ST.NnTInputBox>
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
                     <ST.Label>Shop 영업시간을 알려주세요</ST.Label>
-                    <ST.Input
-                        name="shopTime"
-                        type="text"
-                        value={shopRequestDto.shopTime}
-                        onChange={handleChange}
-                        placeholder=""
-                    />
+                    <ST.NnTInputBox>
+                        <ST.TInput name="openTime" type="time" value={openTime} onChange={handleChange} />
+                        <span> ~ </span>
+                        <ST.TInput name="closeTime" type="time" value={closeTime} onChange={handleChange} />
+                    </ST.NnTInputBox>
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
@@ -255,8 +262,34 @@ const ShopsModify: React.FC = () => {
                     />
                 </ST.ShopInputBox>
 
-                <ST.ShopBtn type="submit">수정하기</ST.ShopBtn>
-                <ST.ShopBtn onClick={() => navigate(-1)}>취소</ST.ShopBtn>
+                <ST.ShopInputBox>
+                    <ST.Label>수정할 사진을 등록해주세요</ST.Label>
+                    <ST.Input
+                        id="image"
+                        type="file"
+                        accept="image/png, image/jpeg, image/jpg"
+                        onChange={handleImageFileChange}
+                        style={{ display: 'none' }}
+                    />
+                    <ST.ImgWrap>
+                        <ST.ImgLabel htmlFor="image">
+                            {!imgUrl && (
+                                <>
+                                    <p>
+                                        <ST.FileSpan>파일 열기</ST.FileSpan> 혹은 끌어다 놓기
+                                    </p>
+                                    <ST.FileP>파일 형식은 jpg, jpeg, png만 업로드 가능합니다.</ST.FileP>
+                                </>
+                            )}
+                            {imgUrl && <ST.Image src={imgUrl} alt="ShopImg" />}
+                        </ST.ImgLabel>
+                    </ST.ImgWrap>
+                </ST.ShopInputBox>
+
+                <ST.ShopBtnBox>
+                    <ST.ShopModifyBtn onClick={() => navigate(-1)}>취소</ST.ShopModifyBtn>
+                    <ST.ShopModifyBtn type="submit">수정완료</ST.ShopModifyBtn>
+                </ST.ShopBtnBox>
             </ST.Form>
         </ST.Container>
     )

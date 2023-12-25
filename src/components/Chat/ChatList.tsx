@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, KeyboardEvent } from 'react'
+import React, { useState, useEffect, ChangeEvent } from 'react'
 import * as ST from './style'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
@@ -69,10 +69,10 @@ const ChatList: React.FC = () => {
     }
 
     return (
-        <ST.ChatContainer id="app">
-            <div>
-                <ST.ChatH2>채팅방 만들기</ST.ChatH2>
-            </div>
+        <ST.ChatContainer>
+            <ST.ChatListTitleWrap>
+                <ST.ChatH2>채팅방 만들기 (개인이 생성할 수 있는 채팅방은 최대 2개입니다)</ST.ChatH2>
+            </ST.ChatListTitleWrap>
 
             <ST.ChatInputDiv>
                 <div>
@@ -82,7 +82,6 @@ const ChatList: React.FC = () => {
                     type="text"
                     value={roomName}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setRoomName(e.target.value)}
-                    onKeyUp={(e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && createRoom()}
                 />
                 <div>
                     <ST.ChatBtn type="button" onClick={createRoom}>
@@ -98,14 +97,14 @@ const ChatList: React.FC = () => {
                     </ST.EmptyWrap>
                 ) : (
                     chatrooms.map((item) => (
-                        <div key={item.roomId}>
+                        <ST.ChatListContainer key={item.roomId}>
                             <ST.ChatList onClick={() => enterRoom(item.roomId)}>
                                 {/* 방 ID: {item.roomId} <br /> */}
-                                방 이름: {item.name} <br />
-                                방장 : {item.creator.nickname}
+                                방 이름 : {item.name} <br />
+                                방장👑 : {item.creator.nickname}
                             </ST.ChatList>
-                            <button onClick={() => DeleteHandler(item.roomId)}>삭제</button>
-                        </div>
+                            <ST.ChatDelBtn onClick={() => DeleteHandler(item.roomId)}>삭제</ST.ChatDelBtn>
+                        </ST.ChatListContainer>
                     ))
                 )}
             </ST.ChatLists>

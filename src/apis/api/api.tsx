@@ -28,7 +28,6 @@ export interface shopResponseDto {
     imageUrls: string,
     reviews: Review[] 
 }
-
 export interface Review {
     reviewId: number,
     userId: number,
@@ -48,6 +47,18 @@ export interface Pet {
     petInfo: string,
     imageUrls: string[]
 }
+
+export interface ChatRoom {
+    roomId: string,
+    name: string,
+    creator: Creator
+}
+export interface Creator {
+    email: string,
+    nickname: string
+}
+
+
 
 // Shop 목록 조회
 export const getShops = async () => {
@@ -71,6 +82,20 @@ export const getDetailShop = async (shopId: number) => {
         console.log('가게 상세조회 에러 :',error);
     }
 }
+
+// Shop 카테고리별 조회
+export const getShopType = async (shopType: string) => {
+    try {
+        const res = await instance.get(`/api/shops/category/${shopType}`);
+        const typeShops: Shop[] = res.data.result;
+        return typeShops;
+    } catch (error) {
+        console.log('가게 카테고리별 조회 에러 :',error);
+    }
+}
+
+
+
 
 // 마이페이지 Shop 조회
 export const getMyShop = async () => {
@@ -100,5 +125,16 @@ export const deleteShop = async (shopId: number) => {
         await instance.delete(`/api/shops/${shopId}`);
     } catch (error) {
         console.log('shop 삭제에러 :',error);
+    }
+}
+
+// 마이페이지 ChatRoom 조회
+export const getMyChatRoom = async () => {
+    try {
+        const res = await instance.get('/chat/mypage');
+        const myChatRoom: ChatRoom[] = res.data.result;
+        return myChatRoom;
+    } catch (error) {
+        console.log('마이 chatRoom 조회 :',error);
     }
 }

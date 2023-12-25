@@ -1,7 +1,8 @@
-import React, { useState, ChangeEvent, FormEvent, useRef } from 'react'
+import React, { useState, ChangeEvent, FormEvent, useRef, useEffect } from 'react'
 import * as ST from './style'
 import instance from '../../apis/instance'
 import { useNavigate } from 'react-router-dom'
+import { Dropdown } from 'react-bootstrap'
 import BackWave from '../BackWave'
 
 export interface ShopPostData {
@@ -34,7 +35,11 @@ const Shops: React.FC = () => {
     const midNInput = useRef<HTMLInputElement>(null)
     const lastNInput = useRef<HTMLInputElement>(null)
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    // 영업시간(shopTime) 각 부분
+    const [openTime, setOpenTime] = useState<string>('')
+    const [closeTime, setCloseTime] = useState<string>('')
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
 
         if (name === 'firstN' || name === 'midN' || name === 'lastN') {
@@ -42,8 +47,9 @@ const Shops: React.FC = () => {
             const telRegEx = /^[0-9\b -]{0,4}$/
             if (telRegEx.test(value)) {
                 // 전화번호(shopTel) 각 부분 업데이트
-                if (name === 'firstN' && value.length < 4) {
+                if (name === 'firstN' && value.length < 5) {
                     setFirstN(value)
+                    // 4자리도 입력 가능하지만 많은 경우인 3자리에서 포커스 이동
                     if (value.length === 3) midNInput.current?.focus()
                 }
                 if (name === 'midN') {
@@ -59,6 +65,11 @@ const Shops: React.FC = () => {
                 ...prevData,
                 shopTel: tel,
             }))
+
+            // 오픈시간 마감시간 각 업데이트
+        } else if (name === 'openTime' || name === 'closeTime') {
+            if (name === 'openTime') setOpenTime(value)
+            if (name === 'closeTime') setCloseTime(value)
         } else {
             setShopRequestDto((prevData) => ({
                 ...prevData,
@@ -66,6 +77,17 @@ const Shops: React.FC = () => {
             }))
         }
     }
+
+    useEffect(() => {
+        // 컴포넌트가 렌더링된 후에 실행되어
+        // openTime, closeTime 업데이트된 후에 setShopRequestDto 호출되도록
+        // 전체 영업시간 업데이트
+        const time = `${openTime} ~ ${closeTime}`
+        setShopRequestDto((prevData) => ({
+            ...prevData,
+            shopTime: time,
+        }))
+    }, [openTime, closeTime])
 
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -85,6 +107,14 @@ const Shops: React.FC = () => {
     // useEffect(() => {
     //     console.log('uploadImage 업데이트 확인', uploadImage)
     // }, [uploadImage])
+
+    // shopType (드롭다운 토글 값) 업데이트
+    const handleDropdownChange = (value: string) : void => {
+        setShopRequestDto((prevData) => ({
+            ...prevData,
+            shopType: value,
+        }))
+    }
 
     // 등록하기
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -123,6 +153,22 @@ const Shops: React.FC = () => {
             <ST.Form onSubmit={handleSubmit}>
                 <ST.ShopInputBox>
                     <ST.Label>Shop 종류를 알려주세요</ST.Label>
+                    <ST.StDropdown>
+                        <Dropdown.Toggle variant="light" id="dropdown-basic">
+                            {shopRequestDto.shopType || 'Shop 종류를 선택해주세요'}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => handleDropdownChange('GROOMING')}>GROOMING</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleDropdownChange('HOSPITAL')}>HOSPITAL</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleDropdownChange('CAFE')}>CAFE</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleDropdownChange('ETC')}>ETC</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </ST.StDropdown>
+                </ST.ShopInputBox>
+
+                {/* <ST.ShopInputBox>
+                    <ST.Label>Shop 종류를 알려주세요</ST.Label>
                     <ST.SelectContainer>
                         <ST.Select name="shopType" value={shopRequestDto.shopType} onChange={handleChange}>
                             <ST.FirstOption value="">Shop 종류를 선택해주세요</ST.FirstOption>
@@ -132,7 +178,7 @@ const Shops: React.FC = () => {
                             <option value="ETC">ETC</option>
                         </ST.Select>
                     </ST.SelectContainer>
-                </ST.ShopInputBox>
+                </ST.ShopInputBox> */}
 
                 <ST.ShopInputBox>
                     <ST.Label>Shop 이름을 알려주세요</ST.Label>
@@ -158,34 +204,32 @@ const Shops: React.FC = () => {
 
                 <ST.ShopInputBox>
                     <ST.Label>Shop 전화번호를 알려주세요</ST.Label>
-                    <ST.NInputBox>
+                    <ST.NnTInputBox>
                         <ST.NInput name="firstN" type="text" value={firstN} onChange={handleChange} />
                         <ST.NSpan />
                         <ST.NInput ref={midNInput} name="midN" type="text" value={midN} onChange={handleChange} />
                         <ST.NSpan />
                         <ST.NInput ref={lastNInput} name="lastN" type="text" value={lastN} onChange={handleChange} />
-                    </ST.NInputBox>
+                    </ST.NnTInputBox>
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
                     <ST.Label>Shop 영업시간을 알려주세요</ST.Label>
-                    <ST.Input
-                        name="shopTime"
-                        type="text"
-                        value={shopRequestDto.shopTime}
-                        onChange={handleChange}
-                        placeholder=""
-                    />
+                    <ST.NnTInputBox>
+                        <ST.TInput name="openTime" type="time" value={openTime} onChange={handleChange} />
+                        <span> ~ </span>
+                        <ST.TInput name="closeTime" type="time" value={closeTime} onChange={handleChange} />
+                    </ST.NnTInputBox>
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>Shop 한줄소개를 적어주세요</ST.Label>
-                    <ST.Input
+                    <ST.Label>Shop 소개를 적어주세요</ST.Label>
+                    <ST.DescInput
                         name="shopDescribe"
-                        type="text"
+                        // rows={10}
                         value={shopRequestDto.shopDescribe}
                         onChange={handleChange}
-                        placeholder="한줄소개를 입력해주세요 (최대 300byte)"
+                        placeholder="소개를 입력해주세요"
                     />
                 </ST.ShopInputBox>
 

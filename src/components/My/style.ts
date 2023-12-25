@@ -1,14 +1,27 @@
 import styled from "styled-components";
 
 
-export const MyContainer = styled.div`
+export const Container = styled.div`
     max-width: 1440px;
     margin: 0 auto;
+    display: flex;
+
+    font-family: Pretendard-regular;
+    
+    z-index: 1;
+`
+
+export const MyContainer = styled.div`
+    max-width: 1440px;
+    margin: 50px auto;
     padding: 50px;
+    background-color: #fff;
+    border-radius: 8px;
+
     display: flex;
     flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
+    align-items: left;
+    z-index: 3;
 `
 
 export const ShopNPetSection = styled.section`
@@ -27,6 +40,10 @@ export const MyUl = styled.ul`
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+`
+
+export const MyDiv = styled.div`
+    cursor: pointer;
 `
 
 export const MyShopImg = styled.img`
@@ -52,6 +69,6 @@ export const MyBtn = styled.button`
 `
 
 export const LeaveSpan = styled.span`
-    margin: 100px;
+    margin: 100px auto 0;
     color: #bbb;
 `

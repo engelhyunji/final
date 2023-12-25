@@ -21,7 +21,7 @@ export const HeaderContainer = styled.div`
 `
 
 export const Logo = styled.div`
-    width: 280px;
+    /* width: 280px; */
     display: flex;
     align-items: center;
     cursor: pointer;

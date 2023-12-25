@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Dropdown } from 'react-bootstrap'
 
 export const Container = styled.div`
     max-width: 1440px;
@@ -38,9 +39,54 @@ export const Form = styled.form`
 export const SelectContainer = styled.div`
     width: 100%;
     margin-bottom: 10px;
-    border: 1px solid #dadada;
-    border-radius: 8px;
 `
+
+export const StDropdown = styled(Dropdown)`
+    width: 100%;
+    height: 51px;
+    border-radius: 8px;
+
+    color: #8f8e93;
+    font-family: Pretendard-regular;
+
+    .dropdown-toggle {
+        width: 100%;
+        height: 100%;
+        padding: 0 16px;
+        background-color: #fff;
+        border: 1px solid #dadada;
+        border-radius: 8px;
+
+        text-align: left;
+        font-size: 14px;
+        color: #8f8e93;
+
+        &:hover {
+            filter: brightness(95%);
+        }
+
+        &:after {
+            position: absolute;
+            top: 45%;
+            right: 16px;
+            display: inline-block;
+        }
+    }
+
+    .dropdown-menu {
+        width: 100%;
+
+        .dropdown-item {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .dropdown-item:hover {
+            background-color: #eee;
+        }
+    }
+`
+
 export const Select = styled.select`
     width: 100%;
     height: 51px;
@@ -84,7 +130,10 @@ export const Input = styled.input`
     }
 `
 
-export const NInputBox = styled.div`
+export const NnTInputBox = styled.div`
+    color: #8f8e93;
+    font-family: Pretendard-regular;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -95,12 +144,46 @@ export const NSpan = styled.span`
     background-color: #8f8e93;
 `
 export const NInput = styled.input`
-    width: 30%;
+    width: 28%;
+    height: 51px;
+    padding: 0 16px;
+    background-color: #fff;
+    border: 1px solid #dadada;
+    border-radius: 8px;
+
+    &::placeholder {
+        color: #8f8e93;
+        font-size: 14px;
+        font-family: Pretendard-regular;
+    }
+`
+
+export const TInput = styled.input`
+    width: 42%;
     height: 51px;
     background-color: #fff;
     padding: 0 16px;
+    margin-bottom: 10px;
     border: 1px solid #dadada;
     border-radius: 8px;
+
+    &::placeholder {
+        color: #8f8e93;
+        font-size: 14px;
+        font-family: Pretendard-regular;
+    }
+`
+
+export const DescInput = styled.textarea`
+    width: 100%;
+    height: 102px;
+    background-color: #fff;
+    padding: 16px 16px;
+    margin-bottom: 10px;
+    border: 1px solid #dadada;
+    border-radius: 8px;
+
+    resize: none;
 
     &::placeholder {
         color: #8f8e93;
@@ -154,73 +237,30 @@ export const ShopBtn = styled.button`
     border-radius: 8px;
 `
 
-// =====ShopList 컴포넌트======
-export const thumImg = styled.img`
-    max-width: 300px;
-    overflow: hidden;
-    /* height: 300px; */
-`
+// ======= ShopList 컴포넌트 ========
+// 코드 정리 이사 중
 
-export const TitleBackContainer = styled.div`
-    max-width: 1440px;
-    height: 340px;
+// ======= ShopDetail 컴포넌트 ========
+// 코드 정리 이사 중
 
-    color: #fff;
-    font-family: Pretendard-medium;
-    background-color: #00bd8f;
+// ======= Modify 컴포넌트 ========
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* position: absolute; */
-    /* z-index: 1; // 제일 뒤로 */
-`
-
-export const ShopDetailH2 = styled.h2`
-    color: #fff;
-    font-family: Pretendard-medium;
-    font-size: 48px;
-`
-export const ShopListContainer = styled.div`
-    max-width: 358;
-    height: 454px;
-
-    color: #fff;
-    font-family: Pretendard-medium;
-    background-color: #00bd8f;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* position: absolute; */
-    /* z-index: 1; // 제일 뒤로 */
-`
-export const ShopListH3 = styled.h3`
-    margin: 103px 0;
-    font-family: Pretendard-bold;
-    font-size: 30px;
-`
-
-export const ShopBox = styled.div`
-    max-width: 358px;
-    height: 454px;
-    border: none;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    font-family: Pretendard-medium;
+export const ShopBtnBox = styled.div`
+    width: 100%;
+    font-size: 18px;
+    font-family: Pretendard-regular;
     background-color: #fff;
 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 `
 
-// =====ShopDetail 컴포넌트======
-export const detailImg = styled.img`
-    max-width: 300px;
-    height: 300px;
+export const ShopModifyBtn = styled.button`
+    width: 227px;
+    height: 51px;
+    color: #fff;
+    background-color: #00bd8f;
+    border: none;
+    border-radius: 8px;
 `
-
-//=====Modify 컴포넌트=====
