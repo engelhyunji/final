@@ -144,7 +144,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         }
 
         const script = document.createElement('script')
-        script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=30e58bfb3907dffb16196ae237d38d8f&libraries=services'
+        script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=30e58bfb3907dffb16196ae237d38d8f&libraries=services'
         document.head.appendChild(script)
 
         script.onload = () => {
