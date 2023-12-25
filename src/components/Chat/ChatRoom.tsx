@@ -16,6 +16,15 @@ interface ChatroomDetail {
 interface member {
     email: string
     nickname: string
+    pets: pet[]
+}
+interface pet {
+    petName: string
+    petId: number
+    petKind: string
+    petGender: string
+    petInfo: string
+    imageUrls: string[]
 }
 
 interface Message {
@@ -34,6 +43,8 @@ const ChatRoom: React.FC = () => {
     const [room, setRoom] = useState<ChatroomDetail | null>(null)
     const [message, setMessage] = useState<string>('')
     const [messages, setMessages] = useState<Message[]>([])
+    const [members, setMembers] = useState<member[]>([])
+
     const [wclient, setWclient] = useState<any | null>(null)
     const scrollRef = useRef<any>()
 
@@ -49,10 +60,19 @@ const ChatRoom: React.FC = () => {
 
     useEffect(() => {
         connectWebSocket()
-        getChatRoom(roomId as string).then((data) => setRoom(data))
+        getChatRoom(roomId as string).then((data) => {
+            setRoom(data)
+            setMembers(data.members)
+        })
         getChatMessages(roomId as string).then((data) => setMessages(data))
         return () => disconnect()
     }, [])
+
+    useEffect(() => {
+        getChatRoom(roomId as string).then((data) => {
+            setMembers(data.members)
+        })
+    }, [room])
 
     const client = useRef<any>()
     const headers = {
@@ -145,27 +165,24 @@ const ChatRoom: React.FC = () => {
         setMessage('')
     }
 
-
-
     return (
-        <ST.ChatContainer id="app">
+        <ST.ChatContainer>
             <ST.MessageContainer>
-
                 <ST.MessageInfoContainer>
                     <ST.ChatH2>{room?.name} 채팅방</ST.ChatH2>
-                    <span>방ID: {room?.roomId}</span>
-                    <span>개설자: {room?.creator.nickname}</span>
-                    <span>참여자수: {room?.members.length}</span>
-                    <span>참여자: {room?.members.map((member) => member.nickname)}</span>
+                    {/* <span>방ID: {room?.roomId}</span> */}
+                    <span>방장👑: {room?.creator.nickname}</span>
+                    <span>참여자 수: {room?.members.length}</span>
+                    <span>참여인원: {room?.members.map((member) => member.nickname)}</span>
                     <div>
-                        <button onClick={disconnect}>채팅방 나가기</button>
+                        <ST.ChatLeaveBtn onClick={disconnect}>채팅방 나가기</ST.ChatLeaveBtn>
                     </div>
                 </ST.MessageInfoContainer>
 
-                <ST.MessageListContainer ref={scrollRef}>
-                    <ST.MessageUl>
-                        {/* 내 메세지, 받은 메세지 스타일 따로 지정 */}
+                <ST.MessageListContainer>
+                    <ST.MessageUl ref={scrollRef}>
                         {messages?.map((msg, idx) => (
+                            // 내 메세지, 받은 메세지 스타일 따로 지정
                             <ST.MessageLi key={idx} className={msg.sender !== nickname ? 'otherChat' : 'myChat'}>
                                 <ST.MessageDiv className={msg.sender !== nickname ? 'otherMsg' : 'myMsg'}>
                                     {msg.sender !== nickname && <p>{msg.sender}</p>}
@@ -174,15 +191,33 @@ const ChatRoom: React.FC = () => {
                             </ST.MessageLi>
                         ))}
                     </ST.MessageUl>
-                </ST.MessageListContainer>
 
+                    <ST.ChatMemberContainer>
+                        <ST.ChatH3>대화상대</ST.ChatH3>
+                        {members?.map((member) => (
+                            <ST.ChatMemberDiv key={member.email}>
+                                {member.nickname}
+                                {member.nickname === room?.creator.nickname ? '👑' : ''}
+                                {member.pets?.map((pet) => (
+                                    <ST.ChatPetDiv key={pet.petId}>
+                                        <ST.ChatPetImg src={pet.imageUrls[0]} alt={pet.petName} />
+                                        <ST.ChatPetInfoDiv>
+                                            <span>{pet.petName}</span>
+                                            <span>{pet.petInfo}</span>
+                                        </ST.ChatPetInfoDiv>
+                                    </ST.ChatPetDiv>
+                                ))}
+                            </ST.ChatMemberDiv>
+                        ))}
+                    </ST.ChatMemberContainer>
+                </ST.MessageListContainer>
             </ST.MessageContainer>
 
             <ST.MessageInputDiv>
                 <div>
-                    <label>내용</label>
+                    <label>💌</label>
                 </div>
-                <input
+                <ST.MessageInput
                     type="text"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -194,9 +229,9 @@ const ChatRoom: React.FC = () => {
                     }}
                 />
                 <div>
-                    <ST.ChatBtn type="button" onClick={() => publish(message)}>
+                    <ST.MyBtn type="button" onClick={() => publish(message)}>
                         보내기
-                    </ST.ChatBtn>
+                    </ST.MyBtn>
                 </div>
             </ST.MessageInputDiv>
         </ST.ChatContainer>
