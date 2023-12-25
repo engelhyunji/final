@@ -5,7 +5,7 @@ import instance from '../../../apis/instance'
 import '../../../index.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { Image } from '../../Pet/PetDetail/style';
+import { Image } from '../../Pet/PetDetail/style'
 
 type ShopType = 'GROOMING' | 'HOSPITAL' | 'CAFE' | 'ETC'
 
@@ -28,7 +28,7 @@ const Category: React.FC = () => {
     useEffect(() => {
         const fetchShops = async () => {
             try {
-                const response = await instance.get<{ result: ShopInfo[] }>('/api/shops')
+                const response = await instance.get(`${import.meta.env.VITE_APP_SERVER_URL}/api/shops`)
                 setShops(response.data.result || [])
                 console.log('Category shops:', response.data.result)
             } catch (error) {
