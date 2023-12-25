@@ -1,3 +1,4 @@
+import React from 'react'
 import MapComponent from '../components/Map/MapComponent'
 
 const MapPage: React.FC = () => {
