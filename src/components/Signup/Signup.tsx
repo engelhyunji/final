@@ -80,7 +80,7 @@ const Signup: React.FC = () => {
             return
         }
         await userSignup(userData)
-        console.log('회원가입 정보:', userData)
+        // console.log('회원가입 정보:', userData)
     }
 
     return (
@@ -88,7 +88,7 @@ const Signup: React.FC = () => {
             <ST.SignupBox>
                 <ST.SignupTitleH2>회원가입</ST.SignupTitleH2>
                 <ST.SignupP>간단한 정보 입력으로 회원가입하고 더 많은 서비스를 즐겨보세요!</ST.SignupP>
-                <ST.SignupForm onSubmit={(event) => event.preventDefault()}>
+                <ST.SignupForm onSubmit={(e) => e.preventDefault()}>
                     <ST.SignupInputBox>
                         <ST.SignupLabel>이메일 </ST.SignupLabel>
                         <ST.SignupInput
@@ -151,6 +151,11 @@ const Signup: React.FC = () => {
                             name="phoneNumber"
                             value={userData.phoneNumber}
                             onChange={handleInputChange}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    handleSignUp
+                                }
+                            }}
                         />
                     </ST.SignupInputBox>
 
