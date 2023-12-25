@@ -20,7 +20,7 @@ export const Content = styled.div`
     justify-content: center;
     gap: 20px;
     max-width: 600px;
-    margin: auto; // Centers the content block
+    margin: auto;
 `
 
 export const Inside = styled.div`

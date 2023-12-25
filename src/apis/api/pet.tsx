@@ -11,9 +11,10 @@ export interface PetDetails {
 }
 
 export interface ApiResponse<T> {
-    isSuccess: boolean;
-    result: T;
-    message: string;
+    isSuccess: boolean
+    result: T
+    message: string
+    status: number
 }
 
 // Pet 등록
@@ -22,33 +23,22 @@ export const fetchPetDetails = async () => {
         const response = await instance.get<PetDetails>('/api/pets/mypage')
         return response.data
     } catch (error) {
-        console.error('Error fetching pet details:', error)
+        console.error('Error:', error)
         throw error
     }
 }
 
-// // Pet 상세 조회
-// export const fetchPetDetail = async (petId: string): Promise<PetDetails> => {
-//     try {
-//         const response = await instance.get<PetDetails>(`/api/pets/${petId}`)
-//         return response.data
-//     } catch (error) {
-//         console.error('Error fetching pet details:', error)
-//         throw error
-//     }
-// }
-
 // Pet 상세 정보 조회
 export const fetchPetDetail = async (petId: string): Promise<ApiResponse<PetDetails> | null> => {
     try {
-        const response = await instance.get<ApiResponse<PetDetails>>(`/api/pets/${petId}`);
+        const response = await instance.get<ApiResponse<PetDetails>>(`/api/pets/${petId}`)
         if (response.status === 200) {
-            return response.data;
+            return response.data
         } else {
-            throw new Error(`오류 발생: ${response.status}`);
+            throw new Error(`오류 발생: ${response.status}`)
         }
     } catch (error) {
-        console.error('에러:', error);
-        return null;
+        console.error('에러:', error)
+        return null
     }
-};
+}

@@ -92,61 +92,60 @@
 // }
 
 export interface LatLng {
-    getLat(): number;
-    getLng(): number;
+    getLat(): number
+    getLng(): number
 }
 
 export interface Map {
-    setCenter(latlng: LatLng): void;
-    setLevel(level: number): void;
+    setCenter(latlng: LatLng): void
+    setLevel(level: number): void
 }
 
 export interface Places {
-    keywordSearch(keyword: string, callback: (result: PlaceResult[], status: Status) => void): void;
+    keywordSearch(keyword: string, callback: (result: PlaceResult[], status: Status) => void): void
 }
 
 export interface PlaceResult {
-    y: string;
-    x: string;
-    place_name: string;
+    y: string
+    x: string
+    place_name: string
 }
 
 export enum Status {
-    OK = "OK",
+    OK = 'OK',
 }
 
 declare global {
     interface Window {
         kakao: {
             maps: {
-                LatLng: typeof kakao.maps.LatLng;  // Referencing the type directly from kakao.maps
-                Map: typeof kakao.maps.Map;       // Referencing the type directly from kakao.maps
+                LatLng: typeof kakao.maps.LatLng
+                Map: typeof kakao.maps.Map
                 services: {
-                    Places: typeof kakao.maps.services.Places;  // Referencing the type directly from kakao.maps
-                    Status: typeof kakao.maps.services.Status;
-                };
-            };
-        };
+                    Places: typeof kakao.maps.services.Places
+                    Status: typeof kakao.maps.services.Status
+                }
+            }
+        }
     }
 }
 
 export interface MapOptions {
-    center: LatLng;
-    level: number;
+    center: LatLng
+    level: number
 }
 
 export interface Coords {
-    lat: number;
-    lng: number;
+    lat: number
+    lng: number
 }
 
 export interface MarkerInfo {
-    position: Coords;
-    content: string;
-    title?: string;
+    position: Coords
+    content: string
+    title?: string
 }
 
 export interface MapComponentProps {
-    coords: Coords;
+    coords: Coords
 }
-

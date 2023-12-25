@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import * as ST from './style'
-// import { useAuth } from '../../context/AuthContext'
 import instance from '../../apis/instance'
 import { PetDetails } from '../../apis/api/pet'
 import BackWave from '../BackWave'
@@ -18,8 +17,6 @@ const Pet: React.FC = () => {
     const [imageFiles, setImageFiles] = useState<File[]>([])
     const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null)
     const [registrationStatus, setRegistrationStatus] = useState<string | null>(null)
-
-    // const { nickname } = useAuth()
 
     const genderOptions = ['MALE', 'FEMALE']
     const kindOptions = ['SMALL', 'MEDIUM', 'LARGE']
@@ -69,15 +66,15 @@ const Pet: React.FC = () => {
             })
 
             if (response.status === 200 || response.status === 201) {
-                alert('애완동물 정보가 성공적으로 등록되었습니다.🐶')
+                alert('Pet 정보가 성공적으로 등록되었습니다.🐶')
 
                 resetFormData()
             } else {
-                setRegistrationStatus('애완동물 정보 등록에 실패했습니다.')
+                setRegistrationStatus('Pet 정보 등록에 실패했습니다.')
             }
         } catch (error) {
             console.error('Error processing pet:', error)
-            setRegistrationStatus('애완동물 정보 처리에 실패했습니다.')
+            setRegistrationStatus('Pet 정보 처리에 실패했습니다.')
         }
     }
 

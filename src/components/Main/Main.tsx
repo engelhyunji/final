@@ -29,10 +29,8 @@ const Main: React.FC = () => {
                     >
                         <ST.Text1>
                             가게를 운영하는
-                            <br />
                             사장님이라면?
                         </ST.Text1>
-                        <br />
                         <ST.Text>Shop 등록하기</ST.Text>
                     </ST.ShopBtn>
                     <ST.PetBtn
@@ -42,10 +40,8 @@ const Main: React.FC = () => {
                     >
                         <ST.Text1>
                             귀여운 내새끼를
-                            <br />
                             키우는 중이라면?
                         </ST.Text1>
-                        <br />
                         <ST.Text>애완동물 등록</ST.Text>
                     </ST.PetBtn>
                 </ST.BtnContainer>

@@ -4,7 +4,7 @@ import * as ST from './style'
 import { PetDetails, fetchPetDetail } from '../../../apis/api/pet'
 
 type PetDetailParams = {
-    [key: string]: string | undefined // petId가 undefined일 수 있음을 명시
+    [key: string]: string | undefined
 }
 
 const PetDetail: React.FC = () => {

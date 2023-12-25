@@ -1,5 +1,3 @@
-// AppRoutes.jsx
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from '../components/Layout/Layout'
 import ShopsPage from '../pages/ShopsPage'
@@ -47,6 +45,7 @@ const AppRoutes = () => {
                         <Route path="/shops/:shopId" element={<ShopsDetailPage />} />
                         {/* 수정 + 삭제 페이지 modify */}
                         <Route path="/shops/modify/:shopId" element={<ShopsModifyPage />} />
+
                         <Route path="/map" element={<MapPage />} />
 
                         <Route path="/signup" element={<SignupPage />} />

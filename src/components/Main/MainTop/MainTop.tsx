@@ -1,11 +1,12 @@
+// Main Pet 조회
 import React, { useState, useEffect } from 'react'
 import * as ST from './style'
-import { fetchPets, PetDetails } from '../../../apis/api/petlist' // 필요한 API 호출 함수 및 타입 가져오기
+import { fetchPets, PetDetails } from '../../../apis/api/petlist'
 
 const MainTop: React.FC = () => {
-    const [pets, setPets] = useState<PetDetails[]>([]) // 펫 목록을 저장할 상태
-    const [isLoading, setIsLoading] = useState(true) // 로딩 상태
-    const [error, setError] = useState<string | null>(null) // 에러 상태
+    const [pets, setPets] = useState<PetDetails[]>([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         const fetchPetsData = async () => {
@@ -42,7 +43,7 @@ const MainTop: React.FC = () => {
         <ST.TopContainer>
             <ST.Text>Pet</ST.Text>
             <ST.Content>
-                {pets.slice(0, 6).map((pet) => (  // 첫 6개 항목만 추출
+                {pets.slice(0, 6).map((pet) => (
                     <ST.Inside key={pet.petId}>
                         <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
                     </ST.Inside>

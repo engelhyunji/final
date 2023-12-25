@@ -30,7 +30,7 @@ const Category: React.FC = () => {
             try {
                 const response = await instance.get<{ result: ShopInfo[] }>('/api/shops')
                 setShops(response.data.result || [])
-                console.log('Fetched shops:', response.data.result)
+                console.log('Category shops:', response.data.result)
             } catch (error) {
                 console.error('가게 정보를 불러오는데 실패했습니다.', error)
             }
@@ -40,7 +40,7 @@ const Category: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        console.log('Current shops state:', shops)
+        console.log('가게 카테고리:', shops)
     }, [shops])
 
     const filteredShops = shops.filter((shop) => shop.shopType === selectedCategory)
@@ -56,9 +56,9 @@ const Category: React.FC = () => {
         infinite: true,
         speed: 200,
         slidesToScroll: 1,
-        slidesToShow: 3, 
-        autoplay: true, 
-        autoplaySpeed: 1700, 
+        slidesToShow: 3,
+        autoplay: true,
+        autoplaySpeed: 1700,
         responsive: [
             {
                 breakpoint: 1024,
@@ -103,33 +103,35 @@ const Category: React.FC = () => {
     }
 
     return (
-        <ST.CategoryContainer>
-            <ST.CategoryList>
-                {['GROOMING', 'HOSPITAL', 'CAFE', 'ETC'].map((category, index) => (
-                    <ST.CategoryItem
-                        key={index}
-                        $isSelected={category === selectedCategory}
-                        onClick={() => handleCategoryClick(category as ShopType)}
-                    >
-                        <p>{category}</p>
-                    </ST.CategoryItem>
-                ))}
-            </ST.CategoryList>
-            <Slider {...settings}>
-                {filteredShops.map((shop, index) => (
-                    <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
-                        <ST.ShopCard>
-                            {shop.imageUrls?.map((url, imgIdx) => (
-                                <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
-                            ))}
-                            <p>가게: {shop.shopName}</p>
-                            <p>업종: {shop.shopType}</p>
-                            <p>주소: {shop.shopAddress}</p>
-                        </ST.ShopCard>
-                    </div>
-                ))}
-            </Slider>
-        </ST.CategoryContainer>
+        <>
+            <ST.CategoryContainer>
+                <ST.CategoryList>
+                    {['GROOMING', 'HOSPITAL', 'CAFE', 'ETC'].map((category, index) => (
+                        <ST.CategoryItem
+                            key={index}
+                            $isSelected={category === selectedCategory}
+                            onClick={() => handleCategoryClick(category as ShopType)}
+                        >
+                            <p>{category}</p>
+                        </ST.CategoryItem>
+                    ))}
+                </ST.CategoryList>
+                <Slider {...settings}>
+                    {filteredShops.map((shop, index) => (
+                        <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
+                            <ST.ShopCard>
+                                {shop.imageUrls?.map((url, imgIdx) => (
+                                    <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
+                                ))}
+                                <p>가게: {shop.shopName}</p>
+                                <p>업종: {shop.shopType}</p>
+                                <p>주소: {shop.shopAddress}</p>
+                            </ST.ShopCard>
+                        </div>
+                    ))}
+                </Slider>
+            </ST.CategoryContainer>
+        </>
     )
 }
 

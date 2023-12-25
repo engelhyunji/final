@@ -22,9 +22,7 @@ export const Name = styled.h2`
     margin-bottom: 20px;
 `
 
-export const Button = styled.button`
-    // Your existing button styles
-`
+export const Button = styled.button``
 
 export const Posts = styled.div`
     display: grid;
@@ -38,7 +36,7 @@ export const PostContainer = styled.div`
     aspect-ratio: 1 / 1;
     width: 100%;
     overflow: hidden;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     position: relative;
     cursor: pointer;
     &:hover {
@@ -50,7 +48,6 @@ export const Img = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 `
-export const Image = styled.img`
-`;
+export const Image = styled.img``
