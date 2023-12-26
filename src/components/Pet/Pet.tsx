@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import * as ST from './style'
-// import { useAuth } from '../../context/AuthContext'
+import Dropdown from 'react-bootstrap/Dropdown'
 import instance from '../../apis/instance'
 import { PetDetails } from '../../apis/api/pet'
 import BackWave from '../BackWave'
@@ -21,16 +21,24 @@ const Pet: React.FC = () => {
 
     // const { nickname } = useAuth()
 
-    const genderOptions = ['MALE', 'FEMALE']
-    const kindOptions = ['SMALL', 'MEDIUM', 'LARGE']
+    // const kindOptions = ['SMALL', 'MEDIUM', 'LARGE']
 
-    const handleGenderChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        setPetGender(e.target.value as 'MALE' | 'FEMALE')
+    // const handleGenderChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    //     setPetGender(e.target.value as 'MALE' | 'FEMALE')
+    // }
+
+    const handleGenderChange = (gender: 'MALE' | 'FEMALE') => {
+        setPetGender(gender)
     }
 
-    const handleKindChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        setPetKind(e.target.value as 'SMALL' | 'MEDIUM' | 'LARGE')
-    }
+    // const handleKindChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    //     setPetKind(e.target.value as 'SMALL' | 'MEDIUM' | 'LARGE')
+    // }
+
+    const handleKindChangeDropdown = (kind: 'SMALL' | 'MEDIUM' | 'LARGE') => {
+        setPetKind(kind);
+    };
+    
 
     const handleInfoChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setPetInfo(e.target.value)
@@ -99,39 +107,72 @@ const Pet: React.FC = () => {
             <ST.Form onSubmit={handleSubmit}>
                 <ST.PetInputBox>
                     <ST.Label>Pet의 이름을 알려주세요</ST.Label>
-                    <ST.Input type="text" value={petName} onChange={handlePetNameChange} />
-                    <br />
-                    <ST.Label>Pet 성별을 알려주세요</ST.Label>
-                    <select className="form-control" value={petGender} onChange={handleGenderChange}>
-                        {genderOptions.map((option) => (
-                            <option key={option} value={option}>
-                                {option === 'MALE' ? '남아' : '여아'}
-                            </option>
-                        ))}
-                    </select>
-                    <ST.Label>Pet의 크기를 알려주세요</ST.Label>
-                    <select className="form-control" value={petKind} onChange={handleKindChange}>
-                        {kindOptions.map((option) => (
-                            <option key={option} value={option}>
-                                {option === 'SMALL' ? '소형견' : option === 'MEDIUM' ? '중형견' : '대형견'}
-                            </option>
-                        ))}
-                    </select>
-                    <ST.Label>Pet의 특징을 적어주세요</ST.Label>
-                    <ST.Textarea value={petInfo} onChange={handleInfoChange} />
-
-                    <br />
-                    <ST.Label>사진이 있다면 등록해주세요</ST.Label>
-                    <ST.Input type="file" accept="image/*" onChange={handleImageFileChange} />
+                    <ST.Input type="text" placeholder="Pet의 이름을 입력해주세요" value={petName} onChange={handlePetNameChange} />
                 </ST.PetInputBox>
-                <br />
-                <ST.Wrap> {imagePreviewUrl && <ST.Image src={imagePreviewUrl} alt="Pet Preview" />}</ST.Wrap>
+
+                <ST.PetInputBox>
+                    <ST.Label>Pet 성별을 알려주세요</ST.Label>
+                    <ST.StDropdown>
+                        <Dropdown.Toggle variant="light" id="dropdown-basic">
+                            {petGender === 'MALE' ? '남아' : '여아'}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => handleGenderChange('MALE')}>남아</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleGenderChange('FEMALE')}>여아</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </ST.StDropdown>
+                </ST.PetInputBox>
+
+                <ST.PetInputBox>
+                    <ST.Label>Pet의 크기를 알려주세요</ST.Label>
+                    <ST.StDropdown>
+                        <Dropdown.Toggle variant="light" id="dropdown-kind">
+                            {petKind === 'SMALL' ? '소형견' : petKind === 'MEDIUM' ? '중형견' : '대형견'}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => handleKindChangeDropdown('SMALL')}>소형견</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleKindChangeDropdown('MEDIUM')}>중형견</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleKindChangeDropdown('LARGE')}>대형견</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </ST.StDropdown>
+                </ST.PetInputBox>
+
+                <ST.PetInputBox>
+                    <ST.Label>Pet의 특징을 적어주세요</ST.Label>
+                    <ST.DescInput value={petInfo} placeholder="Pet의 특징을 입력해주세요" onChange={handleInfoChange} />
+                </ST.PetInputBox>
+
+                <ST.PetInputBox>
+                    <ST.Label>사진을 등록해주세요</ST.Label>
+                    <ST.Input
+                        id="image"
+                        type="file"
+                        accept="image/png, image/jpeg, image/jpg"
+                        onChange={handleImageFileChange}
+                        style={{ display: 'none' }}
+                    />
+                    <ST.ImgWrap>
+                        <ST.ImgLabel htmlFor="image">
+                            {!imagePreviewUrl && (
+                                <>
+                                    <p>
+                                        <ST.FileSpan>파일 열기</ST.FileSpan> 혹은 끌어다 놓기
+                                    </p>
+                                    <ST.FileP>파일 형식은 jpg, jpeg, png만 업로드 가능합니다.</ST.FileP>
+                                </>
+                            )}
+                            {imagePreviewUrl && <ST.Image src={imagePreviewUrl} alt="Pet Preview" />}
+                        </ST.ImgLabel>
+                    </ST.ImgWrap>
+                </ST.PetInputBox>
 
                 {registrationStatus && (
                     <ST.StatusMessage message={registrationStatus}>{registrationStatus}</ST.StatusMessage>
                 )}
 
-                <ST.Button type="submit">Add Pet</ST.Button>
+                <ST.PetBtn type="submit">입력 완료</ST.PetBtn>
             </ST.Form>
         </ST.Container>
     )

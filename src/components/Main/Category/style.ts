@@ -82,6 +82,7 @@ export const ShopCard = styled.div`
     border: 1px solid #ddd;
     border-radius: 10px;
     width: 100%;
+    height: 300px;
     max-width: 250px;
     display: flex;
     flex-direction: column;
@@ -103,9 +104,11 @@ export const ShopCard = styled.div`
 
     img {
         width: 100%;
-        height: 20%;
+        height: 300%;
+        max-height: 60%;
         border-radius: 5px;
         margin-top: 10px;
+        object-fit: cover;
     }
 `
 

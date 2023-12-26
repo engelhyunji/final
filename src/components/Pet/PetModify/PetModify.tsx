@@ -14,10 +14,10 @@ const PetModify: React.FC = () => {
 
     useEffect(() => {
         if (petId) {
-            console.log(`Fetching pet details for petId: ${petId}`)
+            console.log(`petId: ${petId}`)
             fetchPetDetail(parseInt(petId))
                 .then((response) => {
-                    console.log('Fetch response:', response)
+                    console.log('Fetch:', response)
                     if (response.isSuccess) {
                         setPetDetail(response.result)
                     } else {
@@ -26,7 +26,7 @@ const PetModify: React.FC = () => {
                     setLoading(false)
                 })
                 .catch((error) => {
-                    console.error('Fetch error:', error)
+                    console.error('error:', error)
                     setError('펫 정보를 불러오는데 실패했습니다.')
                     setLoading(false)
                 })
@@ -34,7 +34,7 @@ const PetModify: React.FC = () => {
     }, [petId])
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        console.log('Input change:', e.target.name, e.target.value)
+        console.log('Input:', e.target.name, e.target.value)
         if (petDetail) {
             setPetDetail({ ...petDetail, [e.target.name]: e.target.value } as PetDetails)
         }
@@ -42,7 +42,7 @@ const PetModify: React.FC = () => {
 
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.[0]) {
-            console.log('Image file selected:', e.target.files[0])
+            console.log('Image:', e.target.files[0])
             setImageFile(e.target.files[0])
             const reader = new FileReader()
             reader.onloadend = () => setImagePreviewUrl(reader.result as string)
@@ -107,7 +107,6 @@ const PetModify: React.FC = () => {
     return (
         <ST.Content>
             <ST.Text>Pet 상세 정보 수정</ST.Text>
-            {/* <p>로그인한 사용자: {nickname}</p> */}
             <ST.Form onSubmit={handleSubmit}>
                 <ST.Label>
                     Pet 이름:

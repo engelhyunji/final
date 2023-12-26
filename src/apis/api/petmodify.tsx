@@ -10,16 +10,16 @@ export interface PetDetails {
 }
 
 export interface ApiResponse<T> {
-    isSuccess: boolean;
-    message: string;
-    result: T;
+    isSuccess: boolean
+    message: string
+    result: T
 }
 
 export interface PetFormState {
-    petName: string;
-    petGender: string;
-    petKind: string;
-    petInfo: string;
+    petName: string
+    petGender: string
+    petKind: string
+    petInfo: string
 }
 
 export const initialFormState: PetFormState = {
@@ -27,10 +27,10 @@ export const initialFormState: PetFormState = {
     petGender: '',
     petKind: '',
     petInfo: '',
-};
+}
 
 export interface ApiResponseError {
-    message: string;
+    message: string
     // 필요에 따라 추가적인 필드를 정의할 수 있습니다.
 }
 
@@ -50,22 +50,19 @@ export interface ApiResponseError {
 //     await instance.delete(`/api/pets/${petId}`)
 // }
 
-
-
 export const fetchPetDetail = async (petId: number): Promise<ApiResponse<PetDetails>> => {
-    const response = await instance.get<ApiResponse<PetDetails>>(`/api/pets/${petId}`);
-    return response.data;
-};
+    const response = await instance.get<ApiResponse<PetDetails>>(`/api/pets/${petId}`)
+    return response.data
+}
 
 export const updatePet = async (petId: number, formData: FormData): Promise<ApiResponse<null>> => {
     const response = await instance.put<ApiResponse<null>>(`/api/pets/${petId}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-    });
-    return response.data;
-};
+    })
+    return response.data
+}
 
 export const deletePet = async (petId: number): Promise<ApiResponse<null>> => {
-    const response = await instance.delete<ApiResponse<null>>(`/api/pets/${petId}`);
-    return response.data;
-};
-
+    const response = await instance.delete<ApiResponse<null>>(`/api/pets/${petId}`)
+    return response.data
+}
