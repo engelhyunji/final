@@ -95,8 +95,7 @@ export const Image = styled.img`
     height: auto;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
+`
 
 export const Img = styled.div`
     width: 100%;
@@ -109,4 +108,3 @@ export const Img = styled.div`
         opacity: 0.8;
     }
 `
-

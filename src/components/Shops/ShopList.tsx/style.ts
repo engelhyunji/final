@@ -77,7 +77,6 @@ export const ShopSearchContainer = styled.div`
     position: absolute;
     top: 290px;
     z-index: 10;
-    
 
     display: flex;
     align-items: center;
@@ -89,7 +88,7 @@ export const ShopSearchCondition = styled.div`
     padding: 11px 15px;
     border-radius: 26px;
     border: 1px solid #dadada;
-    color: #8F8E93;
+    color: #8f8e93;
     font-size: 16px;
 `
 export const ShopSearchInput = styled.input`
@@ -100,7 +99,7 @@ export const ShopSearchInput = styled.input`
     border-radius: 7px;
     border: 1px solid #dadada;
     background: #f8f8f8;
-    color: #8F8E93;
+    color: #8f8e93;
 `
 export const SearchBtn = styled.button`
     height: 51px;

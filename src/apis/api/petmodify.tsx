@@ -6,13 +6,32 @@ export interface PetDetails {
     petGender: 'MALE' | 'FEMALE'
     petKind: 'SMALL' | 'MEDIUM' | 'LARGE'
     petInfo: string
-    imageUrl: string
+    imageUrls: string
 }
 
 export interface ApiResponse<T> {
     isSuccess: boolean
     message: string
     result: T
+}
+
+export interface PetFormState {
+    petName: string
+    petGender: string
+    petKind: string
+    petInfo: string
+}
+
+export const initialFormState: PetFormState = {
+    petName: '',
+    petGender: '',
+    petKind: '',
+    petInfo: '',
+}
+
+export interface ApiResponseError {
+    message: string
+    // 필요에 따라 추가적인 필드를 정의할 수 있습니다.
 }
 
 // // Pet 상세 조회
@@ -37,7 +56,9 @@ export const fetchPetDetail = async (petId: number): Promise<ApiResponse<PetDeta
 }
 
 export const updatePet = async (petId: number, formData: FormData): Promise<ApiResponse<null>> => {
-    const response = await instance.put<ApiResponse<null>>(`/api/pets/${petId}`, formData)
+    const response = await instance.put<ApiResponse<null>>(`/api/pets/${petId}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    })
     return response.data
 }
 
