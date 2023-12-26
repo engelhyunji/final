@@ -75,7 +75,7 @@ export const ShopSearchContainer = styled.div`
 
     overflow: visible;
     position: absolute;
-    bottom: 1392px;
+    top: 290px;
     z-index: 10;
     
 
