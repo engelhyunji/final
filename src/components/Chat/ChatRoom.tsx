@@ -182,8 +182,16 @@ const ChatRoom: React.FC = () => {
                         {messages?.map((msg, idx) => (
                             // 내 메세지, 받은 메세지 스타일 따로 지정
                             <ST.MessageLi key={idx} className={msg.sender !== nickname ? 'otherChat' : 'myChat'}>
-                                <ST.MessageDiv className={msg.sender !== nickname ? 'otherMsg' : 'myMsg'}>
-                                    {msg.sender !== nickname && <p>{msg.sender}</p>}
+                                <ST.MessageDiv
+                                    className={
+                                        msg.type !== 'ENTER' && msg.type !== 'QUIT'
+                                            ? msg.sender !== nickname
+                                                ? 'otherMsg'
+                                                : 'myMsg'
+                                            : 'enterNquit'
+                                    }
+                                >
+                                    {msg.sender !== nickname && msg.type !== 'ENTER' && <p>{msg.sender}</p>}
                                     <span>{msg.message}</span>
                                 </ST.MessageDiv>
                             </ST.MessageLi>

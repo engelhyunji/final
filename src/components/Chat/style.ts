@@ -156,6 +156,16 @@ export const MessageDiv = styled.div`
             background-color: #00bd8f;
         }
     }
+
+    &.enterNquit {
+        span {
+            color: #bbb;
+            display: inline-block;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #fff;
+        }
+    }
 `
 
 export const ChatMemberContainer = styled.div`
