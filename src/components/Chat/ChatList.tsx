@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent } from 'react'
 import * as ST from './style'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { addChat, deleteChat, getChatList } from '../../apis/api/chat'
+import { addChat, getChatList } from '../../apis/api/chat'
 import { AxiosError } from 'axios'
 
 interface Chatroom {
@@ -39,11 +39,11 @@ const ChatList: React.FC = () => {
         },
     })
 
-    const deleteChatMutation = useMutation<void, AxiosError, { roomId: string }>(({ roomId }) => deleteChat(roomId), {
-        onSuccess: () => {
-            queryClient.invalidateQueries('getChatList')
-        },
-    })
+    // const deleteChatMutation = useMutation<void, AxiosError, { roomId: string }>(({ roomId }) => deleteChat(roomId), {
+    //     onSuccess: () => {
+    //         queryClient.invalidateQueries('getChatList')
+    //     },
+    // })
 
     const createRoom = (): void => {
         if (roomName === '') {
@@ -56,11 +56,11 @@ const ChatList: React.FC = () => {
         }
     }
 
-    const DeleteHandler = (roomId: string) => {
-        if (confirm('채팅방을 삭제하시겠습니까?')) {
-            deleteChatMutation.mutate({ roomId })
-        }
-    }
+    // const DeleteHandler = (roomId: string) => {
+    //     if (confirm('채팅방을 삭제하시겠습니까?')) {
+    //         deleteChatMutation.mutate({ roomId })
+    //     }
+    // }
 
     const enterRoom = (roomId: string): void => {
         if (confirm('채팅방에 입장하시겠습니까?')) {
@@ -103,7 +103,7 @@ const ChatList: React.FC = () => {
                                 방 이름 : {item.name} <br />
                                 방장👑 : {item.creator.nickname}
                             </ST.ChatList>
-                            <ST.ChatDelBtn onClick={() => DeleteHandler(item.roomId)}>삭제</ST.ChatDelBtn>
+                            {/* <ST.ChatDelBtn onClick={() => DeleteHandler(item.roomId)}>삭제</ST.ChatDelBtn> */}
                         </ST.ChatListContainer>
                     ))
                 )}
