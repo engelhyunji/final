@@ -10,8 +10,8 @@ import { useQuery } from 'react-query'
 const ShopsList: React.FC = () => {
     const navigate = useNavigate()
 
-    // 현재 활성화된 카테고리(스타일 설정용)
-    const [nowCategory, setNowCategory] = useState('ALL');
+    // 현재 활성화된 카테고리(.active 스타일 설정용)
+    const [nowCategory, setNowCategory] = useState('ALL')
 
     // 서버에서 받은 전체 목록
     const [shopList, setShopList] = useState<Shop[]>([])
@@ -71,7 +71,7 @@ const ShopsList: React.FC = () => {
         }
 
         // 현재 활성화된 카테고리 저장
-        setNowCategory(type);
+        setNowCategory(type)
     }
 
     return (
@@ -80,16 +80,46 @@ const ShopsList: React.FC = () => {
                 <ST.ShopListH2>Shop</ST.ShopListH2>
                 <ST.ShopP>내 펫에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
             </ST.TitleBackContainer>
+            <ST.ShopSearchContainer>
+                <ST.ShopSearchCondition>가게 종류 ▾</ST.ShopSearchCondition>
+                <ST.ShopSearchInput type="text" value={'검색기능 준비중입니다'} placeholder="검색기능 준비중입니다" />
+                <ST.SearchBtn>검색</ST.SearchBtn>
+            </ST.ShopSearchContainer>
 
             <ST.ShopListContainer>
                 <ST.ShopListH3>Shop 조회</ST.ShopListH3>
 
                 <ST.ShopCategoryUl>
-                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('ALL')} className={nowCategory === 'ALL' ? 'active' : ''}>모든 Shop</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('GROOMING')} className={nowCategory === 'GROOMING' ? 'active' : ''}>Pet 미용</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('HOSPITAL')} className={nowCategory === 'HOSPITAL' ? 'active' : ''}>Pet 병원</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('CAFE')} className={nowCategory === 'CAFE' ? 'active' : ''}>Pet 카페</ST.ShopCategoryLi>
-                    <ST.ShopCategoryLi onClick={() => roomTypeHandler('ETC')} className={nowCategory === 'ETC' ? 'active' : ''}>기타</ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi
+                        onClick={() => roomTypeHandler('ALL')}
+                        className={nowCategory === 'ALL' ? 'active' : ''}
+                    >
+                        모든 Shop
+                    </ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi
+                        onClick={() => roomTypeHandler('GROOMING')}
+                        className={nowCategory === 'GROOMING' ? 'active' : ''}
+                    >
+                        Pet 미용
+                    </ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi
+                        onClick={() => roomTypeHandler('HOSPITAL')}
+                        className={nowCategory === 'HOSPITAL' ? 'active' : ''}
+                    >
+                        Pet 병원
+                    </ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi
+                        onClick={() => roomTypeHandler('CAFE')}
+                        className={nowCategory === 'CAFE' ? 'active' : ''}
+                    >
+                        Pet 카페
+                    </ST.ShopCategoryLi>
+                    <ST.ShopCategoryLi
+                        onClick={() => roomTypeHandler('ETC')}
+                        className={nowCategory === 'ETC' ? 'active' : ''}
+                    >
+                        기타
+                    </ST.ShopCategoryLi>
                 </ST.ShopCategoryUl>
 
                 <ST.StRow>

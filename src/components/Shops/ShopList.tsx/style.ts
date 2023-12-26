@@ -19,7 +19,7 @@ export const TitleBackContainer = styled.div`
 
     color: #fff;
     font-family: Pretendard-medium;
-    
+
     /* linear-gradient(검정색 필터로 활용) */
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 
@@ -55,11 +55,65 @@ export const ShopListH2 = styled.h2`
 `
 export const ShopP = styled.p`
     margin: 0 0 10px;
-    z-index: 2;
+    /* z-index: 2; */
 
     color: #fff;
     text-align: center;
     font-family: Pretendard-regular;
+`
+
+export const ShopSearchContainer = styled.div`
+    width: 745px;
+    /* height: 131px; */
+    padding: 19px 33px;
+
+    border-radius: 7px;
+    background: #fff;
+    box-shadow: 7px 7px 20px 0px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    font-family: Pretendard-regular;
+
+    overflow: visible;
+    position: absolute;
+    bottom: 1392px;
+    z-index: 10;
+    
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+export const ShopSearchCondition = styled.div`
+    width: 109px;
+    height: 40px;
+    padding: 11px 15px;
+    border-radius: 26px;
+    border: 1px solid #dadada;
+    color: #8F8E93;
+    font-size: 16px;
+`
+export const ShopSearchInput = styled.input`
+    width: 407px;
+    height: 51px;
+    padding: 11px 18px;
+
+    border-radius: 7px;
+    border: 1px solid #dadada;
+    background: #f8f8f8;
+    color: #8F8E93;
+`
+export const SearchBtn = styled.button`
+    height: 51px;
+    padding: 15px 54px;
+    color: #fff;
+    font-family: Pretendard-medium;
+    background-color: #00bd8f;
+    border: none;
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 export const ShopListContainer = styled.div`
@@ -116,7 +170,6 @@ export const StRow = styled(Row)`
     column-gap: 63px;
     row-gap: 20px;
 `
-
 
 export const ShopBox = styled.div`
     max-width: 358px;
