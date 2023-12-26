@@ -12,9 +12,9 @@ export const Container = styled.div`
 `
 
 export const MyContainer = styled.div`
-    max-width: 1440px;
+    width: 1200px;
     margin: 50px auto;
-    padding: 50px;
+    padding: 40px;
     background-color: #fff;
     border-radius: 8px;
 
@@ -35,6 +35,8 @@ export const TitleH2 = styled.h2`
 export const TitleH3 = styled.h3`
     font-size: 20px;
 `
+
+
 export const MyUl = styled.ul`
     width: 100%;
     display: flex;
@@ -44,12 +46,49 @@ export const MyUl = styled.ul`
 
 export const MyDiv = styled.div`
     cursor: pointer;
+    width: 500px;
+    /* margin: 44px auto 0; */
+
+    border-radius: 15px;
+    border: 1px solid #dadada;
+    background: #fff;
+
+    display: flex;
+    align-items: center;
 `
 
 export const MyShopImg = styled.img`
-    max-width:300px;
-    height: 300px;
+    width:35%;
+    /* height: 300px; */
+    object-fit: contain;
 `
+
+export const ImgInfo = styled.div`
+    width: 65%;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+`
+
+
+export const ShopNameH2 = styled.h2`
+    width: 100%;
+    margin-bottom: 30px;
+
+    font-size: 42px;
+    font-family: Pretendard-Bold;
+`
+export const ShopInfoP = styled.p`
+    font-size: 18px;
+    line-height: 28px;
+
+    font-family: Pretendard-regular;
+`
+
+
+
+
 
 export const BtnContainer = styled.div`
     margin: 30px;
@@ -60,13 +99,23 @@ export const BtnContainer = styled.div`
 
 export const MyBtn = styled.button`
     width: 100px;
-    height: 51px;
+    height: 34px;
     color: #fff;
     font-family: Pretendard-medium;
     background-color: #00bd8f;
     border: none;
     border-radius: 8px;
 `
+export const ChatDelBtn = styled.button`
+    width: 100px;
+    height: 34px;
+    color: #FD4141;
+    font-family: Pretendard-medium;
+    background-color: #eee;
+    border: none;
+    border-radius: 8px;
+`
+
 
 export const LeaveSpan = styled.span`
     margin: 100px auto 0;

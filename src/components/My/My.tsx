@@ -6,6 +6,9 @@ import { useMutation } from 'react-query'
 import instance from '../../apis/instance'
 import { useAuth } from '../../context/AuthContext'
 import BackWave from '../BackWave'
+import { AxiosError } from 'axios'
+import { deleteChat } from '../../apis/api/chat'
+import { ApiResponse, deletePet } from '../../apis/api/petmodify'
 
 const My: React.FC = () => {
     const { logout } = useAuth()
@@ -50,7 +53,7 @@ const My: React.FC = () => {
             .catch((error) => console.error('chatRoom 정보 불러오기 오류:', error))
     }, [])
 
-    const mutation = useMutation(deleteShop, {
+    const mutation = useMutation<void, AxiosError, number>(deleteShop, {
         onSuccess: () => {
             getMyShop()
                 .then((shopData) => {
@@ -59,6 +62,35 @@ const My: React.FC = () => {
                     }
                 })
                 .catch((error) => console.error('shop 삭제 에러', error))
+        },
+    })
+    const petDeletemutation = useMutation<ApiResponse<null>, AxiosError, number>(deletePet, {
+        onSuccess: () => {
+            getMyPet()
+                .then((petData) => {
+                    if (petData) {
+                        setPets(petData)
+                        console.log('petData 확인', petData)
+                    } else {
+                        console.log('펫 없음')
+                    }
+                })
+                .catch((error) => console.error('pet 정보 불러오기 오류:', error))
+        },
+    })
+
+    const deleteChatMutation = useMutation<void, AxiosError, { roomId: string }>(({ roomId }) => deleteChat(roomId), {
+        onSuccess: () => {
+            getMyChatRoom()
+                .then((roomData) => {
+                    if (roomData) {
+                        setChatRooms(roomData)
+                        console.log('roomData 확인', roomData)
+                    } else {
+                        console.log('룸 없음')
+                    }
+                })
+                .catch((error) => console.error('chatRoom 정보 불러오기 오류:', error))
         },
     })
 
@@ -70,7 +102,12 @@ const My: React.FC = () => {
             }
         } else if (target === 'pet') {
             if (confirm(`${pets[idx].petName} Pet을 삭제하시겠습니까?`)) {
-                mutation.mutate(pets[idx].petId)
+                petDeletemutation.mutate(pets[idx].petId)
+                setPets([])
+            }
+        } else if (target === 'chat') {
+            if (confirm(`${chatRooms[idx].name} 채팅방을 삭제하시겠습니까?`)) {
+                deleteChatMutation.mutate({ roomId: chatRooms[idx].roomId })
                 setPets([])
             }
         }
@@ -111,20 +148,22 @@ const My: React.FC = () => {
                                 <li key={shop.shopId}>
                                     <ST.MyDiv onClick={() => navigate(`/shops/${shop.shopId}`)}>
                                         <ST.MyShopImg src={shop.imageUrls[0]} alt={shop.shopName} />
-                                        <p>가게 이름: {shop.shopName}</p>
-                                        <p>가게 시간: {shop.shopTime}</p>
-                                        <p>연락처: {shop.shopTel}</p>
-                                        <p>주소: {shop.shopAddress}</p>
-                                        <p>유형: {shop.shopType}</p>
-                                        <p>소개: {shop.shopDescribe}</p>
+                                        <ST.ImgInfo>
+                                            <p>{shop.shopName}</p>
+                                            <p>업종: {shop.shopType}</p>
+                                            <p>영업시간: {shop.shopTime}</p>
+                                            <p>전화번호: {shop.shopTel}</p>
+                                            <p>위치: {shop.shopAddress}</p>
+                                            <p>소개: {shop.shopDescribe}</p>
+                                        </ST.ImgInfo>
                                     </ST.MyDiv>
                                     <ST.BtnContainer>
                                         <ST.MyBtn onClick={() => navigate(`/shops/modify/${shop.shopId}`)}>
                                             수정
                                         </ST.MyBtn>
-                                        <ST.MyBtn onClick={() => DeleteHandler('shop', shops.indexOf(shop))}>
+                                        <ST.ChatDelBtn onClick={() => DeleteHandler('shop', shops.indexOf(shop))}>
                                             삭제
-                                        </ST.MyBtn>
+                                        </ST.ChatDelBtn>
                                     </ST.BtnContainer>
                                 </li>
                             ))}
@@ -140,15 +179,17 @@ const My: React.FC = () => {
                                 <li key={pet.petId}>
                                     <ST.MyDiv onClick={() => navigate(`/pet/${pet.petId}`)}>
                                         <ST.MyShopImg src={pet.imageUrls[0]} alt={pet.petName} />
-                                        <p>반려동물 이름: {pet.petName}</p>
-                                        <p>반려동물 종류: {pet.petKind}</p>
-                                        <p>반려동물 특이사항: {pet.petInfo}</p>
+                                        <ST.ImgInfo>
+                                            <p>반려동물 이름: {pet.petName}</p>
+                                            <p>반려동물 종류: {pet.petKind}</p>
+                                            <p>반려동물 특이사항: {pet.petInfo}</p>
+                                        </ST.ImgInfo>
                                     </ST.MyDiv>
                                     <ST.BtnContainer>
                                         <ST.MyBtn onClick={() => navigate(`/modify/${pet.petId}`)}>수정</ST.MyBtn>
-                                        <ST.MyBtn onClick={() => DeleteHandler('pet', pets.indexOf(pet))}>
+                                        <ST.ChatDelBtn onClick={() => DeleteHandler('pet', pets.indexOf(pet))}>
                                             삭제
-                                        </ST.MyBtn>
+                                        </ST.ChatDelBtn>
                                     </ST.BtnContainer>
                                 </li>
                             ))}
@@ -161,11 +202,16 @@ const My: React.FC = () => {
                         <ST.TitleH3>마이 채팅방</ST.TitleH3>
                         <ST.MyUl>
                             {chatRooms.map((chatroom) => (
-                                <ST.MyDiv key={chatroom.roomId} onClick={() => enterRoom(chatroom.roomId)}>
-                                    <p>방 ID: {chatroom.roomId}</p>
-                                    <p>방 이름: {chatroom.name}</p>
-                                    <p>개설자: {chatroom.creator.nickname}</p>
-                                </ST.MyDiv>
+                                <li key={chatroom.roomId}>
+                                    <ST.MyDiv onClick={() => enterRoom(chatroom.roomId)}>
+                                        <p>방 ID: {chatroom.roomId}</p>
+                                        <p>방 이름: {chatroom.name}</p>
+                                        <p>개설자: {chatroom.creator.nickname}</p>
+                                    </ST.MyDiv>
+                                    <ST.ChatDelBtn onClick={() => DeleteHandler('chat', chatRooms.indexOf(chatroom))}>
+                                        삭제
+                                    </ST.ChatDelBtn>
+                                </li>
                             ))}
                         </ST.MyUl>
                     </ST.ShopNPetSection>
