@@ -181,7 +181,17 @@ const ChatRoom: React.FC = () => {
                     <ST.MessageUl ref={scrollRef}>
                         {messages?.map((msg, idx) => (
                             // 내 메세지, 받은 메세지 스타일 따로 지정
-                            <ST.MessageLi key={idx} className={msg.sender !== nickname ? 'otherChat' : 'myChat'}>
+                            // 입장 및 퇴장 메세지 스타일도 분리
+                            <ST.MessageLi
+                                key={idx}
+                                className={
+                                    msg.type !== 'ENTER' && msg.type !== 'QUIT'
+                                        ? msg.sender !== nickname
+                                            ? 'otherChat'
+                                            : 'myChat'
+                                        : ''
+                                }
+                            >
                                 <ST.MessageDiv
                                     className={
                                         msg.type !== 'ENTER' && msg.type !== 'QUIT'

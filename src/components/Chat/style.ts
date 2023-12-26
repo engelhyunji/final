@@ -126,6 +126,8 @@ export const MessageUl = styled.ul`
 `
 
 export const MessageLi = styled.li`
+    text-align: center;
+
     &.otherChat {
         text-align: left;
     }
@@ -159,11 +161,12 @@ export const MessageDiv = styled.div`
 
     &.enterNquit {
         span {
-            color: #bbb;
             display: inline-block;
+            color: #bbb;
+            text-align: center;
             padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #fff;
+            border-radius: 20px;
+            border: 2px solid #fff;
         }
     }
 `
