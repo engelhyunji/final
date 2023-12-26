@@ -20,7 +20,7 @@ export const Content = styled.div`
     justify-content: center;
     gap: 20px;
     max-width: 600px;
-    margin: auto; // Centers the content block
+    margin: auto;
 `
 
 export const Inside = styled.div`
@@ -35,7 +35,7 @@ export const Inside = styled.div`
     }
     &:nth-child(even) {
         align-self: flex-end;
-        margin-top: 100px;
+        margin-top: 70px;
     }
 `
 

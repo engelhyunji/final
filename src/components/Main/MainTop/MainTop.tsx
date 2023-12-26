@@ -42,11 +42,15 @@ const MainTop: React.FC = () => {
         <ST.TopContainer>
             <ST.Text>Pet</ST.Text>
             <ST.Content>
-                {pets.slice(0, 6).map((pet) => (  // 첫 6개 항목만 추출
-                    <ST.Inside key={pet.petId}>
-                        <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
-                    </ST.Inside>
-                ))}
+                {pets.slice(0, 6).map(
+                    (
+                        pet, // 첫 6개 항목만 추출
+                    ) => (
+                        <ST.Inside key={pet.petId}>
+                            <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
+                        </ST.Inside>
+                    ),
+                )}
             </ST.Content>
         </ST.TopContainer>
     )
