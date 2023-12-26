@@ -167,19 +167,6 @@ const Shops: React.FC = () => {
                     </ST.StDropdown>
                 </ST.ShopInputBox>
 
-                {/* <ST.ShopInputBox>
-                    <ST.Label>Shop 종류를 알려주세요</ST.Label>
-                    <ST.SelectContainer>
-                        <ST.Select name="shopType" value={shopRequestDto.shopType} onChange={handleChange}>
-                            <ST.FirstOption value="">Shop 종류를 선택해주세요</ST.FirstOption>
-                            <option value="GROOMING">GROOMING</option>
-                            <option value="HOSPITAL">HOSPITAL</option>
-                            <option value="CAFE">CAFE</option>
-                            <option value="ETC">ETC</option>
-                        </ST.Select>
-                    </ST.SelectContainer>
-                </ST.ShopInputBox> */}
-
                 <ST.ShopInputBox>
                     <ST.Label>Shop 이름을 알려주세요</ST.Label>
                     <ST.Input
@@ -229,7 +216,7 @@ const Shops: React.FC = () => {
                         // rows={10}
                         value={shopRequestDto.shopDescribe}
                         onChange={handleChange}
-                        placeholder="소개를 입력해주세요"
+                        placeholder="Shop 소개를 입력해주세요"
                     />
                 </ST.ShopInputBox>
 
