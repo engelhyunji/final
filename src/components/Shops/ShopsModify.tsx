@@ -90,7 +90,7 @@ const ShopsModify: React.FC = () => {
     //     }))
     // }, [firstN, midN, lastN])
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
 
         if (name === 'firstN' || name === 'midN' || name === 'lastN') {
@@ -253,12 +253,11 @@ const ShopsModify: React.FC = () => {
 
                 <ST.ShopInputBox>
                     <ST.Label>Shop 한줄소개를 적어주세요</ST.Label>
-                    <ST.Input
+                    <ST.DescInput
                         name="shopDescribe"
-                        type="text"
                         value={shopRequestDto.shopDescribe}
                         onChange={handleChange}
-                        placeholder="한줄소개를 입력해주세요 (최대 300byte)"
+                        placeholder="Shop 소개를 입력해주세요"
                     />
                 </ST.ShopInputBox>
 
