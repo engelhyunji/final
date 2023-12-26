@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import * as ST from './style'
+import { MdOutlineCategory } from "react-icons/md";
+import { IoLocationOutline } from "react-icons/io5";
+import { IoTimeOutline } from "react-icons/io5";
+import { FiPhone } from "react-icons/fi";
 import { ShopDetails, getDetailShop } from '../../../apis/api/api'
 import { useQuery } from 'react-query'
-import Reviews from '../Reviews/Reviews'
+import Reviews, { mainColor } from '../Reviews/Reviews'
 
 const ShopsDetail: React.FC = () => {
     const navigate = useNavigate()
@@ -27,34 +31,51 @@ const ShopsDetail: React.FC = () => {
     }
 
     return (
-        <div className="pet-detail">
+        <ST.ShopDetailContainer>
+            <div>
+                <ST.DelBtn onClick={() => navigate('/shopslist')}>&lt; 목록으로</ST.DelBtn>
+            </div>
+
             {detailShopData ? (
                 <>
-                    <p>카테고리 : {detailShopData.shopResponseDto.shopType}</p>
-                    <h2>샵이름 {detailShopData.shopResponseDto.shopName}</h2>
-
-                    <div className="pet-wrapper">
-                        <p>
+                    <div>
+                        <ST.ShopImgBox>
                             <ST.detailImg
                                 src={detailShopData.shopResponseDto.imageUrls[0]}
                                 alt={detailShopData.shopResponseDto.shopName}
                             />
-                        </p>
-                        <p>주소 : {detailShopData.shopResponseDto.shopAddress}</p>
-                        <p>영업시간 : {detailShopData.shopResponseDto.shopTime}</p>
-                        <p>연락처 : {detailShopData.shopResponseDto.shopTel}</p>
-                        <p>소개 : {detailShopData.shopResponseDto.shopDescribe}</p>
+                            <ST.ShopImgInfo>
+                                <ST.ShopNameH2>{detailShopData.shopResponseDto.shopName}</ST.ShopNameH2>
+                                <ST.ShopInfoP>{detailShopData.shopResponseDto.shopDescribe}</ST.ShopInfoP>
+                            </ST.ShopImgInfo>
+                        </ST.ShopImgBox>
+
+                        <ST.ShopCategoryUl>
+                            <ST.ShopCategoryLi>
+                                <ST.ShopInfo><MdOutlineCategory style={mainColor}/> 업종</ST.ShopInfo>
+                                <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopType}</ST.ShopInfoContent>
+                            </ST.ShopCategoryLi>
+                            <ST.ShopCategoryLi>
+                                <ST.ShopInfo><IoLocationOutline style={mainColor}/> 위치</ST.ShopInfo>
+                                <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopAddress}</ST.ShopInfoContent>
+                            </ST.ShopCategoryLi>
+                            <ST.ShopCategoryLi>
+                                <ST.ShopInfo><IoTimeOutline style={mainColor}/> 영업시간</ST.ShopInfo>
+                                <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopTime}</ST.ShopInfoContent>
+                            </ST.ShopCategoryLi>
+                            <ST.ShopCategoryLi>
+                                <ST.ShopInfo><FiPhone style={mainColor}/> 전화번호</ST.ShopInfo>
+                                <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopTel}</ST.ShopInfoContent>
+                            </ST.ShopCategoryLi>
+                        </ST.ShopCategoryUl>
                     </div>
 
-                    <div className="grid-2">
-                        <button onClick={() => navigate('/shopslist')}>목록으로</button>
-                    </div>
                     <Reviews detailShopData={detailShopData} />
                 </>
             ) : (
-                <div>가게 상세보기 에러</div>
+                <div>Shop 상세정보가 없습니다. 데이터 로드 에러</div>
             )}
-        </div>
+        </ST.ShopDetailContainer>
     )
 }
 
