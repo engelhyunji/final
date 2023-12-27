@@ -7,6 +7,8 @@ export const MainContainer = styled.div`
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
+
+    font-family: Pretendard-regular;
 `
 
 export const BannerContainer = styled.div`
@@ -36,7 +38,7 @@ export const ShopBtn = styled.button`
     color: #00bd8f;
     width: 247.77px;
     height: 196px;
-    border-radius: 7px;
+    border-radius: 18px;
     margin-right: 0;
     cursor: pointer;
     transition: background-color 0.1s ease;
@@ -60,7 +62,7 @@ export const PetBtn = styled.button`
     color: #00bd8f;
     width: 247.77px;
     height: 196px;
-    border-radius: 7px;
+    border-radius: 18px;
     margin-right: 0;
     cursor: pointer;
     transition: background-color 0.1s ease;
