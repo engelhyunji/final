@@ -76,7 +76,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         }
     };
 
-    const saveSearchResults = async (results: Place[]) => {
+    const saveSearchResults = async () => {
         try {
             // 결과를 서버로 보내는 API 호출
             const response = await fetch('/api/map', {
