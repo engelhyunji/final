@@ -104,6 +104,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                 address: place.address_name,
                 latitude: parseFloat(place.y),
                 longitude: parseFloat(place.x),
+                address_name: place.address_name,
             }));
     
             // Axios 인스턴스를 사용하여 결과를 서버로 보내는 API 호출
