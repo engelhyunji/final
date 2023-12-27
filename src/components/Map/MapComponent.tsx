@@ -164,7 +164,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                     />
                     <ST.Button onClick={searchPlaces}>검색</ST.Button>
                     <ST.Button onClick={handleSaveSearchResults}>saveSearchResults</ST.Button> {/* 추가된 버튼 */}
-                    <ST.Button onClick={saveSearchResults}>saveSearchResults</ST.Button> {/* 추가된 버튼 */}
                     {message && <div style={{ color: 'red' }}>{message}</div>}
                     {showIntro && (
                         <div
