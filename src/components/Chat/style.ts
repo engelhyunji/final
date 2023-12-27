@@ -205,8 +205,8 @@ export const ChatPetDiv = styled.div`
 `
 
 export const ChatPetImg = styled.img`
-    width: 30%;
-    height: 30%;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
     border-radius: 50%;
 `
