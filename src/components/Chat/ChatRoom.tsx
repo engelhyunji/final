@@ -171,7 +171,7 @@ const ChatRoom: React.FC = () => {
                     {/* <span>방ID: {room?.roomId}</span> */}
                     <span>방장👑: {room?.creator.nickname}</span>
                     <span>참여자 수: {room?.members.length}</span>
-                    <span>참여인원: {room?.members.map((member) => member.nickname)}</span>
+                    <span>참여인원: {room?.members.map((member) => <span>{member.nickname}, </span>)}</span>
                     <div>
                         <ST.ChatLeaveBtn onClick={disconnect}>채팅방 나가기</ST.ChatLeaveBtn>
                     </div>
@@ -221,7 +221,7 @@ const ChatRoom: React.FC = () => {
                                         <ST.ChatPetImg src={pet.imageUrls[0]} alt={pet.petName} />
                                         <ST.ChatPetInfoDiv>
                                             <span>{pet.petName}</span>
-                                            <span>{pet.petInfo}</span>
+                                            <p>{pet.petInfo}</p>
                                         </ST.ChatPetInfoDiv>
                                     </ST.ChatPetDiv>
                                 ))}

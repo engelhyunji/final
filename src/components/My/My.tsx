@@ -110,7 +110,7 @@ const My: React.FC = () => {
         } else if (target === 'chat') {
             if (confirm(`${chatRooms[idx].name} 채팅방을 삭제하시겠습니까?`)) {
                 deleteChatMutation.mutate({ roomId: chatRooms[idx].roomId })
-                setPets([])
+                setChatRooms([])
             }
         }
     }
@@ -203,7 +203,7 @@ const My: React.FC = () => {
 
                 {chatRooms.length > 0 && (
                     <ST.ShopNPetSection>
-                        <ST.TitleH3>마이 채팅방</ST.TitleH3>
+                        <ST.TitleH3>마이 CHAT</ST.TitleH3>
                         <ST.MyUl>
                             {chatRooms.map((chatroom) => (
                                 <li key={chatroom.roomId}>
