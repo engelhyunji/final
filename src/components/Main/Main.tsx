@@ -4,11 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import Category from './Category/Category'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-<<<<<<< HEAD
 import MainTop from './MainTop/MainTop'
-=======
 import { useAuth } from '../../context/AuthContext'
->>>>>>> 89bd31c74ede30b296b6becdc9cb2dc282ddd89a
 
 const Main: React.FC = () => {
     const { isLogin } = useAuth()
@@ -54,8 +51,8 @@ const Main: React.FC = () => {
                             </ST.PetBtn>
                         </>
                     ) : (
-                        <> 
-                        {/* 비회원 상태: 회원가입 유도 */}
+                        <>
+                            {/* 비회원 상태: 회원가입 유도 */}
                             <ST.ShopBtn
                                 onClick={() => {
                                     navigate('/signup')
@@ -75,7 +72,7 @@ const Main: React.FC = () => {
                                 }}
                             >
                                 <ST.Text1>
-                                    등록할 나의 Shop 
+                                    등록할 나의 Shop
                                     <br />
                                     또는 Pet이 있다면?
                                 </ST.Text1>
