@@ -81,15 +81,6 @@ const ShopsModify: React.FC = () => {
     //     console.log('setShopRequestDto', shopRequestDto)
     // }, [shopRequestDto])
 
-    // useEffect(() => {
-    //     // 전체 전화번호 조합 업데이트
-    //     const tel = `${firstN}-${midN}-${lastN}`
-    //     setShopRequestDto((prevData) => ({
-    //         ...prevData,
-    //         shopTel: tel,
-    //     }))
-    // }, [firstN, midN, lastN])
-
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
 
@@ -109,13 +100,6 @@ const ShopsModify: React.FC = () => {
                 if (name === 'lastN') setLastN(value)
             }
 
-            // 전체 전화번호 조합 업데이트
-            const tel = `${firstN}-${midN}-${lastN}`
-            setShopRequestDto((prevData) => ({
-                ...prevData,
-                shopTel: tel,
-            }))
-
         // 오픈시간 마감시간 각 업데이트
         } else if (name === 'openTime' || name === 'closeTime') {
             if (name === 'openTime') setOpenTime(value)
@@ -128,6 +112,16 @@ const ShopsModify: React.FC = () => {
             }))
         }
     }
+
+        useEffect(() => {
+        // 컴포넌트가 렌더링된 후에 실행되어 최신입력값 적용되게
+        // 전체 전화번호 조합 업데이트
+        const tel = `${firstN}-${midN}-${lastN}`
+        setShopRequestDto((prevData) => ({
+            ...prevData,
+            shopTel: tel,
+        }))
+    }, [firstN, midN, lastN])
 
     useEffect(() => {
         // 컴포넌트가 렌더링된 후에 실행되어

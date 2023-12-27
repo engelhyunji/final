@@ -6,12 +6,14 @@ import { useParams } from 'react-router-dom'
 import { addReview, cancelRecommendReview, deleteReview, recommendReview } from '../../../apis/api/review'
 import { useMutation, useQueryClient } from 'react-query'
 import { AxiosError } from 'axios'
+import { useAuth } from '../../../context/AuthContext';
 
 interface ReviewsProps {
     detailShopData: ShopDetails
 }
 
 const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
+    const { isLogin } = useAuth()
     const { shopId } = useParams()
     const queryClient = useQueryClient()
 
@@ -21,12 +23,12 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     // shopId가 undefined 일 때 경고창
     const currentShopId = shopId ? +shopId : 0 && alert('가게를 찾을 수 없습니다')
 
-    const addReviewMutation = useMutation<void, AxiosError, { shopId: number; comment: string }>(
-        ({ shopId, comment }) => addReview(shopId, comment),
+    const addReviewMutation = useMutation<void, AxiosError, { shopId: number; comment: string, shopName: string }>(
+        ({ shopId, comment, shopName }) => addReview(shopId, comment, shopName),
         {
             onSuccess: () => {
                 queryClient.invalidateQueries('detailShopData')
-                alert(`${detailShopData.shopResponseDto.shopName}에 후기가 등록되었습니다🙉`)
+                // alert(`${detailShopData.shopResponseDto.shopName}에 후기가 등록되었습니다🙉`)
             },
             onError: (error) => {
                 console.error('후기추가 Mutation 에러 :', error)
@@ -60,7 +62,7 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     )
 
     const onSubmit = (shopId: number, comment: string) => {
-        addReviewMutation.mutate({ shopId, comment })
+        addReviewMutation.mutate({ shopId, comment, shopName: `${detailShopData.shopResponseDto.shopName}` })
         setComment('')
     }
 
@@ -85,11 +87,11 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
 
     return (
         <ST.Container>
-            <ST.ReviewInputP>
+            {isLogin && <ST.ReviewInputP>
                 <span>후기 작성</span>
                 <ST.ReviewInput type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
                 <ST.AddBtn onClick={() => onSubmit(currentShopId, comment)}>등록</ST.AddBtn>
-            </ST.ReviewInputP>
+            </ST.ReviewInputP>}
             <ST.ReviewH3>방문자 후기 {detailShopData.reviews.length}</ST.ReviewH3>
             <ST.ReviewListUl>
                 {detailShopData.reviews.map((review) => (
@@ -109,7 +111,7 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
                             <ST.DelBtn onClick={() => DeleteHandler(currentShopId, review.reviewId)}>삭제</ST.DelBtn>
                         </ST.ReviewListP>
                     </ST.ReviewListLi>
-                ))}
+                )).reverse()} 
             </ST.ReviewListUl>
         </ST.Container>
     )
