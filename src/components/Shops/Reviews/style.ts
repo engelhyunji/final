@@ -7,7 +7,7 @@ export const Container = styled.div`
 export const ReviewInputP = styled.p`
     width: 100%;
     font-family: Pretendard-regular;
-    margin: 50px 0;
+    margin: 50px 0 30px;
 
     display: flex;
     gap: 10px;
@@ -32,7 +32,7 @@ export const AddBtn = styled.button`
 `
 
 export const ReviewH3 = styled.h3`
-    margin: 26px 0;
+    margin: 46px 0 26px;
     font-family: Pretendard-bold;
     font-size: 22px;
     line-height: 28px;
@@ -42,7 +42,9 @@ export const ReviewListUl = styled.ul`
     width: 100%;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 14px;
 `
 
 export const ReviewListLi = styled.li`
