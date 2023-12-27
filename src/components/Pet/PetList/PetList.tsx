@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from 'react-router-dom'
 import { fetchPets } from '../../../apis/api/petlist'
-import { PetDetails,  } from '../../../apis/api/petlist'
+import { PetDetails } from '../../../apis/api/petlist'
 import * as ST from './style'
-
 
 const PetList: React.FC = () => {
     const [pets, setPets] = useState<PetDetails[]>([])
@@ -18,27 +17,25 @@ const PetList: React.FC = () => {
     }
 
     const fetchPetsData = async () => {
-        setIsLoading(true);
-        setError(null);
-    
+        setIsLoading(true)
+        setError(null)
+
         try {
-            const response = await fetchPets();
+            const response = await fetchPets()
             console.log(response)
-    
+
             if (response && response.result) {
-                setPets(response.result);
+                setPets(response.result)
             } else {
-                setError(response ? response.message : '펫 목록을 불러오는 데 실패했습니다.');
+                setError(response ? response.message : '펫 목록을 불러오는 데 실패했습니다.')
             }
         } catch (error) {
-            console.error('API 호출 중 오류 발생:', error);
-            setError('API 호출에 실패했습니다.');
+            console.error('API 호출 중 오류 발생:', error)
+            setError('API 호출에 실패했습니다.')
         }
-    
-        setIsLoading(false);
-    };
-    
-    
+
+        setIsLoading(false)
+    }
 
     useEffect(() => {
         fetchPetsData() // 컴포넌트 마운트 시 자동으로 목록을 불러옵니다.
@@ -55,8 +52,6 @@ const PetList: React.FC = () => {
     if (error) {
         return <div>오류: {error}</div>
     }
-
-    
 
     return (
         <ST.Back>
