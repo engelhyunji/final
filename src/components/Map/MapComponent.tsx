@@ -3,6 +3,7 @@ import { Map, MapMarker, MapInfoWindow } from 'react-kakao-maps-sdk';
 import * as ST from './style';
 import { MarkerInfo, MapComponentProps } from '../../kakao-maps';
 import ShopMapComponent from './ShopMapComponent';
+import instance from '../../apis/instance';
 
 interface Place {
     place_name: string;
@@ -79,8 +80,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const saveSearchResults = async () => {
         try {
             // 결과를 서버로 보내는 API 호출
-            const response = await fetch('/api/map', {
-                method: 'POST', // POST 요청
+            const response = await instance.post('/api/map', {
                 headers: {
                     'Content-Type': 'application/json', // JSON 형식으로 데이터 전송
                 },
