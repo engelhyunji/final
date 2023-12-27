@@ -81,9 +81,10 @@ export const ShopCard = styled.div`
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    width: 100%;
+    /* width: 100%; */
     height: 300px;
     max-width: 250px;
+    min-width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
