@@ -76,6 +76,39 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         }
     }
 
+    const saveSearchResults = async (results: Place[]) => {
+        try {
+            // 결과를 서버로 보내는 API 호출
+            const response = await fetch('/map', {
+                method: 'POST', // POST 요청
+                headers: {
+                    'Content-Type': 'application/json', // JSON 형식으로 데이터 전송
+                },
+                body: JSON.stringify({ places }), // 검색 결과를 JSON 문자열로 변환하여 전송
+            })
+
+            if (response.status === 200) {
+                // 성공적으로 저장된 경우
+                console.log('검색 결과가 성공적으로 저장되었습니다.')
+            } else {
+                // 저장 실패 또는 오류 발생한 경우
+                console.error('검색 결과 저장 실패:', response.statusText)
+                throw new Error('검색 결과 저장 실패')
+            }
+        } catch (error) {
+            // 예외 발생 시 처리
+            console.error('검색 결과 저장 에러:', error)
+            throw error
+        }
+    }
+
+    // ...
+
+    const handleSaveSearchResults = () => {
+        // places 변수에 저장된 검색 결과를 서버로 전송
+        saveSearchResults(places)
+    }
+
     useEffect(() => {
         if (window.kakao && window.kakao.maps) {
             return
@@ -117,6 +150,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                         placeholder="애견샵을 검색해보세요.🐶"
                     />
                     <ST.Button onClick={searchPlaces}>검색</ST.Button>
+                    <ST.Button onClick={handleSaveSearchResults}>saveSearchResults</ST.Button> {/* 추가된 버튼 */}
                     {message && <div style={{ color: 'red' }}>{message}</div>}
                     {showIntro && (
                         <div
