@@ -121,7 +121,8 @@ const ChatRoom: React.FC = () => {
         client.current = new Stomp.Client({
             brokerURL: import.meta.env.VITE_APP_SERVER_WS_URL,
             onConnect: () => {
-                console.log('success')
+                console.log('connect 성공')
+                alert('채팅방에 입장하셨습니다🐼')
                 subscribe()
                 const enterMessage = {
                     type: 'ENTER',
@@ -201,7 +202,9 @@ const ChatRoom: React.FC = () => {
                                             : 'enterNquit'
                                     }
                                 >
-                                    {msg.sender !== nickname && msg.type !== 'ENTER' && <p>{msg.sender}</p>}
+                                    {msg.sender !== nickname && msg.type !== 'ENTER' && msg.type !== 'QUIT' && (
+                                        <p>{msg.sender}</p>
+                                    )}
                                     <span>{msg.message}</span>
                                 </ST.MessageDiv>
                             </ST.MessageLi>

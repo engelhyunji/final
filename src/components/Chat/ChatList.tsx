@@ -101,7 +101,7 @@ const ChatList: React.FC = () => {
                             <ST.ChatList onClick={() => enterRoom(item.roomId)}>
                                 {/* 방 ID: {item.roomId} <br /> */}
                                 방 이름 : {item.name} <br />
-                                방장👑 : {item.creator.nickname}
+                                방소유주👑 : {item.creator.nickname} 님
                             </ST.ChatList>
                             {/* <ST.ChatDelBtn onClick={() => DeleteHandler(item.roomId)}>삭제</ST.ChatDelBtn> */}
                         </ST.ChatListContainer>
