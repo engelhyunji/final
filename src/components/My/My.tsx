@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { Pet, Shop, getMyShop, getMyPet, deleteShop, ChatRoom, getMyChatRoom } from '../../apis/api/api'
 import * as ST from './style'
+import { IoLogoWechat } from 'react-icons/io5'
+import { FaUserCircle } from 'react-icons/fa'
 import React, { useState, useEffect } from 'react'
 import { useMutation } from 'react-query'
 import instance from '../../apis/instance'
@@ -138,7 +140,9 @@ const My: React.FC = () => {
         <ST.Container>
             <BackWave />
             <ST.MyContainer>
-                <ST.TitleH2>{nickname}님의 마이 페이지</ST.TitleH2>
+                <ST.TitleH2>
+                    <FaUserCircle /> {nickname} 님의 마이 페이지
+                </ST.TitleH2>
 
                 {shops.length > 0 && (
                     <ST.ShopNPetSection>
@@ -149,7 +153,7 @@ const My: React.FC = () => {
                                     <ST.MyDiv onClick={() => navigate(`/shops/${shop.shopId}`)}>
                                         <ST.MyShopImg src={shop.imageUrls[0]} alt={shop.shopName} />
                                         <ST.ImgInfo>
-                                            <p>{shop.shopName}</p>
+                                            <ST.TitleH4>{shop.shopName}</ST.TitleH4>
                                             <p>업종: {shop.shopType}</p>
                                             <p>영업시간: {shop.shopTime}</p>
                                             <p>전화번호: {shop.shopTel}</p>
@@ -180,9 +184,9 @@ const My: React.FC = () => {
                                     <ST.MyDiv onClick={() => navigate(`/pet/${pet.petId}`)}>
                                         <ST.MyShopImg src={pet.imageUrls[0]} alt={pet.petName} />
                                         <ST.ImgInfo>
-                                            <p>반려동물 이름: {pet.petName}</p>
-                                            <p>반려동물 종류: {pet.petKind}</p>
-                                            <p>반려동물 특이사항: {pet.petInfo}</p>
+                                            <ST.TitleH4>{pet.petName}</ST.TitleH4>
+                                            <p>종류: {pet.petKind}</p>
+                                            <p>특이사항: {pet.petInfo}</p>
                                         </ST.ImgInfo>
                                     </ST.MyDiv>
                                     <ST.BtnContainer>
@@ -203,14 +207,19 @@ const My: React.FC = () => {
                         <ST.MyUl>
                             {chatRooms.map((chatroom) => (
                                 <li key={chatroom.roomId}>
-                                    <ST.MyDiv onClick={() => enterRoom(chatroom.roomId)}>
-                                        <p>방 ID: {chatroom.roomId}</p>
-                                        <p>방 이름: {chatroom.name}</p>
-                                        <p>개설자: {chatroom.creator.nickname}</p>
-                                    </ST.MyDiv>
-                                    <ST.ChatDelBtn onClick={() => DeleteHandler('chat', chatRooms.indexOf(chatroom))}>
-                                        삭제
-                                    </ST.ChatDelBtn>
+                                    <ST.MyChatDiv onClick={() => enterRoom(chatroom.roomId)}>
+                                        {/* <p>방 ID: {chatroom.roomId}</p> */}
+                                        <p>
+                                            <IoLogoWechat /> <span>[ {chatroom.name} ]</span> 채팅방
+                                        </p>
+                                    </ST.MyChatDiv>
+                                    <ST.BtnContainer>
+                                        <ST.ChatDelBtn
+                                            onClick={() => DeleteHandler('chat', chatRooms.indexOf(chatroom))}
+                                        >
+                                            삭제
+                                        </ST.ChatDelBtn>
+                                    </ST.BtnContainer>
                                 </li>
                             ))}
                         </ST.MyUl>
