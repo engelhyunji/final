@@ -1,10 +1,10 @@
 import React from 'react'
 import * as ST from './style'
-import MainTop from './MainTop/MainTop'
 import { useNavigate } from 'react-router-dom'
 import Category from './Category/Category'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import MainTop from './MainTop/MainTop'
 
 const Main: React.FC = () => {
     const navigate = useNavigate()

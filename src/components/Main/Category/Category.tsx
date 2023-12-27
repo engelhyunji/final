@@ -49,11 +49,15 @@ const Category: React.FC = () => {
         setSelectedCategory(category)
     }
 
+    // 'infinite' 속성을 'filteredShops'의 길이에 따라 조정
+    const isSliderInfinite = filteredShops.length > 3
+
     const settings = {
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
         dots: true,
-        infinite: filteredShops.length > 3,
+        // infinite: filteredShops.length > 3,
+        infinite: isSliderInfinite,
         speed: 100,
         slidesToScroll: 1,
         slidesToShow: Math.min(3, filteredShops.length),
