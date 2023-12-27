@@ -122,7 +122,6 @@ const ChatRoom: React.FC = () => {
             brokerURL: import.meta.env.VITE_APP_SERVER_WS_URL,
             onConnect: () => {
                 console.log('connect 성공')
-                alert('채팅방에 입장하셨습니다🐼')
                 subscribe()
                 const enterMessage = {
                     type: 'ENTER',
