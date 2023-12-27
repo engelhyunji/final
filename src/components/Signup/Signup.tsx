@@ -81,7 +81,7 @@ const Signup: React.FC = () => {
         let eng = userData.password.search(/[a-z]/gi)
         if (!userData.nickname || !userData.phoneNumber || !userData.email || !userData.password) {
             alert('정보를 모두 입력해주세요😺')
-            return true
+            return false
         } else if (userData.password.length < 4 || userData.password.length > 12) {
             alert('4자리 ~ 20자리 이내로 입력해주세요.')
             return false
