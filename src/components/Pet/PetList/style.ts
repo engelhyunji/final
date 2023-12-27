@@ -23,7 +23,6 @@ export const Name = styled.h2`
 `
 
 export const Button = styled.button`
-    // Your existing button styles
 `
 
 export const Posts = styled.div`
@@ -52,5 +51,4 @@ export const Img = styled.img`
     object-fit: cover;
     border-radius: 10px;
 `
-export const Image = styled.img`
-`;
+export const Image = styled.img``
