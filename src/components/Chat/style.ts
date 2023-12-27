@@ -40,6 +40,9 @@ export const ChatH3 = styled.h3`
 
 export const ChatInputDiv = styled.div`
     margin: 20px 0;
+    padding: 20px 0 30px;
+    border-bottom: 1px solid #dadada;
+
     display: flex;
     align-items: center;
     gap: 12px;
@@ -47,7 +50,13 @@ export const ChatInputDiv = styled.div`
 
 export const ChatLabel = styled.label``
 
-export const ChatNameInput = styled.input``
+export const ChatNameInput = styled.input`
+    width: 407px;
+    padding: 11px 13px;
+
+    border-radius: 7px;
+    border: 1px solid #dadada;
+`
 
 export const ChatBtn = styled.button`
     width: 100px;
@@ -60,29 +69,31 @@ export const ChatBtn = styled.button`
 `
 
 export const ChatLists = styled.div`
-    width: 100%;
+    width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 `
 
 export const ChatListContainer = styled.div`
-    width: 100%;
-    margin: 20px 0 30px;
+    width: 20%;
+    margin: 20px;
 `
 
 export const ChatList = styled.div`
+    cursor: pointer;
     width: 100%;
     margin: 10px 0;
 `
 export const ChatDelBtn = styled.button`
     width: 100px;
     height: 34px;
-    color: #FD4141;
+    color: #fd4141;
     font-family: Pretendard-medium;
     background-color: #eee;
     border: none;
     border-radius: 8px;
 `
-
-
 
 // =====ChatRoom 컴포넌트======
 export const MessageContainer = styled.div`
@@ -100,7 +111,7 @@ export const MessageInfoContainer = styled.div`
 export const ChatLeaveBtn = styled.button`
     width: 120px;
     height: 34px;
-    color: #FD4141;
+    color: #fd4141;
     font-family: Pretendard-medium;
     background-color: #eee;
     border: none;
@@ -195,6 +206,8 @@ export const ChatPetDiv = styled.div`
 
 export const ChatPetImg = styled.img`
     width: 30%;
+    height: 30%;
+    object-fit: cover;
     border-radius: 50%;
 `
 export const ChatPetInfoDiv = styled.div`
@@ -202,6 +215,13 @@ export const ChatPetInfoDiv = styled.div`
     margin: 10px;
     display: flex;
     flex-direction: column;
+    span {
+        // 넘치는 내용 처리
+        display: inline-block;
+        white-space: nowrap; // 자동 줄바꿈 방지
+        overflow: hidden; // 넘치는 부분 화면에서 숨김
+        text-overflow: ellipsis; // 숨긴 부분 말줄임표(...) 처리
+    }
 `
 
 // 메세지 입력

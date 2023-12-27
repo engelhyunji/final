@@ -49,6 +49,9 @@ const ChatList: React.FC = () => {
         if (roomName === '') {
             alert('방 제목을 입력해 주세요.')
             return
+        } else if(roomName.length > 10) {
+            alert('방 제목은 10자 이내로 입력해 주세요.')
+            return
         } else {
             const params = new URLSearchParams()
             params.append('name', roomName)
