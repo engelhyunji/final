@@ -54,11 +54,11 @@ const Category: React.FC = () => {
         prevArrow: <SamplePrevArrow />,
         dots: true,
         infinite: filteredShops.length > 3,
-        speed: 200,
+        speed: 100,
         slidesToScroll: 1,
         slidesToShow: Math.min(3, filteredShops.length),
-        autoplay: filteredShops.length > 3,
-        autoplaySpeed: 1700, 
+        autoplay: true,
+        autoplaySpeed: 1300,
         responsive: [
             {
                 breakpoint: 1024,

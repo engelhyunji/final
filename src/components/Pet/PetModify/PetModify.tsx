@@ -7,7 +7,7 @@ const PetModify: React.FC = () => {
     const [petDetail, setPetDetail] = useState<PetDetails | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string | null>(null)
-    const [imageFile, setImageFile] = useState<File | null>(null)
+    const [imageUrl, setImageUrl] = useState<File | null>(null)
     const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null)
     const { petId } = useParams<{ petId: string }>()
     const navigate = useNavigate()
@@ -17,7 +17,7 @@ const PetModify: React.FC = () => {
             console.log(`petId: ${petId}`)
             fetchPetDetail(parseInt(petId))
                 .then((response) => {
-                    console.log('Fetch:', response)
+                    console.log('response:', response)
                     if (response.isSuccess) {
                         setPetDetail(response.result)
                     } else {
@@ -42,8 +42,8 @@ const PetModify: React.FC = () => {
 
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.[0]) {
-            console.log('Image:', e.target.files[0])
-            setImageFile(e.target.files[0])
+            console.log('file:', e.target.files[0])
+            setImageUrl(e.target.files[0])
             const reader = new FileReader()
             reader.onloadend = () => setImagePreviewUrl(reader.result as string)
             reader.readAsDataURL(e.target.files[0])
@@ -64,14 +64,15 @@ const PetModify: React.FC = () => {
         formData.append('petKind', petDetail.petKind)
         formData.append('petInfo', petDetail.petInfo)
 
-        if (imageFile) {
-            formData.append('imageFile', imageFile)
+        if (imageUrl) {
+            formData.append('imageUrl', imageUrl)
         }
 
         try {
             const response = await updatePet(petDetail.petId, formData)
             if (response.isSuccess) {
                 console.log('애완동물 정보 업데이트 성공')
+                alert('애완동물 정보 업데이트 성공')
                 navigate('/petlist')
             } else {
                 console.error('애완동물 정보 업데이트 실패:', response.message)
@@ -89,6 +90,7 @@ const PetModify: React.FC = () => {
                 const response = await deletePet(petDetail.petId)
                 if (response.isSuccess) {
                     console.log('애완동물 삭제 성공')
+                    alert('애완동물 삭제 성공')
                     navigate('/petlist')
                 } else {
                     setError(response.message)
@@ -137,16 +139,15 @@ const PetModify: React.FC = () => {
                 <br />
                 <ST.Label>
                     Pet 사진:
-                    <ST.Input type="file" accept="image/*" onChange={handleImageFileChange} />
+                    <input type="file" accept="image/*" onChange={handleImageFileChange} />
                 </ST.Label>
                 <br />
-                {imagePreviewUrl && <ST.Image src={imagePreviewUrl} alt="Preview" />}
+                {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" />}
                 <ST.ButtonContainer>
                     <ST.Button type="submit">Pet 수정</ST.Button>
                     <ST.Button onClick={handleDelete}>Pet 삭제</ST.Button>
                 </ST.ButtonContainer>
             </ST.Form>
-            {/* {petDetail.imageUrls && <img src={petDetail.imageUrls} alt={`${petDetail.petName} 이미지`} />} */}
         </ST.Content>
     )
 }
