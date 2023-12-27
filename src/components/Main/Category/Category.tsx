@@ -120,20 +120,22 @@ const Category: React.FC = () => {
                     </ST.CategoryItem>
                 ))}
             </ST.CategoryList>
-            <Slider {...settings}>
-                {filteredShops.map((shop, index) => (
-                    <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
-                        <ST.ShopCard>
-                            {shop.imageUrls?.map((url, imgIdx) => (
-                                <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
-                            ))}
-                            <p>가게: {shop.shopName}</p>
-                            <p>업종: {shop.shopType}</p>
-                            <p>주소: {shop.shopAddress}</p>
-                        </ST.ShopCard>
-                    </div>
-                ))}
-            </Slider>
+            {shops.length > 0 && (
+                <Slider {...settings}>
+                    {filteredShops.map((shop, index) => (
+                        <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
+                            <ST.ShopCard>
+                                {shop.imageUrls?.map((url, imgIdx) => (
+                                    <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
+                                ))}
+                                <p>가게: {shop.shopName}</p>
+                                <p>업종: {shop.shopType}</p>
+                                <p>주소: {shop.shopAddress}</p>
+                            </ST.ShopCard>
+                        </div>
+                    ))}
+                </Slider>
+            )}
         </ST.CategoryContainer>
     )
 }
