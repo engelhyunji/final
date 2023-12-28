@@ -25,7 +25,7 @@ const My: React.FC = () => {
             .then((shopData) => {
                 if (shopData) {
                     setShops(shopData)
-                    console.log('shopData 확인', shopData)
+                    // console.log('shopData 확인', shopData)
                 } else {
                     console.log('가게 없음')
                 }
@@ -36,7 +36,7 @@ const My: React.FC = () => {
             .then((petData) => {
                 if (petData) {
                     setPets(petData)
-                    console.log('petData 확인', petData)
+                    // console.log('petData 확인', petData)
                 } else {
                     console.log('펫 없음')
                 }
@@ -47,7 +47,7 @@ const My: React.FC = () => {
             .then((roomData) => {
                 if (roomData) {
                     setChatRooms(roomData)
-                    console.log('roomData 확인', roomData)
+                    // console.log('roomData 확인', roomData)
                 } else {
                     console.log('룸 없음')
                 }
@@ -72,7 +72,7 @@ const My: React.FC = () => {
                 .then((petData) => {
                     if (petData) {
                         setPets(petData)
-                        console.log('petData 확인', petData)
+                        // console.log('petData 확인', petData)
                     } else {
                         console.log('펫 없음')
                     }
@@ -87,7 +87,7 @@ const My: React.FC = () => {
                 .then((roomData) => {
                     if (roomData) {
                         setChatRooms(roomData)
-                        console.log('roomData 확인', roomData)
+                        // console.log('roomData 확인', roomData)
                     } else {
                         console.log('룸 없음')
                     }
