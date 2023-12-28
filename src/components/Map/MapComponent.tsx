@@ -161,16 +161,24 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     }
 
     const renderPageNumbers = () => {
+        if (places.length <= placesPerPage) {
+            return null // 페이지네이션이 필요하지 않을 때 페이지 번호를 렌더링하지 않습니다.
+        }
+
         const pageNumbers = []
         for (let i = 1; i <= Math.ceil(places.length / placesPerPage); i++) {
             pageNumbers.push(i)
         }
 
-        return pageNumbers.map((number) => (
-            <ST.PageNumber key={number} onClick={() => paginate(number)}>
-                {number}
-            </ST.PageNumber>
-        ))
+        return (
+            <div>
+                {pageNumbers.map((number) => (
+                    <ST.PageNumber key={number} onClick={() => paginate(number)}>
+                        {number}
+                    </ST.PageNumber>
+                ))}
+            </div>
+        )
     }
 
     return (
