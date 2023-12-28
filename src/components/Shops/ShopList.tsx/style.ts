@@ -171,6 +171,7 @@ export const StRow = styled(Row)`
 `
 
 export const ShopBox = styled.div`
+    cursor: pointer;
     max-width: 358px;
     height: 454px;
     border: none;
