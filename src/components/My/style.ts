@@ -72,9 +72,10 @@ export const MyDiv = styled.div`
 `
 export const MyChatDiv = styled.div`
     cursor: pointer;
-    width: 300px;
+    width: 400px;
     height: 100px;
-    font-size: 24px;
+    padding: 0 20px;
+    font-size: 22px;
     font-family: Pretendard-semibold;
 
     border-radius: 15px;
