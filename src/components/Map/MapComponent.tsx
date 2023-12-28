@@ -160,22 +160,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         ))
     }
 
-    // const renderPageNumbers = () => {
-    //     const pageNumbers = []
-    //     for (let i = 1; i <= Math.ceil(places.length / placesPerPage); i++) {
-    //         pageNumbers.push(i)
-    //     }
-
-    //     return pageNumbers.map((number) => (
-    //         <ST.PageNumber key={number} onClick={() => paginate(number)}>
-    //             {number}
-    //         </ST.PageNumber>
-    //     ))
-    // }
-
     const renderPageNumbers = () => {
-        if (!isListVisible) return null
-
         const pageNumbers = []
         for (let i = 1; i <= Math.ceil(places.length / placesPerPage); i++) {
             pageNumbers.push(i)
