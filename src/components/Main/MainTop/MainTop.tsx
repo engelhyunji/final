@@ -40,7 +40,7 @@ const MainTop: React.FC = () => {
 
     return (
         <ST.TopContainer>
-            <ST.Text>Pet</ST.Text>
+            {/* <ST.Text>Pet</ST.Text> */}
             <ST.Content>
                 {pets.slice(0, 6).map(
                     (

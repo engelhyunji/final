@@ -15,6 +15,7 @@ const Main: React.FC = () => {
         <ST.MainContainer>
             <ST.BannerContainer>
                 <ST.Warp>
+                    <ST.BannerImage src="/public/MainBanner.png" alt="Main Banner" />
                     <ST.Text2>
                         반려동물과 함께하는 매칭서비스, 와르와르 <br />
                         <ST.Text3>Shop 또는 Pet을 등록해보세요!</ST.Text3>
@@ -85,14 +86,21 @@ const Main: React.FC = () => {
             </ST.BannerContainer>
 
             <ST.TopWrapper>
-                {/* SHOP 카테고리 슬라이드 */}
                 <Category />
             </ST.TopWrapper>
 
-            <ST.TopWrapper>
-                {/* PET 목록 */}
-                <MainTop />
-            </ST.TopWrapper>
+            <ST.OverlayContainer>
+                {/* PET List */}
+                <ST.PetContent>
+                    <ST.PetTextWrapper>
+                        <ST.PetText>Pet</ST.PetText>
+                        <ST.PetText1>다들 우리 애기 보고 가세요!</ST.PetText1>
+                        <ST.PetText2>더보기 ⇀</ST.PetText2>
+                    </ST.PetTextWrapper>
+                    <MainTop />
+                </ST.PetContent>
+                <ST.PetBackImage src="/public/PetBack.png" alt="Pet Back" />
+            </ST.OverlayContainer>
         </ST.MainContainer>
     )
 }

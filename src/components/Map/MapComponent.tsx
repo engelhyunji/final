@@ -78,7 +78,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                 y: parseFloat(place.y),
                 x: parseFloat(place.x),
                 address_name: place.address_name,
-                // 기타 필드...
             }));
 
             const response = await instance.post('/api/map', transformedPlaces);
