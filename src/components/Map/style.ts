@@ -61,17 +61,17 @@ export const ResultsContainer = styled.div`
 //     overflow: hidden;
 // `
 
-export const ListItem = styled.div`
-    padding: 10px 15px;
-    border-bottom: 1px solid #ddd;
-    &:last-child {
-        border-bottom: none;
-    }
-    cursor: pointer;
-    &:hover {
-        background-color: #f3f3f3;
-    }
-`
+// export const ListItem = styled.div`
+//     padding: 10px 15px;
+//     border-bottom: 1px solid #ddd;
+//     &:last-child {
+//         border-bottom: none;
+//     }
+//     cursor: pointer;
+//     &:hover {
+//         background-color: #f3f3f3;
+//     }
+// `
 export const InfoWindowContent = styled.div`
     max-width: 200px;
     padding: 10px;
@@ -150,3 +150,18 @@ export const ImagePreview = styled.img`
     margin-top: 10px;
     display: none;
 `
+export const ListItem = styled.div`
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    &:last-child {
+        border-bottom: none;
+    }
+    cursor: pointer;
+    &:hover {
+        background-color: #f3f3f3;
+    }
+
+    &.active {
+        background-color: #1dcb8e; // 활성화될 때 초록색으로 변경
+    }
+`;

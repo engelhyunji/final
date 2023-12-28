@@ -150,45 +150,23 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
 
     return (
         <div>
-            <ST.Layout>
-                <ST.SearchContainer>
-                    <ShopMapComponent shopId={exampleShopId} />
-                    <div id="myMap" />
-                    <ST.Input
-                        value={keyword}
-                        onChange={(e) => {
-                            setKeyword(e.target.value)
-                            setMessage('')
-                        }}
-                        placeholder="애견샵을 검색해보세요.🐶"
-                    />
-                    <ST.Button onClick={searchPlaces}>검색</ST.Button>
-                    <ST.Button onClick={handleSaveSearchResults}>
-                        {isListVisible ? '검색 목록 숨기기' : '검색 저장 목록'}
-                    </ST.Button>
-                    {message && <div style={{ color: 'red' }}>{message}</div>}
-                    {showIntro && (
-                        <div
-                            style={{
-                                color: 'red',
-                                fontStyle: 'italic',
-                                textAlign: 'center',
-                                position: 'absolute',
-                                top: '50%',
-                                marginTop: '10px',
-                            }}
-                        >
-                            애견샵과 관련된
-                            <br />
-                            키워드를 입력하여
-                            <br />
-                            지도 위치를
-                            <br />
-                            확인해보시길 바랍니다.
-                        </div>
-                    )}
-                    {renderPlacesList()}
-                    <ST.ListContainer>
+        <ST.Layout>
+            <ST.SearchContainer>
+                <ShopMapComponent shopId={exampleShopId} />
+                <div id="myMap" />
+                <ST.Input value={keyword} onChange={(e) => { setKeyword(e.target.value); setMessage(''); }} placeholder="애견샵을 검색해보세요.🐶" />
+                <ST.Button onClick={searchPlaces}>검색</ST.Button>
+                <ST.Button onClick={handleSaveSearchResults}>
+                    {isListVisible ? '검색 목록 숨기기' : '검색 저장 목록'}
+                </ST.Button>
+                {message && <div style={{ color: 'red' }}>{message}</div>}
+                {showIntro && (
+                    <div style={{ color: 'red', fontStyle: 'italic', textAlign: 'center', position: 'absolute', top: '50%', marginTop: '10px', }}>
+                        애견샵과 관련된<br />키워드를 입력하여<br />지도 위치를<br />확인해보시길 바랍니다.
+                    </div>
+                )}
+                {renderPlacesList()}
+                <ST.ListContainer>
                         {places.map((place, index) => (
                             <ST.ListItem
                                 key={`place-${index}`}
