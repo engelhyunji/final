@@ -7,6 +7,18 @@ export const Layout = styled.div`
     padding: 20px;
 `
 
+// export const SearchContainer = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+//     background: #f9f9f9;
+//     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+//     border-radius: 8px;
+//     width: 20%;
+//     margin-right: 20px;
+//     padding: 20px;
+// `
+
 export const SearchContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -14,10 +26,11 @@ export const SearchContainer = styled.div`
     background: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    width: 20%;
+    /* width: 20%; */ /* 주석 처리하여 너비를 설정하지 않음 */
     margin-right: 20px;
     padding: 20px;
 `
+
 
 export const Input = styled.input`
     width: 100%;

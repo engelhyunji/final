@@ -31,11 +31,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const map = useRef<kakao.maps.Map | null>(null)
     const exampleShopId = 1 // 예시 값
 
-    const mapStyle = {
-        width: '100%',
-        height: isListVisible ? '450px' : '750px', // 목록이 보일 때와 안 보일 때의 높이 조정
-    }
-
     const searchPlaces = () => {
         if (!keyword) {
             setMessage('검색어를 입력해주세요.')
@@ -192,15 +187,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                 <ST.SearchAndListContainer>
                     <ST.SearchContainer>
                         <ShopMapComponent shopId={exampleShopId} />
-                        <div className="map-container">
-                            <div className="map" id="myMap" style={mapStyle} />
-                            {isListVisible && (
-                                <ST.ListContainer>
-                                    {renderPlacesList()}
-                                    <ST.Pagination>{renderPageNumbers()}</ST.Pagination>
-                                </ST.ListContainer>
-                            )}
-                        </div>
+                        <div id="myMap" />
                         <ST.Input
                             value={keyword}
                             onChange={(e) => {
@@ -235,10 +222,20 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                             </div>
                         )}
                     </ST.SearchContainer>
+                    {isListVisible && (
+                        <ST.ListContainer>
+                            {renderPlacesList()}
+                            <ST.Pagination>{renderPageNumbers()}</ST.Pagination>
+                        </ST.ListContainer>
+                    )}
                 </ST.SearchAndListContainer>
                 <ST.MapContainer>
                     {info && (
-                        <Map center={{ lat: info.position.lat, lng: info.position.lng }} style={mapStyle} level={3}>
+                        <Map
+                            center={{ lat: info.position.lat, lng: info.position.lng }}
+                            style={{ width: '100%', height: '750px' }}
+                            level={3}
+                        >
                             {markers.map((marker, index) => (
                                 <MapMarker
                                     key={`marker-${index}`}
