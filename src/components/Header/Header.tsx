@@ -31,12 +31,12 @@ const Header: React.FC = () => {
                     </NoLineLink>
                     {isLogin ? (
                         <>
-                            <NoLineLink to="/pet">
+                            {/* <NoLineLink to="/pet">
                                 <h5>PET등록</h5>
                             </NoLineLink>
                             <NoLineLink to="/shops">
                                 <h5>SHOP등록</h5>
-                            </NoLineLink>
+                            </NoLineLink> */}
                             <NoLineLink to="/chat/room">
                                 <h5>채팅</h5>
                             </NoLineLink>
