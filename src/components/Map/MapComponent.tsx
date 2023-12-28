@@ -197,8 +197,9 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                             placeholder="애견샵을 검색해보세요.🐶"
                         />
                         <ST.Button onClick={searchPlaces}>검색</ST.Button>
-                        <ST.Button onClick={handleSaveSearchResults}>
-                            {isListVisible ? '검색 목록 숨기기' : '검색 저장 목록'}
+                        <ST.Button onClick={handleSaveSearchResults}>검색 저장 목록</ST.Button>
+                        <ST.Button onClick={() => setIsListVisible(!isListVisible)}>
+                            {isListVisible ? '검색 목록 숨기기' : '검색 목록 보기'}
                         </ST.Button>
                         {message && <div style={{ color: 'red' }}>{message}</div>}
                         {showIntro && (
