@@ -33,7 +33,7 @@ export const ShopImgBox = styled.div`
 export const detailImg = styled.img`
     width: 792px;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 `
 export const ShopImgInfo = styled.div`
     max-width: 408px;
