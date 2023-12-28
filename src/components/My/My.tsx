@@ -140,22 +140,25 @@ const My: React.FC = () => {
     const AddTag = async (roomId: string) => {
         if (confirm('해시태그를 추가하시겠어요?')) {
             let hash = prompt('방에 추가할 해시태그를 써주세요(최대 3개 추가 가능)') as string
-
-            try {
-                await AddHash(roomId, hash)
-            } catch (error) {
-                console.error('에러 발생:', error)
-            } finally {
-                // 채팅방 목록을 다시 불러오기
-                getMyChatRoom()
-                    .then((roomData) => {
-                        if (roomData) {
-                            setChatRooms(roomData);
-                        } else {
-                            console.log('룸 없음');
-                        }
-                    })
-                    .catch((error) => console.error('chatRoom 정보 불러오기 오류:', error));
+            if (hash.length > 10) {
+                alert('해시태그는 10자 이내로 입력해 주세요.')
+            } else {
+                try {
+                    await AddHash(roomId, hash)
+                } catch (error) {
+                    console.error('에러 발생:', error)
+                } finally {
+                    // 채팅방 목록을 다시 불러오기
+                    getMyChatRoom()
+                        .then((roomData) => {
+                            if (roomData) {
+                                setChatRooms(roomData)
+                            } else {
+                                console.log('룸 없음')
+                            }
+                        })
+                        .catch((error) => console.error('chatRoom 정보 불러오기 오류:', error))
+                }
             }
         }
     }
@@ -173,12 +176,12 @@ const My: React.FC = () => {
                 getMyChatRoom()
                     .then((roomData) => {
                         if (roomData) {
-                            setChatRooms(roomData);
+                            setChatRooms(roomData)
                         } else {
-                            console.log('룸 없음');
+                            console.log('룸 없음')
                         }
                     })
-                    .catch((error) => console.error('chatRoom 정보 불러오기 오류:', error));
+                    .catch((error) => console.error('chatRoom 정보 불러오기 오류:', error))
             }
         }
     }
@@ -260,20 +263,14 @@ const My: React.FC = () => {
                                             <IoLogoWechat /> <span>[ {chatroom.name} ]</span> 채팅방
                                         </p>
                                         <p>
-                                        {chatroom.tags?.map((tag) => (
-                                            <span key={tag.name}>{tag.name && `#${tag.name} `}</span>
-                                        ))}
-                                    </p>
+                                            {chatroom.tags?.map((tag) => (
+                                                <span key={tag.name}>{tag.name && `#${tag.name} `}</span>
+                                            ))}
+                                        </p>
                                     </ST.MyChatDiv>
                                     <ST.BtnContainer>
-                                        <ST.MyBtn
-                                            onClick={()=>AddTag(chatroom.roomId)}
-                                        >
-                                            해시태그 추가
-                                        </ST.MyBtn>
-                                        <ST.MyHashDeleteBtn
-                                            onClick={()=>DeleteTag(chatroom.roomId)}
-                                        >
+                                        <ST.MyBtn onClick={() => AddTag(chatroom.roomId)}>해시태그 추가</ST.MyBtn>
+                                        <ST.MyHashDeleteBtn onClick={() => DeleteTag(chatroom.roomId)}>
                                             해시태그 삭제
                                         </ST.MyHashDeleteBtn>
                                         <ST.ChatDelBtn
