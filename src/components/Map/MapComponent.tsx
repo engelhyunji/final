@@ -131,6 +131,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         loadSavedResults();
     }, [coords]);
 
+
     return (
         <div>
             <ST.Layout>
@@ -146,7 +147,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                         placeholder="애견샵을 검색해보세요.🐶"
                     />
                     <ST.Button onClick={searchPlaces}>검색</ST.Button>
-                    <ST.Button onClick={handleSaveSearchResults}>검색 결과 저장</ST.Button> {/* 수정된 버튼 */}
+                    <ST.Button onClick={handleSaveSearchResults}>saveSearchResults</ST.Button> {/* 추가된 버튼 */}
                     {message && <div style={{ color: 'red' }}>{message}</div>}
                     {showIntro && (
                         <div
