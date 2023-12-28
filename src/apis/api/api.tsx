@@ -148,4 +148,3 @@ export const getShopLocation = async (shopId: number) => {
         throw error
     }
 }
-

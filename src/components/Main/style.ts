@@ -1,5 +1,16 @@
 import styled from 'styled-components'
 
+export const Container = styled.div`
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: -1;
+`
+
 export const MainContainer = styled.div`
     width: 100%;
     min-height: 100vh;
@@ -7,54 +18,53 @@ export const MainContainer = styled.div`
     flex-direction: column;
     align-items: center;
     font-family: Pretendard-regular;
-    padding: 0; // Ensure there's no padding that can affect the full-width layout
-    margin: 0; // Ensure there's no margin
+    padding: 0;
+    margin: 0;
+    z-index: -1;
 `
-export const BannerImage = styled.img`
+
+export const BannerContainer = styled.div`
+    height: 530px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+`
+
+export const BannerImage = styled.div`
     width: 1450px;
     height: 550px;
+    flex-shrink: 0;
+    background-color: #fafafa;
+    background-image: url('MainBanner.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
     z-index: -1;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 20px;
+        background: url('wave-image.png');
+        background-repeat: repeat-x;
+        animation: wave-animation 5s linear infinite;
+        background-size: cover;
+    }
+
+    &::before {
+        top: 0;
+        background-position: 0 0;
+    }
+
+    &::after {
+        bottom: 0;
+        background-position: 0 100%;
+    }
 `
 
-export const BannerContainer = styled.div``
-
-// export const BannerContainer = styled.div`
-//     width: 1450px;
-//     height: 550px; /* height 값을 늘림 */
-//     flex-shrink: 0;
-//     background-color: #FAFAFA;
-//     background-image: url('MainBanner.png');
-//     background-position: center; /* 이미지를 가운데로 정렬 */
-//     background-size: cover; /* 이미지를 컨테이너에 맞게 확대 또는 축소 */
-//     background-repeat: no-repeat;
-//     position: relative;
-
-//     &::before,
-//     &::after {
-//         content: '';
-//         position: absolute;
-//         width: 100%;
-//         height: 20px;
-//         background: url('wave-image.png');
-//         background-repeat: repeat-x;
-//         animation: wave-animation 5s linear infinite;
-//         background-size: cover;
-//     }
-
-//     &::before {
-//         top: 0;
-//         background-position: 0 0;
-//     }
-
-//     &::after {
-//         bottom: 0;
-//         background-position: 0 100%;
-//     }
-// `
 // ====================================================
 
 export const BtnContainer = styled.div`
@@ -130,10 +140,14 @@ export const Text = styled.h2`
     margin-top: 30px;
     font-size: 20px;
     font-weight: bold;
+    z-index: 2;
+    position: relative;
 `
 export const Text1 = styled.h2`
     margin-top: 20px;
     font-size: 20px;
+    z-index: 2;
+    position: relative;
 `
 export const Text2 = styled.div`
     color: #353535;
@@ -142,6 +156,7 @@ export const Text2 = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 28px; /* 127.273% */
+    z-index: 2;
 `
 export const Text3 = styled.h2`
     color: #353535;
@@ -151,6 +166,7 @@ export const Text3 = styled.h2`
     font-style: normal;
     font-weight: 700;
     line-height: 36px; /* 120% */
+    z-index: 2;
 `
 
 // export const PetBackImage = styled.h2`
@@ -237,10 +253,12 @@ export const OverlayContainer = styled.div`
 
 export const PetBackImage = styled.img`
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: -1; // Ensures it's behind the content
-    width: 100vw; // Now the image will span the full width of the viewport
-    height: auto; // Maintain aspect ratio
+    width: 100%;
+    bottom: -290px; // 이미지를 하단에서 290px 더 아래로 내립니다.
+    left: 50%; // 이미지를 수평 중앙에 위치시킵니다.
+    transform: translateX(-50%); // 이미지의 가로 중앙을 정확하게 부모의 중앙에 위치하도록 조정합니다.
+    z-index: -1; // 다른 내용 뒤에 위치하도록 설정합니다.
+    max-width: 100%; // 부모의 최대 너비를 제한합니다.
+    height: auto; // 종횡비를 유지합니다.
+    content: url('/public/PetBack.png');
 `
