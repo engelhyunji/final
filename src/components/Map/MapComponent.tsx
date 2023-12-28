@@ -24,6 +24,35 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const [selectedPlaceIndex, setSelectedPlaceIndex] = useState<number | null>(null);
     const [showIntro, setShowIntro] = useState(true);
 
+    // 모달을 표시하는 상태와 모달을 열고 닫는 함수 추가
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    // 모달 내부에 저장된 데이터를 표시하는 컴포넌트
+    const ModalContent = () => {
+        return (
+            <div>
+                <h2>저장된 데이터 목록</h2>
+                <ul>
+                    {places.map((place, index) => (
+                        <li key={`place-${index}`}>
+                            <strong>장소 이름:</strong> {place.place_name}
+                            <br />
+                            <strong>주소:</strong> {place.address_name}
+                            <br />
+                            <strong>전화번호:</strong> {place.phone}
+                            <br />
+                            {place.image_url && (
+                                <img src={place.image_url} alt={place.place_name} />
+                            )}
+                            <hr />
+                        </li>
+                    ))}
+                </ul>
+                <button onClick={() => setIsModalVisible(false)}>닫기</button>
+            </div>
+        );
+    };
+
     const map = useRef<kakao.maps.Map | null>(null);
     const exampleShopId = 1; // 예시 값
 
@@ -44,13 +73,16 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                 setMarkers(newMarkers);
 
                 const bounds = new window.kakao.maps.LatLngBounds();
-                newMarkers.forEach((marker) => bounds.extend(new window.kakao.maps.LatLng(marker.position.lat, marker.position.lng)));
+                newMarkers.forEach((marker) =>
+                    bounds.extend(new window.kakao.maps.LatLng(marker.position.lat, marker.position.lng)),
+                );
 
                 if (newMarkers.length > 0) {
                     setInfo(newMarkers[0]);
                     map.current?.setBounds(bounds);
                 }
                 setPlaces(result);
+                alert('검색이 완료되었습니다. 저장 목록 버튼을 클릭해보세요.🐶');
             } else {
                 alert('검색 결과가 없습니다.');
             }
@@ -75,7 +107,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
             const transformedPlaces = places.map((place) => ({
                 address: place.address_name,
                 latitude: parseFloat(place.y),
-                longitude: parseFloat(place.x)
+                longitude: parseFloat(place.x),
             }));
             const response = await instance.post('/api/map', transformedPlaces);
             if (response.status === 200) {
@@ -89,7 +121,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
             throw error;
         }
     };
-
 
     const loadSavedResults = async () => {
         try {
@@ -128,7 +159,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         loadSavedResults();
     }, [coords]);
 
-
     return (
         <div>
             <ST.Layout>
@@ -138,13 +168,17 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                     <ST.Input
                         value={keyword}
                         onChange={(e) => {
-                            setKeyword(e.target.value)
-                            setMessage('')
+                            setKeyword(e.target.value);
+                            setMessage('');
                         }}
                         placeholder="애견샵을 검색해보세요.🐶"
                     />
                     <ST.Button onClick={searchPlaces}>검색</ST.Button>
-                    <ST.Button onClick={handleSaveSearchResults}>saveSearchResults</ST.Button> {/* 추가된 버튼 */}
+                    <ST.Button onClick={handleSaveSearchResults}>검색 저장 목록</ST.Button> {/* 추가된 버튼 */}
+                    {/* 모달 열기 버튼 */}
+                    <ST.Button onClick={() => setIsModalVisible(true)}>
+                        검색 저장 목록 보기
+                    </ST.Button>
                     {message && <div style={{ color: 'red' }}>{message}</div>}
                     {showIntro && (
                         <div
@@ -166,31 +200,16 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                             확인해보시길 바랍니다.
                         </div>
                     )}
-                    <ST.ListContainer>
-                        {places.map((place, index) => (
-                            <ST.ListItem
-                                key={`place-${index}`}
-                                onClick={() => handleListItemClick(index)}
-                                className={selectedPlaceIndex === index ? 'selected' : ''}
-                            >
-                                <ST.Text>{place.place_name}</ST.Text>
-                                {selectedPlaceIndex === index && (
-                                    <ST.AddressText>
-                                        <strong>주소:</strong> {place.address_name}
-                                    </ST.AddressText>
-                                )}
-                                {selectedPlaceIndex === index && place.phone && (
-                                    <ST.PhoneText>
-                                        <strong>전화번호:</strong> {place.phone}
-                                    </ST.PhoneText>
-                                )}
-                                {selectedPlaceIndex === index && place.image_url && (
-                                    <img src={place.image_url} alt={place.place_name} />
-                                )}
-                            </ST.ListItem>
-                        ))}
-                    </ST.ListContainer>
                 </ST.SearchContainer>
+
+                {/* 모달 */}
+                {isModalVisible && (
+                    <ST.ModalContainer>
+                        <div className="modal">
+                            <ModalContent />
+                        </div>
+                    </ST.ModalContainer>
+                )}
 
                 <ST.MapContainer>
                     {info && (
@@ -204,8 +223,8 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                                     key={`marker-${index}`}
                                     position={marker.position}
                                     onClick={() => {
-                                        setInfo(marker)
-                                        setSelectedPlaceIndex(index)
+                                        setInfo(marker);
+                                        setSelectedPlaceIndex(index);
                                     }}
                                 />
                             ))}
@@ -224,7 +243,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                 </ST.MapContainer>
             </ST.Layout>
         </div>
-    )
-}
+    );
+};
 
-export default MapComponent
+export default MapComponent;
