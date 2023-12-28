@@ -13,7 +13,7 @@ export const getChatList = async () => {
 // 채팅방 생성
 export const addChat = async (query: { name: string }) => {
     try {
-        const res = await instance.post('/chat/room', null, { params: query })
+        await instance.post('/chat/room', null, { params: query })
         // console.log('addChat 함수 반환값',res.data.result)
     } catch (err) {
         console.log(err)
