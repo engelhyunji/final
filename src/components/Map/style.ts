@@ -164,7 +164,7 @@ export const ListItem = styled.div`
     &.active {
         background-color: #1dcb8e; // 활성화될 때 초록색으로 변경
     }
-`;
+`
 
 export const PageNumber = styled.button`
     background-color: transparent;
@@ -175,11 +175,17 @@ export const PageNumber = styled.button`
     &:hover {
         background-color: #f3f3f3;
     }
-`;
+`
 
 export const Pagination = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 20px;
-`;
+`
 
+export const SearchAndListContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+`
