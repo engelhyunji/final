@@ -32,9 +32,9 @@ const ShopsDetail: React.FC = () => {
 
     return (
         <ST.ShopDetailContainer>
-            <div>
+            {/* <div>
                 <ST.DelBtn onClick={() => navigate('/shopslist')}>&lt; 목록으로</ST.DelBtn>
-            </div>
+            </div> */}
 
             {detailShopData ? (
                 <>

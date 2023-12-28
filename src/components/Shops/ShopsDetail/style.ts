@@ -13,7 +13,7 @@ export const DelBtn = styled.button`
 
 export const ShopDetailContainer = styled.div`
     width: 1200px;
-    margin: 0 auto 30px;
+    margin: 60px auto 30px;
 `
 
 export const ShopImgBox = styled.div`
