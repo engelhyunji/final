@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
 import * as ST from './style'
+import { SiKakaotalk } from "react-icons/si";
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { addChat, getChatList } from '../../apis/api/chat'
@@ -9,10 +10,15 @@ interface Chatroom {
     roomId: string
     name: string
     creator: Creator
+    lastTalkMessage: LastTalkMessage
 }
 export interface Creator {
     email: string
     nickname: string
+}
+interface LastTalkMessage {
+    sender: string
+    message: string
 }
 
 const ChatList: React.FC = () => {
@@ -79,9 +85,10 @@ const ChatList: React.FC = () => {
 
             <ST.ChatInputDiv>
                 <div>
-                    <ST.ChatLabel>채팅방 이름: </ST.ChatLabel>
+                    {/* <ST.ChatLabel>채팅방 이름: </ST.ChatLabel> */}
                 </div>
                 <ST.ChatNameInput
+                    placeholder="채팅방 이름(최대 10자)"
                     type="text"
                     value={roomName}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setRoomName(e.target.value)}
@@ -92,6 +99,7 @@ const ChatList: React.FC = () => {
                     </ST.ChatBtn>
                 </div>
             </ST.ChatInputDiv>
+            
             <ST.ChatH2>채팅방 목록</ST.ChatH2>
             <ST.ChatLists>
                 {chatrooms.length === 0 ? (
@@ -102,9 +110,12 @@ const ChatList: React.FC = () => {
                     chatrooms.map((item) => (
                         <ST.ChatListContainer key={item.roomId}>
                             <ST.ChatList onClick={() => enterRoom(item.roomId)}>
-                                {/* 방 ID: {item.roomId} <br /> */}
-                                방 이름 : {item.name} <br />
-                                방소유주👑 : {item.creator.nickname} 님
+                                <ST.ChatListIcon><SiKakaotalk style={{width: '50px', height: '50px'}}/></ST.ChatListIcon>
+                                <ST.ChatListInfo>
+                                <p>{item.name}</p>
+                                <p>👑 : {item.creator.nickname}</p>
+                                <p>💌 - {item.lastTalkMessage.message}</p>
+                                </ST.ChatListInfo>
                             </ST.ChatList>
                             {/* <ST.ChatDelBtn onClick={() => DeleteHandler(item.roomId)}>삭제</ST.ChatDelBtn> */}
                         </ST.ChatListContainer>
