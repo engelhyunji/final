@@ -231,3 +231,4 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
 }
 
 export default MapComponent
+
