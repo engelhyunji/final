@@ -121,14 +121,13 @@ const ChatList: React.FC = () => {
                 </div>
             </ST.ChatInputDiv>
 
-{/* 해시태그 부분 */}
+            {/* 해시태그 부분 */}
             <div>
                 HOT 해시태그: &nbsp;
                 <ST.TagWords onClick={getAllRooms}>전체보기</ST.TagWords>
-                {popularHash.map((item) => (
+                {popularHash?.map((item) => (
                     <ST.TagWords key={item?.name} onClick={() => getTagRooms(item?.name)}>
-                        {'  '}
-                        #{item?.name}{' '}
+                        {'  '}#{item?.name}{' '}
                     </ST.TagWords>
                 ))}
             </div>
