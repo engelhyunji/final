@@ -72,7 +72,7 @@ export const ChatBtn = styled.button`
 `
 
 export const ChatLists = styled.div`
-    width: 1200px;
+    max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;

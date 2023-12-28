@@ -56,8 +56,8 @@ const ChatList: React.FC = () => {
         if (roomName === '') {
             alert('방 제목을 입력해 주세요.')
             return
-        } else if(roomName.length > 10) {
-            alert('방 제목은 10자 이내로 입력해 주세요.')
+        } else if(roomName.length > 12) {
+            alert('방 제목은 12자 이내로 입력해 주세요.')
             return
         } else {
             const params = new URLSearchParams()
@@ -89,7 +89,7 @@ const ChatList: React.FC = () => {
                     {/* <ST.ChatLabel>채팅방 이름: </ST.ChatLabel> */}
                 </div>
                 <ST.ChatNameInput
-                    placeholder="채팅방 이름(최대 10자)"
+                    placeholder="채팅방 이름(최대 12자)"
                     type="text"
                     value={roomName}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setRoomName(e.target.value)}
