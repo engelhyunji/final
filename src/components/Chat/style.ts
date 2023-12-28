@@ -72,6 +72,10 @@ export const ChatBtn = styled.button`
     border-radius: 8px;
 `
 
+export const TagWords = styled.span`
+    cursor: pointer;
+`
+
 export const ChatLists = styled.div`
     max-width: 1200px;
     display: flex;

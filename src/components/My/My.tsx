@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Pet, Shop, getMyShop, getMyPet, deleteShop, ChatRoom, getMyChatRoom } from '../../apis/api/api'
+import { Pet, Shop, getMyShop, getMyPet, deleteShop, getMyChatRoom } from '../../apis/api/api'
 import * as ST from './style'
 import { IoLogoWechat } from 'react-icons/io5'
 import { FaUserCircle } from 'react-icons/fa'
@@ -9,8 +9,9 @@ import instance from '../../apis/instance'
 import { useAuth } from '../../context/AuthContext'
 import BackWave from '../BackWave'
 import { AxiosError } from 'axios'
-import { deleteChat } from '../../apis/api/chat'
+import { AddHash, deleteChat, deleteHash } from '../../apis/api/chat'
 import { ApiResponse, deletePet } from '../../apis/api/petmodify'
+import { Chatroom } from '../Chat/ChatList'
 
 const My: React.FC = () => {
     const { logout } = useAuth()
@@ -18,7 +19,7 @@ const My: React.FC = () => {
     const nickname = localStorage.getItem('nickname')
     const [shops, setShops] = useState<Shop[]>([])
     const [pets, setPets] = useState<Pet[]>([])
-    const [chatRooms, setChatRooms] = useState<ChatRoom[]>([])
+    const [chatRooms, setChatRooms] = useState<Chatroom[]>([])
 
     useEffect(() => {
         getMyShop()
@@ -136,6 +137,52 @@ const My: React.FC = () => {
         }
     }
 
+    const AddTag = async (roomId: string) => {
+        if (confirm('해시태그를 추가하시겠어요?')) {
+            let hash = prompt('방에 추가할 해시태그를 써주세요(최대 3개 추가 가능)') as string
+
+            try {
+                await AddHash(roomId, hash)
+            } catch (error) {
+                console.error('에러 발생:', error)
+            } finally {
+                // 채팅방 목록을 다시 불러오기
+                getMyChatRoom()
+                    .then((roomData) => {
+                        if (roomData) {
+                            setChatRooms(roomData);
+                        } else {
+                            console.log('룸 없음');
+                        }
+                    })
+                    .catch((error) => console.error('chatRoom 정보 불러오기 오류:', error));
+            }
+        }
+    }
+
+    const DeleteTag = async (roomId: string) => {
+        if (confirm('해시태그를 삭제하시겠어요?')) {
+            let hash = prompt('삭제할 해시태그를 써주세요') as string
+
+            try {
+                await deleteHash(roomId, hash)
+            } catch (error) {
+                console.error('에러 발생:', error)
+            } finally {
+                // 채팅방 목록을 다시 불러오기
+                getMyChatRoom()
+                    .then((roomData) => {
+                        if (roomData) {
+                            setChatRooms(roomData);
+                        } else {
+                            console.log('룸 없음');
+                        }
+                    })
+                    .catch((error) => console.error('chatRoom 정보 불러오기 오류:', error));
+            }
+        }
+    }
+
     return (
         <ST.Container>
             <BackWave />
@@ -212,8 +259,23 @@ const My: React.FC = () => {
                                         <p>
                                             <IoLogoWechat /> <span>[ {chatroom.name} ]</span> 채팅방
                                         </p>
+                                        <p>
+                                        {chatroom.tags?.map((tag) => (
+                                            <span key={tag.name}>{tag.name && `#${tag.name} `}</span>
+                                        ))}
+                                    </p>
                                     </ST.MyChatDiv>
                                     <ST.BtnContainer>
+                                        <ST.MyBtn
+                                            onClick={()=>AddTag(chatroom.roomId)}
+                                        >
+                                            해시태그 추가
+                                        </ST.MyBtn>
+                                        <ST.MyHashDeleteBtn
+                                            onClick={()=>DeleteTag(chatroom.roomId)}
+                                        >
+                                            해시태그 삭제
+                                        </ST.MyHashDeleteBtn>
                                         <ST.ChatDelBtn
                                             onClick={() => DeleteHandler('chat', chatRooms.indexOf(chatroom))}
                                         >

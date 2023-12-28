@@ -53,3 +53,42 @@ export const getChatMessages = async (roomId: string) => {
         console.log('채팅방 메세지 조회 에러 :',err)
     }
 }
+
+// 해시태그 방별 추가
+export const AddHash = async (roomId: string, hash: string) => {
+    try {
+        await instance.post(`${import.meta.env.VITE_APP_SERVER_URL}/api/tags/chatrooms/${roomId}`, [hash] )
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+// 해시태그 인기 조회
+export const getPopularHash = async () => {
+    try {
+        const res = await instance.get('api/tags/popular')
+        return res.data.result
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+// 해시태그 별 방조회
+export const getHashRoomList = async (tagName: string) => {
+    try {
+        const res = await instance.get(`api/tags/chatrooms/bytag/${tagName}`)
+        return res.data.result
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+// 해시태그 삭제
+export const deleteHash = async (roomId : string, name: string) => {
+    try {
+        const res = await instance.delete(`api/tags/chatrooms/${roomId}/tags/${name}`)
+        return res.data.result
+    } catch (err) {
+        console.log(err)
+    }
+}

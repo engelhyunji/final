@@ -1,16 +1,20 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
 import * as ST from './style'
-import { SiKakaotalk } from "react-icons/si";
+import { SiKakaotalk } from 'react-icons/si'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { addChat, getChatList } from '../../apis/api/chat'
+import { addChat, getChatList, getHashRoomList, getPopularHash } from '../../apis/api/chat'
 import { AxiosError } from 'axios'
 
-interface Chatroom {
+interface Hash {
+    name: string
+}
+export interface Chatroom {
     roomId: string
     name: string
     creator: Creator
     lastTalkMessage: LastTalkMessage
+    tags: Tag[]
 }
 export interface Creator {
     email: string
@@ -20,23 +24,33 @@ interface LastTalkMessage {
     sender: string
     message: string
 }
+interface Tag {
+    name: string
+}
 
 const ChatList: React.FC = () => {
     const navigate = useNavigate()
     const queryClient = useQueryClient()
+
+    const [popularHash, setPopularHash] = useState<Hash[]>([])
     const [roomName, setRoomName] = useState<string>('')
     const [chatrooms, setChatrooms] = useState<Chatroom[]>([])
+    const [allChatrooms, setAllChatrooms] = useState<Chatroom[]>([])
 
     const { data, isSuccess } = useQuery('getChatList', getChatList)
     useEffect(() => {
         if (isSuccess && data) {
             setChatrooms(data)
-            // console.log('채팅방 목록 조회 성공 data : ', data)
-            console.log('채팅방 목록 조회 성공')
+            setAllChatrooms(data)
+            console.log('채팅방 목록 조회 성공 data : ', data)
+            // console.log('채팅방 목록 조회 성공')
         }
     }, [isSuccess, data])
+    useEffect(() => {
+        getPopularHash().then((data) => setPopularHash(data))
+    }, [])
 
-    const addChatMutation = useMutation<void, AxiosError, { name: string }>(({ name }) => addChat({name}), {
+    const addChatMutation = useMutation<void, AxiosError, { name: string }>(({ name }) => addChat({ name }), {
         onSuccess: () => {
             setRoomName('')
             queryClient.invalidateQueries('getChatList')
@@ -52,11 +66,11 @@ const ChatList: React.FC = () => {
     //     },
     // })
 
-    const createRoom = (): void => {
+    const createRoom = async (): Promise<void> => {
         if (roomName === '') {
             alert('방 제목을 입력해 주세요.')
             return
-        } else if(roomName.length > 12) {
+        } else if (roomName.length > 12) {
             alert('방 제목은 12자 이내로 입력해 주세요.')
             return
         } else {
@@ -78,6 +92,15 @@ const ChatList: React.FC = () => {
         }
     }
 
+    // 해시태그 클릭
+    const getTagRooms = async (tag: string): Promise<void> => {
+        await getHashRoomList(tag).then((data) => setChatrooms(data))
+    }
+    // 다시 전체보기
+    const getAllRooms = () => {
+        setChatrooms(allChatrooms) // 전체보기를 누를 때 원래 목록으로 복원
+    }
+
     return (
         <ST.ChatContainer>
             <ST.ChatListTitleWrap>
@@ -97,8 +120,21 @@ const ChatList: React.FC = () => {
                     </ST.ChatBtn>
                 </div>
             </ST.ChatInputDiv>
-            
+
+{/* 해시태그 부분 */}
+            <div>
+                HOT 해시태그: &nbsp;
+                <ST.TagWords onClick={getAllRooms}>전체보기</ST.TagWords>
+                {popularHash.map((item) => (
+                    <ST.TagWords key={item?.name} onClick={() => getTagRooms(item?.name)}>
+                        {'  '}
+                        #{item?.name}{' '}
+                    </ST.TagWords>
+                ))}
+            </div>
+
             <ST.ChatH2>채팅방 목록</ST.ChatH2>
+
             <ST.ChatLists>
                 {chatrooms.length === 0 ? (
                     <ST.EmptyWrap>
@@ -108,11 +144,18 @@ const ChatList: React.FC = () => {
                     chatrooms.map((item) => (
                         <ST.ChatListContainer key={item.roomId}>
                             <ST.ChatList onClick={() => enterRoom(item.roomId)}>
-                                <ST.ChatListIcon><SiKakaotalk style={{width: '50px', height: '50px'}}/></ST.ChatListIcon>
+                                <ST.ChatListIcon>
+                                    <SiKakaotalk style={{ width: '50px', height: '50px' }} />
+                                </ST.ChatListIcon>
                                 <ST.ChatListInfo>
-                                <p>{item.name}</p>
-                                <p>👑 : {item.creator.nickname}</p>
-                                <p>💌 - {item.lastTalkMessage?.message}</p>
+                                    <p>{item.name}</p>
+                                    <p>👑 : {item.creator.nickname}</p>
+                                    <p>💌 - {item.lastTalkMessage?.message}</p>
+                                    <p>
+                                        {item.tags?.map((tag) => (
+                                            <span key={tag.name}>{tag.name && `#${tag.name} `}</span>
+                                        ))}
+                                    </p>
                                 </ST.ChatListInfo>
                             </ST.ChatList>
                             {/* <ST.ChatDelBtn onClick={() => DeleteHandler(item.roomId)}>삭제</ST.ChatDelBtn> */}

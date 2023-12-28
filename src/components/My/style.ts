@@ -82,8 +82,10 @@ export const MyChatDiv = styled.div`
     background: #eee;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 10px;
 `
 
 export const MyShopImg = styled.img`
@@ -136,6 +138,15 @@ export const MyBtn = styled.button`
     color: #fff;
     font-family: Pretendard-medium;
     background-color: #00bd8f;
+    border: none;
+    border-radius: 8px;
+`
+export const MyHashDeleteBtn = styled.button`
+    width: 100px;
+    height: 34px;
+    color: #00bd8f;
+    font-family: Pretendard-medium;
+    background-color: #eee;
     border: none;
     border-radius: 8px;
 `
