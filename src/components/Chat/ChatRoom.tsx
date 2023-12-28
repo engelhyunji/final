@@ -140,8 +140,9 @@ const ChatRoom: React.FC = () => {
                 })
             },
             connectHeaders: headers,
-            debug: function (str) {
-                console.log(str)
+            debug () {
+                // 관련 정보(헤더토큰) 안보이게
+                // console.log(str)
             },
             reconnectDelay: 5000, // 자동 재 연결
             heartbeatIncoming: 4000,
@@ -164,7 +165,7 @@ const ChatRoom: React.FC = () => {
     }
 
     return (
-        <ST.ChatContainer>
+        <ST.ChatRContainer>
             <ST.MessageContainer>
                 <ST.MessageInfoContainer>
                     <ST.ChatH2>{room?.name} 채팅방</ST.ChatH2>
@@ -252,7 +253,7 @@ const ChatRoom: React.FC = () => {
                     </ST.MyBtn>
                 </div>
             </ST.MessageInputDiv>
-        </ST.ChatContainer>
+        </ST.ChatRContainer>
     )
 }
 

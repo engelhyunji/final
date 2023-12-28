@@ -22,16 +22,18 @@ export const ChatContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: left;
+    align-items: center;
 `
 
 export const ChatListTitleWrap = styled.div`
+    width: 100%;
     margin: 50px 0 0;
 `
-
 export const ChatH2 = styled.h2`
+    width: 100%;
     font-size: 20px;
     font-weight: 700;
+    text-align: left;
 `
 export const ChatH3 = styled.h3`
     font-size: 16px;
@@ -39,6 +41,7 @@ export const ChatH3 = styled.h3`
 `
 
 export const ChatInputDiv = styled.div`
+    width: 100%;
     margin: 20px 0;
     padding: 20px 0 30px;
     border-bottom: 1px solid #dadada;
@@ -48,7 +51,7 @@ export const ChatInputDiv = styled.div`
     gap: 12px;
 `
 
-export const ChatLabel = styled.label``
+// export const ChatLabel = styled.label``
 
 export const ChatNameInput = styled.input`
     width: 407px;
@@ -76,15 +79,32 @@ export const ChatLists = styled.div`
 `
 
 export const ChatListContainer = styled.div`
-    width: 20%;
     margin: 20px;
 `
 
 export const ChatList = styled.div`
     cursor: pointer;
-    width: 100%;
-    margin: 10px 0;
+    max-width: 250px;
+    padding: 10px;
+    display: flex;
 `
+export const ChatListIcon = styled.div`
+    width: 26%;
+`
+export const ChatListInfo = styled.div`
+    width: 70%;
+        p {
+            // 넘치는 내용 처리
+            width: 100%;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+`
+
+
 export const ChatDelBtn = styled.button`
     width: 100px;
     height: 34px;
@@ -95,7 +115,18 @@ export const ChatDelBtn = styled.button`
     border-radius: 8px;
 `
 
-// =====ChatRoom 컴포넌트======
+// ======= ChatRoom 컴포넌트 ======
+
+export const ChatRContainer = styled.div`
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 150px;
+    font-family: Pretendard-regular;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+`
 export const MessageContainer = styled.div`
     max-width: 1200px;
     margin: 0 auto;
