@@ -10,7 +10,6 @@ import { useQuery } from 'react-query'
 import Reviews, { mainColor } from '../Reviews/Reviews'
 
 const ShopsDetail: React.FC = () => {
-    const navigate = useNavigate()
     const { shopId } = useParams()
     const [detailShopData, setDetailShopData] = useState<ShopDetails | null>(null)
 
@@ -32,9 +31,6 @@ const ShopsDetail: React.FC = () => {
 
     return (
         <ST.ShopDetailContainer>
-            {/* <div>
-                <ST.DelBtn onClick={() => navigate('/shopslist')}>&lt; 목록으로</ST.DelBtn>
-            </div> */}
 
             {detailShopData ? (
                 <>
