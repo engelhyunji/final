@@ -140,3 +140,13 @@ export const PhoneText = styled.div`
     text-align: left;
     font-weight: bold;
 `
+export const Img = styled.div``
+
+export const ImagePreview = styled.img`
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: none;
+`

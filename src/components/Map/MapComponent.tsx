@@ -23,6 +23,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const [places, setPlaces] = useState<Place[]>([])
     const [selectedPlaceIndex, setSelectedPlaceIndex] = useState<number | null>(null)
     const [showIntro, setShowIntro] = useState(true)
+    const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
     const map = useRef<kakao.maps.Map | null>(null)
     const exampleShopId = 1 // 예시 값
@@ -62,15 +63,18 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
 
     const handleListItemClick = (index: number) => {
         if (index >= 0 && index < markers.length) {
-            const marker = markers[index]
-            setInfo(marker)
-            setSelectedPlaceIndex(index)
+            const marker = markers[index];
+            setInfo(marker);
+            setSelectedPlaceIndex(index);
+
+            setActiveIndex(index === activeIndex ? null : index);
+
             if (map.current) {
-                const position = new window.kakao.maps.LatLng(marker.position.lat, marker.position.lng)
-                map.current.panTo(position)
+                const position = new window.kakao.maps.LatLng(marker.position.lat, marker.position.lng);
+                map.current.panTo(position);
             }
         }
-    }
+    };
 
     const saveSearchResults = async () => {
         try {
@@ -130,16 +134,18 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         loadSavedResults()
     }, [coords])
 
-    // places 상태를 이용하여 위치 목록을 표시하는 UI
     const renderPlacesList = () => {
         return places.map((place, index) => (
-            <ST.ListItem key={index} onClick={() => handleListItemClick(index)}>
+            <ST.ListItem key={index} onClick={() => handleListItemClick(index)} className={selectedPlaceIndex === index ? 'selected' : ''}>
                 <ST.Text>{place.place_name}</ST.Text>
                 <ST.AddressText>{place.address_name}</ST.AddressText>
-                {/* 기타 필요한 정보 표시 */}
+                {/* Optional: Display phone number and other details if needed */}
+                {activeIndex === index && place.image_url && (
+                    <ST.ImagePreview src={place.image_url} alt={place.place_name} />
+                )}
             </ST.ListItem>
-        ))
-    }
+        ));
+    };
 
     return (
         <div>
@@ -178,6 +184,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                             확인해보시길 바랍니다.
                         </div>
                     )}
+                    {renderPlacesList()}
                     <ST.ListContainer>
                         {places.map((place, index) => (
                             <ST.ListItem
@@ -197,11 +204,11 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                                     </ST.PhoneText>
                                 )}
                                 {selectedPlaceIndex === index && place.image_url && (
-                                    <img src={place.image_url} alt={place.place_name} />
+                                    <ST.ImagePreview src={place.image_url} alt={place.place_name} />
                                 )}
                             </ST.ListItem>
                         ))}
-                        {renderPlacesList()} 
+                        {renderPlacesList()}
                     </ST.ListContainer>
                 </ST.SearchContainer>
 
