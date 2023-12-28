@@ -25,7 +25,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const [showIntro, setShowIntro] = useState(true);
 
     const map = useRef<kakao.maps.Map | null>(null);
-
     const exampleShopId = 1; // 예시 값
 
     const searchPlaces = () => {
@@ -74,13 +73,10 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const saveSearchResults = async () => {
         try {
             const transformedPlaces = places.map((place) => ({
-                place_name: place.place_name,
-                y: parseFloat(place.y),
-                x: parseFloat(place.x),
-                address_name: place.address_name,
-                // 기타 필드...
+                address: place.address_name,
+                latitude: parseFloat(place.y),
+                longitude: parseFloat(place.x)
             }));
-
             const response = await instance.post('/api/map', transformedPlaces);
             if (response.status === 200) {
                 console.log('검색 결과가 성공적으로 저장되었습니다.');
@@ -93,6 +89,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
             throw error;
         }
     };
+
 
     const loadSavedResults = async () => {
         try {
