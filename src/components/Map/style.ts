@@ -7,6 +7,18 @@ export const Layout = styled.div`
     padding: 20px;
 `
 
+// export const SearchContainer = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+//     background: #f9f9f9;
+//     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+//     border-radius: 8px;
+//     width: 20%;
+//     margin-right: 20px;
+//     padding: 20px;
+// `
+
 export const SearchContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -14,10 +26,11 @@ export const SearchContainer = styled.div`
     background: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    width: 20%;
+    /* width: 20%; */ /* 주석 처리하여 너비를 설정하지 않음 */
     margin-right: 20px;
     padding: 20px;
 `
+
 
 export const Input = styled.input`
     width: 100%;
@@ -61,17 +74,17 @@ export const ResultsContainer = styled.div`
 //     overflow: hidden;
 // `
 
-export const ListItem = styled.div`
-    padding: 10px 15px;
-    border-bottom: 1px solid #ddd;
-    &:last-child {
-        border-bottom: none;
-    }
-    cursor: pointer;
-    &:hover {
-        background-color: #f3f3f3;
-    }
-`
+// export const ListItem = styled.div`
+//     padding: 10px 15px;
+//     border-bottom: 1px solid #ddd;
+//     &:last-child {
+//         border-bottom: none;
+//     }
+//     cursor: pointer;
+//     &:hover {
+//         background-color: #f3f3f3;
+//     }
+// `
 export const InfoWindowContent = styled.div`
     max-width: 200px;
     padding: 10px;
@@ -139,4 +152,69 @@ export const PhoneText = styled.div`
     white-space: normal;
     text-align: left;
     font-weight: bold;
+`
+export const Img = styled.div``
+
+export const ImagePreview = styled.img`
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: none;
+`
+export const ListItem = styled.div`
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    &:last-child {
+        border-bottom: none;
+    }
+    cursor: pointer;
+    &:hover {
+        background-color: #f3f3f3;
+    }
+
+    &.active {
+        background-color: #1dcb8e; // 활성화될 때 초록색으로 변경
+    }
+`
+
+// export const PageNumber = styled.button`
+//     background-color: transparent;
+//     border: none;
+//     padding: 5px 10px;
+//     margin: 0 5px;
+//     cursor: pointer;
+//     &:hover {
+//         background-color: #f3f3f3;
+//     }
+// `
+
+export const PageNumber = styled.div`
+    /* 페이지 번호 스타일을 정의하세요. */
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+    color: #333;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    &.active {
+        background-color: #333;
+        color: #fff;
+    }
+`;
+
+export const Pagination = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+`
+
+export const SearchAndListContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
 `
