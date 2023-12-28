@@ -3,6 +3,7 @@ import { Map, MapMarker, MapInfoWindow } from 'react-kakao-maps-sdk'
 import * as ST from './style'
 import { MarkerInfo, MapComponentProps } from '../../kakao-maps'
 import ShopMapComponent from './ShopMapComponent'
+import instance from '../../apis/instance'
 
 interface Place {
     place_name: string
@@ -21,11 +22,10 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const [message, setMessage] = useState('')
     const [places, setPlaces] = useState<Place[]>([])
     const [selectedPlaceIndex, setSelectedPlaceIndex] = useState<number | null>(null)
-    const [showIntro, setShowIntro] = useState(true) // 초기 안내 메시지 상태
+    const [showIntro, setShowIntro] = useState(true)
 
     const map = useRef<kakao.maps.Map | null>(null)
 
-    // ShopMapComponent에 전달할 shopId 값 설정
     const exampleShopId = 1 // 예시 값
 
     const searchPlaces = () => {
@@ -58,7 +58,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                 alert('검색 결과가 없습니다.')
             }
         })
-        // 검색 후 안내 메시지를 숨김
         setShowIntro(false)
     }
 
@@ -66,9 +65,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         if (index >= 0 && index < markers.length) {
             const marker = markers[index]
             setInfo(marker)
-
             setSelectedPlaceIndex(index)
-
             if (map.current) {
                 const position = new window.kakao.maps.LatLng(marker.position.lat, marker.position.lng)
                 map.current.panTo(position)
@@ -76,17 +73,53 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         }
     }
 
-    useEffect(() => {
-        if (window.kakao && window.kakao.maps) {
-            return
+    const saveSearchResults = async () => {
+        try {
+            const transformedPlaces = places.map((place) => ({
+                place_name: place.place_name,
+                y: parseFloat(place.y),
+                x: parseFloat(place.x),
+                address_name: place.address_name,
+            }))
+
+            const response = await instance.post('/api/map', transformedPlaces)
+            if (response.status === 200) {
+                console.log('검색 결과가 성공적으로 저장되었습니다.')
+            } else {
+                console.error('검색 결과 저장 실패:', response.statusText)
+                throw new Error('검색 결과 저장 실패')
+            }
+        } catch (error) {
+            console.error('검색 결과 저장 에러:', error)
+            throw error
         }
+    }
 
-        const script = document.createElement('script')
-        script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=30e58bfb3907dffb16196ae237d38d8f&libraries=services'
-        document.head.appendChild(script)
+    const loadSavedResults = async () => {
+        try {
+            const response = await instance.get('/api/map')
+            if (response.status === 200) {
+                setPlaces(response.data)
+                console.log('검색 결과를 성공적으로 불러왔습니다.')
+            } else {
+                console.error('검색 결과 가져오기 실패:', response.statusText)
+            }
+        } catch (error) {
+            console.error('검색 결과 가져오기 에러:', error)
+        }
+    }
 
-        script.onload = () => {
-            window.kakao.maps.load(() => {
+    const handleSaveSearchResults = () => {
+        saveSearchResults()
+    }
+
+    useEffect(() => {
+        if (!window.kakao || !window.kakao.maps) {
+            const script = document.createElement('script')
+            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=30e58bfb3907dffb16196ae237d38d8f&libraries=services'
+            document.head.appendChild(script)
+
+            script.onload = () => {
                 if (coords.lat !== undefined && coords.lng !== undefined) {
                     const container = document.getElementById('myMap')
                     if (container) {
@@ -94,12 +127,9 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                         map.current = new kakao.maps.Map(container, options)
                     }
                 }
-            })
+            }
         }
-
-        return () => {
-            document.head.removeChild(script)
-        }
+        loadSavedResults()
     }, [coords])
 
     return (
@@ -117,6 +147,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                         placeholder="애견샵을 검색해보세요.🐶"
                     />
                     <ST.Button onClick={searchPlaces}>검색</ST.Button>
+                    <ST.Button onClick={handleSaveSearchResults}>검색 결과 저장</ST.Button> {/* 수정된 버튼 */}
                     {message && <div style={{ color: 'red' }}>{message}</div>}
                     {showIntro && (
                         <div
