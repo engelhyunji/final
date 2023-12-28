@@ -135,17 +135,17 @@ export const getMyChatRoom = async () => {
 }
 
 // 지도 백엔드랑 연동 - 특정 가게의 위치 정보를 가져오는 함수
+// 특정 가게의 위치 정보를 가져오는 함수
 export const getShopLocation = async (shopId: number) => {
     try {
-        const response = await instance.get(`/api/shops/${shopId}/map`)
+        const response = await instance.get(`/api/shops/${shopId}/map`);
         if (response.data && response.data.data) {
-            return response.data.data // 위치 정보 반환
+            return response.data.data; // 위치 정보 반환
         } else {
-            throw new Error('위치 정보가 없습니다.')
+            throw new Error('위치 정보가 없습니다.');
         }
     } catch (error) {
-        console.error('위치 정보 조회 에러:', error)
-        throw error
+        console.error('위치 정보 조회 에러:', error);
+        throw error;
     }
-}
-
+};

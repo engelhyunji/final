@@ -9,6 +9,8 @@ export const CategoryContainer = styled.div`
     max-width: 1280px;
     margin: 200px auto 50px;
     width: 100%;
+    height: 500px;
+    margin-top: 10px;
 `
 
 export const Text = styled.h2`
