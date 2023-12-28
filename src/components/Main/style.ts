@@ -6,20 +6,56 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: auto;
-
     font-family: Pretendard-regular;
+    padding: 0; // Ensure there's no padding that can affect the full-width layout
+    margin: 0; // Ensure there's no margin
+`
+export const BannerImage = styled.img`
+    width: 1450px;
+    height: 550px;
+    z-index: -1;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
 `
 
-export const BannerContainer = styled.div`
-    width: 100%;
-    height: 300px;
-    background-color: #1dcb8e;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-`
+export const BannerContainer = styled.div``
+
+// export const BannerContainer = styled.div`
+//     width: 1450px;
+//     height: 550px; /* height 값을 늘림 */
+//     flex-shrink: 0;
+//     background-color: #FAFAFA;
+//     background-image: url('MainBanner.png');
+//     background-position: center; /* 이미지를 가운데로 정렬 */
+//     background-size: cover; /* 이미지를 컨테이너에 맞게 확대 또는 축소 */
+//     background-repeat: no-repeat;
+//     position: relative;
+
+//     &::before,
+//     &::after {
+//         content: '';
+//         position: absolute;
+//         width: 100%;
+//         height: 20px;
+//         background: url('wave-image.png');
+//         background-repeat: repeat-x;
+//         animation: wave-animation 5s linear infinite;
+//         background-size: cover;
+//     }
+
+//     &::before {
+//         top: 0;
+//         background-position: 0 0;
+//     }
+
+//     &::after {
+//         bottom: 0;
+//         background-position: 0 100%;
+//     }
+// `
+// ====================================================
 
 export const BtnContainer = styled.div`
     display: flex;
@@ -100,16 +136,111 @@ export const Text1 = styled.h2`
     font-size: 20px;
 `
 export const Text2 = styled.div`
-    color: aliceblue;
-    margin-top: 20px;
-    font-size: 25px;
-    font-weight: bold;
-    text-align: left;
+    color: #353535;
+    font-family: Pretendard Variable;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 127.273% */
 `
 export const Text3 = styled.h2`
-    color: aliceblue;
+    color: #353535;
     margin-top: 20px;
-    font-size: 35px;
-    font-weight: bold;
-    text-align: left;
+    font-family: Pretendard Variable;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px; /* 120% */
+`
+
+// export const PetBackImage = styled.h2`
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     z-index: -1;
+// `
+
+// export const PetBackImage = styled.img`
+//     position: absolute;
+//     top: 140vh; // 화면 높이에 비례하여 위치 조정
+//     left: 50%;
+//     transform: translateX(-50%);
+//     z-index: -1;
+//     width: 100vw; // 화면 너비의 100% 차지
+//     height: auto; // 이미지의 종횡비 유지
+//     padding-top: 100px;
+// `
+
+export const PetText = styled.div`
+    flex: 1; // 텍스트 영역이 차지할 공간
+    text-align: left; // 텍스트 왼쪽 정렬
+    color: #000;
+    font-family: Pretendard Variable;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px; /* 120% */
+`
+export const PetText1 = styled.div`
+    flex: 1; // 텍스트 영역이 차지할 공간
+    text-align: left; // 텍스트 왼쪽 정렬
+    margin-right: 50px;
+    color: var(--Gray3, #575756);
+    font-family: Pretendard Variable;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 10px;
+`
+export const PetText2 = styled.div`
+    flex: 1; // 텍스트 영역이 차지할 공간
+    text-align: left; // 텍스트 왼쪽 정렬
+    margin-right: 50px;
+    color: var(--Gray3, #575756);
+    font-family: Pretendard Variable;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 114.286% */
+    margin-top: 30px;
+`
+
+export const PetContent = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1280px;
+    position: relative; // This will ensure the content is on top of the background image
+`
+
+export const PetTextWrapper = styled.div`
+    display: flex;
+    flex-direction: column; // 텍스트를 수직으로 나열합니다.
+    margin-right: 10px; // 이미지와의 간격을 설정합니다.
+    align-items: flex-start; // 텍스트를 왼쪽 정렬합니다.
+`
+
+export const MainTopWrapper = styled.div`
+    display: flex; // 이미지도 flex 아이템으로 만듭니다.
+    flex-direction: column; // 이미지 내부 아이템을 수직으로 나열합니다.
+    align-items: center; // 이미지 내부 아이템을 중앙 정렬합니다.
+`
+export const OverlayContainer = styled.div`
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
+`
+
+export const PetBackImage = styled.img`
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1; // Ensures it's behind the content
+    width: 100vw; // Now the image will span the full width of the viewport
+    height: auto; // Maintain aspect ratio
 `
