@@ -57,6 +57,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                     map.current?.setBounds(bounds)
                 }
                 setPlaces(result)
+                alert('검색이 완료되었습니다. 검색 저장 목록 버튼을 눌러서 확인하세요.')
             } else {
                 alert('검색 결과가 없습니다.')
             }
@@ -234,7 +235,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                     {info && (
                         <Map
                             center={{ lat: info.position.lat, lng: info.position.lng }}
-                            style={{ width: '100%', height: '750px' }}
+                            style={{ width: '500px', height: '750px' }}
                             level={3}
                         >
                             {markers.map((marker, index) => (
