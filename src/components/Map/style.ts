@@ -165,3 +165,21 @@ export const ListItem = styled.div`
         background-color: #1dcb8e; // 활성화될 때 초록색으로 변경
     }
 `;
+
+export const PageNumber = styled.button`
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    &:hover {
+        background-color: #f3f3f3;
+    }
+`;
+
+export const Pagination = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+`;
+

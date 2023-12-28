@@ -25,6 +25,9 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const [showIntro, setShowIntro] = useState(true);
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [isListVisible, setIsListVisible] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [placesPerPage] = useState(5);
+    
 
     const map = useRef<kakao.maps.Map | null>(null);
     const exampleShopId = 1; // 예시 값
@@ -132,65 +135,63 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         loadSavedResults();
     }, [coords]);
 
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+    const indexOfLastPlace = currentPage * placesPerPage;
+    const indexOfFirstPlace = indexOfLastPlace - placesPerPage;
+    const currentPlaces = places.slice(indexOfFirstPlace, indexOfLastPlace);
+
     const renderPlacesList = () => {
         if (!isListVisible) return null;
-
-        return places.map((place, index) => (
-            <ST.ListItem key={index} onClick={() => handleListItemClick(index)} className={selectedPlaceIndex === index ? 'selected' : ''}>
+    
+        return currentPlaces.map((place, index) => (
+            <ST.ListItem 
+                key={index} 
+                onClick={() => handleListItemClick(index + indexOfFirstPlace)} 
+                className={selectedPlaceIndex === index + indexOfFirstPlace ? 'selected' : ''}
+            >
                 <ST.Text>{place.place_name}</ST.Text>
                 <ST.AddressText>{place.address_name}</ST.AddressText>
-                {/* Optional: Display phone number and other details if needed */}
-                {activeIndex === index && place.image_url && (
+                {activeIndex === index + indexOfFirstPlace && place.image_url && (
                     <ST.ImagePreview src={place.image_url} alt={place.place_name} />
                 )}
             </ST.ListItem>
         ));
     };
+    
 
+    const renderPageNumbers = () => {
+        const pageNumbers = [];
+        for (let i = 1; i <= Math.ceil(places.length / placesPerPage); i++) {
+            pageNumbers.push(i);
+        }
+
+        return pageNumbers.map(number => (
+            <ST.PageNumber key={number} onClick={() => paginate(number)}>
+                {number}
+            </ST.PageNumber>
+        ));
+    };
 
     return (
         <div>
-        <ST.Layout>
-            <ST.SearchContainer>
-                <ShopMapComponent shopId={exampleShopId} />
-                <div id="myMap" />
-                <ST.Input value={keyword} onChange={(e) => { setKeyword(e.target.value); setMessage(''); }} placeholder="애견샵을 검색해보세요.🐶" />
-                <ST.Button onClick={searchPlaces}>검색</ST.Button>
-                <ST.Button onClick={handleSaveSearchResults}>
-                    {isListVisible ? '검색 목록 숨기기' : '검색 저장 목록'}
-                </ST.Button>
-                {message && <div style={{ color: 'red' }}>{message}</div>}
-                {showIntro && (
-                    <div style={{ color: 'red', fontStyle: 'italic', textAlign: 'center', position: 'absolute', top: '50%', marginTop: '10px', }}>
-                        애견샵과 관련된<br />키워드를 입력하여<br />지도 위치를<br />확인해보시길 바랍니다.
-                    </div>
-                )}
-                {renderPlacesList()}
-                <ST.ListContainer>
-                        {places.map((place, index) => (
-                            <ST.ListItem
-                                key={`place-${index}`}
-                                onClick={() => handleListItemClick(index)}
-                                className={selectedPlaceIndex === index ? 'selected' : ''}
-                            >
-                                <ST.Text>{place.place_name}</ST.Text>
-                                {selectedPlaceIndex === index && (
-                                    <ST.AddressText>
-                                        <strong>주소:</strong> {place.address_name}
-                                    </ST.AddressText>
-                                )}
-                                {selectedPlaceIndex === index && place.phone && (
-                                    <ST.PhoneText>
-                                        <strong>전화번호:</strong> {place.phone}
-                                    </ST.PhoneText>
-                                )}
-                                {selectedPlaceIndex === index && place.image_url && (
-                                    <ST.ImagePreview src={place.image_url} alt={place.place_name} />
-                                )}
-                            </ST.ListItem>
-                        ))}
-                        {renderPlacesList()}
-                    </ST.ListContainer>
+            <ST.Layout>
+                <ST.SearchContainer>
+                    <ShopMapComponent shopId={exampleShopId} />
+                    <div id="myMap" />
+                    <ST.Input value={keyword} onChange={(e) => { setKeyword(e.target.value); setMessage(''); }} placeholder="애견샵을 검색해보세요.🐶" />
+                    <ST.Button onClick={searchPlaces}>검색</ST.Button>
+                    <ST.Button onClick={handleSaveSearchResults}>
+                        {isListVisible ? '검색 목록 숨기기' : '검색 저장 목록'}
+                    </ST.Button>
+                    {message && <div style={{ color: 'red' }}>{message}</div>}
+                    {showIntro && (
+                        <div style={{ color: 'red', fontStyle: 'italic', textAlign: 'center', position: 'absolute', top: '50%', marginTop: '10px', }}>
+                            애견샵과 관련된<br />키워드를 입력하여<br />지도 위치를<br />확인해보시길 바랍니다.
+                        </div>
+                    )}
+                    {renderPlacesList()}
+                    <ST.Pagination>{renderPageNumbers()}</ST.Pagination>
                 </ST.SearchContainer>
 
                 <ST.MapContainer>
@@ -225,7 +226,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                 </ST.MapContainer>
             </ST.Layout>
         </div>
-    )
-}
+    );
+};
 
-export default MapComponent
+export default MapComponent;
