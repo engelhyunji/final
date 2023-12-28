@@ -100,19 +100,19 @@ const ShopsList: React.FC = () => {
                         onClick={() => roomTypeHandler('GROOMING')}
                         className={nowCategory === 'GROOMING' ? 'active' : ''}
                     >
-                        Pet 미용
+                        애견 미용
                     </ST.ShopCategoryLi>
                     <ST.ShopCategoryLi
                         onClick={() => roomTypeHandler('HOSPITAL')}
                         className={nowCategory === 'HOSPITAL' ? 'active' : ''}
                     >
-                        Pet 병원
+                        동물병원
                     </ST.ShopCategoryLi>
                     <ST.ShopCategoryLi
                         onClick={() => roomTypeHandler('CAFE')}
                         className={nowCategory === 'CAFE' ? 'active' : ''}
                     >
-                        Pet 카페
+                        애견 카페
                     </ST.ShopCategoryLi>
                     <ST.ShopCategoryLi
                         onClick={() => roomTypeHandler('ETC')}
