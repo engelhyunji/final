@@ -31,7 +31,8 @@ const ChatList: React.FC = () => {
     useEffect(() => {
         if (isSuccess && data) {
             setChatrooms(data)
-            console.log('채팅방 목록 조회 성공 data : ', data)
+            // console.log('채팅방 목록 조회 성공 data : ', data)
+            console.log('채팅방 목록 조회 성공')
         }
     }, [isSuccess, data])
 
@@ -114,7 +115,7 @@ const ChatList: React.FC = () => {
                                 <ST.ChatListInfo>
                                 <p>{item.name}</p>
                                 <p>👑 : {item.creator.nickname}</p>
-                                <p>💌 - {item.lastTalkMessage.message}</p>
+                                <p>💌 - {item.lastTalkMessage?.message}</p>
                                 </ST.ChatListInfo>
                             </ST.ChatList>
                             {/* <ST.ChatDelBtn onClick={() => DeleteHandler(item.roomId)}>삭제</ST.ChatDelBtn> */}

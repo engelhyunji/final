@@ -63,7 +63,7 @@ export const getShops = async () => {
     try {
         const res = await instance.get('/api/shops')
         const shop: Shop[] = res.data.result
-        console.log('shop:', shop)
+        // console.log('shop:', shop)
         return shop
     } catch (error) {
         console.log('가게 목록조회 에러 :', error)
