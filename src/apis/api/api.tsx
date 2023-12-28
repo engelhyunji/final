@@ -1,3 +1,4 @@
+import { Chatroom } from '../../components/Chat/ChatList'
 import instance from '../instance'
 
 export interface Shop {
@@ -48,15 +49,15 @@ export interface Pet {
     imageUrls: string[]
 }
 
-export interface ChatRoom {
-    roomId: string
-    name: string
-    creator: Creator
-}
-export interface Creator {
-    email: string
-    nickname: string
-}
+// export interface ChatRoom {
+//     roomId: string
+//     name: string
+//     creator: Creator
+// }
+// export interface Creator {
+//     email: string
+//     nickname: string
+// }
 
 // Shop 목록 조회
 export const getShops = async () => {
@@ -127,7 +128,7 @@ export const deleteShop = async (shopId: number) => {
 export const getMyChatRoom = async () => {
     try {
         const res = await instance.get('/chat/mypage')
-        const myChatRoom: ChatRoom[] = res.data.result
+        const myChatRoom: Chatroom[] = res.data.result
         return myChatRoom
     } catch (error) {
         console.log('마이 chatRoom 조회 :', error)
