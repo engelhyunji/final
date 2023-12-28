@@ -16,8 +16,7 @@ const NoLineLink: React.FC<NoLineLinkProps> = ({ to, children, ...rest }) => (
             color: '#000000',
             display: 'inline-block',
             textAlign: 'center',
-            fontWeight: 'bold',
-            fontFamily: 'Pretendard-SemiBold',
+            fontFamily: 'Pretendard-Bold',
             marginLeft: '36px',
         }}
         {...rest}
