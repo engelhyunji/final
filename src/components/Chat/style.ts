@@ -42,8 +42,8 @@ export const ChatH3 = styled.h3`
 
 export const ChatInputDiv = styled.div`
     width: 100%;
-    margin: 20px 0;
-    padding: 20px 0 30px;
+    margin: 20px;
+    /* padding: 20px 0 30px; */
     border-bottom: 1px solid #dadada;
 
     display: flex;
@@ -56,6 +56,7 @@ export const ChatInputDiv = styled.div`
 export const ChatNameInput = styled.input`
     width: 407px;
     padding: 11px 13px;
+    margin: 20px;
 
     border-radius: 7px;
     border: 1px solid #dadada;
@@ -79,7 +80,7 @@ export const ChatLists = styled.div`
 `
 
 export const ChatListContainer = styled.div`
-    margin: 20px;
+    margin: 12px;
 `
 
 export const ChatList = styled.div`

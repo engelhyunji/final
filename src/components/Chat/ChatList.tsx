@@ -85,9 +85,6 @@ const ChatList: React.FC = () => {
             </ST.ChatListTitleWrap>
 
             <ST.ChatInputDiv>
-                <div>
-                    {/* <ST.ChatLabel>채팅방 이름: </ST.ChatLabel> */}
-                </div>
                 <ST.ChatNameInput
                     placeholder="채팅방 이름(최대 12자)"
                     type="text"
