@@ -101,7 +101,6 @@ export const ChatListInfo = styled.div`
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
 `
 
 
@@ -137,6 +136,10 @@ export const MessageInfoContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 12px;
+
+    span {
+        max-width: 500px;
+    }
 `
 
 export const ChatLeaveBtn = styled.button`

@@ -170,7 +170,7 @@ const ChatRoom: React.FC = () => {
                 <ST.MessageInfoContainer>
                     <ST.ChatH2>{room?.name} 채팅방</ST.ChatH2>
                     {/* <span>방ID: {room?.roomId}</span> */}
-                    <span>방장👑: {room?.creator.nickname}</span>
+                    <span>방소유주👑: {room?.creator.nickname}</span>
                     <span>참여자 수: {room?.members.length}</span>
                     <span>참여인원: {room?.members.map((member) => <span>{member.nickname}, </span>)}</span>
                     <div>

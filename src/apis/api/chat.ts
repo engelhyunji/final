@@ -14,7 +14,7 @@ export const getChatList = async () => {
 export const addChat = async (query: { name: string }) => {
     try {
         const res = await instance.post('/chat/room', null, { params: query })
-        console.log('addChat 함수 반환값',res.data.result)
+        // console.log('addChat 함수 반환값',res.data.result)
     } catch (err) {
         console.log(err)
     }
