@@ -23,6 +23,10 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const [places, setPlaces] = useState<Place[]>([])
     const [selectedPlaceIndex, setSelectedPlaceIndex] = useState<number | null>(null)
     const [showIntro, setShowIntro] = useState(true)
+    const [activeIndex, setActiveIndex] = useState<number | null>(null)
+    const [isListVisible, setIsListVisible] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [placesPerPage] = useState(5)
 
     const map = useRef<kakao.maps.Map | null>(null)
     const exampleShopId = 1 // 예시 값
@@ -53,6 +57,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                     map.current?.setBounds(bounds)
                 }
                 setPlaces(result)
+                alert('검색이 완료되었습니다. 검색 저장 목록 버튼을 눌러서 확인하세요.')
             } else {
                 alert('검색 결과가 없습니다.')
             }
@@ -65,6 +70,8 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
             const marker = markers[index]
             setInfo(marker)
             setSelectedPlaceIndex(index)
+            setActiveIndex(index === activeIndex ? null : index)
+
             if (map.current) {
                 const position = new window.kakao.maps.LatLng(marker.position.lat, marker.position.lng)
                 map.current.panTo(position)
@@ -108,6 +115,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
 
     const handleSaveSearchResults = () => {
         saveSearchResults()
+        setIsListVisible(!isListVisible)
     }
 
     useEffect(() => {
@@ -129,74 +137,105 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         loadSavedResults()
     }, [coords])
 
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
+
+    const indexOfLastPlace = currentPage * placesPerPage
+    const indexOfFirstPlace = indexOfLastPlace - placesPerPage
+    const currentPlaces = places.slice(indexOfFirstPlace, indexOfLastPlace)
+
+    const renderPlacesList = () => {
+        if (!isListVisible) return null
+
+        return currentPlaces.map((place, index) => (
+            <ST.ListItem
+                key={index}
+                onClick={() => handleListItemClick(index + indexOfFirstPlace)}
+                className={selectedPlaceIndex === index + indexOfFirstPlace ? 'selected' : ''}
+            >
+                <ST.Text>{place.place_name}</ST.Text>
+                <ST.AddressText>{place.address_name}</ST.AddressText>
+                {activeIndex === index + indexOfFirstPlace && place.image_url && (
+                    <ST.ImagePreview src={place.image_url} alt={place.place_name} />
+                )}
+            </ST.ListItem>
+        ))
+    }
+
+    const renderPageNumbers = () => {
+        if (places.length <= placesPerPage) {
+            return null // 페이지네이션이 필요하지 않을 때 페이지 번호를 렌더링하지 않습니다.
+        }
+
+        const pageNumbers = []
+        for (let i = 1; i <= Math.ceil(places.length / placesPerPage); i++) {
+            pageNumbers.push(i)
+        }
+
+        return (
+            <div>
+                {pageNumbers.map((number) => (
+                    <ST.PageNumber key={number} onClick={() => paginate(number)}>
+                        {number}
+                    </ST.PageNumber>
+                ))}
+            </div>
+        )
+    }
+
     return (
         <div>
             <ST.Layout>
-                <ST.SearchContainer>
-                    <ShopMapComponent shopId={exampleShopId} />
-                    <div id="myMap" />
-                    <ST.Input
-                        value={keyword}
-                        onChange={(e) => {
-                            setKeyword(e.target.value)
-                            setMessage('')
-                        }}
-                        placeholder="애견샵을 검색해보세요.🐶"
-                    />
-                    <ST.Button onClick={searchPlaces}>검색</ST.Button>
-                    <ST.Button onClick={handleSaveSearchResults}>saveSearchResults</ST.Button> {/* 추가된 버튼 */}
-                    {message && <div style={{ color: 'red' }}>{message}</div>}
-                    {showIntro && (
-                        <div
-                            style={{
-                                color: 'red',
-                                fontStyle: 'italic',
-                                textAlign: 'center',
-                                position: 'absolute',
-                                top: '50%',
-                                marginTop: '10px',
+                <ST.SearchAndListContainer>
+                    <ST.SearchContainer>
+                        <ShopMapComponent shopId={exampleShopId} />
+                        <div id="myMap" />
+                        <ST.Input
+                            value={keyword}
+                            onChange={(e) => {
+                                setKeyword(e.target.value)
+                                setMessage('')
                             }}
-                        >
-                            애견샵과 관련된
-                            <br />
-                            키워드를 입력하여
-                            <br />
-                            지도 위치를
-                            <br />
-                            확인해보시길 바랍니다.
-                        </div>
-                    )}
-                    <ST.ListContainer>
-                        {places.map((place, index) => (
-                            <ST.ListItem
-                                key={`place-${index}`}
-                                onClick={() => handleListItemClick(index)}
-                                className={selectedPlaceIndex === index ? 'selected' : ''}
+                            placeholder="애견샵을 검색해보세요.🐶"
+                        />
+                        <ST.Button onClick={searchPlaces}>검색</ST.Button>
+                        <ST.Button onClick={handleSaveSearchResults}>검색 저장 목록</ST.Button>
+                        <ST.Button onClick={() => setIsListVisible(!isListVisible)}>
+                            {isListVisible ? '검색 목록 숨기기' : '검색 목록 보기'}
+                        </ST.Button>
+                        {message && <div style={{ color: 'red' }}>{message}</div>}
+                        {showIntro && (
+                            <div
+                                style={{
+                                    color: 'red',
+                                    fontStyle: 'italic',
+                                    textAlign: 'center',
+                                    position: 'absolute',
+                                    top: '50%',
+                                    marginTop: '10px',
+                                }}
                             >
-                                <ST.Text>{place.place_name}</ST.Text>
-                                {selectedPlaceIndex === index && (
-                                    <ST.AddressText>
-                                        <strong>주소:</strong> {place.address_name}
-                                    </ST.AddressText>
-                                )}
-                                {selectedPlaceIndex === index && place.phone && (
-                                    <ST.PhoneText>
-                                        <strong>전화번호:</strong> {place.phone}
-                                    </ST.PhoneText>
-                                )}
-                                {selectedPlaceIndex === index && place.image_url && (
-                                    <img src={place.image_url} alt={place.place_name} />
-                                )}
-                            </ST.ListItem>
-                        ))}
-                    </ST.ListContainer>
-                </ST.SearchContainer>
-
+                                애견샵과 관련된
+                                <br />
+                                키워드를 입력하여
+                                <br />
+                                지도 위치를
+                                <br />
+                                확인해보시길 바랍니다.
+                            </div>
+                        )}
+                    </ST.SearchContainer>
+                    {isListVisible && (
+                        <ST.ListContainer>
+                            {renderPlacesList()}
+                            <ST.Pagination>{renderPageNumbers()}</ST.Pagination>
+                        </ST.ListContainer>
+                    )}
+                </ST.SearchAndListContainer>
                 <ST.MapContainer>
                     {info && (
                         <Map
                             center={{ lat: info.position.lat, lng: info.position.lng }}
-                            style={{ width: '100%', height: '750px' }}
+                            style={{ width: '750px', height: '750px' }}
                             level={3}
                         >
                             {markers.map((marker, index) => (
