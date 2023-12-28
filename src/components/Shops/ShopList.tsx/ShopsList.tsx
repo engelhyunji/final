@@ -82,7 +82,7 @@ const ShopsList: React.FC = () => {
             </ST.TitleBackContainer>
             <ST.ShopSearchContainer>
                 <ST.ShopSearchCondition>가게 종류 ▾</ST.ShopSearchCondition>
-                <ST.ShopSearchInput type="text" value={'검색기능 준비중입니다'} placeholder="검색기능 준비중입니다" />
+                <ST.ShopSearchInput type="text" value={'검색기능 준비중입니다'} placeholder="" readOnly/>
                 <ST.SearchBtn>검색</ST.SearchBtn>
             </ST.ShopSearchContainer>
 
