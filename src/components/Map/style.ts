@@ -179,16 +179,32 @@ export const ListItem = styled.div`
     }
 `
 
-export const PageNumber = styled.button`
-    background-color: transparent;
-    border: none;
-    padding: 5px 10px;
-    margin: 0 5px;
+// export const PageNumber = styled.button`
+//     background-color: transparent;
+//     border: none;
+//     padding: 5px 10px;
+//     margin: 0 5px;
+//     cursor: pointer;
+//     &:hover {
+//         background-color: #f3f3f3;
+//     }
+// `
+
+export const PageNumber = styled.div`
+    /* 페이지 번호 스타일을 정의하세요. */
+    display: inline-block;
+    margin-right: 5px;
     cursor: pointer;
-    &:hover {
-        background-color: #f3f3f3;
+    color: #333;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    &.active {
+        background-color: #333;
+        color: #fff;
     }
-`
+`;
 
 export const Pagination = styled.div`
     display: flex;
