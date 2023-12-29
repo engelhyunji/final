@@ -1,24 +1,17 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    max-width: 1440px;
-    margin: 0 auto;
-    position: relative;
-    font-family: Pretendard-regular;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* width: 1440px; // 화면의 전체 가로 너비를 사용합니다.
+    width: 100vw; // 화면의 전체 가로 너비를 사용합니다.
     max-width: 100%; // 최대 너비를 100%로 설정하여 이미지가 넘치지 않도록 합니다.
     overflow-x: hidden; // 가로 스크롤바가 생기지 않도록 숨깁니다.
     overflow-y: hidden; // 가로 스크롤바가 생기지 않도록 숨깁니다.
     position: relative; // 이미지가 기준이 될 수 있도록 설정
+    width: 100%;
     min-height: 100vh;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
-    margin: 0 auto; */
+    padding: 0;
 `
 
 // export const Container = styled.div`
@@ -36,32 +29,38 @@ export const Container = styled.div`
 // `;
 
 export const Container1 = styled.div``
-// export const MainContainer = styled.div`
-//     width: 100%;
-//     min-height: 100vh;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     font-family: Pretendard-regular;
-//     padding: 0;
-//     margin: 0;
-// `
+export const MainContainer = styled.div`
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Pretendard-regular;
+    padding: 0;
+    margin: 0;
+`
 export const BannerImage = styled.img`
     background-image: url('/Main1.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    width: 100%;
+    height: 550px;
+    z-index: -1;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
+    object-fit: cover;
+    object-position: center;
+    border: none;
+    box-shadow: none;
+    outline: none;
 `
 
 export const BannerContainer = styled.div`
-    width: 100%;
-    height: 400px;
+    height: 530px;
+    overflow: hidden;
     position: relative;
-    display: flex;
 `
 
 // export const BannerContainer = styled.div`
@@ -100,36 +99,15 @@ export const BannerContainer = styled.div`
 // ====================================================
 
 export const BtnContainer = styled.div`
-    margin: 100px 0;
-
     display: flex;
-    justify-content: center;
-    gap: 39px;
-    /* display: flex;
     justify-content: center;
     gap: 20px;
     align-items: center;
-    padding-top: 100px; */
+    padding-top: 100px;
 `
 
 export const ShopBtn = styled.button`
-    width: 247px;
-    height: 186px;
-
-    background-color: #fff;
-    line-height: 22px;
-    padding: 32px;
-    border: none;
-    color: #00bd8f;
-
-    border-radius: 18px;
-    cursor: pointer;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    /* position: relative;
+    position: relative;
     font-size: 1.77vh;
     background-color: #ffffff;
     color: white;
@@ -149,7 +127,7 @@ export const ShopBtn = styled.button`
 
     & > * {
         pointer-events: none;
-    } */
+    }
 `
 
 export const PetBtn = styled.button`
@@ -178,31 +156,31 @@ export const PetBtn = styled.button`
 
 export const TopWrapper = styled.div`
     max-width: 1280px;
-    /* margin: 20px auto; */
+    margin: 20px;
 `
 
-// export const ShopsWrapper = styled.div`
-//     max-width: 1280px;
-//     margin: 20px;
-// `
+export const ShopsWrapper = styled.div`
+    max-width: 1280px;
+    margin: 20px;
+`
 export const Warp = styled.div`
-    margin: 130px 100px;
-    width: 610px;
+    /* margin-top: 100px; */
+    margin-right: 150px;
 `
 
 export const Text = styled.h2`
     /* margin-top: 30px; */
-    font-size: 25px;
-    font-family: Pretendard-bold;
+    font-size: 20px;
+    font-weight: bold;
 `
 export const Text1 = styled.h2`
     /* margin-top: 20px; */
-    text-align: left;
     font-size: 20px;
 `
 export const Text2 = styled.div`
     /* margin-left: 100px; */
     color: #353535;
+    font-family: Pretendard Variable;
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
@@ -211,6 +189,7 @@ export const Text2 = styled.div`
 export const Text3 = styled.h2`
     color: #353535;
     margin-top: 20px;
+    font-family: Pretendard Variable;
     font-size: 30px;
     font-style: normal;
     font-weight: 700;
@@ -378,18 +357,32 @@ export const OverlayContainer = styled.div`
     flex-direction: row;
 `
 
+// export const PetBackImage = styled.img`
+//     margin-right: 170px;
+//     position: absolute;
+//     width: 100%;
+//     top: 47%;
+//     left: 50%;
+//     transform: translate(-50%, 15%);
+//     z-index: -1;
+//     max-width: 100%;
+//     height: auto;
+//     /* content: url('/public/PetBack.png'); */
+// `
+
 export const PetBackImage = styled.img`
+    src: url('/MainPet1.png');
     margin-right: 170px;
     position: absolute;
     width: 100%;
     top: 47%;
     left: 50%;
-    transform: translate(-50%, 15%);
+    transform: translate(-50%, -50%);
     z-index: -1;
     max-width: 100%;
     height: auto;
-    content: url('/MainPet1.png');
 `
+
 export const Bottom = styled.div`
     padding-top: 50px; // 위쪽 여백
     padding-bottom: 70px; // 아래쪽 여백
