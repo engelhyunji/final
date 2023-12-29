@@ -83,7 +83,7 @@ const Signup: React.FC = () => {
             alert('정보를 모두 입력해주세요😺')
             return false
         } else if (userData.password.length < 4 || userData.password.length > 12) {
-            alert('4자리 ~ 20자리 이내로 입력해주세요.')
+            alert('4자리 ~ 12자리 이내로 입력해주세요.')
             return false
         } else if (userData.password.search(/\s/) != -1) {
             alert('비밀번호는 공백 없이 입력해주세요.')
