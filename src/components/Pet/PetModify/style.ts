@@ -236,4 +236,3 @@ export const FileIcon = styled.div`
     font-size: 36px; /* 아이콘 크기 설정 */
     color: #787878;
 `;
-
