@@ -206,7 +206,7 @@ const PetModify: React.FC = () => {
                     </ST.ImgWrap>
                 </ST.PetInputBox>
 
-                {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" />}
+                {/* {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" />} */}
                 <ST.ButtonContainer>
                     <ST.Button type="submit">Pet 수정</ST.Button>
                     <ST.Button onClick={handleDelete}>Pet 삭제</ST.Button>
