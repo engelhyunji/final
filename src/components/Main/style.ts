@@ -380,7 +380,7 @@ export const PetBackImage = styled.img`
     transform: translate(-50%, -50%);
     z-index: -1;
     max-width: 100%;
-    height: auto;
+    /* height: auto; */
 `
 
 export const Bottom = styled.div`
