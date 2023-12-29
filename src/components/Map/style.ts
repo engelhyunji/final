@@ -39,7 +39,7 @@ export const Input = styled.input`
     border: 2px solid #ddd;
     border-radius: 20px;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 15px;
     &:focus {
         border-color: #1dcb8e;
         outline: none;

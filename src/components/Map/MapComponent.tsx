@@ -55,6 +55,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                 setIsListVisible(true); // 검색 결과가 있을 때 목록을 보이도록 설정
             } else {
                 alert('검색 결과가 없습니다.');
+                setIsListVisible(false); // 검색 결과가 없을 때 목록을 숨기도록 설정
             }
         });
         setShowIntro(false);
@@ -82,8 +83,10 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
             const response = await instance.post('/api/map', transformedPlaces);
             if (response.status === 200) {
                 console.log('검색 결과가 성공적으로 저장되었습니다.');
+                alert('검색 결과가 성공적으로 저장되었습니다. 검색 저장 목록을 눌러서 확인해보시길 바랍니다.');
             } else {
                 console.error('검색 결과 저장 실패:', response.statusText);
+                alert('검색 결과 저장 실패하였습니다. 다시 시도 해주시길 바랍니다.');
                 throw new Error('검색 결과 저장 실패');
             }
         } catch (error) {
@@ -98,8 +101,10 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
             if (response.status === 200) {
                 setPlaces(response.data);
                 console.log('검색 결과를 성공적으로 불러왔습니다.');
+                alert('검색 결과를 성공적으로 불러왔습니다.');
             } else {
                 console.error('검색 결과 가져오기 실패:', response.statusText);
+                alert('검색 결과 가져오기 실패하였습니다.');
             }
         } catch (error) {
             console.error('검색 결과 가져오기 에러:', error);
@@ -141,7 +146,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                             setKeyword(e.target.value)
                             setMessage('')
                         }}
-                        placeholder="애견샵을 검색해보세요.🐶"
+                        placeholder="애견샵을 검색해보세요🐶"
                     />
                     <ST.Button onClick={searchPlaces}>검색</ST.Button>
                     <ST.Button onClick={handleSaveSearchResults}>검색 저장 목록</ST.Button> {/* 추가된 버튼 */}
@@ -150,11 +155,11 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                         <div
                             style={{
                                 color: 'red',
-                                fontStyle: 'italic',
                                 textAlign: 'center',
                                 position: 'absolute',
                                 top: '50%',
                                 marginTop: '10px',
+                                marginLeft: '10px',
                             }}
                         >
                             애견샵과 관련된
