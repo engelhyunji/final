@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import * as ST from './style'
 import Dropdown from 'react-bootstrap/Dropdown'
+import { useNavigate } from 'react-router-dom'
 import instance from '../../apis/instance'
 import { PetDetails } from '../../apis/api/pet'
 import BackWave from '../BackWave'
@@ -18,16 +19,15 @@ const Pet: React.FC = () => {
     const [imageFiles, setImageFiles] = useState<File[]>([])
     const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null)
     const [registrationStatus, setRegistrationStatus] = useState<string | null>(null)
-
+    const navigate = useNavigate()
 
     const handleGenderChange = (gender: 'MALE' | 'FEMALE') => {
         setPetGender(gender)
     }
 
     const handleKindChangeDropdown = (kind: 'SMALL' | 'MEDIUM' | 'LARGE') => {
-        setPetKind(kind);
-    };
-    
+        setPetKind(kind)
+    }
 
     const handleInfoChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setPetInfo(e.target.value)
@@ -69,6 +69,7 @@ const Pet: React.FC = () => {
                 alert('애완동물 정보가 성공적으로 등록되었습니다.🐶')
 
                 resetFormData()
+                navigate('/petlist')
             } else {
                 setRegistrationStatus('애완동물 정보 등록에 실패했습니다.')
             }
@@ -96,7 +97,12 @@ const Pet: React.FC = () => {
             <ST.Form onSubmit={handleSubmit}>
                 <ST.PetInputBox>
                     <ST.Label>Pet의 이름을 알려주세요</ST.Label>
-                    <ST.Input type="text" placeholder="Pet의 이름을 입력해주세요" value={petName} onChange={handlePetNameChange} />
+                    <ST.Input
+                        type="text"
+                        placeholder="Pet의 이름을 입력해주세요"
+                        value={petName}
+                        onChange={handlePetNameChange}
+                    />
                 </ST.PetInputBox>
 
                 <ST.PetInputBox>
