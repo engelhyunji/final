@@ -41,7 +41,7 @@ export const MainContainer = styled.div`
     margin: 0;
 `
 export const BannerImage = styled.img`
-    background-image: url('/MainBanner.png');
+    background-image: url('/Main1.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -371,7 +371,7 @@ export const PetBackImage = styled.img`
     z-index: -1;
     max-width: 100%;
     height: auto;
-    content: url('/public/PetBack.png');
+    content: url('/MainPet1.png');
 `
 export const Bottom = styled.div`
     padding-top: 50px; // 위쪽 여백
