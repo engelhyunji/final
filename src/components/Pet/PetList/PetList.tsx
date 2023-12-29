@@ -41,10 +41,6 @@ const PetList: React.FC = () => {
         fetchPetsData() // 컴포넌트 마운트 시 자동으로 목록을 불러옵니다.
     }, [])
 
-    const handleFetchPetsClick = () => {
-        fetchPetsData() // 버튼 클릭 시 목록을 다시 불러옵니다.
-    }
-
     if (isLoading) {
         return <div>로딩 중...</div>
     }
@@ -54,21 +50,35 @@ const PetList: React.FC = () => {
     }
 
     return (
-        <ST.Back>
+        <ST.Container>
             <ST.ProfileContainer>
-                <ST.Name>애완동물 전체 목록</ST.Name>
-                <ST.Button onClick={handleFetchPetsClick}>전체 조회</ST.Button>
-                <ST.Posts>
-                    {pets.map((pet) => (
-                        <ST.PostContainer key={pet.petId} onClick={() => handlePetClick(pet.petId)}>
-                            {pet.imageUrls && pet.imageUrls[0] && (
-                                <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
-                            )}
-                        </ST.PostContainer>
-                    ))}
-                </ST.Posts>
+                <ST.TitleBackContainer>
+                    <ST.PetP>우리 애기 귀여운 거 나만 볼 수 없을 땐? 마이펫에 자랑하기!</ST.PetP>
+                </ST.TitleBackContainer>
             </ST.ProfileContainer>
-        </ST.Back>
+            <ST.PetSearchContainer>
+                <ST.PetSearchCondition>애견 이름</ST.PetSearchCondition>
+                <ST.PetSearchInput
+                    type="text"
+                    value={'검색기능 준비중입니다'}
+                    placeholder="검색기능 준비중입니다"
+                    readOnly // 검색 기능이 준비 중이므로 입력을 방지합니다.
+                    />
+                <ST.SearchBtn>검색</ST.SearchBtn>
+            </ST.PetSearchContainer>
+            <ST.PetListContainer>
+                <ST.PetListH3>Pet 조회</ST.PetListH3>
+            </ST.PetListContainer>
+            <ST.Posts>
+                {pets.map((pet) => (
+                    <ST.PostContainer key={pet.petId} onClick={() => handlePetClick(pet.petId)}>
+                        {pet.imageUrls && pet.imageUrls[0] && (
+                            <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
+                        )}
+                    </ST.PostContainer>
+                ))}
+            </ST.Posts>
+        </ST.Container>
     )
 }
 

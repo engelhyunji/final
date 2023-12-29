@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import * as ST from './style'
 import { PetDetails, fetchPetDetail } from '../../../apis/api/pet'
+import NoLineLink from '../../NoLineLink'
 
 type PetDetailParams = {
     [key: string]: string | undefined // petId가 undefined일 수 있음을 명시
@@ -36,46 +37,38 @@ const PetDetail: React.FC = () => {
 
     return (
         <ST.ProfileContainer>
-            <ST.Wrap>
-                <ST.Posts>
-                    <ST.Name>{pet.petName} 상세 정보</ST.Name>
-                    <ST.ImgCard>
-                        <ST.PetItem>
-                            <ST.Img>
-                                {pet.imageUrls && pet.imageUrls[0] && (
-                                    <img
-                                        src={pet.imageUrls[0]}
-                                        alt={`${pet.petName} 이미지`}
-                                        style={{
-                                            maxWidth: '100%',
-                                            maxHeight: '100%',
-                                            borderRadius: '10px',
-                                            cursor: 'pointer',
-                                        }}
-                                    />
-                                )}
-                            </ST.Img>
-                        </ST.PetItem>
+            <ST.DetailCard>
+                {pet.imageUrls.slice(0, 1).map((url, index) => (
+                    <ST.ImgCard key={index}>
+                        <ST.Img2 src={url} alt={`${pet.petName} 이미지`} />
                     </ST.ImgCard>
-
-                    <ST.Text>
-                        <p>
-                            <ST.DetailLabel>애완동물 성별:</ST.DetailLabel> {pet.petGender === 'MALE' ? '남아' : '여아'}
-                        </p>
-                        <p>
-                            <ST.DetailLabel>애완동물 종류:</ST.DetailLabel>
-                            {pet.petKind === 'SMALL' ? '소형견' : pet.petKind === 'MEDIUM' ? '중형견' : '대형견'}
-                        </p>
-                        <p>
-                            <ST.DetailLabel>Info:</ST.DetailLabel> {pet.petInfo}
-                        </p>
-
-                        <p>
-                            <Link to={`/modify/${pet.petId}`}>수정 페이지로 이동</Link>
-                        </p>
-                    </ST.Text>
-                </ST.Posts>
-            </ST.Wrap>
+                ))}
+                <ST.Name>{pet.petName}</ST.Name>
+                <ST.DetailText>
+                    <ST.DetailLabel>성별: </ST.DetailLabel>
+                    {pet.petGender === 'MALE' ? '남아' : '여아'}
+                </ST.DetailText>
+                <ST.DetailText>
+                    <ST.DetailLabel>종류: </ST.DetailLabel>
+                    {pet.petKind}
+                </ST.DetailText>
+                <ST.DetailText>
+                    <ST.DetailLabel>Info: </ST.DetailLabel>
+                    {pet.petInfo}
+                </ST.DetailText>
+                <ST.Wrap1>
+                    <NoLineLink to={`/my`}>
+                        <ST.Text1>마이 페이지로 이동 ⇀</ST.Text1>
+                    </NoLineLink>
+                </ST.Wrap1>
+            </ST.DetailCard>
+            <ST.Posts>
+                {pet.imageUrls.map((url, index) => (
+                    <ST.ImgCard1 key={index}>
+                        <ST.Img src={url} alt={`${pet.petName} 이미지`} />
+                    </ST.ImgCard1>
+                ))}
+            </ST.Posts>
         </ST.ProfileContainer>
     )
 }

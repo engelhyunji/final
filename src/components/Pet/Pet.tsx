@@ -19,21 +19,10 @@ const Pet: React.FC = () => {
     const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null)
     const [registrationStatus, setRegistrationStatus] = useState<string | null>(null)
 
-    // const { nickname } = useAuth()
-
-    // const kindOptions = ['SMALL', 'MEDIUM', 'LARGE']
-
-    // const handleGenderChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    //     setPetGender(e.target.value as 'MALE' | 'FEMALE')
-    // }
 
     const handleGenderChange = (gender: 'MALE' | 'FEMALE') => {
         setPetGender(gender)
     }
-
-    // const handleKindChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    //     setPetKind(e.target.value as 'SMALL' | 'MEDIUM' | 'LARGE')
-    // }
 
     const handleKindChangeDropdown = (kind: 'SMALL' | 'MEDIUM' | 'LARGE') => {
         setPetKind(kind);

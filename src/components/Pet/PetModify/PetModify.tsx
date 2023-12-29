@@ -2,6 +2,8 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PetDetails, fetchPetDetail, updatePet, deletePet } from '../../../apis/api/petmodify'
 import * as ST from './style'
+import BackWave from '../../BackWave'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const PetModify: React.FC = () => {
     const [petDetail, setPetDetail] = useState<PetDetails | null>(null)
@@ -14,10 +16,8 @@ const PetModify: React.FC = () => {
 
     useEffect(() => {
         if (petId) {
-            console.log(`petId: ${petId}`)
             fetchPetDetail(parseInt(petId))
                 .then((response) => {
-                    console.log('response:', response)
                     if (response.isSuccess) {
                         setPetDetail(response.result)
                     } else {
@@ -25,8 +25,7 @@ const PetModify: React.FC = () => {
                     }
                     setLoading(false)
                 })
-                .catch((error) => {
-                    console.error('error:', error)
+                .catch(() => {
                     setError('펫 정보를 불러오는데 실패했습니다.')
                     setLoading(false)
                 })
@@ -34,15 +33,20 @@ const PetModify: React.FC = () => {
     }, [petId])
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        console.log('Input:', e.target.name, e.target.value)
         if (petDetail) {
-            setPetDetail({ ...petDetail, [e.target.name]: e.target.value } as PetDetails)
+            setPetDetail({ ...petDetail, [e.target.name]: e.target.value })
+        }
+    }
+
+    const handleKindChange = (kind: 'SMALL' | 'MEDIUM' | 'LARGE') => {
+        // 타입을 구체적으로 지정
+        if (petDetail) {
+            setPetDetail({ ...petDetail, petKind: kind })
         }
     }
 
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.[0]) {
-            console.log('file:', e.target.files[0])
             setImageUrl(e.target.files[0])
             const reader = new FileReader()
             reader.onloadend = () => setImagePreviewUrl(reader.result as string)
@@ -71,15 +75,12 @@ const PetModify: React.FC = () => {
         try {
             const response = await updatePet(petDetail.petId, formData)
             if (response.isSuccess) {
-                console.log('애완동물 정보 업데이트 성공')
                 alert('애완동물 정보 업데이트 성공')
                 navigate('/petlist')
             } else {
-                console.error('애완동물 정보 업데이트 실패:', response.message)
                 setError(response.message)
             }
         } catch (error) {
-            console.error('애완동물 정보 업데이트 에러:', error)
             setError('애완동물 정보 업데이트 실패')
         }
     }
@@ -89,14 +90,12 @@ const PetModify: React.FC = () => {
             try {
                 const response = await deletePet(petDetail.petId)
                 if (response.isSuccess) {
-                    console.log('애완동물 삭제 성공')
                     alert('애완동물 삭제 성공')
                     navigate('/petlist')
                 } else {
                     setError(response.message)
                 }
             } catch (error) {
-                console.error('애완동물 삭제 에러:', error)
                 setError('애완동물 삭제 에러')
             }
         }
@@ -107,48 +106,111 @@ const PetModify: React.FC = () => {
     if (!petDetail) return <p>Pet 상세정보를 찾을 수 없습니다.</p>
 
     return (
-        <ST.Content>
+        <ST.Container>
+            <BackWave />
             <ST.Text>Pet 상세 정보 수정</ST.Text>
             <ST.Form onSubmit={handleSubmit}>
-                <ST.Label>
-                    Pet 이름:
-                    <input type="text" name="petName" value={petDetail.petName || ''} onChange={handleInputChange} />
-                </ST.Label>
-                <br />
-                <ST.Label>
-                    Pet 성별:
-                    <select name="petGender" value={petDetail.petGender || ''} onChange={handleInputChange}>
-                        <option value="MALE">남아</option>
-                        <option value="FEMALE">여아</option>
-                    </select>
-                </ST.Label>
-                <br />
-                <ST.Label>
-                    Pet 종류:
-                    <select name="petKind" value={petDetail.petKind || ''} onChange={handleInputChange}>
+                <ST.PetInputBox>
+                    <ST.Label>
+                    Pet의 이름을 알려주세요
+                        <ST.Input
+                            type="text"
+                            name="petName"
+                            value={petDetail.petName || ''}
+                            onChange={handleInputChange}
+                        />
+                    </ST.Label>
+                </ST.PetInputBox>
+
+                <ST.PetInputBox>
+                    <ST.Label>Pet 성별을 알려주세요</ST.Label>
+                    <ST.StDropdown>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="light" id="dropdown-basic">
+                                {petDetail.petGender === 'MALE' ? '남아' : '여아'}
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item onClick={() => setPetDetail({ ...petDetail, petGender: 'MALE' })}>
+                                    남아
+                                </Dropdown.Item>
+                                <Dropdown.Item onClick={() => setPetDetail({ ...petDetail, petGender: 'FEMALE' })}>
+                                    여아
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </ST.StDropdown>
+                </ST.PetInputBox>
+
+                {/* <select name="petKind" value={petDetail.petKind || ''} onChange={handleInputChange}>
                         <option value="SMALL">소형견</option>
                         <option value="MEDIUM">중형견</option>
                         <option value="LARGE">대형견</option>
-                    </select>
-                </ST.Label>
-                <br />
-                <ST.Label>
-                    Pet 특이사항:
-                    <textarea name="petInfo" value={petDetail.petInfo || ''} onChange={handleInputChange} />
-                </ST.Label>
-                <br />
-                <ST.Label>
-                    Pet 사진:
-                    <input type="file" accept="image/*" onChange={handleImageFileChange} />
-                </ST.Label>
-                <br />
+                    </select> */}
+
+                <ST.PetInputBox>
+                    <ST.Label>Pet의 크기를 입력해주세요</ST.Label>
+                    <ST.StDropdown>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="light" id="dropdown-kind">
+                                {petDetail?.petKind === 'SMALL'
+                                    ? '소형견'
+                                    : petDetail?.petKind === 'MEDIUM'
+                                      ? '중형견'
+                                      : '대형견'}
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item onClick={() => handleKindChange('SMALL')}>소형견</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleKindChange('MEDIUM')}>중형견</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleKindChange('LARGE')}>대형견</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </ST.StDropdown>
+                </ST.PetInputBox>
+
+                <ST.PetInputBox>
+                    <ST.Label>
+                    Pet의 특징을 적어주세요
+                        <ST.DescInput
+                            placeholder="Pet의 특징을 입력해주세요"
+                            value={petDetail.petInfo || ''}
+                            onChange={handleInputChange}
+                        />
+                    </ST.Label>
+                </ST.PetInputBox>
+
+                <ST.PetInputBox>
+                    <ST.Label>사진을 등록해주세요</ST.Label>
+                    <ST.Input
+                        id="image"
+                        type="file"
+                        accept="image/png, image/jpeg, image/jpg"
+                        onChange={handleImageFileChange}
+                        style={{ display: 'none' }}
+                    />
+                    <ST.ImgWrap>
+                        <ST.ImgLabel htmlFor="image">
+                            {!imagePreviewUrl && (
+                                <>
+                                    <p>
+                                        <ST.FileSpan>파일 열기</ST.FileSpan> 혹은 끌어다 놓기
+                                    </p>
+                                    <ST.FileP>파일 형식은 jpg, jpeg, png만 업로드 가능합니다.</ST.FileP>
+                                </>
+                            )}
+                            {imagePreviewUrl && <ST.Image src={imagePreviewUrl} alt="Pet Preview" />}
+                        </ST.ImgLabel>
+                    </ST.ImgWrap>
+                </ST.PetInputBox>
+
                 {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" />}
                 <ST.ButtonContainer>
                     <ST.Button type="submit">Pet 수정</ST.Button>
                     <ST.Button onClick={handleDelete}>Pet 삭제</ST.Button>
                 </ST.ButtonContainer>
             </ST.Form>
-        </ST.Content>
+        </ST.Container>
     )
 }
 

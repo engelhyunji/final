@@ -7,7 +7,7 @@ export interface PetDetails {
     petGender: 'MALE' | 'FEMALE'
     petKind: 'SMALL' | 'MEDIUM' | 'LARGE'
     petInfo: string
-    imageUrls: string
+    imageUrls: string[] // 펫 상세 페이지 배열로 수정하였음.
 }
 
 export interface ApiResponse<T> {

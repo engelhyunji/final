@@ -51,8 +51,9 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                     map.current?.setBounds(bounds);
                 }
                 setPlaces(result);
+                alert("검색 결과를 확인하시고 '검색 목록 저장' 버튼을 눌러서 정보를 저장하세요.");
             } else {
-                alert('검색 결과가 없습니다.');
+                alert("검색 결과가 없습니다. 다른 키워드로 검색해보세요.");
             }
         });
         setShowIntro(false);
@@ -141,7 +142,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                             setKeyword(e.target.value)
                             setMessage('')
                         }}
-                        placeholder="애견샵을 검색해보세요.🐶"
+                        placeholder="애견샵을 검색해보세요🐶"
                     />
                     <ST.Button onClick={searchPlaces}>검색</ST.Button>
                     <ST.Button onClick={handleSaveSearchResults}>검색 저장 목록</ST.Button> {/* 추가된 버튼 */}
@@ -150,11 +151,11 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                         <div
                             style={{
                                 color: 'red',
-                                fontStyle: 'italic',
                                 textAlign: 'center',
                                 position: 'absolute',
                                 top: '50%',
                                 marginTop: '10px',
+                                marginLeft: '20px',
                             }}
                         >
                             애견샵과 관련된

@@ -9,8 +9,9 @@ export const CategoryContainer = styled.div`
     max-width: 1280px;
     margin: 200px auto 50px;
     width: 100%;
-    height: 500px;
-    margin-top: 10px;
+    margin-top: 0;
+    margin-left: 10px;
+    padding-right: 190px;
 `
 
 export const Text = styled.h2`
@@ -29,7 +30,7 @@ export const CategoryList = styled.div`
 `
 
 export const CategoryItem = styled.div<CategoryItemProps>`
-    margin: 0 10px;
+    margin: 0 3px;
     cursor: pointer;
     padding: 10px;
     border-radius: 112px;
@@ -55,16 +56,51 @@ export const ShopItem = styled.div`
     gap: 10px;
 `
 
+// export const StyledSlide = styled(Slider)`
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     flex-direction: row;
+//     margin: 0 -10px;
+//     width: 90px;
+
+//     .slick-slide {
+//         margin: 0 10px;
+//         transition: transform 0.3s ease;
+//     }
+
+//     .slick-prev,
+//     .slick-next {
+//         display: block;
+//         background: #ddd;
+//         border-radius: 50%;
+//         padding: 300%;
+//         &:hover {
+//             background: #ccc;
+//         }
+//     }
+
+//     .slick-list {
+//         margin: 0 -1px;
+//     }
+
+//     .slick-slide > div {
+//         padding: 0 -2px;
+//     }
+
+//     .slick-track {
+//         display: flex;
+//         align-items: center;
+//         gap: 10px;
+//     }
+// `
+
 export const StyledSlide = styled(Slider)`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    margin: 0 -10px;
+    max-width: 100%; 
+    margin: 0 auto; 
 
     .slick-slide {
-        margin: 0 10px;
-        transition: transform 0.3s ease;
+        padding: 0 5px; 
     }
 
     .slick-prev,
@@ -72,48 +108,69 @@ export const StyledSlide = styled(Slider)`
         display: block;
         background: #ddd;
         border-radius: 50%;
-        padding: 10px;
+        padding: 10px; 
         &:hover {
             background: #ccc;
         }
     }
-`
 
-export const ShopCard = styled.div`
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    /* width: 100%; */
-    height: 300px;
-    max-width: 250px;
-    min-width: 250px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px auto;
-    transition: transform 0.3s ease;
-
-    &:hover {
-        transform: scale(1.05);
+    .slick-list {
+        margin: 0;
     }
 
-    p {
-        margin-top: 10px;
-        font-size: 14px;
-        text-align: center;
+    .slick-track {
+        display: flex;
+        align-items: center;
+        gap: 0px; 
     }
 
-    img {
-        width: 100%;
-        height: 300%;
-        max-height: 60%;
-        border-radius: 5px;
-        margin-top: 10px;
-        object-fit: cover;
+    .slick-prev {
+        left: 10px; 
+        z-index: 1;
     }
-`
+
+    .slick-next {
+        right: 10px; 
+        z-index: 1;
+    }
+`;
+
+
+// export const ShopCard = styled.div`
+//     padding: 20px;
+//     border: 1px solid #ddd;
+//     border-radius: 10px;
+//     /* width: 100%; */
+//     height: 300px;
+//     max-width: 250px;
+//     min-width: 250px;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     background-color: white;
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+//     margin: 10px auto;
+//     transition: transform 0.3s ease;
+
+//     &:hover {
+//         transform: scale(1.05);
+//     }
+
+//     p {
+//         margin-top: 10px;
+//         font-size: 14px;
+//         text-align: center;
+//     }
+
+//     img {
+//         width: 100%;
+//         height: 300%;
+//         max-height: 60%;
+//         border-radius: 5px;
+//         margin-top: 10px;
+//         object-fit: cover;
+//     }
+// `
 
 export const ShopInfo = styled.div`
     margin: 0 10px;
@@ -153,5 +210,75 @@ export const Arrow = styled.div`
 
     &:hover {
         color: #1dcb8e;
+    }
+`
+
+// export const ShopCard = styled.div`
+//     padding: 20px;
+//     border: 1px solid #ddd;
+//     border-radius: 10px;
+//     width: 100%;
+//     height: 300px;
+//     max-width: 250px;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     background-color: white;
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+//     margin: 10px auto;
+//     transition: transform 0.3s ease;
+
+//     &:hover {
+//         transform: scale(1.05);
+//     }
+
+//     p {
+//         margin-top: 10px;
+//         font-size: 14px;
+//         text-align: center;
+//     }
+
+//     img {
+//         width: 100%;
+//         height: 300%;
+//         max-height: 60%;
+//         border-radius: 5px;
+//         margin-top: 10px;
+//         object-fit: cover;
+//     }
+// `
+
+export const ShopCard = styled.div`
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 100%; 
+    max-width: 250px; 
+    height: 300px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px; 
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    p {
+        margin-top: 10px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    img {
+        width: 100%;
+        height: 100%; 
+        max-height: 60%;
+        border-radius: 5px;
+        margin-top: 10px;
+        object-fit: cover;
     }
 `
