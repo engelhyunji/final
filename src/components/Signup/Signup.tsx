@@ -75,11 +75,10 @@ const Signup: React.FC = () => {
     }
 
     const handleSignUp = async () => {
-        await userSignup(userData)
         // 비밀번호 유효성 검사
         let num = userData.password.search(/[0-9]/g)
         let eng = userData.password.search(/[a-z]/gi)
-        if (!userData.nickname || !userData.phoneNumber || !userData.email || !userData.password) {
+        if (!code || !userData.nickname || !userData.phoneNumber || !userData.email || !userData.password) {
             alert('정보를 모두 입력해주세요😺')
             return false
         } else if (userData.password.length < 4 || userData.password.length > 12) {
@@ -93,6 +92,8 @@ const Signup: React.FC = () => {
             return false
         } else {
             console.log('비번 유효성 통과')
+            await userSignup(userData)
+
             return true
         }
         // console.log('회원가입 정보:', userData)
