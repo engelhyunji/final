@@ -10,6 +10,7 @@ const MainTop: React.FC = () => {
     useEffect(() => {
         const fetchPetsData = async () => {
             setIsLoading(true)
+            alert("다른 사람들을 배려하여 관련된 정보만 등록해주시길 부탁드립니다.🙃")
             setError(null)
 
             try {
