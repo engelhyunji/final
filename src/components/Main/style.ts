@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 100vw; // 화면의 전체 가로 너비를 사용합니다.
+    width: 1450px;
     max-width: 100%; // 최대 너비를 100%로 설정하여 이미지가 넘치지 않도록 합니다.
     overflow-x: hidden; // 가로 스크롤바가 생기지 않도록 숨깁니다.
     overflow-y: hidden; // 가로 스크롤바가 생기지 않도록 숨깁니다.
@@ -9,6 +9,16 @@ export const Container = styled.div`
     width: 100%;
     min-height: 100vh;
 `
+// export const Container = styled.div`
+//     max-width: 1440px;
+//     margin: 0 auto;
+//     position: relative;
+
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+// `
+
 export const MainContainer = styled.div`
     width: 100%;
     min-height: 100vh;
@@ -349,7 +359,7 @@ export const PetBackImage = styled.img`
     height: 969px;
     background-image: url('/PetBack.png');
     filter: blur(10.25px);
-    background-size: cover; 
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 `
