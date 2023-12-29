@@ -17,6 +17,7 @@ export const CategoryContainer = styled.div`
 export const Text = styled.h2`
     font-size: 17px;
     margin-bottom: 30px;
+    /*  */
 `
 
 export const CategoryList = styled.div`

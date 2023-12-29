@@ -133,6 +133,7 @@ const Main: React.FC = () => {
                 {/* </ST.MainContainer> */}
                 <ST.PetBackImage />
                 <ST.Bottom />
+                {/*  */}
             </ST.Container>
         </>
     )

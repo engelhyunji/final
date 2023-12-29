@@ -371,7 +371,7 @@ export const OverlayContainer = styled.div`
 // `
 
 export const PetBackImage = styled.img`
-    src: url('/MainPet1.png');
+    background-image: url('/MainPet1.png');
     margin-right: 170px;
     position: absolute;
     width: 100%;
@@ -380,7 +380,8 @@ export const PetBackImage = styled.img`
     transform: translate(-50%, -50%);
     z-index: -1;
     max-width: 100%;
-    /* height: auto; */
+    /*  */
+    height: 500px;
 `
 
 export const Bottom = styled.div`
