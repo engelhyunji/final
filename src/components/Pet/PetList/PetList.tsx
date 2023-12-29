@@ -26,6 +26,7 @@ const PetList: React.FC = () => {
 
             if (response && response.result) {
                 setPets(response.result)
+                alert("무한스크롤 기능 추가 예정 페이지입니다.")
             } else {
                 setError(response ? response.message : '펫 목록을 불러오는 데 실패했습니다.')
             }
