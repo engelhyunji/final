@@ -23,6 +23,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const [places, setPlaces] = useState<Place[]>([]);
     const [selectedPlaceIndex, setSelectedPlaceIndex] = useState<number | null>(null);
     const [showIntro, setShowIntro] = useState(true);
+    const [isListVisible, setIsListVisible] = useState(false); // 목록을 검색하지 않을 때 숨기기 위한 상태 추가
 
     const map = useRef<kakao.maps.Map | null>(null);
     const exampleShopId = 1; // 예시 값
@@ -51,6 +52,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                     map.current?.setBounds(bounds);
                 }
                 setPlaces(result);
+                setIsListVisible(true); // 검색 결과가 있을 때 목록을 보이도록 설정
             } else {
                 alert('검색 결과가 없습니다.');
             }
@@ -90,7 +92,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         }
     };
 
-
     const loadSavedResults = async () => {
         try {
             const response = await instance.get('/api/map');
@@ -127,7 +128,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
         }
         loadSavedResults();
     }, [coords]);
-
 
     return (
         <div>
@@ -166,30 +166,32 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                             확인해보시길 바랍니다.
                         </div>
                     )}
-                    <ST.ListContainer>
-                        {places.map((place, index) => (
-                            <ST.ListItem
-                                key={`place-${index}`}
-                                onClick={() => handleListItemClick(index)}
-                                className={selectedPlaceIndex === index ? 'selected' : ''}
-                            >
-                                <ST.Text>{place.place_name}</ST.Text>
-                                {selectedPlaceIndex === index && (
-                                    <ST.AddressText>
-                                        <strong>주소:</strong> {place.address_name}
-                                    </ST.AddressText>
-                                )}
-                                {selectedPlaceIndex === index && place.phone && (
-                                    <ST.PhoneText>
-                                        <strong>전화번호:</strong> {place.phone}
-                                    </ST.PhoneText>
-                                )}
-                                {selectedPlaceIndex === index && place.image_url && (
-                                    <img src={place.image_url} alt={place.place_name} />
-                                )}
-                            </ST.ListItem>
-                        ))}
-                    </ST.ListContainer>
+                    {isListVisible && ( // 검색 결과가 있을 때만 목록 표시
+                        <ST.ListContainer>
+                            {places.map((place, index) => (
+                                <ST.ListItem
+                                    key={`place-${index}`}
+                                    onClick={() => handleListItemClick(index)}
+                                    className={selectedPlaceIndex === index ? 'selected' : ''}
+                                >
+                                    <ST.Text>{place.place_name}</ST.Text>
+                                    {selectedPlaceIndex === index && (
+                                        <ST.AddressText>
+                                            <strong>주소:</strong> {place.address_name}
+                                        </ST.AddressText>
+                                    )}
+                                    {selectedPlaceIndex === index && place.phone && (
+                                        <ST.PhoneText>
+                                            <strong>전화번호:</strong> {place.phone}
+                                        </ST.PhoneText>
+                                    )}
+                                    {selectedPlaceIndex === index && place.image_url && (
+                                        <img src={place.image_url} alt={place.place_name} />
+                                    )}
+                                </ST.ListItem>
+                            ))}
+                        </ST.ListContainer>
+                    )}
                 </ST.SearchContainer>
 
                 <ST.MapContainer>
@@ -227,4 +229,4 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     )
 }
 
-export default MapComponent
+export default MapComponent;
