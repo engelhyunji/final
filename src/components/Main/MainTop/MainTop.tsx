@@ -52,6 +52,7 @@ const MainTop: React.FC = () => {
                     ),
                 )}
             </ST.Content>
+            {/*  */}
         </ST.TopContainer>
     )
 }

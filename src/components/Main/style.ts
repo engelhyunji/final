@@ -1,35 +1,24 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 100vw; // 화면의 전체 가로 너비를 사용합니다.
+    width: 1450px;
     max-width: 100%; // 최대 너비를 100%로 설정하여 이미지가 넘치지 않도록 합니다.
     overflow-x: hidden; // 가로 스크롤바가 생기지 않도록 숨깁니다.
     overflow-y: hidden; // 가로 스크롤바가 생기지 않도록 숨깁니다.
     position: relative; // 이미지가 기준이 될 수 있도록 설정
     width: 100%;
     min-height: 100vh;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
-    padding: 0;
 `
-
 // export const Container = styled.div`
-//     width: 100vw;
-//     max-width: 100%;
-//     overflow-x: hidden;
-//     overflow-y: hidden;
+//     max-width: 1440px;
+//     margin: 0 auto;
 //     position: relative;
+
 //     display: flex;
 //     flex-direction: column;
-//     align-items: center; 
-//     justify-content: center;
-//     min-height: 100vh;
-//     /* padding: 0;  */
-// `;
+//     align-items: center;
+// `
 
-
-export const Container1 = styled.div``
 export const MainContainer = styled.div`
     width: 100%;
     min-height: 100vh;
@@ -45,6 +34,7 @@ export const BannerImage = styled.img`
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    filter: blur(2px);
     width: 100%;
     height: 550px;
     z-index: -1;
@@ -57,9 +47,6 @@ export const BannerImage = styled.img`
     box-shadow: none;
     outline: none;
 `
-
-
-
 
 export const BannerContainer = styled.div`
     height: 530px;
@@ -223,7 +210,7 @@ export const PetTextP = styled.div`
     font-size: 30px;
     font-weight: 700;
     line-height: 36px;
-    padding-right: 100px;
+    padding-right: 110px;
     text-align: center;
     color: #000;
     font-family: Pretendard Variable;
@@ -353,30 +340,32 @@ export const MainTopWrapper = styled.div`
     display: flex; // 이미지도 flex 아이템으로 만듭니다.
     flex-direction: column; // 이미지 내부 아이템을 수직으로 나열합니다.
     align-items: center; // 이미지 내부 아이템을 중앙 정렬합니다.
-    padding-left: 50px;
 `
 export const OverlayContainer = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    padding: 50px;
 `
 
 export const PetBackImage = styled.img`
-    margin-right: 170px;
     position: absolute;
-    width: 100%;
-    top: 47%;
+    width: 2765px;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, 15%);
     z-index: -1;
     max-width: 100%;
-    height: auto;
-    content: url('/public/PetBack.png');
+    height: 969px;
+    background-image: url('/PetBack.png');
+    filter: blur(10.25px);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 `
 export const Bottom = styled.div`
     padding-top: 50px; // 위쪽 여백
     padding-bottom: 70px; // 아래쪽 여백
-    bottom: 0;
 `
 
 export const OverlayContainer2 = styled.div`
@@ -391,23 +380,13 @@ export const PetContent2 = styled.div`
     align-items: center;
 `
 
-// export const PetTextWrapper2 = styled.div`
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     margin-right: 10px;
-//     /* align-items: flex-start; // 텍스트를 왼쪽 정렬합니다. */
-//     margin-left: 50px;
-// `
-
 export const PetTextWrapper2 = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
-    max-width: 1280px;
-    padding: 0 50px;
-    box-sizing: border-box;
+    margin-right: 10px;
+    /* align-items: flex-start; // 텍스트를 왼쪽 정렬합니다. */
+    margin-left: 135px;
 `
 
 export const Wrap1 = styled.div`

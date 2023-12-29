@@ -121,6 +121,7 @@ const Category: React.FC = () => {
                 ))}
             </ST.CategoryList>
             {shops.length > 0 && (
+                // 
                 <Slider {...settings}>
                     {filteredShops.map((shop, index) => (
                         <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>

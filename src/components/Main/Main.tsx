@@ -105,9 +105,9 @@ const Main: React.FC = () => {
                                     </NoLineLink>
                                 </ST.Wrap1>
                             </ST.PetTextWrapper2>
+                            <Category /> 
                         </ST.PetContent2>
                     </ST.TopWrapper>
-                            <Category /> 
                 </ST.OverlayContainer2>
 
                 <ST.OverlayContainer>
@@ -126,12 +126,10 @@ const Main: React.FC = () => {
                             </ST.Wrap1>
                         </ST.PetTextWrapper>
                     </ST.PetContent>
-                    <ST.Container1>
                     <MainTop />
-                    </ST.Container1>
                 </ST.OverlayContainer>
+                <ST.PetBackImage alt=''/>
                 {/* </ST.MainContainer> */}
-                <ST.PetBackImage />
                 <ST.Bottom />
             </ST.Container>
         </>

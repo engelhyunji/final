@@ -32,11 +32,8 @@ export const TitleBackContainer = styled.div`
         top: 0;
         left: 0;
 
-        background-image: url('SHOPtopBack(draft).png');
-        filter: blur(2.5px);
-        -webkit-filter: blur(2.5px);
-        -moz-filter: blur(2.5px);
-        -o-filter: blur(2.5px);
+        background-image: url('PetList.png');
+        background-size: cover; 
     }
 
     display: flex;
@@ -45,6 +42,7 @@ export const TitleBackContainer = styled.div`
     align-items: center;
     gap: 23px;
 `
+
 export const ProfileContainer = styled.div`
     width: 100%;
     /* padding: 20px; */
