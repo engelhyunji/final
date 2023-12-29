@@ -19,6 +19,7 @@ const PetDetail: React.FC = () => {
                     const response = await fetchPetDetail(petId)
                     if (response && response.isSuccess) {
                         setPet(response.result)
+                        alert("아직 디자인이 나오지 않은 임시 상세조회 페이지입니다.")
                     } else {
                         console.error('Error:', response?.message)
                     }

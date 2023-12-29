@@ -58,7 +58,7 @@ const PetModify: React.FC = () => {
         e.preventDefault()
 
         if (!petDetail || !petDetail.petName || !petDetail.petGender || !petDetail.petKind || !petDetail.petInfo) {
-            setError('모든 필드를 채워주세요.')
+            setError('모든 필드를 채워주시길 바랍니다.')
             return
         }
 
@@ -75,10 +75,11 @@ const PetModify: React.FC = () => {
         try {
             const response = await updatePet(petDetail.petId, formData)
             if (response.isSuccess) {
-                alert('애완동물 정보 업데이트 성공')
+                alert('애완동물 정보 업데이트 성공하였습니다.')
                 navigate('/petlist')
             } else {
                 setError(response.message)
+                alert('애완동물 정보 업데이트 실패하였습니다. 다시 시도해주세요.')
             }
         } catch (error) {
             setError('애완동물 정보 업데이트 실패')
@@ -90,10 +91,11 @@ const PetModify: React.FC = () => {
             try {
                 const response = await deletePet(petDetail.petId)
                 if (response.isSuccess) {
-                    alert('애완동물 삭제 성공')
+                    alert('애완동물 삭제 성공하였습니다.')
                     navigate('/petlist')
                 } else {
                     setError(response.message)
+                    alert('애완동물 삭제 실패하였습니다. 다시 시도해주세요.')
                 }
             } catch (error) {
                 setError('애완동물 삭제 에러')
