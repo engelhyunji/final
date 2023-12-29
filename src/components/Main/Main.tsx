@@ -71,7 +71,7 @@ const Main: React.FC = () => {
                                     <br />
                                     <ST.Text>채팅하러 가기 ⇀</ST.Text>
                                 </ST.MainBtn>
-                                <ST.PetBtn
+                                <ST.MainBtn
                                     onClick={() => {
                                         navigate('/signup')
                                     }}
@@ -83,7 +83,7 @@ const Main: React.FC = () => {
                                     </ST.Text1>
                                     <br />
                                     <ST.Text>등록하기 ⇀</ST.Text>
-                                </ST.PetBtn>
+                                </ST.MainBtn>
                             </>
                         )}
                     </ST.BtnContainer>
@@ -129,7 +129,7 @@ const Main: React.FC = () => {
                     </ST.PetContent>
                     <MainTop />
                 </ST.OverlayContainer>
-                <ST.PetBackImage alt=''/>
+                <ST.PetBackImage/>
                 <ST.Bottom />
             </ST.Container>
         </>
