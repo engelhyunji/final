@@ -717,7 +717,8 @@ export const PetBackImage = styled.img`
     transform: translate(-50%, 15%);
     z-index: -1;
     max-width: 100%;
-    height: 750px;
+    height: 950px;
+    max-height: 1920px;
     /* src: ('/public/PetBack.png'); */
     /* background-image: url('/MainBanner.png'); */
     background-image: url('/PetBack.png');
