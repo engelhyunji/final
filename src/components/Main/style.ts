@@ -1,149 +1,59 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 1450px;
-    max-width: 100%; // 최대 너비를 100%로 설정하여 이미지가 넘치지 않도록 합니다.
-    overflow-x: hidden; // 가로 스크롤바가 생기지 않도록 숨깁니다.
-    overflow-y: hidden; // 가로 스크롤바가 생기지 않도록 숨깁니다.
-    position: relative; // 이미지가 기준이 될 수 있도록 설정
-    width: 100%;
-    min-height: 100vh;
-`
-// export const Container = styled.div`
-//     max-width: 1440px;
-//     margin: 0 auto;
-//     position: relative;
-
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-// `
-
-export const MainContainer = styled.div`
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 1440px;
+    margin: 0 auto;
     font-family: Pretendard-regular;
-    padding: 0;
-    margin: 0;
+
+    position: relative;
 `
-export const BannerImage = styled.img`
-    background-image: url('/MainBanner.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    filter: blur(2px);
+
+export const BannerContainer = styled.div`
     width: 100%;
-    height: 550px;
+    height: 367px;
+
+    overflow: hidden;
+    position: relative;
+`
+export const BannerImage = styled.div`
+    background-image: url('/MainBanner.png');
+    background-position: bottom;
+    background-size: cover;
+    width: 100%;
+    height: 367px;
     z-index: -1;
     position: absolute;
     top: 0;
     left: 0;
-    object-fit: cover;
-    object-position: center;
-    border: none;
-    box-shadow: none;
-    outline: none;
 `
 
-export const BannerContainer = styled.div`
-    height: 530px;
-    overflow: hidden;
-    position: relative;
-`
 
-// export const BannerContainer = styled.div`
-//     width: 1450px;
-//     height: 550px; /* height 값을 늘림 */
-//     flex-shrink: 0;
-//     background-color: #FAFAFA;
-//     background-image: url('MainBanner.png');
-//     background-position: center; /* 이미지를 가운데로 정렬 */
-//     background-size: cover; /* 이미지를 컨테이너에 맞게 확대 또는 축소 */
-//     background-repeat: no-repeat;
-//     position: relative;
-
-//     &::before,
-//     &::after {
-//         content: '';
-//         position: absolute;
-//         width: 100%;
-//         height: 20px;
-//         background: url('wave-image.png');
-//         background-repeat: repeat-x;
-//         animation: wave-animation 5s linear infinite;
-//         background-size: cover;
-//     }
-
-//     &::before {
-//         top: 0;
-//         background-position: 0 0;
-//     }
-
-//     &::after {
-//         bottom: 0;
-//         background-position: 0 100%;
-//     }
-// `
 // ====================================================
 
 export const BtnContainer = styled.div`
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
     align-items: center;
     padding-top: 100px;
 `
 
-export const ShopBtn = styled.button`
-    position: relative;
-    font-size: 1.77vh;
-    background-color: #ffffff;
-    color: white;
-    padding: 10px 20px;
-    border: 1px solid #ffffff;
-    color: #00bd8f;
+export const MainBtn = styled.button`
     width: 247.77px;
     height: 196px;
-    border-radius: 18px;
-    margin-right: 0;
-    cursor: pointer;
-    transition: background-color 0.1s ease;
+    padding: 10px 30px;
 
-    &:hover {
-        background-color: #e2e2e2;
-    }
-
-    & > * {
-        pointer-events: none;
-    }
-`
-
-export const PetBtn = styled.button`
     position: relative;
-    font-size: 1.77vh;
-    background-color: #ffffff;
-    color: white;
-    padding: 10px 20px;
-    border: 1px solid #ffffff;
+    font-size: 20px;
     color: #00bd8f;
-    width: 247.77px;
-    height: 196px;
+    background-color: #fff;
+    text-align: left;
+
+    border: none;
     border-radius: 18px;
-    margin-right: 0;
-    cursor: pointer;
-    transition: background-color 0.1s ease;
-
-    &:hover {
-        background-color: #e2e2e2;
-    }
-
-    & > * {
-        pointer-events: none;
-    }
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `
+
 
 export const TopWrapper = styled.div`
     max-width: 1280px;
@@ -155,35 +65,28 @@ export const ShopsWrapper = styled.div`
     margin: 20px;
 `
 export const Warp = styled.div`
-    /* margin-top: 100px; */
     margin-right: 150px;
+    font-family: Pretendard-regular;
 `
 
 export const Text = styled.h2`
-    /* margin-top: 30px; */
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 26px;
+    font-family:pretendard-bold;
+    line-height: 56px;
 `
 export const Text1 = styled.h2`
-    /* margin-top: 20px; */
     font-size: 20px;
 `
 export const Text2 = styled.div`
-    /* margin-left: 100px; */
     color: #353535;
-    font-family: Pretendard Variable;
     font-size: 22px;
-    font-style: normal;
     font-weight: 700;
     line-height: 28px;
 `
 export const Text3 = styled.h2`
     color: #353535;
-    margin-top: 20px;
-    font-family: Pretendard Variable;
     font-size: 30px;
-    font-style: normal;
-    font-weight: 700;
+    font-family:pretendard-bold;
     line-height: 36px; /* 120% */
 `
 
@@ -348,7 +251,7 @@ export const OverlayContainer = styled.div`
     padding: 50px;
 `
 
-export const PetBackImage = styled.img`
+export const PetBackImage = styled.div`
     position: absolute;
     width: 2765px;
     top: 50%;
@@ -358,7 +261,6 @@ export const PetBackImage = styled.img`
     max-width: 100%;
     height: 969px;
     background-image: url('/PetBack.png');
-    filter: blur(10.25px);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

@@ -15,9 +15,10 @@ const Main: React.FC = () => {
     return (
         <>
             <ST.Container>
-                {/* <ST.MainContainer> */}
+
                 <ST.BannerContainer>
                     <ST.BannerImage />
+
                     <ST.BtnContainer>
                         <ST.Warp>
                             <ST.Text2>
@@ -27,7 +28,7 @@ const Main: React.FC = () => {
                         </ST.Warp>
                         {isLogin ? (
                             <>
-                                <ST.ShopBtn
+                                <ST.MainBtn
                                     onClick={() => {
                                         navigate('/shops')
                                     }}
@@ -39,8 +40,8 @@ const Main: React.FC = () => {
                                     </ST.Text1>
                                     <br />
                                     <ST.Text>Shop 등록하기 ⇀</ST.Text>
-                                </ST.ShopBtn>
-                                <ST.PetBtn
+                                </ST.MainBtn>
+                                <ST.MainBtn
                                     onClick={() => {
                                         navigate('/pet')
                                     }}
@@ -52,12 +53,12 @@ const Main: React.FC = () => {
                                     </ST.Text1>
                                     <br />
                                     <ST.Text>Pet 등록하기 ⇀</ST.Text>
-                                </ST.PetBtn>
+                                </ST.MainBtn>
                             </>
                         ) : (
                             <>
                                 {/* 비회원 상태: 회원가입 유도 */}
-                                <ST.ShopBtn
+                                <ST.MainBtn
                                     onClick={() => {
                                         navigate('/signup')
                                     }}
@@ -69,7 +70,7 @@ const Main: React.FC = () => {
                                     </ST.Text1>
                                     <br />
                                     <ST.Text>채팅하러 가기 ⇀</ST.Text>
-                                </ST.ShopBtn>
+                                </ST.MainBtn>
                                 <ST.PetBtn
                                     onClick={() => {
                                         navigate('/signup')
@@ -129,7 +130,6 @@ const Main: React.FC = () => {
                     <MainTop />
                 </ST.OverlayContainer>
                 <ST.PetBackImage alt=''/>
-                {/* </ST.MainContainer> */}
                 <ST.Bottom />
             </ST.Container>
         </>
