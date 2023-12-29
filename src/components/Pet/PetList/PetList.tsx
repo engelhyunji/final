@@ -53,10 +53,11 @@ const PetList: React.FC = () => {
         <ST.Container>
             <ST.ProfileContainer>
                 <ST.TitleBackContainer>
+                <ST.PetListH2>Pet</ST.PetListH2>
                     <ST.PetP>우리 애기 귀여운 거 나만 볼 수 없을 땐? 마이펫에 자랑하기!</ST.PetP>
                 </ST.TitleBackContainer>
             </ST.ProfileContainer>
-            <ST.PetSearchContainer>
+            {/* <ST.PetSearchContainer>
                 <ST.PetSearchCondition>애견 이름</ST.PetSearchCondition>
                 <ST.PetSearchInput
                     type="text"
@@ -65,7 +66,7 @@ const PetList: React.FC = () => {
                     readOnly // 검색 기능이 준비 중이므로 입력을 방지합니다.
                     />
                 <ST.SearchBtn>검색</ST.SearchBtn>
-            </ST.PetSearchContainer>
+            </ST.PetSearchContainer> */}
             <ST.PetListContainer>
                 <ST.PetListH3>Pet 조회</ST.PetListH3>
             </ST.PetListContainer>
