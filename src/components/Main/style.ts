@@ -719,7 +719,7 @@ export const PetBackImage = styled.img`
     z-index: -1;
     max-width: 100%;
     height: 750px;
-    background-image: ('/public/PetBack.png');
+    background-image: ('/PetBack.png');
 `
 export const Bottom = styled.div`
     padding-top: 50px; // 위쪽 여백
