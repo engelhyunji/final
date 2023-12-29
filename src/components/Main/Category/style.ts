@@ -7,11 +7,10 @@ type CategoryItemProps = {
 
 export const CategoryContainer = styled.div`
     max-width: 1280px;
-    margin: 200px auto 50px;
+    margin: 50px auto 50px;
     width: 100%;
-    margin-top: 0;
-    margin-left: 10px;
-    padding-right: 190px;
+    height: 500px;
+    margin-top: 10px;
 `
 
 export const Text = styled.h2`
@@ -20,21 +19,23 @@ export const Text = styled.h2`
 `
 
 export const CategoryList = styled.div`
+    width: 45%;
+    margin: 0 auto 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 20px;
     color: #a5aaac;
-    font-weight: bold;
 `
 
 export const CategoryItem = styled.div<CategoryItemProps>`
-    margin: 0 3px;
+    margin: 0 10px;
     cursor: pointer;
-    padding: 10px;
+    padding: 10px 30px;
     border-radius: 112px;
     transition: background-color 0.3s ease;
+    color: #1dcb8e;
+    border: 1px solid #1dcb8e;
 
     ${(props) =>
         props.$isSelected &&
@@ -42,6 +43,10 @@ export const CategoryItem = styled.div<CategoryItemProps>`
             background-color: #1dcb8e;
             color: white;
         `}
+
+    p {
+        font-family: Pretendard-regular;
+    }
 `
 
 export const ShopList = styled.div`
@@ -56,13 +61,12 @@ export const ShopItem = styled.div`
     gap: 10px;
 `
 
-// export const StyledSlide = styled(Slider)`
+// export const StSlide = styled(Slider)`
 //     display: flex;
 //     justify-content: center;
 //     align-items: center;
 //     flex-direction: row;
 //     margin: 0 -10px;
-//     width: 90px;
 
 //     .slick-slide {
 //         margin: 0 10px;
@@ -74,111 +78,78 @@ export const ShopItem = styled.div`
 //         display: block;
 //         background: #ddd;
 //         border-radius: 50%;
-//         padding: 300%;
+//         padding: 10px;
 //         &:hover {
 //             background: #ccc;
 //         }
 //     }
-
-//     .slick-list {
-//         margin: 0 -1px;
-//     }
-
-//     .slick-slide > div {
-//         padding: 0 -2px;
-//     }
-
-//     .slick-track {
-//         display: flex;
-//         align-items: center;
-//         gap: 10px;
-//     }
 // `
 
-export const StyledSlide = styled(Slider)`
-    max-width: 100%; 
-    margin: 0 auto; 
+export const ShopSlideBox = styled.div`
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+`
+export const ShopSlide = styled.div`
+    width: 80%;
+`
+export const TextWrapper = styled.div`
+    cursor: pointer;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`
+export const ShopSlideP = styled.p`
+    font-family: Pretendard-bold;
+    font-size: 30px;
+    color: #000;
+`
+export const ShopSlideP2 = styled.p`
+    color: #8f8e93;
+`
 
-    .slick-slide {
-        padding: 0 5px; 
+export const ShopCard = styled.div`
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 278px;
+    height: 366px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px auto;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
     }
 
-    .slick-prev,
-    .slick-next {
-        display: block;
-        background: #ddd;
-        border-radius: 50%;
-        padding: 10px; 
-        &:hover {
-            background: #ccc;
-        }
+    img {
+        width: 100%;
+        height: 70%;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        object-fit: cover;
     }
-
-    .slick-list {
-        margin: 0;
-    }
-
-    .slick-track {
-        display: flex;
-        align-items: center;
-        gap: 0px; 
-    }
-
-    .slick-prev {
-        left: 10px; 
-        z-index: 1;
-    }
-
-    .slick-next {
-        right: 10px; 
-        z-index: 1;
-    }
-`;
-
-
-// export const ShopCard = styled.div`
-//     padding: 20px;
-//     border: 1px solid #ddd;
-//     border-radius: 10px;
-//     /* width: 100%; */
-//     height: 300px;
-//     max-width: 250px;
-//     min-width: 250px;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     background-color: white;
-//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-//     margin: 10px auto;
-//     transition: transform 0.3s ease;
-
-//     &:hover {
-//         transform: scale(1.05);
-//     }
-
-//     p {
-//         margin-top: 10px;
-//         font-size: 14px;
-//         text-align: center;
-//     }
-
-//     img {
-//         width: 100%;
-//         height: 300%;
-//         max-height: 60%;
-//         border-radius: 5px;
-//         margin-top: 10px;
-//         object-fit: cover;
-//     }
-// `
+`
 
 export const ShopInfo = styled.div`
-    margin: 0 10px;
+    width: 100%;
+    padding: 20px;
+    font-family: Pretendard-semibold;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 `
 
 export const StyledSlickSlider = styled(Slider)`
     .slick-slide > div {
-        margin: 0 10px;
+        /* margin: 0 10px; */
     }
 `
 
@@ -210,75 +181,5 @@ export const Arrow = styled.div`
 
     &:hover {
         color: #1dcb8e;
-    }
-`
-
-// export const ShopCard = styled.div`
-//     padding: 20px;
-//     border: 1px solid #ddd;
-//     border-radius: 10px;
-//     width: 100%;
-//     height: 300px;
-//     max-width: 250px;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     background-color: white;
-//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-//     margin: 10px auto;
-//     transition: transform 0.3s ease;
-
-//     &:hover {
-//         transform: scale(1.05);
-//     }
-
-//     p {
-//         margin-top: 10px;
-//         font-size: 14px;
-//         text-align: center;
-//     }
-
-//     img {
-//         width: 100%;
-//         height: 300%;
-//         max-height: 60%;
-//         border-radius: 5px;
-//         margin-top: 10px;
-//         object-fit: cover;
-//     }
-// `
-
-export const ShopCard = styled.div`
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    width: 100%; 
-    max-width: 250px; 
-    height: 300px; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px; 
-    transition: transform 0.3s ease;
-
-    &:hover {
-        transform: scale(1.05);
-    }
-
-    p {
-        margin-top: 10px;
-        font-size: 14px;
-        text-align: center;
-    }
-
-    img {
-        width: 100%;
-        height: 100%; 
-        max-height: 60%;
-        border-radius: 5px;
-        margin-top: 10px;
-        object-fit: cover;
     }
 `
