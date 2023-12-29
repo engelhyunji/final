@@ -6,6 +6,7 @@ import '../../../index.css'
 import { Image } from '../../Pet/PetList/style'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { useNavigate } from 'react-router-dom'
 
 type ShopType = 'GROOMING' | 'HOSPITAL' | 'CAFE' | 'ETC'
 
@@ -22,6 +23,8 @@ interface ShopInfo {
 }
 
 const Category: React.FC = () => {
+    const navigate = useNavigate()
+
     const [shops, setShops] = useState<ShopInfo[]>([])
     const [selectedCategory, setSelectedCategory] = useState<ShopType>('GROOMING')
 
@@ -30,7 +33,7 @@ const Category: React.FC = () => {
             try {
                 const response = await instance.get<{ result: ShopInfo[] }>('/api/shops')
                 setShops(response.data.result || [])
-                console.log('Fetched shops:', response.data.result)
+                // console.log('Fetched shops:', response.data.result)
             } catch (error) {
                 console.error('가게 정보를 불러오는데 실패했습니다.', error)
             }
@@ -39,11 +42,11 @@ const Category: React.FC = () => {
         fetchShops()
     }, [])
 
-    useEffect(() => {
-        console.log('Current shops state:', shops)
-    }, [shops])
+    // useEffect(() => {
+    //     console.log('Current shops state:', shops)
+    // }, [shops])
 
-    const filteredShops = shops.filter((shop) => shop.shopType === selectedCategory)
+    const filteredShops = shops.filter((shop) => shop.shopType === selectedCategory).reverse()
 
     const handleCategoryClick = (category: ShopType) => {
         setSelectedCategory(category)
@@ -116,26 +119,47 @@ const Category: React.FC = () => {
                         $isSelected={category === selectedCategory}
                         onClick={() => handleCategoryClick(category as ShopType)}
                     >
-                        <p>{category}</p>
+                        <p>#{category}</p>
                     </ST.CategoryItem>
                 ))}
             </ST.CategoryList>
-            {shops.length > 0 && (
-                <Slider {...settings}>
-                    {filteredShops.map((shop, index) => (
-                        <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
-                            <ST.ShopCard>
-                                {shop.imageUrls?.map((url, imgIdx) => (
-                                    <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
-                                ))}
-                                <p>가게: {shop.shopName}</p>
-                                <p>업종: {shop.shopType}</p>
-                                <p>주소: {shop.shopAddress}</p>
-                            </ST.ShopCard>
-                        </div>
-                    ))}
-                </Slider>
-            )}
+            <ST.ShopSlideBox>
+                <ST.TextWrapper
+                    onClick={() => {
+                        navigate('/shopslist')
+                    }}
+                >
+                    <ST.ShopSlideP>Shop</ST.ShopSlideP>
+                    <ST.ShopSlideP2>
+                        실시간으로 뜨는 <br /> 곳들을 보여드려요
+                    </ST.ShopSlideP2>
+                    <ST.ShopSlideP2>더보기 ⇀</ST.ShopSlideP2>
+                </ST.TextWrapper>
+                <ST.ShopSlide>
+                    {shops.length > 0 && (
+                        <Slider {...settings}>
+                            {filteredShops.map((shop, index) => (
+                                <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <ST.ShopCard
+                                        onClick={() => {
+                                            navigate(`/shops/${shop.shopId}`)
+                                        }}
+                                    >
+                                        {shop.imageUrls?.map((url, imgIdx) => (
+                                            <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
+                                        ))}
+                                        <ST.ShopInfo>
+                                            <p>{shop.shopName}</p>
+                                            {/* <p>업종: {shop.shopType}</p> */}
+                                            <p>{shop.shopAddress}</p>
+                                        </ST.ShopInfo>
+                                    </ST.ShopCard>
+                                </div>
+                            ))}
+                        </Slider>
+                    )}
+                </ST.ShopSlide>
+            </ST.ShopSlideBox>
         </ST.CategoryContainer>
     )
 }
