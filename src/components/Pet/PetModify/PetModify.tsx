@@ -32,9 +32,16 @@ const PetModify: React.FC = () => {
         }
     }, [petId])
 
+    // const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    //     if (petDetail) {
+    //         setPetDetail({ ...petDetail, [e.target.name]: e.target.value })
+    //     }
+    // }
+
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target
         if (petDetail) {
-            setPetDetail({ ...petDetail, [e.target.name]: e.target.value })
+            setPetDetail({ ...petDetail, [name]: value })
         }
     }
 
@@ -114,11 +121,11 @@ const PetModify: React.FC = () => {
             <ST.Form onSubmit={handleSubmit}>
                 <ST.PetInputBox>
                     <ST.Label>
-                    Pet의 이름을 알려주세요
+                        Pet의 이름을 알려주세요
                         <ST.Input
                             type="text"
                             name="petName"
-                            value={petDetail.petName || ''}
+                            value={petDetail?.petName || ''}
                             onChange={handleInputChange}
                         />
                     </ST.Label>
@@ -129,7 +136,7 @@ const PetModify: React.FC = () => {
                     <ST.StDropdown>
                         <Dropdown>
                             <Dropdown.Toggle variant="light" id="dropdown-basic">
-                                {petDetail.petGender === 'MALE' ? '남아' : '여아'}
+                                {petDetail?.petGender === 'MALE' ? '남아' : '여아'}
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
@@ -143,12 +150,6 @@ const PetModify: React.FC = () => {
                         </Dropdown>
                     </ST.StDropdown>
                 </ST.PetInputBox>
-
-                {/* <select name="petKind" value={petDetail.petKind || ''} onChange={handleInputChange}>
-                        <option value="SMALL">소형견</option>
-                        <option value="MEDIUM">중형견</option>
-                        <option value="LARGE">대형견</option>
-                    </select> */}
 
                 <ST.PetInputBox>
                     <ST.Label>Pet의 크기를 입력해주세요</ST.Label>
@@ -173,10 +174,11 @@ const PetModify: React.FC = () => {
 
                 <ST.PetInputBox>
                     <ST.Label>
-                    Pet의 특징을 적어주세요
+                        Pet의 특징을 적어주세요
                         <ST.DescInput
                             placeholder="Pet의 특징을 입력해주세요"
-                            value={petDetail.petInfo || ''}
+                            name="petInfo"
+                            value={petDetail?.petInfo || ''}
                             onChange={handleInputChange}
                         />
                     </ST.Label>
@@ -193,15 +195,17 @@ const PetModify: React.FC = () => {
                     />
                     <ST.ImgWrap>
                         <ST.ImgLabel htmlFor="image">
-                            {!imagePreviewUrl && (
+                            {imagePreviewUrl ? (
+                                <ST.ImageContainer>
+                                    <ST.Image src={imagePreviewUrl} alt="Pet Preview" />
+                                </ST.ImageContainer>
+                            ) : (
                                 <>
-                                    <p>
-                                        <ST.FileSpan>파일 열기</ST.FileSpan> 혹은 끌어다 놓기
-                                    </p>
+                                    <ST.FileIcon className="fas fa-upload" />
+                                    <ST.FileSpan>파일 열기</ST.FileSpan>
                                     <ST.FileP>파일 형식은 jpg, jpeg, png만 업로드 가능합니다.</ST.FileP>
                                 </>
                             )}
-                            {imagePreviewUrl && <ST.Image src={imagePreviewUrl} alt="Pet Preview" />}
                         </ST.ImgLabel>
                     </ST.ImgWrap>
                 </ST.PetInputBox>

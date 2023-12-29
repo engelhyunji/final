@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Dropdown } from 'react-bootstrap';
+import styled from 'styled-components'
+import { Dropdown } from 'react-bootstrap'
 
 export const Container = styled.div`
     max-width: 1440px;
@@ -10,7 +10,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     width: 474px;
-`;
+`
 
 export const Text = styled.h2`
     margin: 70px 0 20px;
@@ -21,25 +21,25 @@ export const Text = styled.h2`
     color: #fff;
     font-size: 30px;
     font-family: Pretendard-medium;
-`;
+`
 
 export const Form = styled.form`
     max-width: 474px;
     width: 100%; // 가로 너비 일관성 유지
     margin: 50px auto;
     z-index: 2;
-`;
+`
 
 export const Label = styled.label`
     margin: 10px 0;
     font-family: Pretendard-bold;
     font-size: 18px;
-`;
+`
 
 export const PetInputBox = styled.div`
     margin: 30px 0;
     width: 100%; // 부모 요소 너비에 맞춤
-`;
+`
 
 export const DescInput = styled.textarea`
     width: 474px; // 직접적으로 가로 길이 설정
@@ -51,7 +51,6 @@ export const DescInput = styled.textarea`
     margin-bottom: 10px;
     border: 1px solid #dadada;
     border-radius: 8px;
-    
 
     resize: none;
 
@@ -60,7 +59,7 @@ export const DescInput = styled.textarea`
         font-size: 14px;
         font-family: Pretendard-regular;
     }
-`;
+`
 
 export const Input = styled.input`
     width: 474px;
@@ -84,7 +83,7 @@ export const ButtonContainer = styled.div`
     width: 100%; // 부모 요소 너비에 맞춤
     justify-content: space-between;
     margin-top: 10px;
-`;
+`
 
 export const Button = styled.button`
     flex: 1; // 모든 버튼이 동일한 크기를 가짐
@@ -105,17 +104,16 @@ export const Button = styled.button`
     &:last-child {
         margin-right: 0;
     }
-`;
+`
 
 export const Image = styled.img`
     max-width: 100%;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
+`
 
 export const ImgWrap = styled.div`
-    width: 100%; // 부모 요소 너비에 맞춤
     height: 160px;
     border-radius: 8px;
     background-color: #d9d9d9;
@@ -126,7 +124,7 @@ export const ImgWrap = styled.div`
 
     display: flex;
     justify-content: center;
-`;
+`
 
 export const ImgLabel = styled.label`
     width: 100%; // 부모 요소 너비에 맞춤
@@ -137,15 +135,17 @@ export const ImgLabel = styled.label`
     justify-content: center;
     align-items: center;
     gap: 8px;
-`;
+`
 
 export const FileP = styled.p`
     font-size: 12px;
-`;
+    margin-bottom: 50px;
+`
 
 export const FileSpan = styled.span`
     text-decoration: underline;
-`;
+    margin-bottom: 10px;
+`
 
 export const StDropdown = styled(Dropdown)`
     width: 100%;
@@ -195,3 +195,44 @@ export const StDropdown = styled(Dropdown)`
         }
     }
 `
+
+// export const ImageContainer = styled.div`
+//     border-radius: 10px; /* 원하는 둥글게 모서리 값으로 조정하세요 */
+//     overflow: hidden;
+//     width: 200px; /* 이미지 컨테이너의 너비를 조정하세요 */
+//     height: 200px; /* 이미지 컨테이너의 높이를 조정하세요 */
+//     position: relative;
+// `
+// export const FileIcon = styled.div`
+//     border-radius: 10px; /* 원하는 둥글게 모서리 값으로 조정하세요 */
+//     overflow: hidden;
+//     width: 200px; /* 이미지 컨테이너의 너비를 조정하세요 */
+//     height: 200px; /* 이미지 컨테이너의 높이를 조정하세요 */
+//     position: relative;
+// `
+
+export const ImageContainer = styled.div`
+    border-radius: 10px;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d9d9d9;
+`;
+
+export const FileIcon = styled.div`
+    border-radius: 10px;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d9d9d9;
+    font-size: 36px; /* 아이콘 크기 설정 */
+    color: #787878;
+`;
