@@ -370,7 +370,6 @@
 //     }
 // `
 
-
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -719,7 +718,9 @@ export const PetBackImage = styled.img`
     z-index: -1;
     max-width: 100%;
     height: 750px;
-    background-image: ('/PetBack.png');
+    /* src: ('/public/PetBack.png'); */
+    /* background-image: url('/MainBanner.png'); */
+    background-image: url('/PetBack.png');
 `
 export const Bottom = styled.div`
     padding-top: 50px; // 위쪽 여백
@@ -749,9 +750,9 @@ export const PetTextWrapper2 = styled.div`
 
 export const Wrap1 = styled.div`
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 
     &:hover {
         // 마우스 오버 시 스타일 변경
