@@ -77,8 +77,8 @@ const Shops: React.FC = () => {
         setShopRequestDto((prevData) => ({
             ...prevData,
             shopTel: tel,
-        }));
-    }, [firstN, midN, lastN]);
+        }))
+    }, [firstN, midN, lastN])
 
     useEffect(() => {
         // 컴포넌트가 렌더링된 후에 실행되어
@@ -111,7 +111,7 @@ const Shops: React.FC = () => {
     // }, [uploadImage])
 
     // shopType (드롭다운 토글 값) 업데이트
-    const handleDropdownChange = (value: string) : void => {
+    const handleDropdownChange = (value: string): void => {
         setShopRequestDto((prevData) => ({
             ...prevData,
             shopType: value,
@@ -133,16 +133,28 @@ const Shops: React.FC = () => {
             formData.append('imageUrl', uploadImage)
         }
 
-        try {
-            const response = await instance.post(`/api/shops`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            })
-            console.log('가게 등록 response :', response.data)
-            navigate('/shopslist')
-        } catch (error) {
-            console.error('가게 등록 에러 :', error)
+        if (
+            shopRequestDto.shopName === " " ||
+            shopRequestDto.shopTel === " " ||
+            shopRequestDto.shopAddress === " " ||
+            shopRequestDto.shopDescribe === " " ||
+            shopRequestDto.shopTime === " " ||
+            shopRequestDto.shopType === " "
+        ) {
+            alert('정보를 모두 입력해주세요')
+            return false
+        } else {
+            try {
+                const response = await instance.post(`/api/shops`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+                console.log('가게 등록 response :', response.data)
+                navigate('/shopslist')
+            } catch (error) {
+                console.error('가게 등록 에러 :', error)
+            }
         }
     }
 
