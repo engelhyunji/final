@@ -65,7 +65,7 @@ const ChatRoom: React.FC = () => {
             setMembers(data.members)
         })
         getChatMessages(roomId as string).then((data) => setMessages(data))
-        return () => disconnect()
+        return disconnect
     }, [])
 
     useEffect(() => {
@@ -172,7 +172,7 @@ const ChatRoom: React.FC = () => {
                     {/* <span>방ID: {room?.roomId}</span> */}
                     <span>방소유주👑: {room?.creator.nickname}</span>
                     <span>참여자 수: {room?.members.length}</span>
-                    <span>참여인원: {room?.members.map((member) => <span>{member.nickname}, </span>)}</span>
+                    <span>참여인원: {room?.members.map((member) => <span key={member.email}>{member.nickname}, </span>)}</span>
                     <div>
                         <ST.ChatLeaveBtn onClick={disconnect}>채팅방 나가기</ST.ChatLeaveBtn>
                     </div>

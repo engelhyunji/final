@@ -36,7 +36,7 @@ export const deleteChat = async (roomId: string) => {
 export const getChatRoom = async (roomId: string) => {
     try {
         const res = await instance.get(`/chat/room/${roomId}`)
-        console.log('getChatRoom 함수 반환값',res.data.result)
+        // console.log('getChatRoom 함수 반환값',res.data.result)
         return res.data.result;
     } catch (err) {
         console.log('채팅방 상세 에러 :',err)
@@ -47,7 +47,7 @@ export const getChatRoom = async (roomId: string) => {
 export const getChatMessages = async (roomId: string) => {
     try {
         const res = await instance.get(`/chat/room/${roomId}/messages`)
-        console.log('getChatMessages 함수 반환값',res.data.result)
+        // console.log('getChatMessages 함수 반환값',res.data.result)
         return res.data.result;
     } catch (err) {
         console.log('채팅방 메세지 조회 에러 :',err)
