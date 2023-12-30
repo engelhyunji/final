@@ -20,7 +20,7 @@ const ShopsDetail: React.FC = () => {
     useEffect(() => {
         if (isSuccess && data) {
             setDetailShopData(data)
-            console.log('디테일 쿼리 성공 data : ', data)
+            // console.log('디테일 쿼리 성공 data : ', data)
         }
     }, [isSuccess, data])
 

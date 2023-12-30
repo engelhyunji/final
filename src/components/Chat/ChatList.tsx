@@ -42,7 +42,7 @@ const ChatList: React.FC = () => {
         if (isSuccess && data) {
             setChatrooms(data)
             setAllChatrooms(data)
-            console.log('채팅방 목록 조회 성공 data : ', data)
+            // console.log('채팅방 목록 조회 성공 data : ', data)
             // console.log('채팅방 목록 조회 성공')
         }
     }, [isSuccess, data])

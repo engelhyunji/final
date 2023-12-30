@@ -1,6 +1,7 @@
 // 로그인 상태 전역으로 관리
 import React, { createContext, useContext, useState, ReactNode, useMemo, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { postLogout } from '../apis/api/user'
 
 interface AuthContextProps {
     isLogin: boolean
@@ -11,7 +12,7 @@ interface AuthContextProps {
 export const AuthContext = createContext<AuthContextProps | undefined>(undefined)
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const [isLogin, setIsLogin] = useState(() => {
         const storedToken = localStorage.getItem('accessToken')
         // console.log('처음 localStorage.getItem(accessToken) 토큰 확인', storedToken)
@@ -22,11 +23,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setIsLogin(true)
     }, [])
 
-    const logout = useCallback(() => {
+    const logout = useCallback(async() => {
+        await postLogout()
         setIsLogin(false)
-        navigate('/');
+        navigate('/')
         localStorage.clear() // 저장된 모든 (인가)정보 삭제
-        console.log('localStorage.getItem(accessToken) 토큰삭제 확인', localStorage.getItem('accessToken')) // 토큰 삭제 확인
+        // console.log('localStorage.getItem(accessToken) 토큰삭제 확인', localStorage.getItem('accessToken')) // 토큰 삭제 확인
     }, [])
 
     const value = useMemo(() => ({ isLogin, login, logout }), [isLogin, login, logout])

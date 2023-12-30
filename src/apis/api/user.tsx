@@ -19,3 +19,12 @@ export const postCode = async (email: string, verificationCode: string) => {
     }
 }
 
+
+// 로그아웃
+export const postLogout = async () => {
+    try {
+        await instance.post('/api/user/logout')
+    } catch (err) {
+        console.log('로그아웃에러 :', err)
+    }
+}
