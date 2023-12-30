@@ -22,6 +22,9 @@ export const ReviewInput = styled.input`
     border: 1px solid #dadada;
     background: #fff;
 `
+export const ReviewLength = styled.span`
+        color: #fd4141;
+`
 export const AddBtn = styled.button`
     padding: 15px;
     color: #fff;

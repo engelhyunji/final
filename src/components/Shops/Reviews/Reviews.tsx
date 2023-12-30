@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { ShopDetails } from '../../../apis/api/api'
 import * as ST from './style'
-import { BiSolidLike, BiLike } from "react-icons/bi";
+import { BiSolidLike, BiLike } from 'react-icons/bi'
 import { useParams } from 'react-router-dom'
 import { addReview, cancelRecommendReview, deleteReview, recommendReview } from '../../../apis/api/review'
 import { useMutation, useQueryClient } from 'react-query'
 import { AxiosError } from 'axios'
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext'
 
 interface ReviewsProps {
     detailShopData: ShopDetails
@@ -23,7 +23,7 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     // shopId가 undefined 일 때 경고창
     const currentShopId = shopId ? +shopId : 0 && alert('가게를 찾을 수 없습니다')
 
-    const addReviewMutation = useMutation<void, AxiosError, { shopId: number; comment: string, shopName: string }>(
+    const addReviewMutation = useMutation<void, AxiosError, { shopId: number; comment: string; shopName: string }>(
         ({ shopId, comment, shopName }) => addReview(shopId, comment, shopName),
         {
             onSuccess: () => {
@@ -87,31 +87,46 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
 
     return (
         <ST.Container>
-            {isLogin && <ST.ReviewInputP>
-                <span>후기 작성</span>
-                <ST.ReviewInput type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
-                <ST.AddBtn onClick={() => onSubmit(currentShopId, comment)}>등록</ST.AddBtn>
-            </ST.ReviewInputP>}
+            {isLogin && (
+                <ST.ReviewInputP>
+                    <span>후기 작성</span>
+                    <ST.ReviewInput type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
+                    {comment.length > 35 ? (
+                        <ST.ReviewLength>{comment.length}/35</ST.ReviewLength>
+                    ) : (
+                        <span>{comment.length}/35</span>
+                    )}
+                    <ST.AddBtn onClick={() => onSubmit(currentShopId, comment)}>등록</ST.AddBtn>
+                </ST.ReviewInputP>
+            )}
             <ST.ReviewH3>방문자 후기 {detailShopData.reviews.length}</ST.ReviewH3>
             <ST.ReviewListUl>
-                {detailShopData.reviews.map((review) => (
-                    <ST.ReviewListLi key={review.reviewId}>
-                        <ST.ReviewListP>
-                            <ST.ReviewNick>{review.nickname}</ST.ReviewNick>
-                            <ST.ReviewNick>{review.createdAt.slice(0, 10)}</ST.ReviewNick>
-                        </ST.ReviewListP>
-                        <p>{review.comment}</p>
-                        <ST.ReviewListP>
-                            <span>
-                                <ST.GoodBtn onClick={() => RecommendHandler(review.reviewId)}>
-                                    {recommend[review.reviewId] ? <BiSolidLike style={mainColor}/> : <BiLike style={mainColor}/>}
-                                </ST.GoodBtn>
-                                &nbsp;{review.likeCount}
-                            </span>
-                            <ST.DelBtn onClick={() => DeleteHandler(currentShopId, review.reviewId)}>삭제</ST.DelBtn>
-                        </ST.ReviewListP>
-                    </ST.ReviewListLi>
-                )).reverse()} 
+                {detailShopData.reviews
+                    .map((review) => (
+                        <ST.ReviewListLi key={review.reviewId}>
+                            <ST.ReviewListP>
+                                <ST.ReviewNick>{review.nickname}</ST.ReviewNick>
+                                <ST.ReviewNick>{review.createdAt.slice(0, 10)}</ST.ReviewNick>
+                            </ST.ReviewListP>
+                            <p>{review.comment}</p>
+                            <ST.ReviewListP>
+                                <span>
+                                    <ST.GoodBtn onClick={() => RecommendHandler(review.reviewId)}>
+                                        {recommend[review.reviewId] ? (
+                                            <BiSolidLike style={mainColor} />
+                                        ) : (
+                                            <BiLike style={mainColor} />
+                                        )}
+                                    </ST.GoodBtn>
+                                    &nbsp;{review.likeCount}
+                                </span>
+                                <ST.DelBtn onClick={() => DeleteHandler(currentShopId, review.reviewId)}>
+                                    삭제
+                                </ST.DelBtn>
+                            </ST.ReviewListP>
+                        </ST.ReviewListLi>
+                    ))
+                    .reverse()}
             </ST.ReviewListUl>
         </ST.Container>
     )
@@ -120,5 +135,5 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
 export default Reviews
 
 export const mainColor = {
-    color: '#00bd8f'
+    color: '#00bd8f',
 }
