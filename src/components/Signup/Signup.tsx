@@ -90,7 +90,10 @@ const Signup: React.FC = () => {
         } else if (num < 0 || eng < 0) {
             alert('숫자, 영문을 혼합하여 입력해주세요.')
             return false
-        } else {
+        } else if(userData.phoneNumber.length < 10 || userData.phoneNumber.length > 11) {
+            alert('전화번호는 10~11자리로 입력해주세요.')
+            return false
+        }else {
             console.log('비번 유효성 통과')
             await userSignup(userData)
 
