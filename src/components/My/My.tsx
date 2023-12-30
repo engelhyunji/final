@@ -129,6 +129,8 @@ const My: React.FC = () => {
                 try {
                     await instance.delete('/api/user/delete', { data: { password } })
                     logout()
+                    alert('회원탈퇴가 완료되었습니다')
+                    navigate('/')
                 } catch (err) {
                     console.log(err)
                     alert('탈퇴실패 비밀번호가 틀렸습니다')
