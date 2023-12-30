@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import * as ST from './style'
 import { useNavigate } from 'react-router-dom'
 import instance from '../../apis/instance'
-import { postCode, postEmail } from '../../apis/api/user'
 import Timer from './Timer'
 
 export interface UserData {
@@ -36,22 +35,26 @@ const Signup: React.FC = () => {
         const emailEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i
         if (emailEx.test(email)) {
             try {
-                await postEmail(email)
+                await instance.post('/api/user/email', {email})
+                alert('이메일로 인증코드가 발송되었습니다.')
                 setIsTimerRunning(true)
-            } catch (err: any) {
+            } catch (err) {
                 console.log('이메일 전송에러 :', err)
+                alert('이미 가입된 이메일 입니다.')
             }
         } else {
             alert('이메일 형식이 맞지 않습니다.')
         }
     }
 
-    const codeVerify = async () => {
+    const codeVerify = async (email: string, verificationCode: string) => {
         try {
-            await postCode(userData.email, code)
+            await instance.post('/api/user/email/verify', {email, verificationCode})
+            alert('이메일이 인증되었습니다.')
             setIsTimerRunning(false)
-        } catch (err: any) {
-            console.log('이메일 인증에러 :', err)
+        } catch (err) {
+            console.log('이메일 인증코드 전송에러 :', err)
+            alert('인증 코드가 맞지 않습니다.')
         }
     }
 
@@ -133,7 +136,7 @@ const Signup: React.FC = () => {
                             />
                             {isTimerRunning && <Timer mm={'5'} ss={'0'} isRunning={isTimerRunning} />}
                         </ST.SignupInputDiv>
-                        <ST.ComfirmBtn onClick={codeVerify}>확인</ST.ComfirmBtn>
+                        <ST.ComfirmBtn onClick={()=>codeVerify(userData.email, code)}>확인</ST.ComfirmBtn>
                     </ST.VerifyBox>
 
                     <ST.SignupInputBox>
