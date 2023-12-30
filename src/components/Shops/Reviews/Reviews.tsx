@@ -18,6 +18,7 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     const queryClient = useQueryClient()
 
     const [comment, setComment] = useState('')
+    const [notiComment, setNotiComment] = useState('')
     const [recommend, setRecommend] = useState<{ [key: number]: boolean }>({})
 
     // shopId가 undefined 일 때 경고창
@@ -62,8 +63,14 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     )
 
     const onSubmit = (shopId: number, comment: string) => {
-        addReviewMutation.mutate({ shopId, comment, shopName: `${detailShopData.shopResponseDto.shopName}` })
-        setComment('')
+        if (!comment.trim()) {
+            setNotiComment('내용을 작성해주세요')
+            return
+        } else {
+            addReviewMutation.mutate({ shopId, comment, shopName: `${detailShopData.shopResponseDto.shopName}` })
+            setNotiComment('')
+            setComment('')
+        }
     }
 
     // 리뷰 추천 초기 상태 확인 필요,, 수정해야함
@@ -88,16 +95,19 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     return (
         <ST.Container>
             {isLogin && (
-                <ST.ReviewInputP>
-                    <span>후기 작성</span>
-                    <ST.ReviewInput type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
-                    {comment.length > 35 ? (
-                        <ST.ReviewLength>{comment.length}/35</ST.ReviewLength>
-                    ) : (
-                        <span>{comment.length}/35</span>
-                    )}
-                    <ST.AddBtn onClick={() => onSubmit(currentShopId, comment)}>등록</ST.AddBtn>
-                </ST.ReviewInputP>
+                <>
+                    <ST.ReviewInputP>
+                        <span>후기 작성</span>
+                        <ST.ReviewInput type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
+                        {comment.length > 35 ? (
+                            <ST.ReviewLength>{comment.length}/35</ST.ReviewLength>
+                        ) : (
+                            <span>{comment.length}/35</span>
+                        )}
+                        <ST.AddBtn onClick={() => onSubmit(currentShopId, comment)}>등록</ST.AddBtn>
+                    </ST.ReviewInputP>
+                    <ST.ReviewInputNotiP>{comment.trim().length > 2 ? '' : notiComment}</ST.ReviewInputNotiP>
+                </>
             )}
             <ST.ReviewH3>방문자 후기 {detailShopData.reviews.length}</ST.ReviewH3>
             <ST.ReviewListUl>

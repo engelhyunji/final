@@ -7,7 +7,7 @@ export const Container = styled.div`
 export const ReviewInputP = styled.p`
     width: 100%;
     font-family: Pretendard-regular;
-    margin: 50px 0 30px;
+    margin: 50px 0 10px;
 
     display: flex;
     gap: 10px;
@@ -23,7 +23,7 @@ export const ReviewInput = styled.input`
     background: #fff;
 `
 export const ReviewLength = styled.span`
-        color: #fd4141;
+    color: #fd4141;
 `
 export const AddBtn = styled.button`
     padding: 15px;
@@ -32,6 +32,14 @@ export const AddBtn = styled.button`
     background-color: #00bd8f;
     border: none;
     border-radius: 8px;
+`
+export const ReviewInputNotiP = styled.p`
+    width: 100%;
+    height: 20px;
+    font-size: 14px;
+    font-family: Pretendard-regular;
+    color: #fd4141;
+    text-align: center;
 `
 
 export const ReviewH3 = styled.h3`
@@ -77,7 +85,7 @@ export const ReviewListP = styled.p`
 export const ReviewNick = styled.span`
     font-size: 14px;
     font-family: Pretendard-regular;
-    color: #8F8E93;
+    color: #8f8e93;
 `
 export const GoodBtn = styled.button`
     padding: 6px 8px 8px;
@@ -91,7 +99,7 @@ export const GoodBtn = styled.button`
 export const DelBtn = styled.button`
     width: 50px;
     height: 34px;
-    color: #FD4141;
+    color: #fd4141;
     font-size: 14px;
     font-family: Pretendard-Regular;
     background-color: #eee;
