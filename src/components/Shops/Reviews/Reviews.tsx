@@ -3,7 +3,13 @@ import { ShopDetails } from '../../../apis/api/api'
 import * as ST from './style'
 import { BiSolidLike, BiLike } from 'react-icons/bi'
 import { useParams } from 'react-router-dom'
-import { addReview, cancelRecommendReview, deleteReview, getRecommended, recommendReview } from '../../../apis/api/review'
+import {
+    addReview,
+    cancelRecommendReview,
+    deleteReview,
+    getRecommended,
+    recommendReview,
+} from '../../../apis/api/review'
 import { useMutation, useQueryClient } from 'react-query'
 import { AxiosError } from 'axios'
 import { useAuth } from '../../../context/AuthContext'
@@ -16,6 +22,7 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     const { isLogin } = useAuth()
     const { shopId } = useParams()
     const queryClient = useQueryClient()
+    const reviewLimit: number = 50
 
     const [comment, setComment] = useState('')
     const [notiComment, setNotiComment] = useState('')
@@ -27,24 +34,24 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     useEffect(() => {
         // 리뷰 추천 기록 받아오기
         const getRecommendations = async () => {
-            const newRecommendations: { [key: number]: boolean } = {};
+            const newRecommendations: { [key: number]: boolean } = {}
             // detailShopData.reviews가 배열일 경우만
             if (Array.isArray(detailShopData.reviews)) {
                 for (const review of detailShopData.reviews) {
                     try {
-                        const result = await getRecommended(review.reviewId);
-                        newRecommendations[review.reviewId] = result;
+                        const result = await getRecommended(review.reviewId)
+                        newRecommendations[review.reviewId] = result
                     } catch (error) {
-                        console.error('리뷰 추천 기록을 가져오는 중 에러:',error);
+                        console.error('리뷰 추천 기록을 가져오는 중 에러:', error)
                     }
                 }
-                setRecommend(newRecommendations);
+                setRecommend(newRecommendations)
             }
-        };
+        }
 
-        getRecommendations();
-    }, []);
-    
+        getRecommendations()
+    }, [])
+
     const addReviewMutation = useMutation<void, AxiosError, { shopId: number; comment: string; shopName: string }>(
         ({ shopId, comment, shopName }) => addReview(shopId, comment, shopName),
         {
@@ -120,10 +127,14 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
                     <ST.ReviewInputP>
                         <span>후기 작성</span>
                         <ST.ReviewInput type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
-                        {comment.length > 35 ? (
-                            <ST.ReviewLength>{comment.length}/35</ST.ReviewLength>
+                        {comment.length > reviewLimit ? (
+                            <ST.ReviewLength>
+                                {comment.length}/{reviewLimit}
+                            </ST.ReviewLength>
                         ) : (
-                            <span>{comment.length}/35</span>
+                            <span>
+                                {comment.length}/{reviewLimit}
+                            </span>
                         )}
                         <ST.AddBtn onClick={() => onSubmit(currentShopId, comment)}>등록</ST.AddBtn>
                     </ST.ReviewInputP>

@@ -1,13 +1,15 @@
 import instance from '../instance'
 
-    
 // 리뷰 등록
 export const addReview = async (shopId: number, comment: string, shopName: string) => {
     try {
-        await instance.post(`/api/shops/${shopId}/reviews`, {comment})
+        await instance.post(`/api/shops/${shopId}/reviews`, { comment })
         alert(`${shopName}에 후기가 등록되었습니다🙉`)
-    } catch (error) {
+    } catch (error: any) {
         console.log('리뷰 등록 에러 :', error)
+        if (error.response.status === 403) {
+            alert('리뷰를 등록하실 수 없습니다')
+        }
     }
 }
 
