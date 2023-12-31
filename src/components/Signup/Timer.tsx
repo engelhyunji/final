@@ -22,18 +22,29 @@ const Timer: React.FC<TimerProps> = ({ mm = '0', ss = '0', isRunning }) => {
     const [minute, setMinute] = useState<string>(intToString(MM))
     const [second, setSecond] = useState<string>(intToString(SS))
 
+    const [isOver, setIsOver] = useState<boolean>(false)
+
     useEffect(() => {
         if (isRunning && !interval.current) {
             interval.current = window.setInterval(() => {
-                count.current -= 1
+                if (interval.current !== null) {
+                    // 값이 마이너스가 되지 않게
+                    if (count.current > 0) {
+                        count.current -= 1
 
-                setMinute(intToString(Math.floor(count.current / 60)))
-                setSecond(intToString(count.current % 60))
-            }, 1000) as unknown as number
+                        setMinute(intToString(Math.floor(count.current / 60)))
+                        setSecond(intToString(count.current % 60))
+                    } else {
+                        setIsOver(true)
+                        clearInterval(interval.current)
+                        interval.current = null
+                    }
+                }
+            }, 1000)
         }
 
         return () => {
-            if (interval.current) {
+            if (interval.current !== null) {
                 clearInterval(interval.current)
                 interval.current = null
             }
@@ -42,7 +53,13 @@ const Timer: React.FC<TimerProps> = ({ mm = '0', ss = '0', isRunning }) => {
 
     return (
         <div>
-            {minute} : {second}
+            {isOver ? (
+                <span style={{ color: 'fd4141' }}>시간 초과 </span>
+            ) : (
+                <>
+                    {minute} : {second}
+                </>
+            )}
         </div>
     )
 }
