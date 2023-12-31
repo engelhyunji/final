@@ -132,7 +132,7 @@ const Signup: React.FC = () => {
                         />
                     </ST.SignupInputBox>
 
-                    <ST.SignupEBtn onClick={() => emailVerify(userData.email)}>인증코드 발송</ST.SignupEBtn>
+                    <ST.SignupEBtn onClick={() => emailVerify(userData.email)} disabled={isEmailVerified} style={{ color: isEmailVerified ? '#fff' : '#00bd8f' }}>인증코드 발송</ST.SignupEBtn>
 
                     <ST.VerifyBox>
                         <ST.SignupInputDiv>
@@ -146,7 +146,7 @@ const Signup: React.FC = () => {
                             />
                             {isTimerRunning && <Timer key={timerKey} mm={'5'} ss={'0'} isRunning={isTimerRunning} />}
                         </ST.SignupInputDiv>
-                        <ST.ComfirmBtn onClick={() => codeVerify(userData.email, code)}>확인</ST.ComfirmBtn>
+                        <ST.ComfirmBtn onClick={() => codeVerify(userData.email, code)} disabled={isEmailVerified}  style={{ color: isEmailVerified ? '#fff' : '#00bd8f' }}>확인</ST.ComfirmBtn>
                     </ST.VerifyBox>
 
                     <ST.SignupInputBox>

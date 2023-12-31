@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const SignupContainer = styled.div`
     width: 100%;
@@ -84,7 +84,7 @@ export const SignupCodeInput = styled.input`
 export const SignupEBtn = styled.button`
     width: 478px;
     height: 51px;
-    color: #00BD8F;
+    color: #00bd8f;
     font-family: Pretendard-medium;
     background-color: #ddd;
     border: none;
@@ -100,13 +100,12 @@ export const VerifyBox = styled.div`
 export const ComfirmBtn = styled.button`
     width: 120px;
     height: 51px;
-    color: #00BD8F;
+    color: #00bd8f;
     font-family: Pretendard-medium;
     background-color: #ddd;
     border: none;
     border-radius: 8px;
 `
-
 
 export const SignupBtn = styled.button`
     width: 180px;
@@ -114,7 +113,7 @@ export const SignupBtn = styled.button`
     margin: 30px 0 16px;
     color: #fff;
     font-family: Pretendard-medium;
-    background-color: #00BD8F;
+    background-color: #00bd8f;
     border: none;
     border-radius: 8px;
 `
