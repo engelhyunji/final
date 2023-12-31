@@ -66,7 +66,7 @@ export const AddHash = async (roomId: string, hash: string) => {
 // 해시태그 인기 조회
 export const getPopularHash = async () => {
     try {
-        const res = await instance.get('api/tags/popular')
+        const res = await instance.get('api/tags/chatrooms/popular')
         return res.data.result
     } catch (err) {
         console.log(err)
@@ -76,7 +76,7 @@ export const getPopularHash = async () => {
 // 해시태그 별 방조회
 export const getHashRoomList = async (tagName: string) => {
     try {
-        const res = await instance.get(`api/tags/chatrooms/bytag/${tagName}`)
+        const res = await instance.get(`api/tags/chatrooms/${tagName}`)
         return res.data.result
     } catch (err) {
         console.log(err)
@@ -86,7 +86,7 @@ export const getHashRoomList = async (tagName: string) => {
 // 해시태그 삭제
 export const deleteHash = async (roomId : string, name: string) => {
     try {
-        const res = await instance.delete(`api/tags/chatrooms/${roomId}/tags/${name}`)
+        const res = await instance.delete(`api/tags/chatrooms/${roomId}/${name}`)
         return res.data.result
     } catch (err) {
         console.log(err)
