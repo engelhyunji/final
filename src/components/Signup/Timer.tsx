@@ -54,7 +54,7 @@ const Timer: React.FC<TimerProps> = ({ mm = '0', ss = '0', isRunning }) => {
     return (
         <div>
             {isOver ? (
-                <span style={{ color: 'fd4141' }}>시간 초과 </span>
+                <span style={{ color: '#fd4141' }}>시간 초과 </span>
             ) : (
                 <>
                     {minute} : {second}
