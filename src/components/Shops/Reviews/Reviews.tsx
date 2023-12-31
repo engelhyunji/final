@@ -121,9 +121,9 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
                         <span>후기 작성</span>
                         <ST.ReviewInput type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
                         {comment.length > 35 ? (
-                            <ST.ReviewLength>{comment.length}/35</ST.ReviewLength>
+                            <ST.ReviewLength>{comment.length}/50</ST.ReviewLength>
                         ) : (
-                            <span>{comment.length}/35</span>
+                            <span>{comment.length}/50</span>
                         )}
                         <ST.AddBtn onClick={() => onSubmit(currentShopId, comment)}>등록</ST.AddBtn>
                     </ST.ReviewInputP>
