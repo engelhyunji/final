@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent, useRef, useEffect } from 'react'
+import React, { useState, ChangeEvent, FormEvent, useRef } from 'react'
 import * as ST from './style'
 import instance from '../../apis/instance'
 import { useNavigate } from 'react-router-dom'
@@ -7,8 +7,13 @@ import BackWave from '../BackWave'
 
 export interface ShopPostData {
     shopName: string
-    shopTime: string
-    shopTel: string
+    shopStartTime: string
+    shopEndTime: string
+    shopTel1: string
+    shopTel2: string
+    shopTel3: string
+    // shopTime: string
+    // shopTel: string
     shopAddress: string
     shopType: string
     shopDescribe: string
@@ -18,8 +23,11 @@ const Shops: React.FC = () => {
     const navigate = useNavigate()
     const [shopRequestDto, setShopRequestDto] = useState<ShopPostData>({
         shopName: '',
-        shopTime: '',
-        shopTel: '',
+        shopStartTime: '',
+        shopEndTime: '',
+        shopTel1: '',
+        shopTel2: '',
+        shopTel3: '',
         shopAddress: '',
         shopType: '',
         shopDescribe: '',
@@ -28,41 +36,39 @@ const Shops: React.FC = () => {
     const [imgUrl, setImgUrl] = useState<string>('')
     const [uploadImage, setUploadImage] = useState<File>(new File([], ''))
 
-    // 전화번호(shopTel) 각 부분
-    const [firstN, setFirstN] = useState<string>('')
-    const [midN, setMidN] = useState<string>('')
-    const [lastN, setLastN] = useState<string>('')
-    const midNInput = useRef<HTMLInputElement>(null)
-    const lastNInput = useRef<HTMLInputElement>(null)
-
-    // 영업시간(shopTime) 각 부분
-    const [openTime, setOpenTime] = useState<string>('')
-    const [closeTime, setCloseTime] = useState<string>('')
+    const tel2Input = useRef<HTMLInputElement>(null)
+    const tel3Input = useRef<HTMLInputElement>(null)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
 
-        if (name === 'firstN' || name === 'midN' || name === 'lastN') {
+        if (name === 'shopTel1' || name === 'shopTel2' || name === 'shopTel3') {
             // 숫자만 최대 4자리 입력 정규식
             const telRegEx = /^[0-9\b -]{0,4}$/
             if (telRegEx.test(value)) {
                 // 전화번호(shopTel) 각 부분 업데이트
-                if (name === 'firstN' && value.length < 5) {
-                    setFirstN(value)
+                if (name === 'shopTel1' && value.length < 5) {
+                    setShopRequestDto((prevData) => ({
+                        ...prevData,
+                        shopTel1: value,
+                    }))
                     // 4자리도 입력 가능하지만 많은 경우인 3자리에서 포커스 이동
-                    if (value.length === 3) midNInput.current?.focus()
+                    if (value.length === 3) tel2Input.current?.focus()
                 }
-                if (name === 'midN') {
-                    setMidN(value)
-                    if (value.length === 4) lastNInput.current?.focus()
+                if (name === 'shopTel2') {
+                    setShopRequestDto((prevData) => ({
+                        ...prevData,
+                        shopTel2: value,
+                    }))
+                    if (value.length === 4) tel3Input.current?.focus()
                 }
-                if (name === 'lastN') setLastN(value)
+                if (name === 'shopTel3') {
+                    setShopRequestDto((prevData) => ({
+                        ...prevData,
+                        shopTel3: value,
+                    }))
+                }
             }
-
-            // 오픈시간 마감시간 각 업데이트
-        } else if (name === 'openTime' || name === 'closeTime') {
-            if (name === 'openTime') setOpenTime(value)
-            if (name === 'closeTime') setCloseTime(value)
         } else {
             setShopRequestDto((prevData) => ({
                 ...prevData,
@@ -70,26 +76,6 @@ const Shops: React.FC = () => {
             }))
         }
     }
-    useEffect(() => {
-        // 컴포넌트가 렌더링된 후에 실행되어 최신입력값 적용되게
-        // 전체 전화번호 조합 업데이트
-        const tel = `${firstN}-${midN}-${lastN}`
-        setShopRequestDto((prevData) => ({
-            ...prevData,
-            shopTel: tel,
-        }))
-    }, [firstN, midN, lastN])
-
-    useEffect(() => {
-        // 컴포넌트가 렌더링된 후에 실행되어
-        // openTime, closeTime 업데이트된 후에 setShopRequestDto 호출되도록
-        // 전체 영업시간 업데이트
-        const time = `${openTime} ~ ${closeTime}`
-        setShopRequestDto((prevData) => ({
-            ...prevData,
-            shopTime: time,
-        }))
-    }, [openTime, closeTime])
 
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -134,12 +120,15 @@ const Shops: React.FC = () => {
         }
 
         if (
-            shopRequestDto.shopName === " " ||
-            shopRequestDto.shopTel === " " ||
-            shopRequestDto.shopAddress === " " ||
-            shopRequestDto.shopDescribe === " " ||
-            shopRequestDto.shopTime === " " ||
-            shopRequestDto.shopType === " "
+            shopRequestDto.shopName.trim() === '' ||
+            shopRequestDto.shopStartTime.trim() === '' ||
+            shopRequestDto.shopEndTime.trim() === '' ||
+            shopRequestDto.shopAddress.trim() === '' ||
+            shopRequestDto.shopDescribe.trim() === '' ||
+            shopRequestDto.shopTel1.trim() === '' ||
+            shopRequestDto.shopTel2.trim() === '' ||
+            shopRequestDto.shopTel3.trim() === '' ||
+            shopRequestDto.shopType.trim() === ''
         ) {
             alert('정보를 모두 입력해주세요')
             return false
@@ -206,20 +195,47 @@ const Shops: React.FC = () => {
                 <ST.ShopInputBox>
                     <ST.Label>Shop 전화번호를 알려주세요</ST.Label>
                     <ST.NnTInputBox>
-                        <ST.NInput name="firstN" type="text" value={firstN} onChange={handleChange} />
+                        <ST.NInput
+                            name="shopTel1"
+                            type="text"
+                            value={shopRequestDto.shopTel1}
+                            onChange={handleChange}
+                        />
                         <ST.NSpan />
-                        <ST.NInput ref={midNInput} name="midN" type="text" value={midN} onChange={handleChange} />
+                        <ST.NInput
+                            ref={tel2Input}
+                            name="shopTel2"
+                            type="text"
+                            value={shopRequestDto.shopTel2}
+                            onChange={handleChange}
+                        />
                         <ST.NSpan />
-                        <ST.NInput ref={lastNInput} name="lastN" type="text" value={lastN} onChange={handleChange} />
+                        <ST.NInput
+                            ref={tel3Input}
+                            name="shopTel3"
+                            type="text"
+                            value={shopRequestDto.shopTel3}
+                            onChange={handleChange}
+                        />
                     </ST.NnTInputBox>
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
                     <ST.Label>Shop 영업시간을 알려주세요</ST.Label>
                     <ST.NnTInputBox>
-                        <ST.TInput name="openTime" type="time" value={openTime} onChange={handleChange} />
+                        <ST.TInput
+                            name="shopStartTime"
+                            type="time"
+                            value={shopRequestDto.shopStartTime}
+                            onChange={handleChange}
+                        />
                         <span> ~ </span>
-                        <ST.TInput name="closeTime" type="time" value={closeTime} onChange={handleChange} />
+                        <ST.TInput
+                            name="shopEndTime"
+                            type="time"
+                            value={shopRequestDto.shopEndTime}
+                            onChange={handleChange}
+                        />
                     </ST.NnTInputBox>
                 </ST.ShopInputBox>
 

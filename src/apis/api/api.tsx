@@ -5,8 +5,13 @@ export interface Shop {
     shopId: number
     userId: number
     shopName: string
-    shopTime: string
-    shopTel: string
+    shopStartTime: string
+    shopEndTime: string
+    shopTel1: string
+    shopTel2: string
+    shopTel3: string
+    // shopTime: string
+    // shopTel: string
     shopAddress: string
     shopType: string
     shopDescribe: string
@@ -21,8 +26,13 @@ export interface shopResponseDto {
     shopId: number
     userId: number
     shopName: string
-    shopTime: string
-    shopTel: string
+    shopStartTime: string
+    shopEndTime: string
+    shopTel1: string
+    shopTel2: string
+    shopTel3: string
+    // shopTime: string
+    // shopTel: string
     shopAddress: string
     shopType: string
     shopDescribe: string

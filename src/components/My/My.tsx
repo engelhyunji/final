@@ -207,8 +207,8 @@ const My: React.FC = () => {
                                         <ST.ImgInfo>
                                             <ST.TitleH4>{shop.shopName}</ST.TitleH4>
                                             <p>업종: {shop.shopType}</p>
-                                            <p>영업시간: {shop.shopTime}</p>
-                                            <p>전화번호: {shop.shopTel}</p>
+                                            <p>영업시간: {shop.shopStartTime} ~ {shop.shopEndTime}</p>
+                                            <p>전화번호: {shop.shopTel1} - {shop.shopTel2} - {shop.shopTel3}</p>
                                             <p>위치: {shop.shopAddress}</p>
                                             <p>소개: {shop.shopDescribe}</p>
                                         </ST.ImgInfo>

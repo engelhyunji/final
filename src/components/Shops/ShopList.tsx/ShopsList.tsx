@@ -135,9 +135,9 @@ const ShopsList: React.FC = () => {
                                     <ST.ShopListH4 className="card-title">{shop.shopName}</ST.ShopListH4>
                                     <ST.ShopGrid>
                                         <ST.BodyTimeP className="card-text">영업시간</ST.BodyTimeP>
-                                        <ST.BodyTimeInfoP className="card-text">{shop.shopTime}</ST.BodyTimeInfoP>
+                                        <ST.BodyTimeInfoP className="card-text">{shop.shopStartTime} ~ {shop.shopEndTime}</ST.BodyTimeInfoP>
                                         <ST.BodyTelP className="card-text">전화번호</ST.BodyTelP>
-                                        <ST.BodyTelInfoP className="card-text">{shop.shopTel}</ST.BodyTelInfoP>
+                                        <ST.BodyTelInfoP className="card-text">{shop.shopTel1} - {shop.shopTel2} - {shop.shopTel3}</ST.BodyTelInfoP>
                                         <ST.BodyAddressP className="card-text">위치</ST.BodyAddressP>
                                         <ST.BodyAddressInfoP className="card-text">
                                             {shop.shopAddress}
