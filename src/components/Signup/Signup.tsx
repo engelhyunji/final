@@ -17,7 +17,9 @@ const Signup: React.FC = () => {
     // 인증코드 5분 타이머 컨트롤
     const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false)
     // 타이머를 강제로 다시 렌더링하기 위한 키
-    const [timerKey, setTimerKey] = useState<number>(0); 
+    const [timerKey, setTimerKey] = useState<number>(0)
+    // 이메일 인증 후 관련 input창 비활성화 컨트롤
+    const [isEmailVerified, setIsEmailVerified] = useState<boolean>(false)
 
     const [userData, setUserData] = useState<UserData>({
         nickname: '',
@@ -38,11 +40,11 @@ const Signup: React.FC = () => {
         const emailEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i
         if (emailEx.test(email)) {
             try {
-                await instance.post('/api/user/email', {email})
+                await instance.post('/api/user/email', { email })
                 alert('이메일로 인증코드가 발송되었습니다.')
                 setIsTimerRunning(true)
                 // 키 변경해서 타이머 재시작
-                setTimerKey((prevKey) => prevKey + 1); 
+                setTimerKey((prevKey) => prevKey + 1)
             } catch (err) {
                 console.log('이메일 전송에러 :', err)
                 alert('이미 가입된 이메일 입니다.')
@@ -54,9 +56,10 @@ const Signup: React.FC = () => {
 
     const codeVerify = async (email: string, verificationCode: string) => {
         try {
-            await instance.post('/api/user/email/verify', {email, verificationCode})
+            await instance.post('/api/user/email/verify', { email, verificationCode })
             alert('이메일이 인증되었습니다.')
             setIsTimerRunning(false)
+            setIsEmailVerified(true)
         } catch (err) {
             console.log('이메일 인증코드 전송에러 :', err)
             alert('인증 코드가 맞지 않습니다.')
@@ -98,10 +101,10 @@ const Signup: React.FC = () => {
         } else if (num < 0 || eng < 0) {
             alert('숫자, 영문을 혼합하여 입력해주세요.')
             return false
-        } else if(userData.phoneNumber.length < 10 || userData.phoneNumber.length > 11) {
+        } else if (userData.phoneNumber.length < 10 || userData.phoneNumber.length > 11) {
             alert('전화번호는 10~11자리로 입력해주세요.')
             return false
-        }else {
+        } else {
             console.log('비번 유효성 통과')
             await userSignup(userData)
 
@@ -125,6 +128,7 @@ const Signup: React.FC = () => {
                             name="email"
                             value={userData.email}
                             onChange={handleInputChange}
+                            disabled={isEmailVerified} // 인증 후 비활성화
                         />
                     </ST.SignupInputBox>
 
@@ -138,10 +142,11 @@ const Signup: React.FC = () => {
                                 name="code"
                                 value={code}
                                 onChange={(e) => setCode(e.target.value)}
+                                disabled={isEmailVerified} // 인증 후 비활성화
                             />
                             {isTimerRunning && <Timer key={timerKey} mm={'5'} ss={'0'} isRunning={isTimerRunning} />}
                         </ST.SignupInputDiv>
-                        <ST.ComfirmBtn onClick={()=>codeVerify(userData.email, code)}>확인</ST.ComfirmBtn>
+                        <ST.ComfirmBtn onClick={() => codeVerify(userData.email, code)}>확인</ST.ComfirmBtn>
                     </ST.VerifyBox>
 
                     <ST.SignupInputBox>
