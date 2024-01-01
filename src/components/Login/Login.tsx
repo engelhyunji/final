@@ -50,7 +50,7 @@ const Login: React.FC = () => {
         } catch (error: any) {
             if (error.response.status === 403) {
                 console.log('로그인 실패 : error 메세지', error)
-                alert('유효하지 않은 계정입니다')
+                alert(error.response.data.message)
             }
             console.log('로그인 실패 : error 메세지', error)
         }

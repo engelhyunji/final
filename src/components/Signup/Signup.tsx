@@ -45,9 +45,9 @@ const Signup: React.FC = () => {
                 setIsTimerRunning(true)
                 // 키 변경해서 타이머 재시작
                 setTimerKey((prevKey) => prevKey + 1)
-            } catch (err) {
+            } catch (err: any) {
                 console.log('이메일 전송에러 :', err)
-                alert('이미 가입된 이메일 입니다.')
+                alert(err.response.data.message)
             }
         } else {
             alert('이메일 형식이 맞지 않습니다.')
@@ -73,10 +73,7 @@ const Signup: React.FC = () => {
             navigate('/login')
         } catch (err: any) {
             console.log('회원가입 error 메세지', err)
-            if (err?.response.status === 409) {
-                // 이미 등록된 이메일
-                alert(err.response.data.message)
-            }
+            alert(err.response.data.message)
         }
     }
 
