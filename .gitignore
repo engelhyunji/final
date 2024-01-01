@@ -26,6 +26,6 @@ dist-ssr
 # 나중에 사용하기 보안 관련
 # node_modules
 .env
-# db.json
+db.json
 # .prettierrc
 
