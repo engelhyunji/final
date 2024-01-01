@@ -17,6 +17,7 @@ export interface ShopPostData {
     shopAddress: string
     shopType: string
     shopDescribe: string
+    // shopTags: string[]
 }
 
 const Shops: React.FC = () => {
@@ -31,6 +32,7 @@ const Shops: React.FC = () => {
         shopAddress: '',
         shopType: '',
         shopDescribe: '',
+        // shopTags: [],
     })
 
     const [imgUrl, setImgUrl] = useState<string>('')
@@ -154,6 +156,17 @@ const Shops: React.FC = () => {
             <ST.ShopP>사장님의 가게를 등록하고 더 많은 매칭 서비스를 이용해 보세요!</ST.ShopP>
 
             <ST.Form onSubmit={handleSubmit}>
+                {/* <ST.ShopInputBox>
+                    <ST.Label>Shop 관련 키워드 #해시태그</ST.Label>
+                    <ST.Input
+                        name="shopTags"
+                        type="text"
+                        value={shopRequestDto.shopTags}
+                        onChange={handleChange}
+                        placeholder="해시태그 추가"
+                    />
+                </ST.ShopInputBox> */}
+
                 <ST.ShopInputBox>
                     <ST.Label>Shop 종류를 알려주세요</ST.Label>
                     <ST.StDropdown>

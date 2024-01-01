@@ -15,6 +15,7 @@ export interface Shop {
     shopAddress: string
     shopType: string
     shopDescribe: string
+    // shopTags?: string[]
     imageUrls: string[]
 }
 
