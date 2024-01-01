@@ -3,7 +3,8 @@ import * as ST from './style'
 import { SiKakaotalk } from 'react-icons/si'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { addChat, getChatList, getHashRoomList, getPopularHash } from '../../apis/api/chat'
+import { addChat, getChatList } from '../../apis/api/chat'
+import { getHashRoomList, getPopularHash } from '../../apis/api/tag'
 import { AxiosError } from 'axios'
 
 interface Hash {
