@@ -160,3 +160,15 @@ export const getShopLocation = async (shopId: number) => {
         throw error;
     }
 };
+
+
+
+// Shop 검색 (전체목록페이지)
+export const searchShop = async (query: { keyword : string }) => {
+    try {
+        const res = await instance.get('/api/shops/search', { params: query })
+        return res.data.result
+    } catch (err) {
+        console.log(err)
+    }
+}
