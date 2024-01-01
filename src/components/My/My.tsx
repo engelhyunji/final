@@ -9,9 +9,10 @@ import instance from '../../apis/instance'
 import { useAuth } from '../../context/AuthContext'
 import BackWave from '../BackWave'
 import { AxiosError } from 'axios'
-import { AddHash, deleteChat, deleteHash } from '../../apis/api/chat'
+import { deleteChat } from '../../apis/api/chat'
 import { ApiResponse, deletePet } from '../../apis/api/petmodify'
 import { Chatroom } from '../Chat/ChatList'
+import { AddHash, deleteHash } from '../../apis/api/tag'
 
 const My: React.FC = () => {
     const { logout } = useAuth()
