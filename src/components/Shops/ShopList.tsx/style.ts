@@ -63,7 +63,7 @@ export const ShopP = styled.p`
 `
 
 export const ShopSearchContainer = styled.div`
-    width: 745px;
+    width: 725px;
     /* height: 131px; */
     padding: 19px 33px;
 
@@ -79,20 +79,20 @@ export const ShopSearchContainer = styled.div`
     z-index: 10;
 
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
 `
-export const ShopSearchCondition = styled.div`
-    width: 109px;
-    height: 40px;
-    padding: 11px 15px;
-    border-radius: 26px;
-    border: 1px solid #dadada;
-    color: #8f8e93;
-    font-size: 16px;
-`
+
+// export const ShopSearchCondition = styled.div`
+//     width: 109px;
+//     height: 40px;
+//     padding: 11px 15px;
+//     border-radius: 26px;
+//     border: 1px solid #dadada;
+//     color: #8f8e93;
+//     font-size: 16px;
+// `
 export const ShopSearchInput = styled.input`
-    width: 407px;
+    width: 427px;
     height: 51px;
     padding: 11px 18px;
 
@@ -114,6 +114,27 @@ export const SearchBtn = styled.button`
     justify-content: center;
     align-items: center;
 `
+export const ShopSearchBox = styled.div`
+    width: 100%;
+    /* height: 131px; */
+
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+export const ShopTagContainer = styled.div`
+    width: 100%;
+    padding: 15px 0 0;
+
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+
 
 export const ShopListContainer = styled.div`
     max-width: 1200px;

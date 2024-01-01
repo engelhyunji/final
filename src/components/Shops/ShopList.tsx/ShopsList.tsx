@@ -4,12 +4,15 @@ import * as ST from './style'
 import * as StP from './pageStyle'
 import { Pagination, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Shop, getShopType, getShops } from '../../../apis/api/api'
+import { HiSearch } from 'react-icons/hi'
+import { Shop, getShopType, getShops, getSearchShop } from '../../../apis/api/api'
 import { useQuery } from 'react-query'
 
 const ShopsList: React.FC = () => {
     const navigate = useNavigate()
 
+    // 검색어
+    const [searchShop, setSearchShop] = useState<string>('')
     // 현재 활성화된 카테고리(.active 스타일 설정용)
     const [nowCategory, setNowCategory] = useState('ALL')
 
@@ -51,6 +54,15 @@ const ShopsList: React.FC = () => {
         setCurrentShops(reversedShops.slice(indexOfFirstShop, indexOfLastShop))
     }, [shopList, page])
 
+    // 검색
+    const searchHandler = async () => {
+        await getSearchShop({ keyword: searchShop }).then((data) => {
+            if (data) {
+                setShopList([...data])
+            }
+        })
+    }
+
     // 카테고리 별 API호출
     const roomTypeHandler = (type: string) => {
         // 모두 보기
@@ -81,9 +93,21 @@ const ShopsList: React.FC = () => {
                 <ST.ShopP>내 펫에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
             </ST.TitleBackContainer>
             <ST.ShopSearchContainer>
-                <ST.ShopSearchCondition>가게 종류 ▾</ST.ShopSearchCondition>
-                <ST.ShopSearchInput type="text" value={'검색기능 준비중입니다'} placeholder="" readOnly/>
-                <ST.SearchBtn>검색</ST.SearchBtn>
+                {/* <ST.ShopSearchCondition>가게 종류 ▾</ST.ShopSearchCondition> */}
+                <ST.ShopSearchBox>
+                    <HiSearch style={search} />
+                    <ST.ShopSearchInput
+                        type="text"
+                        value={searchShop}
+                        onChange={(e) => setSearchShop(e.target.value)}
+                        placeholder=""
+                    />
+                    <ST.SearchBtn onClick={searchHandler}>검색</ST.SearchBtn>
+                </ST.ShopSearchBox>
+
+                <ST.ShopTagContainer>
+                    HOT 해시태그
+                </ST.ShopTagContainer>
             </ST.ShopSearchContainer>
 
             <ST.ShopListContainer>
@@ -135,9 +159,13 @@ const ShopsList: React.FC = () => {
                                     <ST.ShopListH4 className="card-title">{shop.shopName}</ST.ShopListH4>
                                     <ST.ShopGrid>
                                         <ST.BodyTimeP className="card-text">영업시간</ST.BodyTimeP>
-                                        <ST.BodyTimeInfoP className="card-text">{shop.shopStartTime} ~ {shop.shopEndTime}</ST.BodyTimeInfoP>
+                                        <ST.BodyTimeInfoP className="card-text">
+                                            {shop.shopStartTime} ~ {shop.shopEndTime}
+                                        </ST.BodyTimeInfoP>
                                         <ST.BodyTelP className="card-text">전화번호</ST.BodyTelP>
-                                        <ST.BodyTelInfoP className="card-text">{shop.shopTel1} - {shop.shopTel2} - {shop.shopTel3}</ST.BodyTelInfoP>
+                                        <ST.BodyTelInfoP className="card-text">
+                                            {shop.shopTel1} - {shop.shopTel2} - {shop.shopTel3}
+                                        </ST.BodyTelInfoP>
                                         <ST.BodyAddressP className="card-text">위치</ST.BodyAddressP>
                                         <ST.BodyAddressInfoP className="card-text">
                                             {shop.shopAddress}
@@ -176,4 +204,10 @@ const cardCol = {
     padding: '0px',
     margin: '0px',
     width: '358px',
+}
+
+const search = {
+    width: '36px',
+    height: '36px',
+    color: '#00bd8f',
 }
