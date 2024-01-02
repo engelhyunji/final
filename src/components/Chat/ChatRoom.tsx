@@ -31,6 +31,7 @@ interface Message {
     type: string
     sender: string
     message: string
+    sentAt: string
 }
 
 const ChatRoom: React.FC = () => {
@@ -86,6 +87,7 @@ const ChatRoom: React.FC = () => {
             type: 'QUIT',
             roomId,
             sender: nickname,
+            sentAt: new Date().toISOString(),
         }
 
         client.current.publish({
@@ -128,6 +130,7 @@ const ChatRoom: React.FC = () => {
                     email,
                     roomId,
                     sender: nickname,
+                    sentAt: new Date().toISOString(),
                 }
 
                 client.current.publish({
@@ -140,7 +143,7 @@ const ChatRoom: React.FC = () => {
                 })
             },
             connectHeaders: headers,
-            debug () {
+            debug() {
                 // 관련 정보(헤더토큰) 안보이게
                 // console.log(str)
             },
@@ -157,7 +160,7 @@ const ChatRoom: React.FC = () => {
 
         client.current.publish({
             destination: '/pub/chat/message',
-            body: JSON.stringify({ type: 'TALK', roomId, sender: nickname, message }),
+            body: JSON.stringify({ type: 'TALK', roomId, sender: nickname, message, sentAt: new Date().toISOString() }),
             headers: headers,
         })
 
@@ -169,16 +172,30 @@ const ChatRoom: React.FC = () => {
             <ST.MessageContainer>
                 <ST.MessageInfoContainer>
                     <ST.ChatH2>{room?.name} 채팅방</ST.ChatH2>
-                    {/* <span>방ID: {room?.roomId}</span> */}
-                    <span>방소유주👑: {room?.creator.nickname}</span>
-                    <span>참여자 수: {room?.members.length}</span>
-                    <span>참여인원: {room?.members.map((member) => <span key={member.email}>{member.nickname}, </span>)}</span>
-                    <div>
-                        <ST.ChatLeaveBtn onClick={disconnect}>채팅방 나가기</ST.ChatLeaveBtn>
-                    </div>
                 </ST.MessageInfoContainer>
 
                 <ST.MessageListContainer>
+                    <ST.ChatMemberContainer>
+                        <ST.ChatH3>
+                            대화상대 <span>{room?.members.length}</span>{' '}
+                        </ST.ChatH3>
+                        {members?.map((member) => (
+                            <ST.ChatMemberDiv key={member.email}>
+                                {member.nickname}
+                                {member.nickname === room?.creator.nickname ? '👑' : ''}
+                                {member.pets?.map((pet) => (
+                                    <ST.ChatPetDiv key={pet.petId}>
+                                        <ST.ChatPetImg src={pet.imageUrls[0]} alt={pet.petName} />
+                                        <ST.ChatPetInfoDiv>
+                                            <span>{pet.petName}</span>
+                                            <p>{pet.petInfo}</p>
+                                        </ST.ChatPetInfoDiv>
+                                    </ST.ChatPetDiv>
+                                ))}
+                            </ST.ChatMemberDiv>
+                        ))}
+                    </ST.ChatMemberContainer>
+
                     <ST.MessageUl ref={scrollRef}>
                         {messages?.map((msg, idx) => (
                             // 내 메세지, 받은 메세지 스타일 따로 지정
@@ -197,7 +214,7 @@ const ChatRoom: React.FC = () => {
                                     className={
                                         msg.type !== 'ENTER' && msg.type !== 'QUIT'
                                             ? msg.sender !== nickname
-                                                ? 'otherMsg'
+                                                ? 'otherMsg' 
                                                 : 'myMsg'
                                             : 'enterNquit'
                                     }
@@ -206,53 +223,40 @@ const ChatRoom: React.FC = () => {
                                         <p>{msg.sender}</p>
                                     )}
                                     <span>{msg.message}</span>
+                                    {msg.type !== 'ENTER' && msg.type !== 'QUIT' && (
+                                        <span>{msg.sentAt}</span>
+                                    )}
                                 </ST.MessageDiv>
                             </ST.MessageLi>
                         ))}
                     </ST.MessageUl>
-
-                    <ST.ChatMemberContainer>
-                        <ST.ChatH3>대화상대</ST.ChatH3>
-                        {members?.map((member) => (
-                            <ST.ChatMemberDiv key={member.email}>
-                                {member.nickname}
-                                {member.nickname === room?.creator.nickname ? '👑' : ''}
-                                {member.pets?.map((pet) => (
-                                    <ST.ChatPetDiv key={pet.petId}>
-                                        <ST.ChatPetImg src={pet.imageUrls[0]} alt={pet.petName} />
-                                        <ST.ChatPetInfoDiv>
-                                            <span>{pet.petName}</span>
-                                            <p>{pet.petInfo}</p>
-                                        </ST.ChatPetInfoDiv>
-                                    </ST.ChatPetDiv>
-                                ))}
-                            </ST.ChatMemberDiv>
-                        ))}
-                    </ST.ChatMemberContainer>
                 </ST.MessageListContainer>
             </ST.MessageContainer>
 
-            <ST.MessageInputDiv>
-                <div>
-                    <label>💌</label>
-                </div>
-                <ST.MessageInput
-                    type="text"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    onKeyUp={(e) => {
-                        if (e.key === 'Enter') {
-                            e.preventDefault()
-                            publish(message)
-                        }
-                    }}
-                />
-                <div>
-                    <ST.MyBtn type="button" onClick={() => publish(message)}>
-                        보내기
-                    </ST.MyBtn>
-                </div>
-            </ST.MessageInputDiv>
+            <ST.MessageBottomDiv>
+                <ST.LeaveDiv>
+                    <ST.ChatLeaveBtn onClick={disconnect}>채팅방 나가기</ST.ChatLeaveBtn>
+                </ST.LeaveDiv>
+                <ST.MessageInputDiv>
+                    <ST.MessageInput
+                        type="text"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="메세지를 입력하세요"
+                        onKeyUp={(e) => {
+                            if (e.key === 'Enter') {
+                                e.preventDefault()
+                                publish(message)
+                            }
+                        }}
+                    />
+                    <div>
+                        <ST.MyBtn type="button" onClick={() => publish(message)}>
+                            전송
+                        </ST.MyBtn>
+                    </div>
+                </ST.MessageInputDiv>
+            </ST.MessageBottomDiv>
         </ST.ChatRContainer>
     )
 }

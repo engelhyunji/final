@@ -147,15 +147,7 @@ export const MessageInfoContainer = styled.div`
     }
 `
 
-export const ChatLeaveBtn = styled.button`
-    width: 120px;
-    height: 34px;
-    color: #fd4141;
-    font-family: Pretendard-medium;
-    background-color: #eee;
-    border: none;
-    border-radius: 8px;
-`
+
 
 export const MessageListContainer = styled.div`
     width: 100%;
@@ -170,7 +162,7 @@ export const MessageUl = styled.ul`
 
     padding: 20px;
     border-radius: 8px;
-    background-color: #eee;
+    background-color: #F4F4F4;
 
     box-shadow: inset -10px 2px 20px 1px rgba(77, 71, 71, 0.2);
 `
@@ -201,11 +193,10 @@ export const MessageDiv = styled.div`
 
     &.myMsg {
         span {
-            color: #fff;
             display: inline-block;
             padding: 6px 10px;
             border-radius: 8px;
-            background-color: #00bd8f;
+            background-color: #D8F7DC;
         }
     }
 
@@ -222,7 +213,7 @@ export const MessageDiv = styled.div`
 `
 
 export const ChatMemberContainer = styled.div`
-    width: 300px;
+    width: 387px;
     height: 65vh;
     overflow-y: auto;
 
@@ -263,24 +254,52 @@ export const ChatPetInfoDiv = styled.div`
     }
 `
 
+export const MessageBottomDiv = styled.div`
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+`
+
+export const LeaveDiv = styled.div`
+    width: 387px;
+    height: 146px;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+
+export const ChatLeaveBtn = styled.button`
+    width: 120px;
+    height: 34px;
+    color: #fff;
+    font-family: Pretendard-medium;
+    background-color: #00bd8f;
+    border: none;
+    border-radius: 8px;
+`
+
+
 // 메세지 입력
 export const MessageInputDiv = styled.div`
-    width: 840px;
-    height: 50px;
+    width: 813px;
+    height: 146px;
     padding: 50px 30px;
     margin: 10px 0;
-    background-color: #eee;
+    background-color: #fff;
     border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 12px;
 `
 
+
 export const MessageInput = styled.input`
-    width: 600px;
-    height: 35px;
-    padding: 10px;
-    background-color: #fff;
+    width: 635px;
+    height: 50px;
+    padding: 20px;
+    background-color: #EAEAEA;
     border: none;
     border-radius: 8px;
     display: flex;
@@ -288,11 +307,11 @@ export const MessageInput = styled.input`
     gap: 12px;
 `
 export const MyBtn = styled.button`
-    width: 100px;
-    height: 34px;
-    color: #fff;
+    height: 48px;
+    padding: 10px 33px;
+    color: #00bd8f;
     font-family: Pretendard-medium;
-    background-color: #00bd8f;
+    background-color: #E9E9E6;
     border: none;
     border-radius: 8px;
 `
