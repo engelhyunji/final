@@ -92,8 +92,8 @@ const ShopsList: React.FC = () => {
     return (
         <ST.Container>
             <ST.TitleBackContainer>
-                <ST.ShopListH2>Shop</ST.ShopListH2>
-                <ST.ShopP>내 펫에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
+                <ST.ShopListH2>가게</ST.ShopListH2>
+                <ST.ShopP>내 반려동물에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
             </ST.TitleBackContainer>
             <ST.ShopSearchContainer>
                 {/* <ST.ShopSearchCondition>가게 종류 ▾</ST.ShopSearchCondition> */}
@@ -114,14 +114,14 @@ const ShopsList: React.FC = () => {
             </ST.ShopSearchContainer>
 
             <ST.ShopListContainer>
-                <ST.ShopListH3>Shop 조회</ST.ShopListH3>
+                <ST.ShopListH3>가게 조회</ST.ShopListH3>
 
                 <ST.ShopCategoryUl>
                     <ST.ShopCategoryLi
                         onClick={() => roomTypeHandler('ALL')}
                         className={nowCategory === 'ALL' ? 'active' : ''}
                     >
-                        모든 Shop
+                        모든 가게
                     </ST.ShopCategoryLi>
                     <ST.ShopCategoryLi
                         onClick={() => roomTypeHandler('GROOMING')}

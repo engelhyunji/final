@@ -22,6 +22,7 @@ const ShopsModify: React.FC = () => {
         shopType: '',
         shopDescribe: '',
     })
+    const describeLimit: number = 100
 
     const [imgUrl, setImgUrl] = useState<string | null>(null)
     const [uploadImage, setUploadImage] = useState<File | null>(null)
@@ -171,15 +172,15 @@ const ShopsModify: React.FC = () => {
     return (
         <ST.Container>
             <BackWave />
-            <ST.Text>Shop 수정하기</ST.Text>
-            <ST.ShopP>사장님의 등록된 Shop 정보를 수정해주세요!</ST.ShopP>
+            <ST.Text>가게 수정하기</ST.Text>
+            <ST.ShopP>사장님의 등록된 가게 정보를 수정해주세요!</ST.ShopP>
 
             <ST.Form onSubmit={handleSubmit}>
                 <ST.ShopInputBox>
-                    <ST.Label>Shop 종류를 알려주세요</ST.Label>
+                    <ST.Label>가게 종류를 알려주세요</ST.Label>
                     <ST.StDropdown>
                         <Dropdown.Toggle variant="light" id="dropdown-basic">
-                            {shopRequestDto.shopType || 'Shop 종류를 선택해주세요'}
+                            {shopRequestDto.shopType || '가게 종류를 선택해주세요'}
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
@@ -192,18 +193,18 @@ const ShopsModify: React.FC = () => {
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>Shop 이름을 알려주세요</ST.Label>
+                    <ST.Label>가게 이름을 알려주세요</ST.Label>
                     <ST.Input
                         name="shopName"
                         type="text"
                         value={shopRequestDto.shopName}
                         onChange={handleChange}
-                        placeholder="업장 이름을 입력해주세요"
+                        placeholder="가게 이름을 입력해주세요"
                     />
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>Shop 위치를 알려주세요</ST.Label>
+                    <ST.Label>가게 위치를 알려주세요</ST.Label>
                     <ST.Input
                         name="shopAddress"
                         type="text"
@@ -214,7 +215,7 @@ const ShopsModify: React.FC = () => {
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>Shop 전화번호를 알려주세요</ST.Label>
+                    <ST.Label>가게 전화번호를 알려주세요</ST.Label>
                     <ST.NnTInputBox>
                         <ST.NInput
                             name="shopTel1"
@@ -242,7 +243,7 @@ const ShopsModify: React.FC = () => {
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>Shop 영업시간을 알려주세요</ST.Label>
+                    <ST.Label>가게 영업시간을 알려주세요</ST.Label>
                     <ST.NnTInputBox>
                         <ST.TInput
                             name="shopStartTime"
@@ -261,12 +262,12 @@ const ShopsModify: React.FC = () => {
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>Shop 한줄소개를 적어주세요</ST.Label>
+                    <ST.Label>가게 소개를 적어주세요</ST.Label> <ST.desLimit>{shopRequestDto.shopDescribe.length}/{describeLimit}</ST.desLimit>
                     <ST.DescInput
                         name="shopDescribe"
                         value={shopRequestDto.shopDescribe}
                         onChange={handleChange}
-                        placeholder="Shop 소개를 입력해주세요"
+                        placeholder="가게 소개를 입력해주세요"
                     />
                 </ST.ShopInputBox>
 

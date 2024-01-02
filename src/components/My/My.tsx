@@ -100,12 +100,12 @@ const My: React.FC = () => {
 
     const DeleteHandler = (target: string, idx: number) => {
         if (target === 'shop') {
-            if (confirm(`${shops[idx].shopName} Shop을 삭제하시겠습니까?`)) {
+            if (confirm(`${shops[idx].shopName} 가게를 삭제하시겠습니까?`)) {
                 mutation.mutate(shops[idx].shopId)
                 setShops([])
             }
         } else if (target === 'pet') {
-            if (confirm(`${pets[idx].petName} Pet을 삭제하시겠습니까?`)) {
+            if (confirm(`${pets[idx].petName} 반려동물을 삭제하시겠습니까?`)) {
                 petDeletemutation.mutate(pets[idx].petId)
                 setPets([])
             }
@@ -199,7 +199,7 @@ const My: React.FC = () => {
 
                 {shops.length > 0 && (
                     <ST.ShopNPetSection>
-                        <ST.TitleH3>마이 SHOP</ST.TitleH3>
+                        <ST.TitleH3>마이 가게</ST.TitleH3>
                         <ST.MyUl>
                             {shops.map((shop) => (
                                 <li key={shop.shopId}>
@@ -230,7 +230,7 @@ const My: React.FC = () => {
 
                 {pets.length > 0 && (
                     <ST.ShopNPetSection>
-                        <ST.TitleH3>마이 PET</ST.TitleH3>
+                        <ST.TitleH3>마이 반려동물</ST.TitleH3>
                         <ST.MyUl>
                             {pets.map((pet) => (
                                 <li key={pet.petId}>
@@ -256,7 +256,7 @@ const My: React.FC = () => {
 
                 {chatRooms.length > 0 && (
                     <ST.ShopNPetSection>
-                        <ST.TitleH3>마이 CHAT</ST.TitleH3>
+                        <ST.TitleH3>마이 채팅방</ST.TitleH3>
                         <ST.MyUl>
                             {chatRooms.map((chatroom) => (
                                 <li key={chatroom.roomId}>
@@ -290,7 +290,7 @@ const My: React.FC = () => {
 
                 {shops.length === 0 && pets.length === 0 && (
                     <ST.ShopNPetSection>
-                        등록된 SHOP 또는 PET 정보가 없습니다.
+                        등록된 가게 또는 반려동물 정보가 없습니다.
                         <br /> 내 가게 또는 반려동물을 등록해보세요!
                         <ST.BtnContainer>
                             <ST.MyBtn
