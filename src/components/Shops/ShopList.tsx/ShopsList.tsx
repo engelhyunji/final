@@ -105,9 +105,9 @@ const ShopsList: React.FC = () => {
                     <ST.SearchBtn onClick={searchHandler}>검색</ST.SearchBtn>
                 </ST.ShopSearchBox>
 
-                <ST.ShopTagContainer>
+                {/* <ST.ShopTagContainer>
                     HOT 해시태그
-                </ST.ShopTagContainer>
+                </ST.ShopTagContainer> */}
             </ST.ShopSearchContainer>
 
             <ST.ShopListContainer>
