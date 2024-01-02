@@ -69,6 +69,12 @@ const ChatRoom: React.FC = () => {
         return disconnect
     }, [])
 
+    // 웹소켓 연결 후 하트비트 전송 설정
+    useEffect(() => {
+        const heartbeatInterval = setInterval(sendHeartbeat, 5000); // 5초마다 전송
+        return () => clearInterval(heartbeatInterval); // 컴포넌트 언마운트 시 인터벌 정지
+    }, []);
+
     useEffect(() => {
         getChatRoom(roomId as string).then((data) => {
             setMembers(data.members)
@@ -119,6 +125,20 @@ const ChatRoom: React.FC = () => {
         )
     }
 
+    // 하트비트 메시지 전송 함수
+    const sendHeartbeat = () => {
+        if (!client.current.connected) return
+        const heartbeatMessage = {
+            type: 'HEARTBEAT',
+            email: email,
+        }
+        client.current.publish({
+            destination: '/chat/heartbeat',
+            body: JSON.stringify(heartbeatMessage),
+            headers: headers,
+        })
+    }
+
     const connectWebSocket = () => {
         client.current = new Stomp.Client({
             brokerURL: import.meta.env.VITE_APP_SERVER_WS_URL,
@@ -147,9 +167,9 @@ const ChatRoom: React.FC = () => {
                 // 관련 정보(헤더토큰) 안보이게
                 // console.log(str)
             },
-            reconnectDelay: 5000, // 자동 재 연결
-            heartbeatIncoming: 4000,
-            heartbeatOutgoing: 4000,
+            reconnectDelay: 5000, // 자동 재 연결 5초마다
+            heartbeatIncoming: 10000,
+            heartbeatOutgoing: 10000,
         })
         client.current.activate()
         setWclient(client.current)
@@ -214,7 +234,7 @@ const ChatRoom: React.FC = () => {
                                     className={
                                         msg.type !== 'ENTER' && msg.type !== 'QUIT'
                                             ? msg.sender !== nickname
-                                                ? 'otherMsg' 
+                                                ? 'otherMsg'
                                                 : 'myMsg'
                                             : 'enterNquit'
                                     }
@@ -223,9 +243,7 @@ const ChatRoom: React.FC = () => {
                                         <p>{msg.sender}</p>
                                     )}
                                     <span>{msg.message}</span>
-                                    {msg.type !== 'ENTER' && msg.type !== 'QUIT' && (
-                                        <span>{msg.sentAt}</span>
-                                    )}
+                                    {msg.type !== 'ENTER' && msg.type !== 'QUIT' && <span>{msg.sentAt}</span>}
                                 </ST.MessageDiv>
                             </ST.MessageLi>
                         ))}
