@@ -57,7 +57,7 @@ const ShopsDetail: React.FC = () => {
                             </ST.ShopCategoryLi>
                             <ST.ShopCategoryLi>
                                 <ST.ShopInfo><IoTimeOutline style={mainColor}/> 영업시간</ST.ShopInfo>
-                                <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopStartTime} ~ {detailShopData.shopResponseDto.shopStartTime}</ST.ShopInfoContent>
+                                <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopStartTime} ~ {detailShopData.shopResponseDto.shopEndTime}</ST.ShopInfoContent>
                             </ST.ShopCategoryLi>
                             <ST.ShopCategoryLi>
                                 <ST.ShopInfo><FiPhone style={mainColor}/> 전화번호</ST.ShopInfo>
