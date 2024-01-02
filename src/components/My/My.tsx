@@ -298,14 +298,14 @@ const My: React.FC = () => {
                                     navigate('/shops')
                                 }}
                             >
-                                Shop
+                                가게 등록
                             </ST.MyBtn>
                             <ST.MyBtn
                                 onClick={() => {
                                     navigate('/pet')
                                 }}
                             >
-                                Pet
+                                반려동물 등록
                             </ST.MyBtn>
                         </ST.BtnContainer>
                     </ST.ShopNPetSection>
