@@ -35,6 +35,8 @@ const Shops: React.FC = () => {
         // shopTags: [],
     })
 
+    const describeLimit: number = 100
+
     const [imgUrl, setImgUrl] = useState<string>('')
     const [uploadImage, setUploadImage] = useState<File>(new File([], ''))
 
@@ -72,6 +74,15 @@ const Shops: React.FC = () => {
                 }
             }
         } else {
+            if (name === 'shopName' && value.length > 20) {
+                return
+            }
+            if (name === 'shopAddress' && value.length > 20) {
+                return
+            }
+            if (name === 'shopDescribe' && value.length > 100) {
+                return
+            }
             setShopRequestDto((prevData) => ({
                 ...prevData,
                 [name]: value,
@@ -253,7 +264,7 @@ const Shops: React.FC = () => {
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>Shop 소개를 적어주세요</ST.Label>
+                    <ST.Label>Shop 소개를 적어주세요</ST.Label> <ST.desLimit>{shopRequestDto.shopDescribe.length}/{describeLimit}</ST.desLimit>
                     <ST.DescInput
                         name="shopDescribe"
                         // rows={10}

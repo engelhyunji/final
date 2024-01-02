@@ -191,6 +191,13 @@ export const DescInput = styled.textarea`
         font-family: Pretendard-regular;
     }
 `
+export const desLimit = styled.span`
+    width: 44px;
+    display: inline-block;
+    text-align: right;
+    font-size: 12px;
+`
+
 
 export const ImgWrap = styled.div`
     height: 160px;
