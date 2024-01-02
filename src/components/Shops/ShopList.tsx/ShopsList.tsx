@@ -59,6 +59,9 @@ const ShopsList: React.FC = () => {
         await getSearchShop({ keyword: searchShop }).then((data) => {
             if (data) {
                 setShopList([...data])
+                console.log(data)
+            } else {
+                alert('해당하는 검색 결과가 없습니다.')
             }
         })
     }
