@@ -17,6 +17,10 @@ export interface Chatroom {
 export interface Creator {
     email: string
     nickname: string
+    pets?: Pet[]
+}
+interface Pet {
+    imageUrls: string[]
 }
 interface LastTalkMessage {
     sender: string
@@ -52,8 +56,6 @@ const ChatList: React.FC = () => {
         setModalOn(!modalOn)
     }
 
-    
-
     const enterRoom = (roomId: string): void => {
         if (confirm('채팅방에 입장하시겠습니까?')) {
             navigate(`/chat/room/enter/${roomId}`)
@@ -77,9 +79,7 @@ const ChatList: React.FC = () => {
             </ST.ChatListTitleWrap>
 
             {/* 채팅방 생성 모달창 */}
-            <ModalPortal>
-                {modalOn && <AddChatModal onClose={handleModal} />}
-            </ModalPortal>
+            <ModalPortal>{modalOn && <AddChatModal onClose={handleModal} />}</ModalPortal>
 
             {/* 해시태그 부분 */}
             <ST.ChatHashDiv>
@@ -111,12 +111,35 @@ const ChatList: React.FC = () => {
                     chatrooms.map((item) => (
                         <ST.ChatList key={item.roomId}>
                             <ST.ChatListInfo>
-                                <ST.ChatListInfoP $width="16%">{item.name}</ST.ChatListInfoP>
+                                <ST.ChatListInfoP $width="16%">
+                                    <ST.InfoRoomName>{item.name}</ST.InfoRoomName>
+                                </ST.ChatListInfoP>
                                 <ST.ChatListInfoP $width="32%">{item.lastTalkMessage?.message}</ST.ChatListInfoP>
                                 <ST.ChatListInfoP $width="28%">
-                                    {item.tags?.map((tag) => <ST.InfoTagWords key={tag.name}>{tag.name && `#${tag.name}`}</ST.InfoTagWords>)}
+                                    {item.tags?.map((tag) => (
+                                        <ST.InfoTagWords key={tag.name}>{tag.name && `#${tag.name}`}</ST.InfoTagWords>
+                                    ))}
                                 </ST.ChatListInfoP>
-                                <ST.ChatListInfoP $width="8%">방장 {item.creator.nickname}</ST.ChatListInfoP>
+                                <ST.ChatListInfoP $width="8%">
+                                    방장
+                                    <ST.ChatListInfoImg
+                                        $ImgUrl={item.creator.pets && item.creator.pets[0]?.imageUrls[0]}
+                                    />
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="21"
+                                        height="21"
+                                        viewBox="0 0 21 21"
+                                        fill="none"
+                                        style={{transform: "translate(-16px, 12px)"}}
+                                    >
+                                        <path
+                                            d="M10.4752 1.74609C5.648 1.74609 1.74609 5.67419 1.74609 10.4752C1.74609 15.2762 5.67419 19.2043 10.4752 19.2043C15.2762 19.2043 19.2043 15.2762 19.2043 10.4752C19.2043 5.67419 15.2762 1.74609 10.4752 1.74609ZM13.9668 13.478C13.9668 13.7748 13.7748 13.9668 13.478 13.9668H7.47238C7.17559 13.9668 6.98355 13.7748 6.98355 13.478V13.0939H13.9668V13.478ZM13.9668 12.221H6.98355L6.11064 6.98355L8.72937 8.72937L10.4752 6.11064L12.221 8.72937L14.8397 6.98355L13.9668 12.221Z"
+                                            fill="#00BD8F"
+                                        />
+                                    </svg>
+                                    {/* {item.creator.nickname} */}
+                                </ST.ChatListInfoP>
                                 <ST.InBtn onClick={() => enterRoom(item.roomId)}>채팅 참여하기</ST.InBtn>
                             </ST.ChatListInfo>
                         </ST.ChatList>

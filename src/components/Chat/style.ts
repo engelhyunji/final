@@ -2,7 +2,10 @@ import styled from 'styled-components'
 
 interface ChatInfoProps {
     $width?: string
-    $maxWidth?: string
+}
+
+interface InfoImgProps {
+    $ImgUrl?: string
 }
 
 export const EmptyWrap = styled.div`
@@ -107,12 +110,18 @@ export const ChatListInfo = styled.div`
 export const ChatListInfoP = styled.p<ChatInfoProps>`
     width: ${(props) => props.$width};
     height: 51px;
+    font-size: 16px;
+    color: #8f8e93;
     // 넘치는 내용 처리
     display: flex;
     align-items: center;
     white-space: nowrap;
     overflow: hidden;
     /* text-overflow: ellipsis; */
+`
+export const InfoRoomName = styled.span`
+    font-size: 20px;
+    color: #000;
 `
 export const InfoTagWords = styled.span`
     font-size: 16px;
@@ -122,6 +131,13 @@ export const InfoTagWords = styled.span`
     padding: 8px 20px;
     border-radius: 46px;
     border: 1px solid #4ce1a1;
+`
+export const ChatListInfoImg = styled.div<InfoImgProps>`
+    width: 32px;
+    height: 32px;
+    margin-left: 11px;
+    border-radius: 32px;
+    background: no-repeat center/110% url(${(props) => props.$ImgUrl}), lightgray 50%;
 `
 
 export const InBtn = styled.button`
