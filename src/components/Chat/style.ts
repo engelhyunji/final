@@ -132,7 +132,8 @@ export const InfoTagWords = styled.span`
     border-radius: 46px;
     border: 1px solid #4ce1a1;
 `
-export const ChatListInfoImg = styled.div<InfoImgProps>`
+export const ChatListInfoImg = styled.span<InfoImgProps>`
+    display: inline-block;
     width: 32px;
     height: 32px;
     margin-left: 11px;
