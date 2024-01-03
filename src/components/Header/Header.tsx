@@ -14,10 +14,8 @@ const Header: React.FC = () => {
     return (
         <ST.HeaderWrap>
             <ST.HeaderContainer>
-                <ST.Logo onClick={() => navigate('/')}>
-                    <ST.LogoImg src={logoUrl} alt="logo" />
+                <ST.Logo $logoUrl={logoUrl} onClick={() => navigate('/')}>
                     {/* <ST.LogoH1>와르와르</ST.LogoH1> */}
-                    {/* <ST.LogoImg1 src={logoUrl1} alt="logo" /> */}
                 </ST.Logo>
                 <ST.GNBDiv>
                     <NoLineLink to="/shopslist">

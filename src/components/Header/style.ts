@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface LogoProps {
+    $logoUrl: string
+}
+
 export const HeaderWrap = styled.div`
     width: 100%;
     height: 88px;
@@ -20,8 +24,10 @@ export const HeaderContainer = styled.div`
     color: #fff;
 `
 
-export const Logo = styled.div`
-    /* width: 280px; */
+export const Logo = styled.div<LogoProps>`
+    width: 58px;
+    height: 58px;
+    background: no-repeat center/100% url(${props => props.$logoUrl});
     display: flex;
     align-items: center;
     cursor: pointer;
