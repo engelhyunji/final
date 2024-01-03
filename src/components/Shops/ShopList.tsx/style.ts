@@ -21,7 +21,7 @@ export const TitleBackContainer = styled.div`
     font-family: Pretendard-medium;
 
     /* linear-gradient(검정색 필터로 활용) */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65));
 
     // 가상 요소 만들어서 배경만 흐리게
     &::before {
