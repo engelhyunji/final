@@ -20,6 +20,7 @@ interface ReviewsProps {
 
 const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     const { isLogin } = useAuth()
+    const nickname = localStorage.getItem('nickname')
     const { shopId } = useParams()
     const queryClient = useQueryClient()
     const reviewLimit: number = 50
@@ -27,6 +28,7 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
     const [comment, setComment] = useState('')
     const [notiComment, setNotiComment] = useState('')
     const [recommend, setRecommend] = useState<{ [key: number]: boolean }>({})
+    
 
     // shopId가 undefined 일 때 경고창
     const currentShopId = shopId ? +shopId : 0 && alert('가게를 찾을 수 없습니다')
@@ -39,8 +41,8 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
             if (Array.isArray(detailShopData.reviews)) {
                 for (const review of detailShopData.reviews) {
                     try {
-                        const result = await getRecommended(review.reviewId)
-                        newRecommendations[review.reviewId] = result
+                        const res = await getRecommended(review.reviewId)
+                        newRecommendations[review.reviewId] = res
                     } catch (error) {
                         console.error('리뷰 추천 기록을 가져오는 중 에러:', error)
                     }
@@ -57,7 +59,6 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
         {
             onSuccess: () => {
                 queryClient.invalidateQueries('detailShopData')
-                // alert(`${detailShopData.shopResponseDto.shopName}에 후기가 등록되었습니다🙉`)
             },
             onError: (error) => {
                 console.error('후기추가 Mutation 에러 :', error)
@@ -162,9 +163,10 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
                                     </ST.GoodBtn>
                                     &nbsp;{review.likeCount}
                                 </span>
-                                <ST.DelBtn onClick={() => DeleteHandler(currentShopId, review.reviewId)}>
+                                {review.nickname === nickname && <ST.DelBtn onClick={() => DeleteHandler(currentShopId, review.reviewId)}>
                                     삭제
-                                </ST.DelBtn>
+                                </ST.DelBtn>}
+                                
                             </ST.ReviewListP>
                         </ST.ReviewListLi>
                     ))

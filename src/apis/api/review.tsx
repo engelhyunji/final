@@ -45,7 +45,7 @@ export const cancelRecommendReview = async (reviewId: number) => {
 // 리뷰 추천 기록
 export const getRecommended = async (reviewId: number) => {
     try {
-        const res =await instance.get(`/api/reviews/${reviewId}/like`)
+        const res = await instance.get(`/api/reviews/${reviewId}/like`)
         return res.data.result
     } catch (error) {
         console.log('리뷰 내역 확인 에러 :', error)
