@@ -43,7 +43,7 @@ const Signup: React.FC = () => {
                 await instance.post('/api/user/email', { email })
                 alert('이메일로 인증코드가 발송되었습니다.')
                 setIsTimerRunning(true)
-                // 키 변경해서 타이머 재시작
+                // 키 변경해서 타이머 재시작(코드 발송될 때마다)
                 setTimerKey((prevKey) => prevKey + 1)
             } catch (err: any) {
                 console.log('이메일 전송에러 :', err)
@@ -84,13 +84,16 @@ const Signup: React.FC = () => {
 
     const handleSignUp = async () => {
         // 비밀번호 유효성 검사
-        let num = userData.password.search(/[0-9]/g)
-        let eng = userData.password.search(/[a-z]/gi)
+        const num = userData.password.search(/[0-9]/g)
+        const eng = userData.password.search(/[a-z]/gi)
+
         if (!code || !userData.nickname || !userData.phoneNumber || !userData.email || !userData.password) {
             alert('정보를 모두 입력해주세요😺')
             return false
+
+        // 비밀번호 유효성
         } else if (userData.password.length < 4 || userData.password.length > 12) {
-            alert('4자리 ~ 12자리 이내로 입력해주세요.')
+            alert('비밀번호는 4자리 ~ 12자리로 입력해주세요.')
             return false
         } else if (userData.password.search(/\s/) != -1) {
             alert('비밀번호는 공백 없이 입력해주세요.')
@@ -98,6 +101,11 @@ const Signup: React.FC = () => {
         } else if (num < 0 || eng < 0) {
             alert('숫자, 영문을 혼합하여 입력해주세요.')
             return false
+
+        } else if (userData.nickname.length < 1 || userData.nickname.length > 10) {
+            alert('닉네임은 1~10자로 입력해주세요.')
+            return false
+
         } else if (userData.phoneNumber.length < 10 || userData.phoneNumber.length > 11) {
             alert('전화번호는 10~11자리로 입력해주세요.')
             return false
