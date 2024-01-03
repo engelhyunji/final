@@ -77,7 +77,7 @@ const Shops: React.FC = () => {
             if (name === 'shopName' && value.length > 20) {
                 return
             }
-            if (name === 'shopAddress' && value.length > 20) {
+            if (name === 'shopAddress' && value.length > 30) {
                 return
             }
             if (name === 'shopDescribe' && value.length > 100) {
