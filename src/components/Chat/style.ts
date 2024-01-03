@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 interface ChatInfoProps {
-    $width: string
+    $width?: string
+    $maxWidth?: string
 }
 
 export const EmptyWrap = styled.div`
@@ -69,12 +70,17 @@ export const ChatH3 = styled.h3`
     font-family: Pretendard-bold;
     margin: 0 0 24px;
 `
-
+export const TagDiv = styled.div`
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+`
 export const TagWords = styled.span`
     cursor: pointer;
     font-size: 18px;
     color: #4ce1a1;
     margin-right: 15px;
+    margin-bottom: 10px;
     padding: 11px 32px;
     border-radius: 46px;
     border: 1px solid #4ce1a1;
@@ -111,8 +117,9 @@ export const ChatListInfoP = styled.p<ChatInfoProps>`
 export const InfoTagWords = styled.span`
     font-size: 16px;
     color: #4ce1a1;
+
     margin-right: 10px;
-    padding: 8px 23px;
+    padding: 8px 20px;
     border-radius: 46px;
     border: 1px solid #4ce1a1;
 `
@@ -148,39 +155,82 @@ export const ChatBtn = styled.button`
     border-radius: 8px;
 `
 
-// ======= ChatRoom 컴포넌트 ======
+// ========= ChatRoom 컴포넌트 =========
 
 export const ChatRContainer = styled.div`
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 150px;
+    max-width: 1200px;
+    margin: 76px auto 0;
+    font-family: Pretendard-bold;
+
+    border-radius: 10px;
+    border: 1px solid #dadada;
+
+    display: flex;
+    justify-content: center;
+`
+export const MessageLeftDiv = styled.div`
+    width: 30%;
+`
+export const ChatMemberContainer = styled.div`
+    width: 387px;
+    height: 728px;
+    overflow-y: auto;
+    padding: 31px 50px;
+    background-color: #fff;
+
+    padding: 30px 20px;
+
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+`
+export const ChatMemberP = styled.p`
+    font-size: 16px;
+`
+export const ChatMemberSpan = styled.span`
     font-family: Pretendard-regular;
+    color: #575756;
+`
+
+export const ChatMemberDiv = styled.div`
+    width: 100%;
+    margin: 20px 0;
+`
+export const ChatPetDiv = styled.div`
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+`
+
+export const ChatPetImg = styled.img`
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+`
+export const ChatPetInfoDiv = styled.div`
+    width: 100%;
+    margin: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: left;
-`
-export const MessageContainer = styled.div`
-    max-width: 1200px;
-    margin: 0 auto;
-`
-export const MessageInfoContainer = styled.div`
-    margin: 30px 0;
-
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
     span {
-        max-width: 500px;
+        // 넘치는 내용 처리
+        display: inline-block;
+        white-space: nowrap; // 자동 줄바꿈 방지
+        overflow: hidden; // 넘치는 부분 화면에서 숨김
+        text-overflow: ellipsis; // 숨긴 부분 말줄임표(...) 처리
     }
 `
 
-export const MessageListContainer = styled.div`
-    width: 100%;
-    /* background-color: #fff; */
-    display: flex;
+
+export const MessageInfoContainer = styled.div`
+    margin: 30px 0;
 `
+
+// export const MessageListContainer = styled.div`
+//     width: 100%;
+//     /* background-color: #fff; */
+//     display: flex;
+// `
 
 export const MessageUl = styled.ul`
     width: 840px;
@@ -239,52 +289,11 @@ export const MessageDiv = styled.div`
     }
 `
 
-export const ChatMemberContainer = styled.div`
-    width: 387px;
-    height: 65vh;
-    overflow-y: auto;
 
-    padding: 30px 20px;
 
+export const MessageRightDiv = styled.div`
+    width: 70%;
     background-color: #fff;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-`
-
-export const ChatMemberDiv = styled.div`
-    width: 100%;
-    margin: 20px 0;
-`
-export const ChatPetDiv = styled.div`
-    width: 100%;
-    margin: 10px 0;
-    display: flex;
-`
-
-export const ChatPetImg = styled.img`
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 50%;
-`
-export const ChatPetInfoDiv = styled.div`
-    width: 100%;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    span {
-        // 넘치는 내용 처리
-        display: inline-block;
-        white-space: nowrap; // 자동 줄바꿈 방지
-        overflow: hidden; // 넘치는 부분 화면에서 숨김
-        text-overflow: ellipsis; // 숨긴 부분 말줄임표(...) 처리
-    }
-`
-
-export const MessageBottomDiv = styled.div`
-    width: 100%;
-    background-color: #fff;
-    display: flex;
 `
 
 export const LeaveDiv = styled.div`
@@ -329,6 +338,18 @@ export const MessageInput = styled.input`
     display: flex;
     align-items: center;
     gap: 12px;
+`
+export const MessageLimit = styled.p`
+    width: 60px;
+    text-align: right;
+    font-size: 14px;
+    color: #bbb;
+`
+export const MessageLimitRed = styled.p`
+    width: 60px;
+    text-align: right;
+    font-size: 14px;
+    color: #fd4141;
 `
 export const MyBtn = styled.button`
     height: 48px;

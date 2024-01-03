@@ -84,20 +84,20 @@ const ChatList: React.FC = () => {
             {/* 해시태그 부분 */}
             <ST.ChatHashDiv>
                 <ST.ChatH3>실시간 인기 해시태그</ST.ChatH3>
-                <div>
+                <ST.TagDiv>
                     {popularHash?.length === 0 ? (
                         '해시태그가 없습니다'
                     ) : (
                         <>
-                            <ST.TagWords onClick={getAllRooms}>전체보기 </ST.TagWords>
+                            <ST.TagWords onClick={getAllRooms}>전체</ST.TagWords>
                         </>
                     )}
                     {popularHash?.map((item) => (
                         <ST.TagWords key={item?.name} onClick={() => getTagRooms(item?.name)}>
-                            {'  '}#{item?.name}{' '}
+                            #{item?.name}
                         </ST.TagWords>
                     ))}
-                </div>
+                </ST.TagDiv>
             </ST.ChatHashDiv>
 
             <ST.ChatH3>실시간 채팅</ST.ChatH3>
@@ -111,12 +111,12 @@ const ChatList: React.FC = () => {
                     chatrooms.map((item) => (
                         <ST.ChatList key={item.roomId}>
                             <ST.ChatListInfo>
-                                <ST.ChatListInfoP $width="15%">{item.name}</ST.ChatListInfoP>
-                                <ST.ChatListInfoP $width="26%">{item.lastTalkMessage?.message}</ST.ChatListInfoP>
-                                <ST.ChatListInfoP $width="26%">
-                                    {item.tags?.map((tag) => <ST.InfoTagWords key={tag.name}>{tag.name && `#${tag.name} `}</ST.InfoTagWords>)}
+                                <ST.ChatListInfoP $width="16%">{item.name}</ST.ChatListInfoP>
+                                <ST.ChatListInfoP $width="32%">{item.lastTalkMessage?.message}</ST.ChatListInfoP>
+                                <ST.ChatListInfoP $width="28%">
+                                    {item.tags?.map((tag) => <ST.InfoTagWords key={tag.name}>{tag.name && `#${tag.name}`}</ST.InfoTagWords>)}
                                 </ST.ChatListInfoP>
-                                <ST.ChatListInfoP $width="10%">방장 {item.creator.nickname}</ST.ChatListInfoP>
+                                <ST.ChatListInfoP $width="8%">방장 {item.creator.nickname}</ST.ChatListInfoP>
                                 <ST.InBtn onClick={() => enterRoom(item.roomId)}>채팅 참여하기</ST.InBtn>
                             </ST.ChatListInfo>
                         </ST.ChatList>
