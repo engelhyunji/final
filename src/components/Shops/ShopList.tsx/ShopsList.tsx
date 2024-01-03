@@ -173,7 +173,7 @@ const ShopsList: React.FC = () => {
                                         <ST.BodyAddressInfoP className="card-text">
                                             {shop.shopAddress}
                                         </ST.BodyAddressInfoP>
-                                        <ST.CardBodyP className="card-text">#hashtag</ST.CardBodyP>
+                                        {/* <ST.CardBodyP className="card-text">#hashtag</ST.CardBodyP> */}
                                     </ST.ShopGrid>
                                 </ST.CardBodyDiv>
                             </ST.ShopBox>

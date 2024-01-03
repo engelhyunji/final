@@ -194,7 +194,8 @@ export const StRow = styled(Row)`
 export const ShopBox = styled.div`
     cursor: pointer;
     max-width: 358px;
-    height: 454px;
+    /* height: 454px; */
+    height: 430px;
     border: none;
     border-radius: 15px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
@@ -208,6 +209,7 @@ export const ShopBox = styled.div`
 export const thumImg = styled.img`
     width: 100%;
     height: 269px;
+    overflow: hidden;
     object-fit: cover;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -231,7 +233,8 @@ export const ShopGrid = styled.div`
 
     display: grid;
     grid-template-columns: 0.8fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    /* grid-template-rows: 1fr 1fr 1fr 1fr; */
     grid-gap: 8px 10px; // 브라우저 호환 범위 넓히기 위해 작성
     gap: 8px 10px;
 
@@ -267,7 +270,7 @@ export const BodyAddressInfoP = styled.p`
     grid-column: 2 / 4;
     grid-row: 3 / 4;
 `
-export const CardBodyP = styled.p`
-    grid-column: 1 / 4;
-    grid-row: 4 / 5;
-`
+// export const CardBodyP = styled.p`
+//     grid-column: 1 / 4;
+//     grid-row: 4 / 5;
+// `
