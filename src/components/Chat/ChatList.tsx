@@ -143,7 +143,7 @@ const ChatList: React.FC = () => {
                                 <ST.InBtn onClick={() => enterRoom(item.roomId)}>채팅 참여하기</ST.InBtn>
                             </ST.ChatListInfo>
                         </ST.ChatList>
-                    ))
+                    )).reverse()
                 )}
             </ST.ChatLists>
         </ST.ChatContainer>
