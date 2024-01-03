@@ -8,13 +8,13 @@ const Header: React.FC = () => {
     const navigate = useNavigate()
     const { isLogin, logout } = useAuth()
 
-    const logoUrl = './warwar.png'
+    // const logoUrl = './warwar.png'
     // const logoUrl1 = './warwar-name.png'
 
     return (
         <ST.HeaderWrap>
             <ST.HeaderContainer>
-                <ST.Logo $logoUrl={logoUrl} onClick={() => navigate('/')}>
+                <ST.Logo $logoUrl={'https://hanghaelv4.s3.ap-northeast-2.amazonaws.com/warrwar.png'} onClick={() => navigate('/')}>
                     {/* <ST.LogoH1>와르와르</ST.LogoH1> */}
                 </ST.Logo>
                 <ST.GNBDiv>
