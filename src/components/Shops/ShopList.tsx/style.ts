@@ -140,8 +140,7 @@ export const ShopTagContainer = styled.div`
 `
 
 export const ShopListContainer = styled.div`
-    max-width: 1200px;
-    min-width: 800px;
+    width: 1200px;
 
     font-family: Pretendard-medium;
 
@@ -188,7 +187,7 @@ export const ShopCategoryLi = styled.li`
 `
 
 export const StRow = styled(Row)`
-    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     column-gap: 63px;
     row-gap: 20px;
