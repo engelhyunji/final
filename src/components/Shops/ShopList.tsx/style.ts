@@ -13,33 +13,34 @@ export const Container = styled.div`
 
 export const TitleBackContainer = styled.div`
     width: 100%;
-    height: 340px;
+    height: 325px;
     position: relative;
     overflow: hidden;
 
     color: #fff;
     font-family: Pretendard-medium;
 
+    background-image: url('shopListBanner.png');
+
     /* linear-gradient(검정색 필터로 활용) */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65));
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)); */
 
     // 가상 요소 만들어서 배경만 흐리게
-    &::before {
+    /* &::before {
         content: '';
-        z-index: -1; /* 콘텐츠 뒤로 */
+        z-index: -1;
         width: 100%;
         height: 100%;
-        /* 부모 기준으로 위치 맞춰야 높이 적용됨 */
         position: absolute;
         top: 0;
         left: 0;
 
-        background-image: url('SHOPtopBack(draft).png');
+        background-image: url('shopListBanner.png');
         filter: blur(2.5px);
         -webkit-filter: blur(2.5px);
         -moz-filter: blur(2.5px);
         -o-filter: blur(2.5px);
-    }
+    } */
 
     display: flex;
     flex-direction: column;
@@ -50,8 +51,11 @@ export const TitleBackContainer = styled.div`
 
 export const ShopListH2 = styled.h2`
     color: #fff;
-    font-family: Pretendard-bold;
+    font-family: 'LOTTERIACHAB';
     font-size: 48px;
+
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: #005D32;
 `
 export const ShopP = styled.p`
     margin: 0 0 10px;
@@ -134,7 +138,6 @@ export const ShopTagContainer = styled.div`
     align-items: center;
     justify-content: space-between;
 `
-
 
 export const ShopListContainer = styled.div`
     max-width: 1200px;
