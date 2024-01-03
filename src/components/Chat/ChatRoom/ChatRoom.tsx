@@ -4,8 +4,8 @@ import * as Stomp from '@stomp/stompjs'
 // import SockJS from 'sockjs-client/dist/sockjs'
 // import SockJS from 'sockjs-client'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getChatMessages, getChatRoom } from '../../apis/api/chat'
-import { Creator } from './ChatList'
+import { getChatMessages, getChatRoom } from '../../../apis/api/chat'
+import { Creator } from '../ChatList'
 
 interface ChatroomDetail {
     roomId: string
@@ -71,9 +71,9 @@ const ChatRoom: React.FC = () => {
 
     // 웹소켓 연결 후 하트비트 전송 설정
     useEffect(() => {
-        const heartbeatInterval = setInterval(sendHeartbeat, 5000); // 5초마다 전송
-        return () => clearInterval(heartbeatInterval); // 컴포넌트 언마운트 시 인터벌 정지
-    }, []);
+        const heartbeatInterval = setInterval(sendHeartbeat, 5000) // 5초마다 전송
+        return () => clearInterval(heartbeatInterval) // 컴포넌트 언마운트 시 인터벌 정지
+    }, [])
 
     useEffect(() => {
         getChatRoom(roomId as string).then((data) => {
@@ -178,6 +178,11 @@ const ChatRoom: React.FC = () => {
     const publish = (message: string) => {
         if (!client.current.connected) return
 
+        if (message.length > 300) {
+            alert('메시지는 300자 이내로 입력해 주세요.')
+            return
+        }
+
         client.current.publish({
             destination: '/pub/chat/message',
             body: JSON.stringify({ type: 'TALK', roomId, sender: nickname, message, sentAt: new Date().toISOString() }),
@@ -189,16 +194,12 @@ const ChatRoom: React.FC = () => {
 
     return (
         <ST.ChatRContainer>
-            <ST.MessageContainer>
-                <ST.MessageInfoContainer>
-                    <ST.ChatH2>{room?.name} 채팅방</ST.ChatH2>
-                </ST.MessageInfoContainer>
-
-                <ST.MessageListContainer>
-                    <ST.ChatMemberContainer>
-                        <ST.ChatH3>
-                            대화상대 <span>{room?.members.length}</span>{' '}
-                        </ST.ChatH3>
+            <ST.MessageLeftDiv>
+                <ST.ChatMemberContainer>
+                    <ST.ChatMemberP>
+                        대화상대 <ST.ChatMemberSpan>{room?.members.length}명</ST.ChatMemberSpan>
+                    </ST.ChatMemberP>
+                    <ST.ChatMemberWrap>
                         {members?.map((member) => (
                             <ST.ChatMemberDiv key={member.email}>
                                 {member.nickname}
@@ -214,53 +215,56 @@ const ChatRoom: React.FC = () => {
                                 ))}
                             </ST.ChatMemberDiv>
                         ))}
-                    </ST.ChatMemberContainer>
+                    </ST.ChatMemberWrap>
+                </ST.ChatMemberContainer>
 
-                    <ST.MessageUl ref={scrollRef}>
-                        {messages?.map((msg, idx) => (
-                            // 내 메세지, 받은 메세지 스타일 따로 지정
-                            // 입장 및 퇴장 메세지 스타일도 분리
-                            <ST.MessageLi
-                                key={idx}
-                                className={
-                                    msg.type !== 'ENTER' && msg.type !== 'QUIT'
-                                        ? msg.sender !== nickname
-                                            ? 'otherChat'
-                                            : 'myChat'
-                                        : ''
-                                }
-                            >
-                                <ST.MessageDiv
-                                    className={
-                                        msg.type !== 'ENTER' && msg.type !== 'QUIT'
-                                            ? msg.sender !== nickname
-                                                ? 'otherMsg'
-                                                : 'myMsg'
-                                            : 'enterNquit'
-                                    }
-                                >
-                                    {msg.sender !== nickname && msg.type !== 'ENTER' && msg.type !== 'QUIT' && (
-                                        <p>{msg.sender}</p>
-                                    )}
-                                    <span>{msg.message}</span>
-                                    {msg.type !== 'ENTER' && msg.type !== 'QUIT' && <span>{msg.sentAt}</span>}
-                                </ST.MessageDiv>
-                            </ST.MessageLi>
-                        ))}
-                    </ST.MessageUl>
-                </ST.MessageListContainer>
-            </ST.MessageContainer>
-
-            <ST.MessageBottomDiv>
                 <ST.LeaveDiv>
                     <ST.ChatLeaveBtn onClick={disconnect}>채팅방 나가기</ST.ChatLeaveBtn>
                 </ST.LeaveDiv>
+            </ST.MessageLeftDiv>
+
+            <ST.MessageRightDiv>
+                <ST.ChatH2>{room?.name}</ST.ChatH2>
+
+                <ST.MessageUl ref={scrollRef}>
+                    {messages?.map((msg, idx) => (
+                        // 내 메세지, 받은 메세지 스타일 따로 지정
+                        // 입장 및 퇴장 메세지 스타일도 분리
+                        <ST.MessageLi
+                            key={idx}
+                            className={
+                                msg.type !== 'ENTER' && msg.type !== 'QUIT'
+                                    ? msg.sender !== nickname
+                                        ? 'otherChat'
+                                        : 'myChat'
+                                    : ''
+                            }
+                        >
+                            <ST.MessageDiv
+                                className={
+                                    msg.type !== 'ENTER' && msg.type !== 'QUIT'
+                                        ? msg.sender !== nickname
+                                            ? 'otherMsg'
+                                            : 'myMsg'
+                                        : 'enterNquit'
+                                }
+                            >
+                                {msg.sender !== nickname && msg.type !== 'ENTER' && msg.type !== 'QUIT' && (
+                                    <p>{msg.sender}</p>
+                                )}
+                                <span>{msg.message}</span>
+                                {msg.type !== 'ENTER' && msg.type !== 'QUIT' && <span>{msg.sentAt}</span>}
+                            </ST.MessageDiv>
+                        </ST.MessageLi>
+                    ))}
+                </ST.MessageUl>
+
                 <ST.MessageInputDiv>
                     <ST.MessageInput
                         type="text"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        placeholder="메세지를 입력하세요"
+                        placeholder="메세지를 입력해주세요"
                         onKeyUp={(e) => {
                             if (e.key === 'Enter') {
                                 e.preventDefault()
@@ -268,13 +272,18 @@ const ChatRoom: React.FC = () => {
                             }
                         }}
                     />
+                    {message.length > 300 ? (
+                        <ST.MessageLimitRed>{message.length}/300</ST.MessageLimitRed>
+                    ) : (
+                        <ST.MessageLimit>{message.length}/300</ST.MessageLimit>
+                    )}
                     <div>
                         <ST.MyBtn type="button" onClick={() => publish(message)}>
                             전송
                         </ST.MyBtn>
                     </div>
                 </ST.MessageInputDiv>
-            </ST.MessageBottomDiv>
+            </ST.MessageRightDiv>
         </ST.ChatRContainer>
     )
 }
