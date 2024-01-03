@@ -154,7 +154,10 @@ const Shops: React.FC = () => {
                 })
                 console.log('가게 등록 response :', response.data)
                 navigate('/shopslist')
-            } catch (error) {
+            } catch (error: any) {
+                if (error.response.data.code === 4506) {
+                    alert(error.response.data.message)
+                }
                 console.error('가게 등록 에러 :', error)
             }
         }
