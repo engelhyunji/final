@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import * as ST from './style'
 import * as Stomp from '@stomp/stompjs'
-// import SockJS from 'sockjs-client/dist/sockjs'
-// import SockJS from 'sockjs-client'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getChatMessages, getChatRoom } from '../../../apis/api/chat'
 import { Creator } from '../ChatList'
@@ -112,17 +110,39 @@ const ChatRoom: React.FC = () => {
     }
 
     const subscribe = () => {
-        client.current.subscribe(
-            `/sub/chat/room/${roomId}`,
-            (message: any) => {
-                console.log('connect !')
-                if (message.body) {
-                    const msg = JSON.parse(message.body)
-                    setMessages((prevMessages) => [...prevMessages, msg])
-                }
-            },
-            headers,
-        )
+        if (client.current) {
+            client.current.subscribe(
+                `/sub/chat/room/${roomId}`,
+                (message: any) => {
+                    console.log('connect !')
+
+                    if (message.body) {
+                        // 다른 메시지 유형 (ENTER, QUIT, TALK)에 따라 적절하게 처리
+                        const msg = JSON.parse(message.body)
+                        setMessages((prevMessages) => [...prevMessages, msg])
+
+                        if (msg.type === 'ENTER' || msg.type === 'QUIT') {
+                            // 누군가 채팅방에 들어오거나 나갈 때 멤버 업데이트
+                            getChatRoom(roomId as string).then((data) => {
+                                setMembers(data.members)
+                            })
+                        }
+                    }
+                },
+                headers,
+            )
+        }
+        // client.current.subscribe(
+        //     `/sub/chat/room/${roomId}`,
+        //     (message: any) => {
+        //         console.log('connect !')
+        //         if (message.body) {
+        //             const msg = JSON.parse(message.body)
+        //             setMessages((prevMessages) => [...prevMessages, msg])
+        //         }
+        //     },
+        //     headers,
+        // )
     }
 
     // 하트비트 메시지 전송 함수
@@ -139,19 +159,7 @@ const ChatRoom: React.FC = () => {
         })
     }
 
-    // 시간 형식 00:00 AM/PM
-    const formatDateToAMPM = (dateString: string) => {
-        const options: Intl.DateTimeFormatOptions = {
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: true,
-        }
-
-        const date = new Date(dateString)
-        return date.toLocaleTimeString('en-US', options)
-    }
-
-    const formattedDate = formatDateToAMPM(new Date().toISOString())
+    
 
     const connectWebSocket = () => {
         client.current = new Stomp.Client({
@@ -164,7 +172,7 @@ const ChatRoom: React.FC = () => {
                     email,
                     roomId,
                     sender: nickname,
-                    sentAt: formattedDate,
+                    sentAt: '',
                 }
 
                 client.current.publish({
@@ -199,7 +207,7 @@ const ChatRoom: React.FC = () => {
 
         client.current.publish({
             destination: '/pub/chat/message',
-            body: JSON.stringify({ type: 'TALK', roomId, sender: nickname, message, sentAt: formattedDate }),
+            body: JSON.stringify({ type: 'TALK', roomId, sender: nickname, message, sentAt: '' }),
             headers: headers,
         })
 
@@ -217,7 +225,19 @@ const ChatRoom: React.FC = () => {
                         {members?.map((member) => (
                             <ST.ChatMemberDiv key={member.email}>
                                 {member.nickname}
-                                {member.nickname === room?.creator.nickname ? '👑' : ''}
+                                {member.nickname === room?.creator.nickname ? <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="21"
+                                        height="21"
+                                        viewBox="0 0 21 21"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M10.4752 1.74609C5.648 1.74609 1.74609 5.67419 1.74609 10.4752C1.74609 15.2762 5.67419 19.2043 10.4752 19.2043C15.2762 19.2043 19.2043 15.2762 19.2043 10.4752C19.2043 5.67419 15.2762 1.74609 10.4752 1.74609ZM13.9668 13.478C13.9668 13.7748 13.7748 13.9668 13.478 13.9668H7.47238C7.17559 13.9668 6.98355 13.7748 6.98355 13.478V13.0939H13.9668V13.478ZM13.9668 12.221H6.98355L6.11064 6.98355L8.72937 8.72937L10.4752 6.11064L12.221 8.72937L14.8397 6.98355L13.9668 12.221Z"
+                                            fill="#00BD8F"
+                                        />
+                                    </svg> : ''}
+                                    {member.nickname === nickname ? ' (나)' : ''}
                                 {member.pets?.map((pet) => (
                                     <ST.ChatPetDiv key={pet.petId}>
                                         <ST.ChatPetImg src={pet.imageUrls[0]} alt={pet.petName} />

@@ -174,7 +174,7 @@ export const MessageDiv = styled.div`
 // 메세지 입력
 export const MessageInputDiv = styled.div`
     width: 813px;
-    height: 146px;
+    height: 149px;
     padding: 48px 30px;
     background-color: #fff;
     border: 1px solid #dadada;
