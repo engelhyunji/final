@@ -142,7 +142,7 @@ const My: React.FC = () => {
 
     const AddTag = async (roomId: string) => {
         if (confirm('해시태그를 추가하시겠어요?')) {
-            const hash = prompt('방에 추가할 해시태그(7자 이내)를 써주세요(최대 3개 추가 가능)') as string
+            const hash = prompt('추가할 해시태그(7자 이내)를 써주세요(최대 2개 가능)') as string
             if (hash.length > 7) {
                 alert('해시태그는 7자 이내로 입력해 주세요.')
             } else {
