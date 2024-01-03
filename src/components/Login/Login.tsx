@@ -50,9 +50,8 @@ const Login: React.FC = () => {
         } catch (error: any) {
             if (error.response.status === 403) {
                 console.log('로그인 실패 : error 메세지', error)
-                alert(error.response.data.message)
+                alert('입력하신 이메일 또는 비밀번호를 다시 확인해주세요.')
             }
-            console.log('로그인 실패 : error 메세지', error)
         }
     }
 
