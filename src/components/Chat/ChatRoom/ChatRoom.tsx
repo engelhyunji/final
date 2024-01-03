@@ -139,6 +139,20 @@ const ChatRoom: React.FC = () => {
         })
     }
 
+    // 시간 형식 00:00 AM/PM
+    const formatDateToAMPM = (dateString: string) => {
+        const options: Intl.DateTimeFormatOptions = {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
+        }
+
+        const date = new Date(dateString)
+        return date.toLocaleTimeString('en-US', options)
+    }
+
+    const formattedDate = formatDateToAMPM(new Date().toISOString())
+
     const connectWebSocket = () => {
         client.current = new Stomp.Client({
             brokerURL: import.meta.env.VITE_APP_SERVER_WS_URL,
@@ -150,7 +164,7 @@ const ChatRoom: React.FC = () => {
                     email,
                     roomId,
                     sender: nickname,
-                    sentAt: new Date().toISOString(),
+                    sentAt: formattedDate,
                 }
 
                 client.current.publish({
@@ -185,7 +199,7 @@ const ChatRoom: React.FC = () => {
 
         client.current.publish({
             destination: '/pub/chat/message',
-            body: JSON.stringify({ type: 'TALK', roomId, sender: nickname, message, sentAt: new Date().toISOString() }),
+            body: JSON.stringify({ type: 'TALK', roomId, sender: nickname, message, sentAt: formattedDate }),
             headers: headers,
         })
 
@@ -227,36 +241,39 @@ const ChatRoom: React.FC = () => {
                 <ST.ChatH2>{room?.name}</ST.ChatH2>
 
                 <ST.MessageUl ref={scrollRef}>
-                    {messages?.map((msg, idx) => (
-                        // 내 메세지, 받은 메세지 스타일 따로 지정
-                        // 입장 및 퇴장 메세지 스타일도 분리
-                        <ST.MessageLi
-                            key={idx}
-                            className={
-                                msg.type !== 'ENTER' && msg.type !== 'QUIT'
-                                    ? msg.sender !== nickname
-                                        ? 'otherChat'
-                                        : 'myChat'
-                                    : ''
-                            }
-                        >
-                            <ST.MessageDiv
+                    {messages
+                        ?.filter((msg) => msg.message !== null) // null인 메시지 필터링
+                        .map((msg, idx) => (
+                            // 내 메세지, 받은 메세지 스타일 따로 지정
+                            // 입장 및 퇴장 메세지 스타일도 분리
+                            <ST.MessageLi
+                                key={idx}
                                 className={
                                     msg.type !== 'ENTER' && msg.type !== 'QUIT'
                                         ? msg.sender !== nickname
-                                            ? 'otherMsg'
-                                            : 'myMsg'
-                                        : 'enterNquit'
+                                            ? 'otherChat'
+                                            : 'myChat'
+                                        : ''
                                 }
                             >
-                                {msg.sender !== nickname && msg.type !== 'ENTER' && msg.type !== 'QUIT' && (
-                                    <p>{msg.sender}</p>
-                                )}
-                                <span>{msg.message}</span>
-                                {msg.type !== 'ENTER' && msg.type !== 'QUIT' && <span>{msg.sentAt}</span>}
-                            </ST.MessageDiv>
-                        </ST.MessageLi>
-                    ))}
+                                <ST.MessageDiv
+                                    className={
+                                        msg.type !== 'ENTER' && msg.type !== 'QUIT'
+                                            ? msg.sender !== nickname
+                                                ? 'otherMsg'
+                                                : 'myMsg'
+                                            : 'enterNquit'
+                                    }
+                                >
+
+                                    {msg.sender !== nickname && msg.type !== 'ENTER' && msg.type !== 'QUIT' && (
+                                        <p>{msg.sender}</p>
+                                    )}
+                                    <span>{msg.message}</span>
+                                    {/* {msg.type !== 'ENTER' && msg.type !== 'QUIT' && <ST.MessageTimeSpan>{msg.sentAt}</ST.MessageTimeSpan>} */}
+                                </ST.MessageDiv>
+                            </ST.MessageLi>
+                        ))}
                 </ST.MessageUl>
 
                 <ST.MessageInputDiv>

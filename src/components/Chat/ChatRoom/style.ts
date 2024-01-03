@@ -60,7 +60,7 @@ export const ChatPetInfoDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    
+
     span {
         // 넘치는 내용 처리
         display: inline-block;
@@ -93,6 +93,8 @@ export const ChatLeaveBtn = styled.button`
     border-radius: 8px;
 `
 
+// 오른쪽 영역 =======================
+
 export const MessageRightDiv = styled.div`
     width: 813px;
     background-color: #fff;
@@ -112,8 +114,8 @@ export const MessageUl = styled.ul`
     width: 100%;
     height: 65vh;
     overflow-y: auto;
-
-    /* padding: 20px; */
+    padding: 20px;
+    font-family: Pretendard-medium;
     background-color: #f4f4f4;
 
     box-shadow: inset -10px 2px 20px 1px rgba(77, 71, 71, 0.2);
@@ -121,6 +123,7 @@ export const MessageUl = styled.ul`
 
 export const MessageLi = styled.li`
     text-align: center;
+    margin: 10px 0;
 
     &.otherChat {
         text-align: left;
@@ -134,9 +137,10 @@ export const MessageLi = styled.li`
 export const MessageDiv = styled.div`
     &.otherMsg {
         span {
+            margin-top: 5px;
             display: inline-block;
-            padding: 6px 10px;
-            border-radius: 8px;
+            padding: 8px 10px;
+            border-radius: 2px 16px 16px 2px;
             background-color: #fff;
         }
     }
@@ -144,9 +148,9 @@ export const MessageDiv = styled.div`
     &.myMsg {
         span {
             display: inline-block;
-            padding: 6px 10px;
-            border-radius: 8px;
-            background-color: #d8f7dc;
+            padding: 8px 10px;
+            border-radius: 16px 2px 2px 16px;
+            background-color: #00d498;
         }
     }
 
@@ -161,6 +165,11 @@ export const MessageDiv = styled.div`
         }
     }
 `
+
+// export const MessageTimeSpan = styled.span`
+//     display: inline-block;
+//     background-color: transparent;
+// `
 
 // 메세지 입력
 export const MessageInputDiv = styled.div`
