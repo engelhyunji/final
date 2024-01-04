@@ -14,7 +14,7 @@ const ShopsList: React.FC = () => {
     // 검색어
     const [searchShop, setSearchShop] = useState<string>('')
     // 현재 활성화된 카테고리(.active 스타일 설정용)
-    const [nowCategory, setNowCategory] = useState('ALL')
+    const [nowCategory, setNowCategory] = useState<string>('ALL')
 
     // 서버에서 받은 전체 목록
     const [shopList, setShopList] = useState<Shop[]>([])
