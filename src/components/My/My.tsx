@@ -2,12 +2,11 @@ import { useNavigate } from 'react-router-dom'
 import { Pet, Shop, getMyShop, getMyPet, deleteShop, getMyChatRoom } from '../../apis/api/api'
 import * as ST from './style'
 import { IoLogoWechat } from 'react-icons/io5'
-import { FaUserCircle } from 'react-icons/fa'
+import { AiFillMinusCircle } from 'react-icons/ai'
 import React, { useState, useEffect } from 'react'
 import { useMutation } from 'react-query'
 import instance from '../../apis/instance'
 import { useAuth } from '../../context/AuthContext'
-import BackWave from '../BackWave'
 import { AxiosError } from 'axios'
 import { deleteChat } from '../../apis/api/chat'
 import { ApiResponse, deletePet } from '../../apis/api/petmodify'
@@ -18,6 +17,11 @@ const My: React.FC = () => {
     const { logout } = useAuth()
     const navigate = useNavigate()
     const nickname = localStorage.getItem('nickname')
+
+    const [myCategory, setMyCategory] = useState<string>('shop')
+    // 현재 활성화된 카테고리(.active 스타일 설정용)
+    const [nowCategory, setNowCategory] = useState<string>('shop')
+
     const [shops, setShops] = useState<Shop[]>([])
     const [pets, setPets] = useState<Pet[]>([])
     const [chatRooms, setChatRooms] = useState<Chatroom[]>([])
@@ -98,6 +102,11 @@ const My: React.FC = () => {
         },
     })
 
+    const MyCategoryHandler = (category: string) => {
+        setMyCategory(category)
+        setNowCategory(category)
+    }
+
     const DeleteHandler = (target: string, idx: number) => {
         if (target === 'shop') {
             if (confirm(`${shops[idx].shopName} 가게를 삭제하시겠습니까?`)) {
@@ -142,7 +151,7 @@ const My: React.FC = () => {
 
     const AddTag = async (roomId: string) => {
         if (confirm('해시태그를 추가하시겠어요?')) {
-            const hash = prompt('추가할 해시태그(7자 이내)를 써주세요(최대 2개 가능)') as string
+            const hash = prompt('한 해시태그 당 최대 7자로 두 개까지 만들 수 있어요') as string
             if (hash.length > 7) {
                 alert('해시태그는 7자 이내로 입력해 주세요.')
             } else {
@@ -151,7 +160,7 @@ const My: React.FC = () => {
                 } catch (error) {
                     console.error('에러 발생:', error)
                 } finally {
-                    // 채팅방 목록을 다시 불러오기
+                    // 채팅방 목록 다시 불러오기
                     getMyChatRoom()
                         .then((roomData) => {
                             if (roomData) {
@@ -166,10 +175,8 @@ const My: React.FC = () => {
         }
     }
 
-    const DeleteTag = async (roomId: string) => {
+    const DeleteTag = async (roomId: string, hash: string) => {
         if (confirm('해시태그를 삭제하시겠어요?')) {
-            let hash = prompt('삭제할 해시태그를 써주세요') as string
-
             try {
                 await deleteHash(roomId, hash)
             } catch (error) {
@@ -190,131 +197,204 @@ const My: React.FC = () => {
     }
 
     return (
-        <ST.Container>
-            <BackWave />
-            <ST.MyContainer>
-                <ST.TitleH2>
-                    <FaUserCircle /> {nickname} 님의 마이 페이지
-                </ST.TitleH2>
+        <ST.MyContainer>
+            <ST.TitleH2>
+                {/* userCircle 아이콘 */}
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <path
+                        d="M32 20C32 22.1217 31.1571 24.1566 29.6569 25.6569C28.1566 27.1571 26.1217 28 24 28C21.8783 28 19.8434 27.1571 18.3431 25.6569C16.8429 24.1566 16 22.1217 16 20C16 17.8783 16.8429 15.8434 18.3431 14.3431C19.8434 12.8429 21.8783 12 24 12C26.1217 12 28.1566 12.8429 29.6569 14.3431C31.1571 15.8434 32 17.8783 32 20Z"
+                        fill="black"
+                    />
+                    <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M23.184 43.984C12.517 43.556 4 34.772 4 24C4 12.954 12.954 4 24 4C35.046 4 44 12.954 44 24C44 35.046 35.046 44 24 44C23.9087 44.0006 23.8173 44.0006 23.726 44C23.545 44 23.364 43.994 23.184 43.984ZM11.166 36.62C11.0165 36.1906 10.9656 35.733 11.0171 35.2812C11.0686 34.8294 11.2212 34.395 11.4636 34.0103C11.706 33.6255 12.0319 33.3003 12.4171 33.0588C12.8024 32.8172 13.2371 32.6655 13.689 32.615C21.485 31.752 26.563 31.83 34.321 32.633C34.7735 32.6801 35.2093 32.8299 35.5952 33.0709C35.9811 33.3119 36.3068 33.6378 36.5477 34.0237C36.7886 34.4096 36.9383 34.8455 36.9853 35.298C37.0323 35.7505 36.9754 36.2078 36.819 36.635C40.1439 33.2709 42.006 28.7299 42 24C42 14.059 33.941 6 24 6C14.059 6 6 14.059 6 24C6 28.916 7.971 33.372 11.166 36.62Z"
+                        fill="black"
+                    />
+                </svg>
+                {nickname} 님의 마이 페이지
+            </ST.TitleH2>
 
-                {shops.length > 0 && (
-                    <ST.ShopNPetSection>
-                        <ST.TitleH3>마이 가게</ST.TitleH3>
-                        <ST.MyUl>
-                            {shops.map((shop) => (
-                                <li key={shop.shopId}>
-                                    <ST.MyDiv onClick={() => navigate(`/shops/${shop.shopId}`)}>
-                                        <ST.MyShopImg src={shop.imageUrls[0]} alt={shop.shopName} />
-                                        <ST.ImgInfo>
-                                            <ST.TitleH4>{shop.shopName}</ST.TitleH4>
-                                            <p>업종: {shop.shopType}</p>
-                                            <p>영업시간: {shop.shopStartTime} ~ {shop.shopEndTime}</p>
-                                            <p>전화번호: {shop.shopTel1} - {shop.shopTel2} - {shop.shopTel3}</p>
-                                            <p>위치: {shop.shopAddress}</p>
-                                            <p>소개: {shop.shopDescribe}</p>
-                                        </ST.ImgInfo>
-                                    </ST.MyDiv>
-                                    <ST.BtnContainer>
-                                        <ST.MyBtn onClick={() => navigate(`/shops/modify/${shop.shopId}`)}>
-                                            수정
-                                        </ST.MyBtn>
-                                        <ST.ChatDelBtn onClick={() => DeleteHandler('shop', shops.indexOf(shop))}>
-                                            삭제
-                                        </ST.ChatDelBtn>
-                                    </ST.BtnContainer>
-                                </li>
-                            ))}
-                        </ST.MyUl>
-                    </ST.ShopNPetSection>
-                )}
+            <ST.MyCategoryUl>
+                <ST.MyCategoryLi
+                    onClick={() => MyCategoryHandler('shop')}
+                    className={nowCategory === 'shop' ? 'active' : ''}
+                >
+                    내 가게
+                </ST.MyCategoryLi>
+                <ST.MyCategoryLi
+                    onClick={() => MyCategoryHandler('pet')}
+                    className={nowCategory === 'pet' ? 'active' : ''}
+                >
+                    내 반려동물
+                </ST.MyCategoryLi>
+            </ST.MyCategoryUl>
 
-                {pets.length > 0 && (
-                    <ST.ShopNPetSection>
-                        <ST.TitleH3>마이 반려동물</ST.TitleH3>
-                        <ST.MyUl>
-                            {pets.map((pet) => (
-                                <li key={pet.petId}>
-                                    <ST.MyDiv onClick={() => navigate(`/pet/${pet.petId}`)}>
-                                        <ST.MyShopImg src={pet.imageUrls[0]} alt={pet.petName} />
-                                        <ST.ImgInfo>
-                                            <ST.TitleH4>{pet.petName}</ST.TitleH4>
-                                            <p>종류: {pet.petKind}</p>
-                                            <p>특이사항: {pet.petInfo}</p>
-                                        </ST.ImgInfo>
-                                    </ST.MyDiv>
-                                    <ST.BtnContainer>
-                                        <ST.MyBtn onClick={() => navigate(`/modify/${pet.petId}`)}>수정</ST.MyBtn>
-                                        <ST.ChatDelBtn onClick={() => DeleteHandler('pet', pets.indexOf(pet))}>
-                                            삭제
-                                        </ST.ChatDelBtn>
-                                    </ST.BtnContainer>
-                                </li>
-                            ))}
-                        </ST.MyUl>
-                    </ST.ShopNPetSection>
-                )}
+            {myCategory === 'shop' && shops.length > 0 && (
+                <ST.ShopNPetSection>
+                    <ST.MyUl>
+                        {shops.map((shop) => (
+                            <ST.MyLi key={shop.shopId}>
+                                <ST.MyDiv onClick={() => navigate(`/shops/${shop.shopId}`)}>
+                                    <ST.MyShopImg src={shop.imageUrls[0]} alt={shop.shopName} />
+                                    <ST.MyInfo>
+                                        <ST.TitleH4>{shop.shopName}</ST.TitleH4>
+                                        <ST.BodyTimeP>영업시간</ST.BodyTimeP>
+                                        <ST.BodyTimeInfoP>
+                                            {shop.shopStartTime}-{shop.shopEndTime}
+                                        </ST.BodyTimeInfoP>
+                                        <ST.BodyTelP>전화번호</ST.BodyTelP>
+                                        <ST.BodyTelInfoP>
+                                            {shop.shopTel1}-{shop.shopTel2}-{shop.shopTel3}
+                                        </ST.BodyTelInfoP>
+                                        <ST.BodyAddressP>위치</ST.BodyAddressP>
+                                        <ST.BodyAddressInfoP>{shop.shopAddress}</ST.BodyAddressInfoP>
+                                    </ST.MyInfo>
+                                </ST.MyDiv>
+                                <ST.BtnContainer>
+                                    <ST.MyBtn onClick={() => navigate(`/shops/modify/${shop.shopId}`)} $color="#00bd8f">
+                                        수정
+                                    </ST.MyBtn>
+                                    <ST.MyBtn
+                                        onClick={() => DeleteHandler('shop', shops.indexOf(shop))}
+                                        $color="#FD4141"
+                                    >
+                                        삭제
+                                    </ST.MyBtn>
+                                </ST.BtnContainer>
+                            </ST.MyLi>
+                        ))}
+                    </ST.MyUl>
+                </ST.ShopNPetSection>
+            )}
 
-                {chatRooms.length > 0 && (
-                    <ST.ShopNPetSection>
-                        <ST.TitleH3>마이 채팅방</ST.TitleH3>
-                        <ST.MyUl>
-                            {chatRooms.map((chatroom) => (
-                                <li key={chatroom.roomId}>
-                                    <ST.MyChatDiv onClick={() => enterRoom(chatroom.roomId)}>
-                                        {/* <p>방 ID: {chatroom.roomId}</p> */}
-                                        <p>
-                                            <IoLogoWechat /> <span>[ {chatroom.name} ]</span> 채팅방
-                                        </p>
-                                        <p>
-                                            {chatroom.tags?.map((tag) => (
-                                                <span key={tag.name}>{tag.name && `#${tag.name} `}</span>
-                                            ))}
-                                        </p>
-                                    </ST.MyChatDiv>
-                                    <ST.BtnContainer>
-                                        <ST.MyBtn onClick={() => AddTag(chatroom.roomId)}>해시태그 추가</ST.MyBtn>
-                                        <ST.MyHashDeleteBtn onClick={() => DeleteTag(chatroom.roomId)}>
-                                            해시태그 삭제
-                                        </ST.MyHashDeleteBtn>
-                                        <ST.ChatDelBtn
-                                            onClick={() => DeleteHandler('chat', chatRooms.indexOf(chatroom))}
-                                        >
-                                            삭제
-                                        </ST.ChatDelBtn>
-                                    </ST.BtnContainer>
-                                </li>
-                            ))}
-                        </ST.MyUl>
-                    </ST.ShopNPetSection>
-                )}
+            {myCategory === 'pet' && pets.length > 0 && (
+                <ST.ShopNPetSection>
+                    <ST.MyUl>
+                        {pets.map((pet) => (
+                            <ST.MyLi key={pet.petId}>
+                                <ST.MyDiv onClick={() => navigate(`/pet/${pet.petId}`)}>
+                                    <ST.MyShopImg src={pet.imageUrls[0]} alt={pet.petName} />
+                                    <ST.MyInfo>
+                                        <ST.TitleH4>{pet.petName}</ST.TitleH4>
+                                        <ST.BodyTimeP>성별</ST.BodyTimeP>
+                                        <ST.BodyTimeInfoP>
+                                            {pet.petGender === 'MALE' ? '남아' : '여아'}
+                                        </ST.BodyTimeInfoP>
+                                        <ST.BodyTelP>크기</ST.BodyTelP>
+                                        <ST.BodyTelInfoP>
+                                            {pet.petKind === 'SMALL'
+                                                ? '소형'
+                                                : pet.petKind === 'MEDIUM'
+                                                  ? '중형'
+                                                  : '대형'}
+                                        </ST.BodyTelInfoP>
+                                        <ST.BodyAddressP>특이사항</ST.BodyAddressP>
+                                        <ST.BodyAddressInfoP>{pet.petInfo}</ST.BodyAddressInfoP>
+                                    </ST.MyInfo>
+                                </ST.MyDiv>
+                                <ST.BtnContainer>
+                                    <ST.MyBtn onClick={() => navigate(`/modify/${pet.petId}`)} $color="#00bd8f">
+                                        수정
+                                    </ST.MyBtn>
+                                    <ST.MyBtn onClick={() => DeleteHandler('pet', pets.indexOf(pet))} $color="#FD4141">
+                                        삭제
+                                    </ST.MyBtn>
+                                </ST.BtnContainer>
+                            </ST.MyLi>
+                        ))}
+                    </ST.MyUl>
+                </ST.ShopNPetSection>
+            )}
 
-                {shops.length === 0 && pets.length === 0 && (
-                    <ST.ShopNPetSection>
-                        등록된 가게 또는 반려동물 정보가 없습니다.
-                        <br /> 내 가게 또는 반려동물을 등록해보세요!
-                        <ST.BtnContainer>
-                            <ST.MyBtn
-                                onClick={() => {
-                                    navigate('/shops')
-                                }}
-                            >
-                                가게 등록
-                            </ST.MyBtn>
-                            <ST.MyBtn
-                                onClick={() => {
-                                    navigate('/pet')
-                                }}
-                            >
-                                반려동물 등록
-                            </ST.MyBtn>
-                        </ST.BtnContainer>
-                    </ST.ShopNPetSection>
-                )}
+            {chatRooms.length > 0 && (
+                <ST.ShopNPetSection>
+                    <ST.TitleH3>내가 만든 채팅방</ST.TitleH3>
+                    {/* <ST.MyChatSpan>한 해시태그 당 최대 7자로 두 개까지 만들 수 있어요</ST.MyChatSpan> */}
+                    <ST.MyUl>
+                        {chatRooms.map((chatroom) => (
+                            <ST.MyChatLi key={chatroom.roomId}>
+                                <ST.MyChatDiv>
+                                    <ST.MyChatP onClick={() => enterRoom(chatroom.roomId)}>
+                                        <IoLogoWechat /> <span>{chatroom.name}</span>
+                                    </ST.MyChatP>
+                                    <p>
+                                        {chatroom.tags?.map((tag) => (
+                                            <>
+                                                <ST.TagWords
+                                                    key={tag.name}
+                                                    onClick={() => DeleteTag(chatroom.roomId, tag.name)}
+                                                >
+                                                    {tag.name && `#${tag.name}`}
+                                                    <AiFillMinusCircle style={TagMinus} />
+                                                </ST.TagWords>
+                                            </>
+                                        ))}
+                                    </p>
+                                </ST.MyChatDiv>
+                                <ST.BtnContainer>
+                                    <ST.MyChatBtn
+                                        onClick={() => AddTag(chatroom.roomId)}
+                                        $color="#00bd8f"
+                                        $backColor="#E9E9E6"
+                                    >
+                                        해시태그 추가
+                                    </ST.MyChatBtn>
+                                    <ST.MyChatBtn
+                                        onClick={() => DeleteHandler('chat', chatRooms.indexOf(chatroom))}
+                                        $color="#fff"
+                                        $backColor="#FD4141"
+                                    >
+                                        채팅방 삭제
+                                    </ST.MyChatBtn>
+                                </ST.BtnContainer>
+                            </ST.MyChatLi>
+                        ))}
+                    </ST.MyUl>
+                </ST.ShopNPetSection>
+            )}
 
-                <ST.LeaveSpan onClick={LeaveUserHandler}>회원탈퇴</ST.LeaveSpan>
-            </ST.MyContainer>
-        </ST.Container>
+            {shops.length === 0 && pets.length === 0 && (
+                <ST.ShopNPetSection>
+                    등록된 가게 또는 반려동물 정보가 없습니다.
+                    <br /> 내 가게 또는 반려동물을 등록해보세요!
+                    <ST.BtnContainer>
+                        <ST.MyBtn
+                            onClick={() => {
+                                navigate('/shops')
+                            }}
+                            $color="#00bd8f"
+                        >
+                            가게 등록
+                        </ST.MyBtn>
+                        <ST.MyBtn
+                            onClick={() => {
+                                navigate('/pet')
+                            }}
+                            $color="#00bd8f"
+                        >
+                            반려동물 등록
+                        </ST.MyBtn>
+                    </ST.BtnContainer>
+                </ST.ShopNPetSection>
+            )}
+
+            <ST.MyChatBtn onClick={LeaveUserHandler} $color="#8F8E93" $backColor="#E9E9E6">
+                탈퇴하기
+            </ST.MyChatBtn>
+        </ST.MyContainer>
     )
 }
 
 export default My
+
+const TagMinus = {
+    width: '13px',
+    height: '13px',
+    color: '#DADADA',
+    borderRadius: '50%',
+    // backgroundColor: '#575756',
+    position: 'absolute',
+    top: '-5px',
+    right: '-4px',
+}
