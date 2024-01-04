@@ -23,36 +23,23 @@ export const HeaderContainer = styled.div`
     background-color: #fff;
     color: #fff;
 `
-
+export const LogoBox = styled.div`
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+`
 export const Logo = styled.div<LogoProps>`
-    width: 58px;
-    height: 58px;
+    width: 88px;
+    height: 88px;
     background: no-repeat center/100% url(${props => props.$logoUrl});
     display: flex;
     align-items: center;
-    cursor: pointer;
 `
 
-export const LogoH1 = styled.h1`
-    font-size: 33px;
-    color: white;
-    font-family: Pretendard-Bold;
-    text-shadow: 
-        -2px -2px 0 #1dcb8e,  
-        1px -2px 0 #1dcb8e,
-        -1px 1px 0 #1dcb8e,
-        1px 1px 0 #1dcb8e; 
-`
-
-
-export const LogoImg = styled.img`
-    width: 56px;
-    margin: 0 20px;
-`
-export const LogoImg1 = styled.img`
-    width: 56px;
-    height: 20px;
-    margin: 0 20px;
+export const LogoH1 = styled.h1<LogoProps>`
+    width: 120px;
+    background: no-repeat center 22px/100% url(${props => props.$logoUrl});
 `
 
 export const GNBDiv = styled.div`
