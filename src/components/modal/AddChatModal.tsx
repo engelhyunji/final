@@ -40,16 +40,16 @@ const AddChatModal: React.FC<AddChatModalProps> = ({ onClose }) => {
     return (
         <ST.StBackground>
             <ST.ChatInputDiv>
-                <h2>채팅방 만들기</h2>
-                <span>한 아이디 당 최대 두 개의 채팅방을 생성할 수 있어요</span>
+                <ST.TitleH2>새로운 채팅방 만들기</ST.TitleH2>
+                <ST.MyChatSpan>한 아이디 당 최대 두 개의 채팅방을 만들 수 있어요</ST.MyChatSpan>
                 <ST.ChatNameInput
-                    placeholder="채팅방 이름을 입력해주세요 (최대 12자)"
+                    placeholder="만들 채팅방 이름을 입력해주세요 (최대 12자)"
                     type="text"
                     value={roomName}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setRoomName(e.target.value)}
                 />
                 <div>
-                    <ST.ChatBtn $textColor="red" $buttonColor="#eee" onClick={onClose}>
+                    <ST.ChatBtn $textColor="#00bd8f" $buttonColor="#eee" $marginRight="13px" onClick={onClose}>
                         닫기
                     </ST.ChatBtn>
                     <ST.ChatBtn $textColor="#fff" $buttonColor="#00bd8f" onClick={createRoom}>
