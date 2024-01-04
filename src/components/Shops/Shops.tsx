@@ -12,12 +12,9 @@ export interface ShopPostData {
     shopTel1: string
     shopTel2: string
     shopTel3: string
-    // shopTime: string
-    // shopTel: string
     shopAddress: string
     shopType: string
     shopDescribe: string
-    // shopTags: string[]
 }
 
 const Shops: React.FC = () => {
@@ -32,7 +29,6 @@ const Shops: React.FC = () => {
         shopAddress: '',
         shopType: '',
         shopDescribe: '',
-        // shopTags: [],
     })
 
     const describeLimit: number = 100
@@ -74,6 +70,7 @@ const Shops: React.FC = () => {
                 }
             }
         } else {
+            // 가게 이름, 위치, 설명 - 글자 수 제한
             if (name === 'shopName' && value.length > 20) {
                 return
             }
@@ -170,29 +167,22 @@ const Shops: React.FC = () => {
             <ST.ShopP>사장님의 가게를 등록하고 더 많은 매칭 서비스를 이용해 보세요!</ST.ShopP>
 
             <ST.Form onSubmit={handleSubmit}>
-                {/* <ST.ShopInputBox>
-                    <ST.Label>Shop 관련 키워드 #해시태그</ST.Label>
-                    <ST.Input
-                        name="shopTags"
-                        type="text"
-                        value={shopRequestDto.shopTags}
-                        onChange={handleChange}
-                        placeholder="해시태그 추가"
-                    />
-                </ST.ShopInputBox> */}
-
                 <ST.ShopInputBox>
                     <ST.Label>가게 종류를 알려주세요</ST.Label>
                     <ST.StDropdown>
                         <Dropdown.Toggle variant="light" id="dropdown-basic">
-                            {shopRequestDto.shopType || '가게 종류를 선택해주세요'}
+                            {shopRequestDto.shopType === 'GROOMING' && '애견 미용'}
+                            {shopRequestDto.shopType === 'HOSPITAL' && '동물병원'}
+                            {shopRequestDto.shopType === 'CAFE' && '애견 카페'}
+                            {shopRequestDto.shopType === 'ETC' && '기타'}
+                            {!shopRequestDto.shopType && '가게 종류를 선택해주세요'}
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item onClick={() => handleDropdownChange('GROOMING')}>GROOMING</Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleDropdownChange('HOSPITAL')}>HOSPITAL</Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleDropdownChange('CAFE')}>CAFE</Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleDropdownChange('ETC')}>ETC</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleDropdownChange('GROOMING')}>애견 미용</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleDropdownChange('HOSPITAL')}>동물병원</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleDropdownChange('CAFE')}>애견 카페</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleDropdownChange('ETC')}>기타</Dropdown.Item>
                         </Dropdown.Menu>
                     </ST.StDropdown>
                 </ST.ShopInputBox>
@@ -267,7 +257,10 @@ const Shops: React.FC = () => {
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>가게 소개를 적어주세요</ST.Label> <ST.desLimit>{shopRequestDto.shopDescribe.length}/{describeLimit}</ST.desLimit>
+                    <ST.Label>가게 소개를 적어주세요</ST.Label>{' '}
+                    <ST.desLimit>
+                        {shopRequestDto.shopDescribe.length}/{describeLimit}
+                    </ST.desLimit>
                     <ST.DescInput
                         name="shopDescribe"
                         value={shopRequestDto.shopDescribe}
