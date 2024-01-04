@@ -8,10 +8,13 @@ export const addReview = async (shopId: number, comment: string, shopName: strin
     } catch (error: any) {
         console.log('리뷰 등록 에러 :', error)
         if (error.response.status === 403) {
-            
+            // 가게 주인은 리뷰작성 불가
             if (error.response.data.code === 4509) {
-                // 가게 주인은 리뷰작성 불가
                 alert(error.response.data.message)
+
+                // 리뷰 작성은 한개만 가능
+            } else if (error.response.data.code === 4508) {
+                alert(`작성하신 리뷰가 ${error.response.data.message}`)
             } else {
                 alert('리뷰 등록을 할 수 없습니다')
             }
