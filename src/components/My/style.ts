@@ -176,13 +176,13 @@ export const TitleH3 = styled.h3`
     font-size: 20px;
     font-family: Pretendard-semibold;
 `
-export const MyChatSpan = styled.span`
-    display: inline-block;
-    margin: 0 0 24px;
+// export const MyChatSpan = styled.span`
+//     display: inline-block;
+//     margin: 0 0 24px;
 
-    font-size: 14px;
-    color: #575756;
-`
+//     font-size: 14px;
+//     color: #575756;
+// `
 
 export const MyChatLi = styled.li`
     width: 284px;
