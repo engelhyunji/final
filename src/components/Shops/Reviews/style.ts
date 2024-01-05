@@ -46,7 +46,7 @@ export const ReviewInputNotiP = styled.p`
 `
 
 export const ReviewH3 = styled.h3`
-    margin: 16px 0 26px;
+    margin: 26px 0 26px;
     font-family: Pretendard-bold;
     font-size: 22px;
     line-height: 28px;
