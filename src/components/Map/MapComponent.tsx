@@ -24,26 +24,26 @@ export interface ShopPostData {
     imageUrls: string[];
 }
 
-const customModalStyles = {
-    overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        zIndex: 1000,
-    },
-    content: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '80%',
-        height: 'auto',
-        overflow: 'auto',
-        backgroundColor: 'white',
-        border: '1px solid #ccc',
-        borderRadius: '7px',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-        zIndex: 1001,
-    },
-};
+// const customModalStyles = {
+//     overlay: {
+//         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+//         zIndex: 1000,
+//     },
+//     content: {
+//         position: 'absolute',
+//         top: '50%',
+//         left: '50%',
+//         transform: 'translate(-50%, -50%)',
+//         width: '80%',
+//         height: 'auto',
+//         overflow: 'auto',
+//         backgroundColor: 'white',
+//         border: '1px solid #ccc',
+//         borderRadius: '7px',
+//         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+//         zIndex: 1001,
+//     },
+// };
 
 Modal.setAppElement('#root');
 
