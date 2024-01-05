@@ -20,7 +20,8 @@ export const TitleBackContainer = styled.div`
     color: #fff;
     font-family: Pretendard-medium;
 
-    background-image: url('shopListBanner.png');
+    /* background-image: url('shopListBanner.png'); */
+    background-image: url('https://moon-test1-bucket.s3.ap-northeast-2.amazonaws.com/shopListBanner.png');
 
     /* linear-gradient(검정색 필터로 활용) */
     /* background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)); */
