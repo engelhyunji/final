@@ -22,19 +22,17 @@ export const Text = styled.h2`
 
 export const CategoryList = styled.div`
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 1000px;
-    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    width: 900px;
     margin-bottom: 20px;
     color: #a5aaac;
-    font-weight: bold;
 `
 
 export const CategoryItem = styled.div<CategoryItemProps>`
     margin: 0 3px;
     cursor: pointer;
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 112px;
     transition: background-color 0.3s ease;
 
