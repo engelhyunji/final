@@ -84,6 +84,8 @@ export const ShopModalBackground = styled.div`
     left: 0;
     top: 0;
     background: rgba(218, 218, 218, 0.5);
+
+    z-index: 100;
 `
 
 export const ShopBoxDiv = styled.div`
@@ -93,7 +95,7 @@ export const ShopBoxDiv = styled.div`
     padding: 34px 46px;
 
     position: relative;
-    top: 10vh;
+    top: 5vh;
     /* left: 10vw; */
     background: #fff;
     box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
