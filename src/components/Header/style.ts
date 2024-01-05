@@ -50,11 +50,11 @@ export const GNBDiv = styled.div`
 
 export const LogoutBtn = styled.button`
     margin-left: 20px;
-    font-family: Pretendard-Medium;
-    background-color: #00BD8F;
-    color: #fff;
+    width: 90px;
+    height: 34px;
+    color: #00BD8e;
+    font-family: Pretendard-regular;
+    background-color: #e9e9e6;
     border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    cursor: pointer;
+    border-radius: 3px;
 `
