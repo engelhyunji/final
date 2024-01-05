@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useParams } from 'react-router-dom'
-import { fetchPetDetail } from '../../../apis/api/petlist'
 import * as ST from './style'
 import Modal from 'react-modal'
+import instance from '../../../apis/instance'
 
 export interface PetDetails {
     userId: number
@@ -19,12 +19,11 @@ export interface PetDetails {
 
 // ApiResponse 타입 정의
 export interface ApiResponse<T> {
-    isSuccess: boolean;
-    code: number;
-    message: string;
-    result: T;
+    isSuccess: boolean
+    code: number
+    message: string
+    result: T
 }
-
 
 Modal.setAppElement('#root')
 
@@ -43,6 +42,22 @@ const PetDetail: React.FC = () => {
 
     const closeModal = () => {
         setIsModalOpen(false)
+    }
+
+    // Pet 상세 정보 조회
+    const fetchPetDetail = async (petId: string): Promise<ApiResponse<PetDetails> | null> => {
+        try {
+            const response = await instance.get<ApiResponse<PetDetails>>(`/api/pets/${petId}`)
+            if (response.status === 200) {
+                // return response.data // 여기에서 ApiResponse 객체를 반환
+                return response.data // 여기에서 ApiResponse 객체를 반환
+            } else {
+                throw new Error(`오류 발생: ${response.status}`)
+            }
+        } catch (error) {
+            console.error('에러:', error)
+            return null
+        }
     }
 
     // useEffect(() => {
@@ -119,37 +134,36 @@ const PetDetail: React.FC = () => {
 
     useEffect(() => {
         const fetchPetData = async () => {
-            setIsLoading(true);
-            setError(null);
-    
+            setIsLoading(true)
+            setError(null)
+
             try {
                 if (petId) {
-                    const response = await fetchPetDetail(petId);
-                    console.log('API Response:', response);
+                    const response = await fetchPetDetail(petId)
+                    console.log('API Response:', response)
                     if (response && response.isSuccess) {
-                        setPet(response.result);
+                        setPet(response.result)
                         // setPet(response.result);
-                        console.log('Fetched Pet Data:', response.result);
+                        console.log('Fetched Pet Data:', response.result)
                     } else {
-                        console.log('No pet data in response');
-                        setError('Pet data not found in response.');
+                        console.log('No pet data in response')
+                        setError('Pet data not found in response.')
                     }
                 } else {
-                    setError('Pet ID is missing.');
+                    setError('Pet ID is missing.')
                 }
             } catch (error) {
-                console.error('Error fetching pet data:', error);
-                setError('Error fetching pet data from API.');
+                console.error('Error fetching pet data:', error)
+                setError('Error fetching pet data from API.')
             } finally {
-                setIsLoading(false);
+                setIsLoading(false)
             }
-        };
-    
-        if (petId) {
-            fetchPetData();
         }
-    }, [petId]);
-    
+
+        if (petId) {
+            fetchPetData()
+        }
+    }, [petId])
 
     useEffect(() => {
         console.log('Current Pet State:', pet) // 상태 업데이트 후 로그 출력
