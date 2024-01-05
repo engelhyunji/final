@@ -180,7 +180,7 @@ export const MyBtn = styled.button<BtnProps>`
 `
 
 export const TitleH3 = styled.h3`
-    margin: 0 0 30px;
+    margin: 10px 0 30px;
     font-size: 20px;
     font-family: Pretendard-semibold;
 `

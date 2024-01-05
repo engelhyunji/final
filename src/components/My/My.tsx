@@ -12,6 +12,7 @@ import { deleteChat } from '../../apis/api/chat'
 import { ApiResponse, deletePet } from '../../apis/api/petmodify'
 import { Chatroom } from '../Chat/ChatList'
 import { AddHash, deleteHash } from '../../apis/api/tag'
+import Empty from './Empty'
 
 const My: React.FC = () => {
     const { logout } = useAuth()
@@ -227,6 +228,9 @@ const My: React.FC = () => {
                 {nickname} 님의 마이 페이지
             </ST.TitleH2>
 
+            {/* 등록된 가게 및 반려동물이 없을 때 */}
+            {shops.length === 0 && pets.length === 0 && <Empty />}
+
             {shops.length > 0 && pets.length > 0 && (
                 <ST.MyCategoryUl>
                     <ST.MyCategoryLi
@@ -401,32 +405,7 @@ const My: React.FC = () => {
                 </ST.ShopNPetSection>
             )}
 
-            {shops.length === 0 && pets.length === 0 && (
-                <ST.ShopNPetSection>
-                    <ST.EmptyP>등록된 가게 또는 반려동물 정보가 없습니다.
-                    <br /> 내 가게 또는 반려동물을 등록해보세요!</ST.EmptyP>
-                    <ST.BtnContainer>
-                        <ST.MyChatBtn
-                            onClick={() => {
-                                navigate('/shops')
-                            }}
-                            $color="#00bd8f"
-                            $backColor="#E9E9E6"
-                        >
-                            가게 등록
-                        </ST.MyChatBtn>
-                        <ST.MyChatBtn
-                            onClick={() => {
-                                navigate('/pet')
-                            }}
-                            $color="#00bd8f"
-                            $backColor="#E9E9E6"
-                        >
-                            반려동물 등록
-                        </ST.MyChatBtn>
-                    </ST.BtnContainer>
-                </ST.ShopNPetSection>
-            )}
+            
 
             <ST.MyChatBtn onClick={LeaveUserHandler} $color="#8F8E93" $backColor="#E9E9E6">
                 탈퇴하기
