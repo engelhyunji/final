@@ -12,13 +12,15 @@ export const ReviewInputP = styled.p`
     display: flex;
     gap: 10px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 `
 export const ReviewInput = styled.input`
-    width: 407px;
-    padding: 11px 13px;
+    width: 631px;
+    height: 51px;
+    padding: 17px 18px;
 
-    border-radius: 7px;
+    font-size: 14px;
+    border-radius: 8px;
     border: 1px solid #dadada;
     background: #fff;
 `
@@ -26,15 +28,16 @@ export const ReviewLength = styled.span`
     color: #fd4141;
 `
 export const AddBtn = styled.button`
-    padding: 15px;
-    color: #fff;
+    height: 51px;
+    padding: 10px 33px;
+    color: #00bd8f;
     font-family: Pretendard-medium;
-    background-color: #00bd8f;
+    background-color: #E9E9E6;
     border: none;
     border-radius: 8px;
 `
 export const ReviewInputNotiP = styled.p`
-    width: 100%;
+    width: 13%;
     height: 20px;
     font-size: 14px;
     font-family: Pretendard-regular;
@@ -43,7 +46,7 @@ export const ReviewInputNotiP = styled.p`
 `
 
 export const ReviewH3 = styled.h3`
-    margin: 46px 0 26px;
+    margin: 16px 0 26px;
     font-family: Pretendard-bold;
     font-size: 22px;
     line-height: 28px;

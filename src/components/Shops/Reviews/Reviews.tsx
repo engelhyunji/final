@@ -98,8 +98,8 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
             {isLogin && (
                 <>
                     <ST.ReviewInputP>
-                        <span>후기 작성</span>
-                        <ST.ReviewInput type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
+                        {/* <span>후기 작성</span> */}
+                        <ST.ReviewInput type="text" value={comment} onChange={(e) => setComment(e.target.value)} placeholder='방문 후기를 입력해주세요'/>
                         {comment.length > reviewLimit ? (
                             <ST.ReviewLength>
                                 {comment.length}/{reviewLimit}
@@ -109,8 +109,9 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
                                 {comment.length}/{reviewLimit}
                             </span>
                         )}
-                        <ST.AddBtn onClick={() => onSubmit(currentShopId, comment)}>등록</ST.AddBtn>
+                        <ST.AddBtn onClick={() => onSubmit(currentShopId, comment)}>후기 등록하기</ST.AddBtn>
                     </ST.ReviewInputP>
+                    {/* '내용을 작성해주세요' 안내글 */}
                     <ST.ReviewInputNotiP>{comment.trim().length > 2 ? '' : notiComment}</ST.ReviewInputNotiP>
                 </>
             )}
