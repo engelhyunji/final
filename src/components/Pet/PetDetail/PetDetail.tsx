@@ -66,9 +66,9 @@ const PetDetail: React.FC = () => {
             setError(null)
 
             try {
-                const response = await fetchPetDetail(petId)
+                const response = await fetchPetDetail(petId as string)
                 if (response && response.isSuccess) {
-                    setPet(response.result)
+                    setPet(response.result.data)
                 } else {
                     console.error('Error:', response?.message)
                 }
