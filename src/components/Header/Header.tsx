@@ -9,14 +9,13 @@ const Header: React.FC = () => {
     const { isLogin, logout } = useAuth()
 
     const logoUrl = './LogoVer1.png'
-    // const logoUrl = './LogoVer2.png'
-    const logoTypoUrl = './Typo.png'
+    const logoTypoUrl = './TypoBeige.png'
 
     return (
         <ST.HeaderWrap>
             <ST.HeaderContainer>
-                <ST.LogoBox>
-                    <ST.Logo $logoUrl={logoUrl} onClick={() => navigate('/')}></ST.Logo>
+                <ST.LogoBox onClick={() => navigate('/')}>
+                    <ST.Logo $logoUrl={logoUrl}></ST.Logo>
                     <ST.LogoH1 $logoUrl={logoTypoUrl}></ST.LogoH1>
                 </ST.LogoBox>
 
