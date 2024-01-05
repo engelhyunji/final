@@ -43,6 +43,12 @@ export const Text = styled.h2`
     font-family: Pretendard-medium;
 `
 
+export const Error = styled.h2`
+    color: red;
+    font-size: 17px;
+    font-family: Pretendard-medium;
+`
+
 export const LoginP = styled.p`
     margin: 0 0 50px;
     z-index: 2;
@@ -70,6 +76,32 @@ export const Label = styled.label`
     margin: 10px 0;
     font-family: Pretendard-bold;
     font-size: 18px;
+`
+export const FileIcon = styled.div`
+    border-radius: 10px;
+    overflow: hidden;
+    width: 474px;
+    height: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d9d9d9;
+    margin-top: 17px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    color: #787878;
+`
+export const ImageContainer = styled.div`
+    border-radius: 10px;
+    overflow: hidden;
+    width: 200px;
+    height: 250px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d9d9d9;
 `
 
 export const Textarea = styled.textarea`
@@ -113,6 +145,7 @@ export const Wrap = styled.div`
 export const Image = styled.img`
     height: 160px;
     object-fit: cover;
+    height: 100%;
 `
 
 

@@ -2,35 +2,63 @@ import styled from 'styled-components'
 
 export const Layout = styled.div`
     display: flex;
-    height: 100vh;
+    height: 130vh;
     background: #fff;
     padding: 20px;
 `
 
-// export const SearchContainer = styled.div`
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-start;
-//     background: #f9f9f9;
-//     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-//     border-radius: 8px;
-//     width: 20%;
-//     margin-right: 20px;
-//     padding: 20px;
-// `
+export const MenuContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 400px;
+`
+export const ModalContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px; // Instagram-like width
+    margin: auto; // Center the modal
+`
+
+export const H2 = styled.div`
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-family: Pretendard-bold;
+`
+export const H3 = styled.div`
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+`
 
 export const SearchContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    /* width: 20%; */ /* 주석 처리하여 너비를 설정하지 않음 */
-    margin-right: 20px;
     padding: 20px;
 `
 
+export const ListMapContainer = styled.div`
+    flex: 1; /* 남은 공간을 모두 채우도록 설정 */
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    overflow-y: auto;
+    opacity: 0.7;
+`
 
 export const Input = styled.input`
     width: 100%;
@@ -41,25 +69,54 @@ export const Input = styled.input`
     box-sizing: border-box;
     font-size: 15px;
     &:focus {
-        border-color: #1dcb8e;
+        border-color: #4ce1a1;
         outline: none;
     }
 `
 
 export const Button = styled.button`
     margin-bottom: 10px;
+    margin-top: 30px;
     width: 100%;
     padding: 12px 15px;
+    border: 2px solid #4ce1a1;
+    box-shadow: 0px 4px 8px 0px rgba(76, 225, 161, 0.5);
     border: none;
-    background-color: #1dcb8e;
-    color: white;
+    background-color: #fff;
+    color: #4ce1a1;
     text-transform: uppercase;
-    border-radius: 20px;
+    border-radius: 47.609px;
     cursor: pointer;
     font-size: 16px;
     &:hover {
-        background-color: #aec8b6;
+        background-color: #4ce1a1;
+        color: #fff;
     }
+`
+
+export const ListContainer = styled.div`
+    flex: 1; /* 남은 공간을 모두 채우도록 설정 */
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    overflow-y: auto;
+`
+
+export const MapContainer = styled.div`
+    flex: 2; /* 남은 공간을 모두 채우도록 설정 */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`
+
+export const InfoWindowContent = styled.div`
+    max-width: 200px;
+    padding: 10px;
+    font-size: 14px;
+    opacity: 0.7;
+    height: 200px;
 `
 
 export const ResultsContainer = styled.div`
@@ -85,26 +142,19 @@ export const ResultsContainer = styled.div`
 //         background-color: #f3f3f3;
 //     }
 // `
-export const InfoWindowContent = styled.div`
-    max-width: 200px;
-    padding: 10px;
-    font-size: 14px;
-`
 
-export const MapContainer = styled.div`
-    flex-grow: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`
 export const Text = styled.div`
-    padding: 5px;
-    color: #00000a;
-    font-size: 14px;
-    text-align: center;
-    max-width: 200px;
+    padding: 1px;
+    padding-left: 9px;
+    padding-bottom: 9px;
+    margin-top: 9px;
+    color: #000;
+    font-family: Pretendard Variable;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 111.111% */
     white-space: normal;
-    margin: auto;
     position: relative;
     text-align: left;
     max-width: 200px;
@@ -127,33 +177,96 @@ export const CustomOverlayStyle = styled.div`
     pointer-events: none; /* 마커 위 텍스트 상자에 마우스 이벤트 무시 */
 `
 export const AddressText = styled.div`
-    padding: 5px;
+    padding: 1px;
+    padding-bottom: 9px;
     color: #333;
     font-size: 12px;
     max-width: 200px;
     white-space: normal;
     text-align: left;
 `
-export const ListContainer = styled.div`
-    width: 100%;
-    margin-top: 20px;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-    overflow: hidden;
-    overflow-y: auto;
-    opacity: 0.7;
+
+export const ShopTime = styled.div`
+    padding: 1px;
+    color: var(--Gray3, #575756);
+    font-family: Pretendard Variable;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    font-size: 12px;
+    max-width: 200px;
+    white-space: normal;
+    text-align: left;
 `
-export const PhoneText = styled.div`
+
+export const Wrap = styled.div`
+    display: flex;
+    margin-left: -44px;
+    justify-content: space-around;
+`
+export const Wrap1 = styled.div`
+    display: flex;
+    gap: 30px;
+    margin-right: 10px;
+    width: 320px;
+    border-radius: 7px;
+    padding-left: 37px;
+    justify-content: space-between;
+`
+export const Wrap2 = styled.div`
+    display: flex;
+    margin-top: 20px;
+    gap: 30px;
+    width: 320px;
+    border-radius: 7px;
+    padding-left: -47px;
+    justify-content: space-between;
+    margin-bottom: -20px;
+`
+export const ShopTel = styled.div`
     padding: 5px;
-    color: #1dcb8e;
+    color: #4ce1a1;
     font-size: 12px;
     max-width: 200px;
     white-space: normal;
     text-align: left;
     font-weight: bold;
 `
+export const PhoneText = styled.div`
+    padding: 1px;
+    color: var(--Gray3, #575756);
+    font-family: Pretendard Variable;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    font-size: 12px;
+    max-width: 200px;
+    white-space: normal;
+    text-align: left;
+`
 export const Img = styled.div``
+export const Image = styled.div`
+    width: 100%;
+    max-width: 500px; // Restrict image width for larger screens
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`
+export const ImageContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+`
+export const Image1 = styled.div`
+    width: 100%;
+    max-width: 400px; // 이미지의 최대 너비를 설정합니다.
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+`
 
 export const ImagePreview = styled.img`
     width: 100%;
@@ -165,6 +278,7 @@ export const ImagePreview = styled.img`
 `
 export const ListItem = styled.div`
     padding: 10px 15px;
+    width: 400px;
     border-bottom: 1px solid #ddd;
     &:last-child {
         border-bottom: none;
@@ -175,20 +289,12 @@ export const ListItem = styled.div`
     }
 
     &.active {
-        background-color: #1dcb8e; // 활성화될 때 초록색으로 변경
+        background-color: #4ce1a1;
+        border-radius: 7px;
+        width: 380px;
+        padding-left: 10px;
     }
 `
-
-// export const PageNumber = styled.button`
-//     background-color: transparent;
-//     border: none;
-//     padding: 5px 10px;
-//     margin: 0 5px;
-//     cursor: pointer;
-//     &:hover {
-//         background-color: #f3f3f3;
-//     }
-// `
 
 export const PageNumber = styled.div`
     /* 페이지 번호 스타일을 정의하세요. */
@@ -204,7 +310,7 @@ export const PageNumber = styled.div`
         background-color: #333;
         color: #fff;
     }
-`;
+`
 
 export const Pagination = styled.div`
     display: flex;

@@ -1,11 +1,15 @@
-import AppRoutes from './router/AppRoutes'
-import './App.css'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { StyleSheetManager } from 'styled-components'
-import isPropValid from '@emotion/is-prop-valid'
-// import MapComponent from './components/Map/MapComponent'
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'; // react-redux의 Provider를 import
+import AppRoutes from './router/AppRoutes';
+import './App.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { StyleSheetManager } from 'styled-components';
+import isPropValid from '@emotion/is-prop-valid';
+import store from './redux/config/configStore';
+// import MapComponent from './components/Map/MapComponent';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 const App = () => {
     // const coords = {
@@ -16,11 +20,13 @@ const App = () => {
     return (
         <StyleSheetManager shouldForwardProp={(prop) => isPropValid(prop) && prop !== 'isSelected'}>
             <QueryClientProvider client={queryClient}>
-                <AppRoutes />
+                <Provider store={store}>
+                    <AppRoutes />
+                </Provider>
                 {/* <MapComponent coords={coords} /> */}
             </QueryClientProvider>
         </StyleSheetManager>
     )
 }
 
-export default App
+export default App;

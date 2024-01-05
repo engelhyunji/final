@@ -21,13 +21,10 @@ const Header: React.FC = () => {
                 </ST.Logo>
                 <ST.GNBDiv>
                     <NoLineLink to="/petlist">
-                        <h5>PET 목록</h5>
+                        <h5>반려동물</h5>
                     </NoLineLink>
                     <NoLineLink to="/shopslist">
-                        <h5>SHOP 목록</h5>
-                    </NoLineLink>
-                    <NoLineLink to="/map">
-                        <h5>지도</h5>
+                        <h5>가게</h5>
                     </NoLineLink>
                     {isLogin ? (
                         <>
@@ -39,6 +36,9 @@ const Header: React.FC = () => {
                             </NoLineLink> */}
                             <NoLineLink to="/chat/room">
                                 <h5>채팅</h5>
+                            </NoLineLink>
+                            <NoLineLink to="/map">
+                                <h5>지도</h5>
                             </NoLineLink>
                             <NoLineLink to={'/my'}>
                                 <h5>마이페이지</h5>

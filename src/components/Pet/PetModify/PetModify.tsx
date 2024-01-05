@@ -12,6 +12,10 @@ const PetModify: React.FC = () => {
     const [imageUrl, setImageUrl] = useState<File | null>(null)
     const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null)
     const { petId } = useParams<{ petId: string }>()
+
+    const [petNameError, setPetNameError] = useState<string | null>(null)
+    const [petInfoError, setPetInfoError] = useState<string | null>(null)
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -40,6 +44,18 @@ const PetModify: React.FC = () => {
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
+        if (name === 'petName' && value.length > 10) {
+            setPetNameError('펫 이름은 10글자 이내로 입력해주세요.')
+        } else {
+            setPetNameError(null)
+        }
+
+        if (name === 'petInfo' && value.length > 50) {
+            setPetInfoError('펫 정보는 50글자 이내로 입력해주세요.')
+        } else {
+            setPetInfoError(null)
+        }
+
         if (petDetail) {
             setPetDetail({ ...petDetail, [name]: value })
         }
@@ -66,6 +82,11 @@ const PetModify: React.FC = () => {
 
         if (!petDetail || !petDetail.petName || !petDetail.petGender || !petDetail.petKind || !petDetail.petInfo) {
             setError('모든 필드를 채워주시길 바랍니다.')
+            return
+        }
+
+        if (petNameError || petInfoError) {
+            alert('글자수 제한 조건을 맞춰서 입력해주세요.')
             return
         }
 
@@ -110,6 +131,21 @@ const PetModify: React.FC = () => {
         }
     }
 
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+    }
+
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            const file = e.dataTransfer.files[0]
+            setImageUrl(file)
+            const reader = new FileReader()
+            reader.onloadend = () => setImagePreviewUrl(reader.result as string)
+            reader.readAsDataURL(file)
+        }
+    }
+
     if (loading) return <p>Loading...</p>
     if (error) return <p>{error}</p>
     if (!petDetail) return <p>Pet 상세정보를 찾을 수 없습니다.</p>
@@ -117,22 +153,23 @@ const PetModify: React.FC = () => {
     return (
         <ST.Container>
             <BackWave />
-            <ST.Text>Pet 상세 정보 수정</ST.Text>
+            <ST.Text>강아지 상세 정보 수정</ST.Text>
             <ST.Form onSubmit={handleSubmit}>
                 <ST.PetInputBox>
                     <ST.Label>
-                        Pet의 이름을 알려주세요
+                        강아지의 이름을 알려주세요
                         <ST.Input
                             type="text"
                             name="petName"
                             value={petDetail?.petName || ''}
                             onChange={handleInputChange}
                         />
+                        {petNameError && <ST.Error>{petNameError}</ST.Error>}
                     </ST.Label>
                 </ST.PetInputBox>
 
                 <ST.PetInputBox>
-                    <ST.Label>Pet 성별을 알려주세요</ST.Label>
+                    <ST.Label>강아지 성별을 알려주세요</ST.Label>
                     <ST.StDropdown>
                         <Dropdown>
                             <Dropdown.Toggle variant="light" id="dropdown-basic">
@@ -152,7 +189,7 @@ const PetModify: React.FC = () => {
                 </ST.PetInputBox>
 
                 <ST.PetInputBox>
-                    <ST.Label>Pet의 크기를 입력해주세요</ST.Label>
+                    <ST.Label>강아지의 크기를 입력해주세요</ST.Label>
                     <ST.StDropdown>
                         <Dropdown>
                             <Dropdown.Toggle variant="light" id="dropdown-kind">
@@ -174,13 +211,14 @@ const PetModify: React.FC = () => {
 
                 <ST.PetInputBox>
                     <ST.Label>
-                        Pet의 특징을 적어주세요
+                        강아지의 특징을 적어주세요
                         <ST.DescInput
                             placeholder="Pet의 특징을 입력해주세요"
                             name="petInfo"
                             value={petDetail?.petInfo || ''}
                             onChange={handleInputChange}
                         />
+                        {petInfoError && <ST.Error>{petInfoError}</ST.Error>}
                     </ST.Label>
                 </ST.PetInputBox>
 
@@ -194,26 +232,28 @@ const PetModify: React.FC = () => {
                         style={{ display: 'none' }}
                     />
                     <ST.ImgWrap>
-                        <ST.ImgLabel htmlFor="image">
-                            {imagePreviewUrl ? (
-                                <ST.ImageContainer>
-                                    <ST.Image src={imagePreviewUrl} alt="Pet Preview" />
-                                </ST.ImageContainer>
-                            ) : (
-                                <>
-                                    <ST.FileIcon className="fas fa-upload" />
-                                    <ST.FileSpan>파일 열기</ST.FileSpan>
-                                    <ST.FileP>파일 형식은 jpg, jpeg, png만 업로드 가능합니다.</ST.FileP>
-                                </>
-                            )}
-                        </ST.ImgLabel>
+                        <ST.FileIcon onDragOver={handleDragOver} onDrop={handleDrop}>
+                            <ST.ImgLabel htmlFor="image">
+                                {imagePreviewUrl ? (
+                                    <ST.ImageContainer>
+                                        <ST.Image src={imagePreviewUrl} alt="Pet Preview" />
+                                    </ST.ImageContainer>
+                                ) : (
+                                    <>
+                                        <i className="fas fa-upload" />
+                                        <ST.FileSpan>파일 열기</ST.FileSpan>
+                                        <ST.FileP>파일 형식은 jpg, jpeg, png만 업로드 가능합니다.</ST.FileP>
+                                    </>
+                                )}
+                            </ST.ImgLabel>
+                        </ST.FileIcon>
                     </ST.ImgWrap>
                 </ST.PetInputBox>
 
                 {/* {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" />} */}
                 <ST.ButtonContainer>
-                    <ST.Button type="submit">Pet 수정</ST.Button>
-                    <ST.Button onClick={handleDelete}>Pet 삭제</ST.Button>
+                    <ST.Button type="submit">입력 수정</ST.Button>
+                    <ST.Button onClick={handleDelete}>입력 삭제</ST.Button>
                 </ST.ButtonContainer>
             </ST.Form>
         </ST.Container>

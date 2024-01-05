@@ -8,6 +8,7 @@ import { Shop, getShopType, getShops } from '../../../apis/api/api'
 import { useQuery } from 'react-query'
 
 const ShopsList: React.FC = () => {
+    
     const navigate = useNavigate()
 
     // 현재 활성화된 카테고리(.active 스타일 설정용)
@@ -48,7 +49,14 @@ const ShopsList: React.FC = () => {
     useEffect(() => {
         const reversedShops = [...shopList].reverse()
 
-        setCurrentShops(reversedShops.slice(indexOfFirstShop, indexOfLastShop))
+        // 영업시간 및 전화번호 필드가 있는지 확인하고 필요한 형식으로 변환
+        const updatedShops = reversedShops.map((shop) => ({
+            ...shop,
+            shopTime: `${shop.shopStartTime} - ${shop.shopEndTime}`, // 가정한 필드 이름
+            shopTel: `${shop.shopTel1}-${shop.shopTel2}-${shop.shopTel3}` // 가정한 필드 이름
+        }));
+
+        setCurrentShops(updatedShops.slice(indexOfFirstShop, indexOfLastShop))
     }, [shopList, page])
 
     // 카테고리 별 API호출
@@ -77,8 +85,8 @@ const ShopsList: React.FC = () => {
     return (
         <ST.Container>
             <ST.TitleBackContainer>
-                <ST.ShopListH2>Shop</ST.ShopListH2>
-                <ST.ShopP>내 펫에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
+                <ST.ShopListH2>가게</ST.ShopListH2>
+                <ST.ShopP>내 강아지에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
             </ST.TitleBackContainer>
             <ST.ShopSearchContainer>
                 <ST.ShopSearchCondition>가게 종류 ▾</ST.ShopSearchCondition>
@@ -87,14 +95,14 @@ const ShopsList: React.FC = () => {
             </ST.ShopSearchContainer>
 
             <ST.ShopListContainer>
-                <ST.ShopListH3>Shop 조회</ST.ShopListH3>
+                <ST.ShopListH3>가게 조회</ST.ShopListH3>
 
                 <ST.ShopCategoryUl>
                     <ST.ShopCategoryLi
                         onClick={() => roomTypeHandler('ALL')}
                         className={nowCategory === 'ALL' ? 'active' : ''}
                     >
-                        모든 Shop
+                        모든 가게
                     </ST.ShopCategoryLi>
                     <ST.ShopCategoryLi
                         onClick={() => roomTypeHandler('GROOMING')}
@@ -134,10 +142,14 @@ const ShopsList: React.FC = () => {
                                 <ST.CardBodyDiv className="card-body">
                                     <ST.ShopListH4 className="card-title">{shop.shopName}</ST.ShopListH4>
                                     <ST.ShopGrid>
-                                        <ST.BodyTimeP className="card-text">영업시간</ST.BodyTimeP>
-                                        <ST.BodyTimeInfoP className="card-text">{shop.shopTime}</ST.BodyTimeInfoP>
+                                    <ST.BodyTimeP className="card-text">영업시간</ST.BodyTimeP>
+                                        <ST.BodyTimeInfoP className="card-text">
+                                            {shop.shopStartTime} ~ {shop.shopEndTime}
+                                        </ST.BodyTimeInfoP>
                                         <ST.BodyTelP className="card-text">전화번호</ST.BodyTelP>
-                                        <ST.BodyTelInfoP className="card-text">{shop.shopTel}</ST.BodyTelInfoP>
+                                        <ST.BodyTelInfoP className="card-text">
+                                            {shop.shopTel1} - {shop.shopTel2} - {shop.shopTel3}
+                                        </ST.BodyTelInfoP>
                                         <ST.BodyAddressP className="card-text">위치</ST.BodyAddressP>
                                         <ST.BodyAddressInfoP className="card-text">
                                             {shop.shopAddress}

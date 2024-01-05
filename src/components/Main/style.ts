@@ -210,7 +210,8 @@ export const PetTextP = styled.div`
     font-size: 30px;
     font-weight: 700;
     line-height: 36px;
-    padding-right: 110px;
+    padding-right: 45px;
+    flex-direction: row;
     text-align: center;
     color: #000;
     font-family: Pretendard Variable;
@@ -220,7 +221,7 @@ export const PetText = styled.div`
     font-size: 30px;
     font-weight: 700;
     line-height: 36px;
-    padding-right: 82px;
+    padding-right: 92px;
     text-align: center;
     color: #000;
     font-family: Pretendard Variable;
@@ -260,6 +261,7 @@ export const PetText2 = styled.div`
     align-items: center;
     justify-content: center;
     direction: calc(50% -20);
+    font-weight: bold;
 `
 
 export const PetText3 = styled.div`
@@ -321,6 +323,7 @@ export const PetText5 = styled.div`
     align-items: center;
     justify-content: center;
     direction: calc(50% -20);
+    font-weight: bold;
 `
 
 export const PetContent = styled.div`

@@ -221,18 +221,25 @@ export const ImageContainer = styled.div`
     align-items: center;
     justify-content: center;
     background-color: #d9d9d9;
-`;
+`
 
 export const FileIcon = styled.div`
     border-radius: 10px;
     overflow: hidden;
-    width: 200px;
-    height: 200px;
+    width: 474px;
+    height: auto;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #d9d9d9;
-    font-size: 36px; /* 아이콘 크기 설정 */
+    margin-top: 17px;
+    margin-bottom: 10px;
+    font-size: 17px;
     color: #787878;
-`;
+`
+export const Error = styled.h2`
+    color: red;
+    font-size: 17px;
+    font-family: Pretendard-medium;
+`

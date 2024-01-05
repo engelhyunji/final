@@ -56,13 +56,15 @@ export const StDropdown = styled(Dropdown)`
         background-color: #fff;
         border: 1px solid #dadada;
         border-radius: 8px;
+        position: relative;
 
         text-align: left;
         font-size: 14px;
         color: #8f8e93;
 
         &:hover {
-            filter: brightness(95%);
+            filter: brightness(100%);
+            border: 1.3px solid #83D18E;
         }
 
         &:after {
@@ -75,14 +77,17 @@ export const StDropdown = styled(Dropdown)`
 
     .dropdown-menu {
         width: 100%;
+        margin-top: -3px;
+        padding: 0;
 
         .dropdown-item {
             font-size: 14px;
             color: #333;
+            padding: 11px 24px;
         }
 
         .dropdown-item:hover {
-            background-color: #eee;
+            background-color: rgba(131, 209, 142, 0.4);
         }
     }
 `
@@ -190,6 +195,12 @@ export const DescInput = styled.textarea`
         font-size: 14px;
         font-family: Pretendard-regular;
     }
+`
+export const desLimit = styled.span`
+    width: 44px;
+    display: inline-block;
+    text-align: right;
+    font-size: 12px;
 `
 
 export const ImgWrap = styled.div`

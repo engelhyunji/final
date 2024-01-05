@@ -4,8 +4,8 @@ export const TopContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    margin: 0 auto; 
+    align-items: center;
+    margin: 0 auto;
     margin-left: 50px;
     padding-right: 130px;
     padding-bottom: -50px;
@@ -13,11 +13,11 @@ export const TopContainer = styled.div`
 
 export const Content = styled.div`
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    justify-content: center; 
+    justify-content: center;
     margin-top: 100px;
-    width: calc(100% - 40px); 
+    width: calc(100% - 40px);
 `
 
 // export const Inside = styled.div`
@@ -61,38 +61,29 @@ export const Inside = styled.div`
     overflow: hidden;
     border-radius: 15px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    position: relative;
 
     &:nth-child(odd) {
         align-self: flex-start;
-        /* flex-basis: calc(50% - 20px);  */
         height: 243px;
     }
     &:nth-child(even) {
         align-self: flex-end;
-        /* flex-basis: calc(40% - 20px); */
         height: 270.357px;
         margin-top: 50px;
     }
+
+    &:hover {
+        & > img {
+            filter: brightness(0.7);
+        }
+    }
 `
-
-// export const Inside = styled.div`
-//     width: 100%; // Make sure this takes the full width of the column
-//     height: auto; // Adjust height as necessary, could be fixed or auto
-//     overflow: hidden;
-//     border-radius: 15px;
-//     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-
-//     &:nth-child(odd) {
-//         height: 213px;
-//     }
-//     &:nth-child(even) {
-//         height: 250.357px;
-//     }
-// `
 
 export const Img = styled.img`
     width: 100%;
     height: 100%;
-    /*  */
     object-fit: cover;
+    transition: filter 0.3s ease;
 `

@@ -22,7 +22,7 @@ const Main: React.FC = () => {
                         <ST.Warp>
                             <ST.Text2>
                                 반려동물과 함께하는 매칭서비스, 와르와르 <br />
-                                <ST.Text3>Shop 또는 Pet을 등록해보세요!</ST.Text3>
+                                <ST.Text3>가게 또는 강아지를 등록해보세요!</ST.Text3>
                             </ST.Text2>
                         </ST.Warp>
                         {isLogin ? (
@@ -38,7 +38,7 @@ const Main: React.FC = () => {
                                         사장님이라면?
                                     </ST.Text1>
                                     <br />
-                                    <ST.Text>Shop 등록하기 ⇀</ST.Text>
+                                    <ST.Text>가게 등록하기 ⇀</ST.Text>
                                 </ST.ShopBtn>
                                 <ST.PetBtn
                                     onClick={() => {
@@ -46,12 +46,12 @@ const Main: React.FC = () => {
                                     }}
                                 >
                                     <ST.Text1>
-                                        귀여운 내새끼를
+                                        귀여운 강아지를
                                         <br />
                                         키우는 중이라면?
                                     </ST.Text1>
                                     <br />
-                                    <ST.Text>Pet 등록하기 ⇀</ST.Text>
+                                    <ST.Text>강아지 등록하기 ⇀</ST.Text>
                                 </ST.PetBtn>
                             </>
                         ) : (
@@ -76,9 +76,9 @@ const Main: React.FC = () => {
                                     }}
                                 >
                                     <ST.Text1>
-                                        등록할 나의 Shop
+                                        등록할 나의 가게
                                         <br />
-                                        또는 Pet이 있다면?
+                                        또는 강아지가 있다면?
                                     </ST.Text1>
                                     <br />
                                     <ST.Text>등록하기 ⇀</ST.Text>
@@ -92,7 +92,7 @@ const Main: React.FC = () => {
                     <ST.TopWrapper>
                         <ST.PetContent2>
                             <ST.PetTextWrapper2>
-                                <ST.PetText>Shop</ST.PetText>
+                                <ST.PetText>가게</ST.PetText>
                                 <ST.PetText1>
                                     실시간으로 뜨는
                                     <br />
@@ -101,11 +101,11 @@ const Main: React.FC = () => {
                                 {/* <ST.PetText2>더보기 ⇀</ST.PetText2> */}
                                 <ST.Wrap1>
                                     <NoLineLink to={`/shopslist`}>
-                                        <ST.PetText2>더보기! ⇀</ST.PetText2>
+                                        <ST.PetText2>더보기 ⇀</ST.PetText2>
                                     </NoLineLink>
                                 </ST.Wrap1>
                             </ST.PetTextWrapper2>
-                            <Category /> 
+                            <Category />
                         </ST.PetContent2>
                     </ST.TopWrapper>
                 </ST.OverlayContainer2>
@@ -113,22 +113,22 @@ const Main: React.FC = () => {
                 <ST.OverlayContainer>
                     <ST.PetContent>
                         <ST.PetTextWrapper>
-                            <ST.PetTextP>Pet</ST.PetTextP>
+                            <ST.PetTextP>반려동물</ST.PetTextP>
                             <ST.PetText3>
-                                다들 우리 애기
+                                다들 우리 강아지
                                 <br /> 보고 가세요!
                             </ST.PetText3>
                             {/* <ST.PetText2>더보기 ⇀</ST.PetText2> */}
                             <ST.Wrap1>
                                 <NoLineLink to={`/petlist`}>
-                                    <ST.PetText5>더보기! ⇀</ST.PetText5>
+                                    <ST.PetText5>더보기 ⇀</ST.PetText5>
                                 </NoLineLink>
                             </ST.Wrap1>
                         </ST.PetTextWrapper>
                     </ST.PetContent>
                     <MainTop />
                 </ST.OverlayContainer>
-                <ST.PetBackImage alt=''/>
+                <ST.PetBackImage alt="" />
                 {/* </ST.MainContainer> */}
                 <ST.Bottom />
             </ST.Container>

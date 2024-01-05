@@ -4,14 +4,12 @@ import * as ST from './style'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { useNavigate } from 'react-router-dom'
 import instance from '../../apis/instance'
-import { PetDetails } from '../../apis/api/pet'
+import { PetDetails } from '../../apis/api/petlist'
 import BackWave from '../BackWave'
-
-export interface StatusMessageProps {
-    message?: string
-}
+import { ApiResponse } from '../../apis/api/petlist'
 
 const Pet: React.FC = () => {
+    // 상태 관리 변수들
     const [petName, setPetName] = useState<string>('')
     const [petGender, setPetGender] = useState<'MALE' | 'FEMALE'>('MALE')
     const [petKind, setPetKind] = useState<'SMALL' | 'MEDIUM' | 'LARGE'>('SMALL')
@@ -19,24 +17,40 @@ const Pet: React.FC = () => {
     const [imageFiles, setImageFiles] = useState<File[]>([])
     const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null)
     const [registrationStatus, setRegistrationStatus] = useState<string | null>(null)
+
+    const [petNameError, setPetNameError] = useState<string | null>(null)
+    const [petInfoError, setPetInfoError] = useState<string | null>(null)
+
     const navigate = useNavigate()
 
+    // 이벤트 핸들러 함수들
     const handleGenderChange = (gender: 'MALE' | 'FEMALE') => {
         setPetGender(gender)
     }
-
     const handleKindChangeDropdown = (kind: 'SMALL' | 'MEDIUM' | 'LARGE') => {
         setPetKind(kind)
     }
-
     const handleInfoChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setPetInfo(e.target.value)
-    }
+        const newInfo = e.target.value
+        setPetInfo(newInfo)
 
+        // Check if pet info exceeds 50 characters
+        if (newInfo.length > 50) {
+            setPetInfoError('펫 정보는 50글자 이내로 입력해주세요.')
+        } else {
+            setPetInfoError(null)
+        }
+    }
     const handlePetNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setPetName(e.target.value)
-    }
+        const newName = e.target.value
+        setPetName(newName)
 
+        if (newName.length > 10) {
+            setPetNameError('펫 이름은 10글자 이내로 입력해주세요.')
+        } else {
+            setPetNameError(null)
+        }
+    }
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             setImageFiles([...e.target.files])
@@ -50,8 +64,17 @@ const Pet: React.FC = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const formData = new FormData()
 
+        if (!petName || !petInfo || imageFiles.length === 0) {
+            alert('모든 필수 정보를 입력해주세요.')
+            return
+        }
+
+        if (petNameError || petInfoError) {
+            alert('글자수 제한 조건을 맞춰서 입력해주세요.')
+            return
+        }
+        const formData = new FormData()
         formData.append('petName', petName)
         formData.append('petGender', petGender)
         formData.append('petKind', petKind)
@@ -59,15 +82,9 @@ const Pet: React.FC = () => {
         imageFiles.forEach((file) => formData.append('imageUrl', file))
 
         try {
-            const response = await instance.post<PetDetails>('/api/pets', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            })
-
-            if (response.status === 200 || response.status === 201) {
-                alert('애완동물 정보가 성공적으로 등록되었습니다.🐶')
-
+            const response = await instance.post<ApiResponse<PetDetails>>('/api/pets', formData)
+            if (response.data.isSuccess && (response.status === 200 || response.status === 201)) {
+                alert('애완동물 정보가 성공적으로 등록되었습니다.')
                 resetFormData()
                 navigate('/petlist')
             } else {
@@ -88,25 +105,41 @@ const Pet: React.FC = () => {
         setImagePreviewUrl(null)
     }
 
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+    }
+
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            const file = e.dataTransfer.files[0]
+            setImageFiles([file])
+            const reader = new FileReader()
+            reader.onloadend = () => setImagePreviewUrl(reader.result as string)
+            reader.readAsDataURL(file)
+        }
+    }
+
     return (
         <ST.Container>
             <BackWave />
-            <ST.Text>Pet 등록하기</ST.Text>
+            <ST.Text>강아지 등록하기</ST.Text>
             <ST.LoginP>사랑스러운 반려동물을 등록하고 더 많은 매칭 서비스를 이용해보세요!</ST.LoginP>
 
             <ST.Form onSubmit={handleSubmit}>
                 <ST.PetInputBox>
-                    <ST.Label>Pet의 이름을 알려주세요</ST.Label>
+                    <ST.Label>강아지의 이름을 알려주세요</ST.Label>
                     <ST.Input
                         type="text"
                         placeholder="Pet의 이름을 입력해주세요"
                         value={petName}
                         onChange={handlePetNameChange}
                     />
+                    {petNameError && <ST.Error>{petNameError}</ST.Error>}
                 </ST.PetInputBox>
 
                 <ST.PetInputBox>
-                    <ST.Label>Pet 성별을 알려주세요</ST.Label>
+                    <ST.Label>강아지의 성별을 알려주세요</ST.Label>
                     <ST.StDropdown>
                         <Dropdown.Toggle variant="light" id="dropdown-basic">
                             {petGender === 'MALE' ? '남아' : '여아'}
@@ -120,7 +153,7 @@ const Pet: React.FC = () => {
                 </ST.PetInputBox>
 
                 <ST.PetInputBox>
-                    <ST.Label>Pet의 크기를 알려주세요</ST.Label>
+                    <ST.Label>강아지의 크기를 알려주세요</ST.Label>
                     <ST.StDropdown>
                         <Dropdown.Toggle variant="light" id="dropdown-kind">
                             {petKind === 'SMALL' ? '소형견' : petKind === 'MEDIUM' ? '중형견' : '대형견'}
@@ -135,8 +168,9 @@ const Pet: React.FC = () => {
                 </ST.PetInputBox>
 
                 <ST.PetInputBox>
-                    <ST.Label>Pet의 특징을 적어주세요</ST.Label>
+                    <ST.Label>강아지의 특징을 적어주세요</ST.Label>
                     <ST.DescInput value={petInfo} placeholder="Pet의 특징을 입력해주세요" onChange={handleInfoChange} />
+                    {petInfoError && <ST.Error>{petInfoError}</ST.Error>}
                 </ST.PetInputBox>
 
                 <ST.PetInputBox>
@@ -149,17 +183,21 @@ const Pet: React.FC = () => {
                         style={{ display: 'none' }}
                     />
                     <ST.ImgWrap>
-                        <ST.ImgLabel htmlFor="image">
-                            {!imagePreviewUrl && (
-                                <>
-                                    <p>
-                                        <ST.FileSpan>파일 열기</ST.FileSpan> 혹은 끌어다 놓기
-                                    </p>
-                                    <ST.FileP>파일 형식은 jpg, jpeg, png만 업로드 가능합니다.</ST.FileP>
-                                </>
-                            )}
-                            {imagePreviewUrl && <ST.Image src={imagePreviewUrl} alt="Pet Preview" />}
-                        </ST.ImgLabel>
+                        <ST.FileIcon onDragOver={handleDragOver} onDrop={handleDrop}>
+                            <ST.ImgLabel htmlFor="image">
+                                {imagePreviewUrl ? (
+                                    <ST.ImageContainer>
+                                        <ST.Image src={imagePreviewUrl} alt="Pet Preview" />
+                                    </ST.ImageContainer>
+                                ) : (
+                                    <>
+                                        <i className="fas fa-upload" />
+                                        <ST.FileSpan>파일 열기</ST.FileSpan>
+                                        <ST.FileP>파일 형식은 jpg, jpeg, png만 업로드 가능합니다.</ST.FileP>
+                                    </>
+                                )}
+                            </ST.ImgLabel>
+                        </ST.FileIcon>
                     </ST.ImgWrap>
                 </ST.PetInputBox>
 

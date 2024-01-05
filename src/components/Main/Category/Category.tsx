@@ -6,6 +6,7 @@ import '../../../index.css'
 import { Image } from '../../Pet/PetList/style'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { useNavigate } from 'react-router-dom'
 
 type ShopType = 'GROOMING' | 'HOSPITAL' | 'CAFE' | 'ETC'
 
@@ -24,13 +25,21 @@ interface ShopInfo {
 const Category: React.FC = () => {
     const [shops, setShops] = useState<ShopInfo[]>([])
     const [selectedCategory, setSelectedCategory] = useState<ShopType>('GROOMING')
+    const navigate = useNavigate()
+
+    const categories = [
+        { displayName: '#애견미용실', value: 'GROOMING' },
+        { displayName: '#동물병원', value: 'HOSPITAL' },
+        { displayName: '#애견카페', value: 'CAFE' },
+        { displayName: '#기타', value: 'ETC' },
+    ]
 
     useEffect(() => {
         const fetchShops = async () => {
             try {
                 const response = await instance.get<{ result: ShopInfo[] }>('/api/shops')
                 setShops(response.data.result || [])
-                console.log('Fetched shops:', response.data.result)
+                console.log('Shops:', response.data.result)
             } catch (error) {
                 console.error('가게 정보를 불러오는데 실패했습니다.', error)
             }
@@ -45,8 +54,8 @@ const Category: React.FC = () => {
 
     const filteredShops = shops.filter((shop) => shop.shopType === selectedCategory)
 
-    const handleCategoryClick = (category: ShopType) => {
-        setSelectedCategory(category)
+    const handleCategoryClick = (categoryValue: ShopType) => {
+        setSelectedCategory(categoryValue)
     }
 
     // 'infinite' 속성을 'filteredShops'의 길이에 따라 조정
@@ -62,7 +71,7 @@ const Category: React.FC = () => {
         slidesToScroll: 1,
         slidesToShow: Math.min(3, filteredShops.length),
         autoplay: true,
-        autoplaySpeed: 1300,
+        autoplaySpeed: 1700,
         responsive: [
             {
                 breakpoint: 1024,
@@ -109,8 +118,9 @@ const Category: React.FC = () => {
 
     return (
         <ST.CategoryContainer>
-            <ST.CategoryList>
+            {/* <ST.CategoryList>
                 {['GROOMING', 'HOSPITAL', 'CAFE', 'ETC'].map((category, index) => (
+                // {['애견미용실', '동물병원', '애견카페', '기타'].map((category, index) => (
                     <ST.CategoryItem
                         key={index}
                         $isSelected={category === selectedCategory}
@@ -119,13 +129,26 @@ const Category: React.FC = () => {
                         <p>{category}</p>
                     </ST.CategoryItem>
                 ))}
+            </ST.CategoryList> */}
+            <ST.CategoryList>
+                {categories.map((category, index) => (
+                    <ST.CategoryItem
+                        key={index}
+                        $isSelected={category.value === selectedCategory}
+                        onClick={() => handleCategoryClick(category.value)}
+                    >
+                        <p>{category.displayName}</p>
+                    </ST.CategoryItem>
+                ))}
             </ST.CategoryList>
+
             {shops.length > 0 && (
-                // 
                 <Slider {...settings}>
                     {filteredShops.map((shop, index) => (
                         <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
-                            <ST.ShopCard>
+                            <ST.ShopCard
+                                onClick={() => navigate(`/shops/${shop.shopId}`)} // 상세 페이지로 이동
+                            >
                                 {shop.imageUrls?.map((url, imgIdx) => (
                                     <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
                                 ))}

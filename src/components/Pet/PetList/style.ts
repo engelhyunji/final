@@ -4,10 +4,12 @@ export const Container = styled.div`
     max-width: 1440px;
     margin: 0 auto;
     position: relative;
-
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 10px;
 `
 export const TitleBackContainer = styled.div`
     width: 100%;
@@ -19,7 +21,7 @@ export const TitleBackContainer = styled.div`
     font-family: Pretendard-medium;
 
     /* linear-gradient(검정색 필터로 활용) */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); */
 
     // 가상 요소 만들어서 배경만 흐리게
     &::before {
@@ -32,8 +34,8 @@ export const TitleBackContainer = styled.div`
         top: 0;
         left: 0;
 
-        background-image: url('PetList.png');
-        background-size: cover; 
+        background-image: url('/PetList.png');
+        background-size: cover;
     }
 
     display: flex;
@@ -93,23 +95,26 @@ export const PetListH3 = styled.h3`
     margin-left: -195px;
 `
 export const PostContainer = styled.div`
-    aspect-ratio: 1 / 1; // Keep the items square
+    aspect-ratio: 1 / 1;
     width: 100%;
     overflow: hidden;
     position: relative;
     cursor: pointer;
-    background: #fafafa; // Instagram-like background for posts
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Soft shadow like Instagram
+    background: #fafafa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     &:hover {
-        opacity: 0.8; // Slight dim on hover
+        opacity: 0.8;
+        & > button {
+            display: block; // 호버 시 좋아요 버튼 표시
+        }
     }
 `
 
 export const Img = styled.img`
     width: 100%;
     height: 100%;
-    object-fit: cover; // Ensure images cover the square area
+    object-fit: cover;
 `
 export const Image = styled.img``
 
@@ -135,7 +140,7 @@ export const PetSearchContainer = styled.div`
     justify-content: space-between;
 `
 export const PetSearchCondition = styled.div`
-    width: 109px;
+    width: 709px;
     height: 40px;
     padding: 11px 15px;
     border-radius: 26px;
@@ -170,4 +175,18 @@ export const Peth3 = styled.div`
     margin: 103px 0 20px;
     font-family: Pretendard-bold;
     font-size: 30px;
+`
+export const LikeButton = styled.button`
+    position: absolute;
+    top: 50%; // 중앙으로 정렬
+    left: 50%; // 중앙으로 정렬
+    transform: translate(-50%, -50%); // 중앙 정렬 조정
+    background: rgba(0, 0, 0, 0.6); // 반투명 배경
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    display: none; // 기본적으로 숨김
+    padding: 10px 20px;
+    border-radius: 20px;
 `

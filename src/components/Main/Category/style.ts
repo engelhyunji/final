@@ -24,6 +24,7 @@ export const CategoryList = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    width: 1000px;
     align-items: center;
     margin-bottom: 20px;
     color: #a5aaac;
@@ -97,11 +98,11 @@ export const ShopItem = styled.div`
 // `
 
 export const StyledSlide = styled(Slider)`
-    max-width: 100%; 
-    margin: 0 auto; 
+    max-width: 100%;
+    margin: 0 auto;
 
     .slick-slide {
-        padding: 0 5px; 
+        padding: 0 5px;
     }
 
     .slick-prev,
@@ -109,7 +110,7 @@ export const StyledSlide = styled(Slider)`
         display: block;
         background: #ddd;
         border-radius: 50%;
-        padding: 10px; 
+        padding: 10px;
         &:hover {
             background: #ccc;
         }
@@ -122,20 +123,19 @@ export const StyledSlide = styled(Slider)`
     .slick-track {
         display: flex;
         align-items: center;
-        gap: 0px; 
+        gap: 0px;
     }
 
     .slick-prev {
-        left: 10px; 
+        left: 10px;
         z-index: 1;
     }
 
     .slick-next {
-        right: 10px; 
+        right: 10px;
         z-index: 1;
     }
-`;
-
+`
 
 // export const ShopCard = styled.div`
 //     padding: 20px;
@@ -253,19 +253,23 @@ export const ShopCard = styled.div`
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    width: 100%; 
-    max-width: 250px; 
-    height: 300px; 
+    width: 100%;
+    max-width: 250px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px; 
+    margin: 10px;
     transition: transform 0.3s ease;
 
     &:hover {
         transform: scale(1.05);
+
+        img {
+            filter: brightness(0.7);
+        }
     }
 
     p {
@@ -276,10 +280,11 @@ export const ShopCard = styled.div`
 
     img {
         width: 100%;
-        height: 100%; 
+        height: 100%;
         max-height: 60%;
         border-radius: 5px;
         margin-top: 10px;
         object-fit: cover;
+        transition: filter 0.3s ease;
     }
 `

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import * as ST from './style'
-import { MdOutlineCategory } from "react-icons/md";
-import { IoLocationOutline } from "react-icons/io5";
-import { IoTimeOutline } from "react-icons/io5";
-import { FiPhone } from "react-icons/fi";
+import { MdOutlineCategory } from 'react-icons/md'
+import { IoLocationOutline } from 'react-icons/io5'
+import { IoTimeOutline } from 'react-icons/io5'
+import { FiPhone } from 'react-icons/fi'
 import { ShopDetails, getDetailShop } from '../../../apis/api/api'
 import { useQuery } from 'react-query'
 import Reviews, { mainColor } from '../Reviews/Reviews'
@@ -19,8 +19,13 @@ const ShopsDetail: React.FC = () => {
 
     useEffect(() => {
         if (isSuccess && data) {
-            setDetailShopData(data)
-            console.log('디테일 쿼리 성공 data : ', data)
+            const transformedData = {
+                ...data,
+                shopTime: `${data.shopResponseDto.shopStartTime} - ${data.shopResponseDto.shopEndTime}`,
+                shopTel: `${data.shopResponseDto.shopTel1}-${data.shopResponseDto.shopTel2}-${data.shopResponseDto.shopTel3}`,
+            }
+            setDetailShopData(transformedData)
+            console.log('디테일 쿼리 성공 data : ', transformedData)
         }
     }, [isSuccess, data])
 
@@ -31,7 +36,6 @@ const ShopsDetail: React.FC = () => {
 
     return (
         <ST.ShopDetailContainer>
-
             {detailShopData ? (
                 <>
                     <div>
@@ -48,20 +52,24 @@ const ShopsDetail: React.FC = () => {
 
                         <ST.ShopCategoryUl>
                             <ST.ShopCategoryLi>
-                                <ST.ShopInfo><MdOutlineCategory style={mainColor}/> 업종</ST.ShopInfo>
+                                <ST.ShopInfo>
+                                    <MdOutlineCategory style={mainColor} /> 업종
+                                </ST.ShopInfo>
                                 <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopType}</ST.ShopInfoContent>
                             </ST.ShopCategoryLi>
                             <ST.ShopCategoryLi>
-                                <ST.ShopInfo><IoLocationOutline style={mainColor}/> 위치</ST.ShopInfo>
+                                <ST.ShopInfo>
+                                    <IoLocationOutline style={mainColor} /> 위치
+                                </ST.ShopInfo>
                                 <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopAddress}</ST.ShopInfoContent>
                             </ST.ShopCategoryLi>
                             <ST.ShopCategoryLi>
-                                <ST.ShopInfo><IoTimeOutline style={mainColor}/> 영업시간</ST.ShopInfo>
-                                <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopTime}</ST.ShopInfoContent>
-                            </ST.ShopCategoryLi>
-                            <ST.ShopCategoryLi>
-                                <ST.ShopInfo><FiPhone style={mainColor}/> 전화번호</ST.ShopInfo>
-                                <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopTel}</ST.ShopInfoContent>
+                            <ST.ShopInfo><IoTimeOutline style={mainColor}/> 영업시간</ST.ShopInfo>
+                                <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopStartTime} ~ {detailShopData.shopResponseDto.shopEndTime}</ST.ShopInfoContent>
+                </ST.ShopCategoryLi>
+                <ST.ShopCategoryLi>
+                <ST.ShopInfo><FiPhone style={mainColor}/> 전화번호</ST.ShopInfo>
+                                <ST.ShopInfoContent>{detailShopData.shopResponseDto.shopTel1} - {detailShopData.shopResponseDto.shopTel2} - {detailShopData.shopResponseDto.shopTel3}</ST.ShopInfoContent>
                             </ST.ShopCategoryLi>
                         </ST.ShopCategoryUl>
                     </div>
