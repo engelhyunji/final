@@ -287,7 +287,7 @@ export const ChatDelBtn = styled.button`
     border-radius: 8px;
 `
 
-export const LeaveSpan = styled.span`
-    margin: 70px auto 0;
-    color: #bbb;
+export const EmptyP = styled.p`
+    margin: 50px auto 10px;
+    font-size: 18px;
 `

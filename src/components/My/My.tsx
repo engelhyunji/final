@@ -227,20 +227,22 @@ const My: React.FC = () => {
                 {nickname} 님의 마이 페이지
             </ST.TitleH2>
 
-            <ST.MyCategoryUl>
-                <ST.MyCategoryLi
-                    onClick={() => MyCategoryHandler('shop')}
-                    className={nowCategory === 'shop' ? 'active' : ''}
-                >
-                    내 가게
-                </ST.MyCategoryLi>
-                <ST.MyCategoryLi
-                    onClick={() => MyCategoryHandler('pet')}
-                    className={nowCategory === 'pet' ? 'active' : ''}
-                >
-                    내 반려동물
-                </ST.MyCategoryLi>
-            </ST.MyCategoryUl>
+            {shops.length > 0 && pets.length > 0 && (
+                <ST.MyCategoryUl>
+                    <ST.MyCategoryLi
+                        onClick={() => MyCategoryHandler('shop')}
+                        className={nowCategory === 'shop' ? 'active' : ''}
+                    >
+                        내 가게
+                    </ST.MyCategoryLi>
+                    <ST.MyCategoryLi
+                        onClick={() => MyCategoryHandler('pet')}
+                        className={nowCategory === 'pet' ? 'active' : ''}
+                    >
+                        내 반려동물
+                    </ST.MyCategoryLi>
+                </ST.MyCategoryUl>
+            )}
 
             {myCategory === 'shop' && shops.length > 0 && (
                 <ST.ShopNPetSection>
@@ -278,7 +280,14 @@ const My: React.FC = () => {
                         ))}
 
                         {/* 추가 등록 (+ 버튼) */}
-                        <ST.MyAddBtn onClick={()=>AddHandler('shop')} xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                        <ST.MyAddBtn
+                            onClick={() => AddHandler('shop')}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="60"
+                            height="60"
+                            viewBox="0 0 60 60"
+                            fill="none"
+                        >
                             <path
                                 d="M30 50.4001C41.28 50.4001 50.4 41.2801 50.4 30.0001C50.4 18.7201 41.28 9.6001 30 9.6001C18.72 9.6001 9.59999 18.7201 9.59999 30.0001C9.59999 41.2801 18.72 50.4001 30 50.4001ZM30 12.0001C39.96 12.0001 48 20.0401 48 30.0001C48 39.9601 39.96 48.0001 30 48.0001C20.04 48.0001 12 39.9601 12 30.0001C12 20.0401 20.04 12.0001 30 12.0001Z"
                                 fill="#DADADA"
@@ -327,7 +336,14 @@ const My: React.FC = () => {
                         ))}
 
                         {/* 추가 등록 (+ 버튼) */}
-                        <ST.MyAddBtn onClick={()=>AddHandler('pet')} xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                        <ST.MyAddBtn
+                            onClick={() => AddHandler('pet')}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="60"
+                            height="60"
+                            viewBox="0 0 60 60"
+                            fill="none"
+                        >
                             <path
                                 d="M30 50.4001C41.28 50.4001 50.4 41.2801 50.4 30.0001C50.4 18.7201 41.28 9.6001 30 9.6001C18.72 9.6001 9.59999 18.7201 9.59999 30.0001C9.59999 41.2801 18.72 50.4001 30 50.4001ZM30 12.0001C39.96 12.0001 48 20.0401 48 30.0001C48 39.9601 39.96 48.0001 30 48.0001C20.04 48.0001 12 39.9601 12 30.0001C12 20.0401 20.04 12.0001 30 12.0001Z"
                                 fill="#DADADA"
@@ -387,25 +403,27 @@ const My: React.FC = () => {
 
             {shops.length === 0 && pets.length === 0 && (
                 <ST.ShopNPetSection>
-                    등록된 가게 또는 반려동물 정보가 없습니다.
-                    <br /> 내 가게 또는 반려동물을 등록해보세요!
+                    <ST.EmptyP>등록된 가게 또는 반려동물 정보가 없습니다.
+                    <br /> 내 가게 또는 반려동물을 등록해보세요!</ST.EmptyP>
                     <ST.BtnContainer>
-                        <ST.MyBtn
+                        <ST.MyChatBtn
                             onClick={() => {
                                 navigate('/shops')
                             }}
                             $color="#00bd8f"
+                            $backColor="#E9E9E6"
                         >
                             가게 등록
-                        </ST.MyBtn>
-                        <ST.MyBtn
+                        </ST.MyChatBtn>
+                        <ST.MyChatBtn
                             onClick={() => {
                                 navigate('/pet')
                             }}
                             $color="#00bd8f"
+                            $backColor="#E9E9E6"
                         >
                             반려동물 등록
-                        </ST.MyBtn>
+                        </ST.MyChatBtn>
                     </ST.BtnContainer>
                 </ST.ShopNPetSection>
             )}
@@ -424,7 +442,6 @@ const TagMinus = {
     height: '13px',
     color: '#DADADA',
     borderRadius: '50%',
-    // backgroundColor: '#575756',
     position: 'absolute',
     top: '-5px',
     right: '-4px',
