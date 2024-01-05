@@ -429,8 +429,3 @@ const TagMinus = {
     top: '-5px',
     right: '-4px',
 }
-
-const PlusStyle = {
-    width: '50px',
-    height: '50px',
-}
