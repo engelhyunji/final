@@ -83,6 +83,7 @@ export const ReviewListP = styled.p`
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `
 
 export const ReviewNick = styled.span`
@@ -108,11 +109,11 @@ export const ReviewCount = styled.span`
 `
 export const DelBtn = styled.button`
     width: 50px;
-    height: 34px;
+    height: 24px;
     color: #fd4141;
     font-size: 14px;
     font-family: Pretendard-Regular;
     background-color: #eee;
     border: none;
-    border-radius: 8px;
+    border-radius: 3px;
 `
