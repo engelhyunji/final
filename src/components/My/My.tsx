@@ -107,6 +107,18 @@ const My: React.FC = () => {
         setNowCategory(category)
     }
 
+    const AddHandler = (target: string) => {
+        if (target === 'shop') {
+            if (confirm('가게를 추가하시겠습니까? (최대 5개 가능)')) {
+                navigate('/shops')
+            }
+        } else if (target === 'pet') {
+            if (confirm('반려동물를 추가하시겠습니까? (최대 10마리 가능)')) {
+                navigate('/pet')
+            }
+        }
+    }
+
     const DeleteHandler = (target: string, idx: number) => {
         if (target === 'shop') {
             if (confirm(`${shops[idx].shopName} 가게를 삭제하시겠습니까?`)) {
@@ -264,6 +276,16 @@ const My: React.FC = () => {
                                 </ST.BtnContainer>
                             </ST.MyLi>
                         ))}
+
+                        {/* 추가 등록 (+ 버튼) */}
+                        <ST.MyAddBtn onClick={()=>AddHandler('shop')} xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <path
+                                d="M30 50.4001C41.28 50.4001 50.4 41.2801 50.4 30.0001C50.4 18.7201 41.28 9.6001 30 9.6001C18.72 9.6001 9.59999 18.7201 9.59999 30.0001C9.59999 41.2801 18.72 50.4001 30 50.4001ZM30 12.0001C39.96 12.0001 48 20.0401 48 30.0001C48 39.9601 39.96 48.0001 30 48.0001C20.04 48.0001 12 39.9601 12 30.0001C12 20.0401 20.04 12.0001 30 12.0001Z"
+                                fill="#DADADA"
+                            />
+                            <path d="M40.8 28.7998H19.2V31.1998H40.8V28.7998Z" fill="#DADADA" />
+                            <path d="M31.2 19.2002H28.8V40.8002H31.2V19.2002Z" fill="#DADADA" />
+                        </ST.MyAddBtn>
                     </ST.MyUl>
                 </ST.ShopNPetSection>
             )}
@@ -303,6 +325,16 @@ const My: React.FC = () => {
                                 </ST.BtnContainer>
                             </ST.MyLi>
                         ))}
+
+                        {/* 추가 등록 (+ 버튼) */}
+                        <svg onClick={()=>AddHandler('pet')} xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <path
+                                d="M30 50.4001C41.28 50.4001 50.4 41.2801 50.4 30.0001C50.4 18.7201 41.28 9.6001 30 9.6001C18.72 9.6001 9.59999 18.7201 9.59999 30.0001C9.59999 41.2801 18.72 50.4001 30 50.4001ZM30 12.0001C39.96 12.0001 48 20.0401 48 30.0001C48 39.9601 39.96 48.0001 30 48.0001C20.04 48.0001 12 39.9601 12 30.0001C12 20.0401 20.04 12.0001 30 12.0001Z"
+                                fill="#DADADA"
+                            />
+                            <path d="M40.8 28.7998H19.2V31.1998H40.8V28.7998Z" fill="#DADADA" />
+                            <path d="M31.2 19.2002H28.8V40.8002H31.2V19.2002Z" fill="#DADADA" />
+                        </svg>
                     </ST.MyUl>
                 </ST.ShopNPetSection>
             )}
@@ -310,7 +342,6 @@ const My: React.FC = () => {
             {chatRooms.length > 0 && (
                 <ST.ShopNPetSection>
                     <ST.TitleH3>내가 만든 채팅방</ST.TitleH3>
-                    {/* <ST.MyChatSpan>한 해시태그 당 최대 7자로 두 개까지 만들 수 있어요</ST.MyChatSpan> */}
                     <ST.MyUl>
                         {chatRooms.map((chatroom) => (
                             <ST.MyChatLi key={chatroom.roomId}>
@@ -397,4 +428,9 @@ const TagMinus = {
     position: 'absolute',
     top: '-5px',
     right: '-4px',
+}
+
+const PlusStyle = {
+    width: '50px',
+    height: '50px',
 }

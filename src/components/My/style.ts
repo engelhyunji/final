@@ -60,6 +60,7 @@ export const MyUl = styled.ul`
     width: 100%;
 
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     gap: 20px;
 `
@@ -75,6 +76,13 @@ export const MyLi = styled.li`
 
     &:hover {
         opacity: 0.8;
+    }
+`
+export const MyAddBtn = styled.svg`
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(0.9);
     }
 `
 export const MyDiv = styled.div`
