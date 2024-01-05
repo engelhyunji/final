@@ -198,7 +198,7 @@ export const ShopBox = styled.div`
     cursor: pointer;
     max-width: 358px;
     /* height: 454px; */
-    height: 430px;
+    height: 445px;
     border: none;
     border-radius: 15px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
@@ -273,7 +273,11 @@ export const BodyAddressInfoP = styled.p`
     grid-column: 2 / 4;
     grid-row: 3 / 4;
 `
-// export const CardBodyP = styled.p`
-//     grid-column: 1 / 4;
-//     grid-row: 4 / 5;
-// `
+export const CardBodyP = styled.p`
+    grid-column: 1 / 4;
+    grid-row: 4 / 5;
+`
+export const CardBodyNumP = styled.p`
+    grid-column: 2 / 5;
+    grid-row: 4 / 5;
+`

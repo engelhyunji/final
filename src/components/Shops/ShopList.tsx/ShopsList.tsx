@@ -96,7 +96,7 @@ const ShopsList: React.FC = () => {
                 <ST.ShopP>내 반려동물에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
             </ST.TitleBackContainer>
             <ST.ShopSearchContainer>
-                {/* <ST.ShopSearchCondition>가게 종류 ▾</ST.ShopSearchCondition> */}
+                {/* <ST.ShopSearchCondition>정보 검색</ST.ShopSearchCondition> */}
                 <ST.ShopSearchBox>
                     <HiSearch style={search} />
                     <ST.ShopSearchInput
@@ -114,7 +114,7 @@ const ShopsList: React.FC = () => {
             </ST.ShopSearchContainer>
 
             <ST.ShopListContainer>
-                <ST.ShopListH3>가게 조회</ST.ShopListH3>
+                <ST.ShopListH3>가게</ST.ShopListH3>
 
                 <ST.ShopCategoryUl>
                     <ST.ShopCategoryLi
@@ -173,7 +173,8 @@ const ShopsList: React.FC = () => {
                                         <ST.BodyAddressInfoP className="card-text">
                                             {shop.shopAddress}
                                         </ST.BodyAddressInfoP>
-                                        {/* <ST.CardBodyP className="card-text">#hashtag</ST.CardBodyP> */}
+                                        <ST.CardBodyP className="card-text">리뷰 수</ST.CardBodyP>
+                                        <ST.CardBodyNumP className="card-text">{shop.reviewCount}</ST.CardBodyNumP>
                                     </ST.ShopGrid>
                                 </ST.CardBodyDiv>
                             </ST.ShopBox>

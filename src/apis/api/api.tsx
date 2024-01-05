@@ -10,12 +10,11 @@ export interface Shop {
     shopTel1: string
     shopTel2: string
     shopTel3: string
-    // shopTime: string
-    // shopTel: string
     shopAddress: string
     shopType: string
     shopDescribe: string
     // shopTags?: string[]
+    reviewCount: number
     imageUrls: string[]
 }
 
@@ -32,8 +31,6 @@ export interface shopResponseDto {
     shopTel1: string
     shopTel2: string
     shopTel3: string
-    // shopTime: string
-    // shopTel: string
     shopAddress: string
     shopType: string
     shopDescribe: string
