@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useParams } from 'react-router-dom'
 import * as ST from './style'
-import Modal from 'react-modal'
 import instance from '../../../apis/instance'
 
 export interface PetDetails {
@@ -25,32 +24,17 @@ export interface ApiResponse<T> {
     result: T
 }
 
-Modal.setAppElement('#root')
-
 const PetDetail: React.FC = () => {
     const [pet, setPet] = useState<PetDetails | null>(null)
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const { petId } = useParams<{ petId: string }>()
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [currentImageUrl, setCurrentImageUrl] = useState('')
 
-    const openModal = (imageUrl: string) => {
-        setCurrentImageUrl(imageUrl)
-        setIsModalOpen(true)
-    }
-
-    const closeModal = () => {
-        setIsModalOpen(false)
-    }
-
-    // Pet 상세 정보 조회
     const fetchPetDetail = async (petId: string): Promise<ApiResponse<PetDetails> | null> => {
         try {
             const response = await instance.get<ApiResponse<PetDetails>>(`/api/pets/${petId}`)
             if (response.status === 200) {
-                // return response.data // 여기에서 ApiResponse 객체를 반환
-                return response.data // 여기에서 ApiResponse 객체를 반환
+                return response.data
             } else {
                 throw new Error(`오류 발생: ${response.status}`)
             }
@@ -60,78 +44,6 @@ const PetDetail: React.FC = () => {
         }
     }
 
-    // useEffect(() => {
-    //     const fetchPetData = async () => {
-    //         setIsLoading(true)
-    //         setError(null)
-
-    //         try {
-    //             if (petId) {
-    //                 const response = await fetchPetDetail(petId)
-    //                 console.log('API Response:', response) // API 전체 응답 로그 출력
-    //                 if (response && response.isSuccess) {
-    //                     if (response.result) {
-    //                         setPet(response.result) // 데이터를 상태에 설정
-    //                         console.log('Fetched Pet Data:', response.result) // API 응답 로그
-    //                     } else {
-    //                         console.log('No pet data in response')
-    //                         setError('Pet data not found in response.')
-    //                     }
-    //                 } else {
-    //                     setError('Pet.')
-    //                 }
-    //             } else {
-    //                 setError('Pet ID.')
-    //             }
-    //         } catch (error) {
-    //             console.error('Error :', error)
-    //             setError('API.')
-    //         } finally {
-    //             setIsLoading(false)
-    //         }
-    //     }
-
-    //     if (petId) {
-    //         fetchPetData()
-    //     }
-    // }, [petId])
-
-    // useEffect(() => {
-    //     const fetchPetData = async () => {
-    //         setIsLoading(true);
-    //         setError(null);
-
-    //         try {
-    //             if (petId) {
-    //                 const response = await fetchPetDetail(petId);
-    //                 console.log('API Response:', response);
-    //                 if (response && response.isSuccess) {
-    //                     if (response.result) {
-    //                         setPet(response.result); // 이 부분을 수정합니다.
-    //                         console.log('Fetched Pet Data:', response.result);
-    //                     } else {
-    //                         console.log('No pet data in response');
-    //                         setError('Pet data not found in response.');
-    //                     }
-    //                 } else {
-    //                     setError('Error fetching pet data.');
-    //                 }
-    //             } else {
-    //                 setError('Pet ID is missing.');
-    //             }
-    //         } catch (error) {
-    //             console.error('Error fetching pet data:', error);
-    //             setError('Error fetching pet data from API.');
-    //         } finally {
-    //             setIsLoading(false);
-    //         }
-    //     };
-
-    //     if (petId) {
-    //         fetchPetData();
-    //     }
-    // }, [petId]);
-
     useEffect(() => {
         const fetchPetData = async () => {
             setIsLoading(true)
@@ -140,13 +52,9 @@ const PetDetail: React.FC = () => {
             try {
                 if (petId) {
                     const response = await fetchPetDetail(petId)
-                    console.log('API Response:', response)
                     if (response && response.isSuccess) {
                         setPet(response.result)
-                        // setPet(response.result);
-                        console.log('Fetched Pet Data:', response.result)
                     } else {
-                        console.log('No pet data in response')
                         setError('Pet data not found in response.')
                     }
                 } else {
@@ -165,16 +73,12 @@ const PetDetail: React.FC = () => {
         }
     }, [petId])
 
-    useEffect(() => {
-        console.log('Current Pet State:', pet) // 상태 업데이트 후 로그 출력
-    }, [pet])
-
     if (isLoading) {
         return <div>Loading...</div>
     }
 
     if (!pet) {
-        return <div>..</div>
+        return <div>No pet data available.</div>
     }
 
     if (error) {
@@ -182,65 +86,39 @@ const PetDetail: React.FC = () => {
     }
 
     return (
-        <ST.ProfileContainer>
-            <ST.DetailCard>
+        <div className="profile-container"> {/* ST.ProfileContainer 대체 */}
+            <div className="detail-card"> {/* ST.DetailCard 대체 */}
                 {pet.imageUrls.slice(0, 1).map((url, index) => (
-                    <ST.ImgCard key={index}>
-                        <ST.Img2 src={url} alt={`${pet.petName} 이미지`} />
-                    </ST.ImgCard>
+                    <div className="img-card" key={index}> {/* ST.ImgCard 대체 */}
+                        <img src={url} alt={`${pet.petName} 이미지`} /> {/* ST.Img2 대체 */}
+                    </div>
                 ))}
 
-                <ST.TextContainer>
-                    <ST.Name>{pet.petName}</ST.Name>
-                    <ST.DetailText>
-                        <ST.DetailLabel>특징 - </ST.DetailLabel>
-                        <ST.H3>{pet.petInfo}</ST.H3>
-                    </ST.DetailText>
-                    <ST.DetailText>
-                        <ST.DetailLabel>크기 - </ST.DetailLabel>
-                        <ST.H3>{pet.petKind}</ST.H3>
-                    </ST.DetailText>
-                    <ST.DetailText>
-                        <ST.DetailLabel>성별 - </ST.DetailLabel>
-                        <ST.H3>{pet.petGender === 'MALE' ? '남아' : '여아'}</ST.H3>
-                    </ST.DetailText>
-                </ST.TextContainer>
-                {/* <ST.Wrap1>
-                <NoLineLink to={`/my`}>
-                    <ST.Text1>마이 페이지로 이동 ⇀</ST.Text1>
-                </NoLineLink>
-            </ST.Wrap1> */}
-            </ST.DetailCard>
-            <ST.Posts>
+                <div className="text-container"> {/* ST.TextContainer 대체 */}
+                    <h1>{pet.petName}</h1> {/* ST.Name 대체, h1 또는 h2 사용 */}
+                    <div className="detail-text"> {/* ST.DetailText 대체 */}
+                        <span>특징 - </span> {/* ST.DetailLabel 대체 */}
+                        <h3>{pet.petInfo}</h3> {/* ST.H3 대체 */}
+                    </div>
+                    <div className="detail-text">
+                        <span>크기 - </span>
+                        <h3>{pet.petKind}</h3>
+                    </div>
+                    <div className="detail-text">
+                        <span>성별 - </span>
+                        <h3>{pet.petGender === 'MALE' ? '남아' : '여아'}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div className="posts"> {/* ST.Posts 대체 */}
                 {pet.imageUrls.map((url, index) => (
-                    <ST.ImgCard1 key={index} onClick={() => openModal(url)}>
-                        <ST.Img src={url} alt={`${pet.petName} 이미지`} />
-                    </ST.ImgCard1>
+                    <div className="img-card-1" key={index}> {/* ST.ImgCard1 대체 */}
+                        <img src={url} alt={`${pet.petName} 이미지`} /> {/* ST.Img 대체 */}
+                    </div>
                 ))}
-            </ST.Posts>
-            <Modal
-                isOpen={isModalOpen}
-                onRequestClose={closeModal}
-                contentLabel="Image Modal"
-                style={{
-                    overlay: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.75)',
-                    },
-                    content: {
-                        inset: '50px',
-                        border: 'none',
-                        background: 'none',
-                        padding: '0',
-                        overflow: 'visible',
-                    },
-                }}
-            >
-                <ST.ModalContent>
-                    <ST.ModalImage src={currentImageUrl} alt="Pet" />
-                    <ST.CloseButton onClick={closeModal}>×</ST.CloseButton>
-                </ST.ModalContent>
-            </Modal>
-        </ST.ProfileContainer>
+            </div>
+        </div>
     )
 }
 

@@ -231,7 +231,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                 </ST.SearchContainer>
             </ST.MenuContainer>
             {/* <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} style={customModalStyles}> */}
-            <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
+            {/* <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
                 {info && (
                     <ST.ModalContainer>
                         <ST.H2>{info.shopName}</ST.H2>
@@ -251,7 +251,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                         <ST.H3>영업시간: {`${info.shopStartTime} - ${info.shopEndTime}`}</ST.H3>
                     </ST.ModalContainer>
                 )}
-            </Modal>
+            </Modal> */}
             <ST.MapContainer>
                 <Map
                     center={{ lat: info?.latitude || defaultCoords.lat, lng: info?.longitude || defaultCoords.lng }}
