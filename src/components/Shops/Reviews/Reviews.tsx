@@ -136,7 +136,7 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
                                             <BiLike style={mainColor} />
                                         )}
                                     </ST.GoodBtn>
-                                    &nbsp;{review.likeCount}
+                                    <ST.ReviewCount>{review.likeCount}</ST.ReviewCount>
                                 </span>
                                 {review.nickname === nickname && (
                                     <ST.DelBtn onClick={() => DeleteHandler(currentShopId, review.reviewId)}>

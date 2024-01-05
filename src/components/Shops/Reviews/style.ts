@@ -91,14 +91,21 @@ export const ReviewNick = styled.span`
     color: #8f8e93;
 `
 export const GoodBtn = styled.button`
-    padding: 6px 8px 8px;
-    font-size: 20px;
-    /* color: #fff; */
-    /* background-color: #00bd8f; */
+    padding: 0;
+    font-size: 18px;
+    background-color: #fff;
     border: none;
     border-radius: 8px;
-`
 
+    &:hover {
+        filter: brightness(1);
+    }
+`
+export const ReviewCount = styled.span`
+    margin: 6px;
+    font-size: 14px;
+    font-family: Pretendard-regular;
+`
 export const DelBtn = styled.button`
     width: 50px;
     height: 34px;
