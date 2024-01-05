@@ -5,8 +5,11 @@ import * as StP from './pageStyle'
 import { Pagination, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { HiSearch } from 'react-icons/hi'
+import { PiQuestionLight } from 'react-icons/pi'
 import { Shop, getShopType, getShops, getSearchShop } from '../../../apis/api/api'
 import { useQuery } from 'react-query'
+import ModalPortal from '../../modal/ModalPortal'
+import AddShopModal from '../../modal/AddShopModal'
 
 const ShopsList: React.FC = () => {
     const navigate = useNavigate()
@@ -15,6 +18,8 @@ const ShopsList: React.FC = () => {
     const [searchShop, setSearchShop] = useState<string>('')
     // 현재 활성화된 카테고리(.active 스타일 설정용)
     const [nowCategory, setNowCategory] = useState<string>('ALL')
+
+    const [modalOn, setModalOn] = useState(false)
 
     // 서버에서 받은 전체 목록
     const [shopList, setShopList] = useState<Shop[]>([])
@@ -28,6 +33,10 @@ const ShopsList: React.FC = () => {
     const indexOfLastShop: number = page * shopsPerPage
     const indexOfFirstShop: number = indexOfLastShop - shopsPerPage
     const shopListLength = shopList.length
+
+    const handleModal = () => {
+        setModalOn(!modalOn)
+    }
 
     const handlePageChange = (page: number) => {
         setPage(page)
@@ -107,15 +116,14 @@ const ShopsList: React.FC = () => {
                     />
                     <ST.SearchBtn onClick={searchHandler}>검색</ST.SearchBtn>
                 </ST.ShopSearchBox>
-
-                {/* <ST.ShopTagContainer>
-                    HOT 해시태그
-                </ST.ShopTagContainer> */}
             </ST.ShopSearchContainer>
 
             <ST.ShopListContainer>
-                <ST.ShopListH3>가게</ST.ShopListH3>
+                <ST.ShopListH3>
+                    가게 <PiQuestionLight onMouseOver={handleModal} style={question} />
+                </ST.ShopListH3>
 
+                <ModalPortal>{modalOn && <AddShopModal onClose={handleModal} />}</ModalPortal>
                 <ST.ShopCategoryUl>
                     <ST.ShopCategoryLi
                         onClick={() => roomTypeHandler('ALL')}
@@ -214,4 +222,12 @@ const search = {
     width: '36px',
     height: '36px',
     color: '#00bd8f',
+}
+
+const question = {
+    width: '36px',
+    height: '36px',
+    marginTop: '-4px',
+    color: '#8F8E93',
+    // backgroundColor: '#FAFAFA',
 }

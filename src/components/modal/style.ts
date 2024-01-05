@@ -53,7 +53,7 @@ export const ChatNameInput = styled.input`
     margin: 20px;
     padding: 17px 18px;
 
-    color: #8F8E93;
+    color: #8f8e93;
     font-family: Pretendard-regular;
     font-size: 14px;
     border-radius: 8px;
@@ -69,4 +69,61 @@ export const ChatBtn = styled.button<BtnProps>`
     border: none;
     border-radius: 8px;
     margin-right: ${(props) => props.$marginRight};
+`
+
+// ================가게 목록페이지 등록유도 모달=========================
+export const ShopModalBackground = styled.div`
+    width: 100%;
+    height: 100%;
+    font-family: Pretendard-medium;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(218, 218, 218, 0.5);
+`
+
+export const ShopBoxDiv = styled.div`
+    width: 365px;
+    height: 190px;
+    border-radius: 15px;
+    padding: 34px 46px;
+
+    position: relative;
+    top: 10vh;
+    /* left: 10vw; */
+    background: #fff;
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+`
+export const LeaveBtn = styled.button`
+    padding: 4px 7px 6px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 14px;
+    color: #00bd8f;
+    background-color: #E9E9E6;
+    border: none;
+    border-radius: 50%;
+`
+
+export const ShopSpan = styled.span`
+    display: inline-block;
+    font-family: Pretendard-regular;
+    font-size: 16px;
+    color: #8f8e93;
+`
+
+export const TitleH3 = styled.h3`
+    font-size: 20px;
+    font-family: Pretendard-bold;
+    margin-bottom: 10px;
 `
