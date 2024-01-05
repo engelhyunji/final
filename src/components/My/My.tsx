@@ -327,14 +327,14 @@ const My: React.FC = () => {
                         ))}
 
                         {/* 추가 등록 (+ 버튼) */}
-                        <svg onClick={()=>AddHandler('pet')} xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                        <ST.MyAddBtn onClick={()=>AddHandler('pet')} xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
                             <path
                                 d="M30 50.4001C41.28 50.4001 50.4 41.2801 50.4 30.0001C50.4 18.7201 41.28 9.6001 30 9.6001C18.72 9.6001 9.59999 18.7201 9.59999 30.0001C9.59999 41.2801 18.72 50.4001 30 50.4001ZM30 12.0001C39.96 12.0001 48 20.0401 48 30.0001C48 39.9601 39.96 48.0001 30 48.0001C20.04 48.0001 12 39.9601 12 30.0001C12 20.0401 20.04 12.0001 30 12.0001Z"
                                 fill="#DADADA"
                             />
                             <path d="M40.8 28.7998H19.2V31.1998H40.8V28.7998Z" fill="#DADADA" />
                             <path d="M31.2 19.2002H28.8V40.8002H31.2V19.2002Z" fill="#DADADA" />
-                        </svg>
+                        </ST.MyAddBtn>
                     </ST.MyUl>
                 </ST.ShopNPetSection>
             )}
