@@ -164,6 +164,7 @@ export const fetchPetDetail = async (petId: string): Promise<ApiResponse<PetDeta
     try {
         const response = await instance.get<ApiResponse<PetDetails>>(`/api/pets/${petId}`)
         if (response.status === 200) {
+            // return response.data // 여기에서 ApiResponse 객체를 반환
             return response.data // 여기에서 ApiResponse 객체를 반환
         } else {
             throw new Error(`오류 발생: ${response.status}`)

@@ -60,6 +60,42 @@ const PetDetail: React.FC = () => {
     //     }
     // }, [petId])
 
+    // useEffect(() => {
+    //     const fetchPetData = async () => {
+    //         setIsLoading(true);
+    //         setError(null);
+
+    //         try {
+    //             if (petId) {
+    //                 const response = await fetchPetDetail(petId);
+    //                 console.log('API Response:', response);
+    //                 if (response && response.isSuccess) {
+    //                     if (response.result) {
+    //                         setPet(response.result); // 이 부분을 수정합니다.
+    //                         console.log('Fetched Pet Data:', response.result);
+    //                     } else {
+    //                         console.log('No pet data in response');
+    //                         setError('Pet data not found in response.');
+    //                     }
+    //                 } else {
+    //                     setError('Error fetching pet data.');
+    //                 }
+    //             } else {
+    //                 setError('Pet ID is missing.');
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching pet data:', error);
+    //             setError('Error fetching pet data from API.');
+    //         } finally {
+    //             setIsLoading(false);
+    //         }
+    //     };
+
+    //     if (petId) {
+    //         fetchPetData();
+    //     }
+    // }, [petId]);
+
     useEffect(() => {
         const fetchPetData = async () => {
             setIsLoading(true);
@@ -70,15 +106,13 @@ const PetDetail: React.FC = () => {
                     const response = await fetchPetDetail(petId);
                     console.log('API Response:', response);
                     if (response && response.isSuccess) {
-                        if (response.result) {
-                            setPet(response.result); // 이 부분을 수정합니다.
-                            console.log('Fetched Pet Data:', response.result);
-                        } else {
-                            console.log('No pet data in response');
-                            setError('Pet data not found in response.');
-                        }
+                        // response.result 대신 response.result.data를 사용하여 상태 설정
+                        setPet(response.result.data);
+                        // setPet(response.result);
+                        console.log('Fetched Pet Data:', response.result.data);
                     } else {
-                        setError('Error fetching pet data.');
+                        console.log('No pet data in response');
+                        setError('Pet data not found in response.');
                     }
                 } else {
                     setError('Pet ID is missing.');
