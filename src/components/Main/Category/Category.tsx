@@ -28,9 +28,9 @@ const Category: React.FC = () => {
     const navigate = useNavigate()
 
     const categories = [
-        { displayName: '#애견미용실', value: 'GROOMING' },
+        { displayName: '#애견 미용', value: 'GROOMING' },
         { displayName: '#동물병원', value: 'HOSPITAL' },
-        { displayName: '#애견카페', value: 'CAFE' },
+        { displayName: '#애견 카페', value: 'CAFE' },
         { displayName: '#기타', value: 'ETC' },
     ]
 
@@ -152,7 +152,7 @@ const Category: React.FC = () => {
                                 {shop.imageUrls?.map((url, imgIdx) => (
                                     <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
                                 ))}
-                                <p>가게: {shop.shopName}</p>
+                                <p>{shop.shopName}</p>
                                 <p>업종: {shop.shopType}</p>
                                 <p>주소: {shop.shopAddress}</p>
                             </ST.ShopCard>
