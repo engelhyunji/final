@@ -88,15 +88,15 @@ const PetDetail: React.FC = () => {
                 <ST.TextContainer>
                     <ST.Name>{pet.petName}</ST.Name>
                     <ST.DetailText>
-                        <ST.DetailLabel>특징 </ST.DetailLabel>
+                        <ST.DetailLabel>특징 - </ST.DetailLabel>
                         <ST.H3>{pet.petInfo}</ST.H3>
                     </ST.DetailText>
                     <ST.DetailText>
-                        <ST.DetailLabel>크기 </ST.DetailLabel>
+                        <ST.DetailLabel>크기 - </ST.DetailLabel>
                         <ST.H3>{pet.petKind}</ST.H3>
                     </ST.DetailText>
                     <ST.DetailText>
-                        <ST.DetailLabel>성별 </ST.DetailLabel>
+                        <ST.DetailLabel>성별 - </ST.DetailLabel>
                         <ST.H3>{pet.petGender === 'MALE' ? '남아' : '여아'}</ST.H3>
                     </ST.DetailText>
                 </ST.TextContainer>

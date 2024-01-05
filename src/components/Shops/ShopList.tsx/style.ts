@@ -13,33 +13,35 @@ export const Container = styled.div`
 
 export const TitleBackContainer = styled.div`
     width: 100%;
-    height: 340px;
+    height: 325px;
     position: relative;
     overflow: hidden;
 
     color: #fff;
     font-family: Pretendard-medium;
 
+    /* background-image: url('shopListBanner.png'); */
+    background-image: url('https://moon-test1-bucket.s3.ap-northeast-2.amazonaws.com/shopListBanner.png');
+
     /* linear-gradient(검정색 필터로 활용) */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)); */
 
     // 가상 요소 만들어서 배경만 흐리게
-    &::before {
+    /* &::before {
         content: '';
-        z-index: -1; /* 콘텐츠 뒤로 */
+        z-index: -1;
         width: 100%;
         height: 100%;
-        /* 부모 기준으로 위치 맞춰야 높이 적용됨 */
         position: absolute;
         top: 0;
         left: 0;
 
-        background-image: url('SHOPtopBack(draft).png');
+        background-image: url('shopListBanner.png');
         filter: blur(2.5px);
         -webkit-filter: blur(2.5px);
         -moz-filter: blur(2.5px);
         -o-filter: blur(2.5px);
-    }
+    } */
 
     display: flex;
     flex-direction: column;
@@ -50,8 +52,11 @@ export const TitleBackContainer = styled.div`
 
 export const ShopListH2 = styled.h2`
     color: #fff;
-    font-family: Pretendard-bold;
+    font-family: 'LOTTERIACHAB';
     font-size: 48px;
+
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: #005D32;
 `
 export const ShopP = styled.p`
     margin: 0 0 10px;
@@ -63,7 +68,7 @@ export const ShopP = styled.p`
 `
 
 export const ShopSearchContainer = styled.div`
-    width: 745px;
+    width: 725px;
     /* height: 131px; */
     padding: 19px 33px;
 
@@ -79,20 +84,20 @@ export const ShopSearchContainer = styled.div`
     z-index: 10;
 
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
 `
-export const ShopSearchCondition = styled.div`
-    width: 109px;
-    height: 40px;
-    padding: 11px 15px;
-    border-radius: 26px;
-    border: 1px solid #dadada;
-    color: #8f8e93;
-    font-size: 16px;
-`
+
+// export const ShopSearchCondition = styled.div`
+//     width: 109px;
+//     height: 40px;
+//     padding: 11px 15px;
+//     border-radius: 26px;
+//     border: 1px solid #dadada;
+//     color: #8f8e93;
+//     font-size: 16px;
+// `
 export const ShopSearchInput = styled.input`
-    width: 407px;
+    width: 427px;
     height: 51px;
     padding: 11px 18px;
 
@@ -114,10 +119,29 @@ export const SearchBtn = styled.button`
     justify-content: center;
     align-items: center;
 `
+export const ShopSearchBox = styled.div`
+    width: 100%;
+    /* height: 131px; */
+
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+export const ShopTagContainer = styled.div`
+    width: 100%;
+    padding: 15px 0 0;
+
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
 
 export const ShopListContainer = styled.div`
-    max-width: 1200px;
-    min-width: 800px;
+    width: 1200px;
 
     font-family: Pretendard-medium;
 
@@ -164,7 +188,7 @@ export const ShopCategoryLi = styled.li`
 `
 
 export const StRow = styled(Row)`
-    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     column-gap: 63px;
     row-gap: 20px;
@@ -173,7 +197,8 @@ export const StRow = styled(Row)`
 export const ShopBox = styled.div`
     cursor: pointer;
     max-width: 358px;
-    height: 454px;
+    /* height: 454px; */
+    height: 445px;
     border: none;
     border-radius: 15px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
@@ -187,6 +212,7 @@ export const ShopBox = styled.div`
 export const thumImg = styled.img`
     width: 100%;
     height: 269px;
+    overflow: hidden;
     object-fit: cover;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -210,7 +236,8 @@ export const ShopGrid = styled.div`
 
     display: grid;
     grid-template-columns: 0.8fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    /* grid-template-rows: 1fr 1fr 1fr 1fr; */
     grid-gap: 8px 10px; // 브라우저 호환 범위 넓히기 위해 작성
     gap: 8px 10px;
 
@@ -248,5 +275,9 @@ export const BodyAddressInfoP = styled.p`
 `
 export const CardBodyP = styled.p`
     grid-column: 1 / 4;
+    grid-row: 4 / 5;
+`
+export const CardBodyNumP = styled.p`
+    grid-column: 2 / 5;
     grid-row: 4 / 5;
 `

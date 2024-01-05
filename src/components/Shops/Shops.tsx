@@ -42,7 +42,6 @@ const Shops: React.FC = () => {
     const tel2Input = useRef<HTMLInputElement>(null);
     const tel3Input = useRef<HTMLInputElement>(null);
 
-    // 주소를 위도와 경도로 변환하는 함수
     const convertAddressToCoords = async (address: string): Promise<{ latitude: number; longitude: number }> => {
         return new Promise((resolve, reject) => {
             const geocoder = new window.kakao.maps.services.Geocoder();
@@ -171,15 +170,30 @@ const Shops: React.FC = () => {
             shopRequestDto.shopName.trim() === '' ||
             shopRequestDto.shopStartTime.trim() === '' ||
             shopRequestDto.shopEndTime.trim() === '' ||
+            shopRequestDto.shopAddress.trim() === '' ||
+            shopRequestDto.shopDescribe.trim() === '' ||
             shopRequestDto.shopTel1.trim() === '' ||
             shopRequestDto.shopTel2.trim() === '' ||
             shopRequestDto.shopTel3.trim() === '' ||
-            shopRequestDto.shopAddress.trim() === '' ||
-            shopRequestDto.shopDescribe.trim() === '' ||
             shopRequestDto.shopType.trim() === ''
         ) {
-            alert('정보를 모두 입력해주세요');
-            return;
+            alert('정보를 모두 입력해주세요')
+            return false
+        } else {
+            try {
+                const response = await instance.post(`/api/shops`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+                console.log('가게 등록 response :', response.data)
+                navigate('/shopslist')
+            } catch (error: any) {
+                if (error.response.data.code === 4506) {
+                    alert(error.response.data.message)
+                }
+                console.error('가게 등록 에러 :', error)
+            }
         }
 
         try {

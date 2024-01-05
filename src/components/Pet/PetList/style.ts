@@ -2,14 +2,19 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     max-width: 1440px;
+    width: 100%;
     margin: 0 auto;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     overflow-y: scroll;
     overflow-x: hidden;
     margin-bottom: 10px;
+    margin-left: 7px;
+
+    margin: 0 auto;
 `
 export const TitleBackContainer = styled.div`
     width: 100%;
@@ -27,8 +32,10 @@ export const TitleBackContainer = styled.div`
     &::before {
         content: '';
         z-index: -1; /* 콘텐츠 뒤로 */
+        /* max-width: 1450px; */
         width: 100%;
-        height: 100%;
+        /* height: 100%; */
+        height: 325px;
         /* 부모 기준으로 위치 맞춰야 높이 적용됨 */
         position: absolute;
         top: 0;
@@ -37,6 +44,12 @@ export const TitleBackContainer = styled.div`
         background-image: url('/PetList.png');
         background-size: cover;
     }
+
+    position: relative;
+    overflow: hidden;
+
+    color: #fff;
+    font-family: Pretendard-medium;
 
     display: flex;
     flex-direction: column;
@@ -63,8 +76,18 @@ export const PetP = styled.p`
 
 export const PetListH2 = styled.h2`
     color: #fff;
-    font-family: Pretendard-bold;
+    font-family: 'LOTTERIACHAB';
     font-size: 48px;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: #005d32;
+`
+export const ShopP = styled.p`
+    margin: 0 0 10px;
+    /* z-index: 2; */
+
+    color: #fff;
+    text-align: center;
+    font-family: Pretendard-regular;
 `
 
 export const Button = styled.button``
@@ -75,7 +98,7 @@ export const Posts = styled.div`
     grid-gap: 15px; // Space between posts
     padding: 120px; // Padding around the grid
     width: 100%;
-    margin-top: 90px;
+    margin-top: 20px;
 `
 export const PetListContainer = styled.div`
     max-width: 1200px;
@@ -119,10 +142,9 @@ export const Img = styled.img`
 export const Image = styled.img``
 
 export const PetSearchContainer = styled.div`
-    width: 745px;
-    padding: 19px 33px;
-    top: 270px;
+    width: 725px;
     /* height: 131px; */
+    padding: 19px 33px;
 
     border-radius: 7px;
     background: #fff;
@@ -136,17 +158,18 @@ export const PetSearchContainer = styled.div`
     z-index: 10;
 
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
 `
 export const PetSearchCondition = styled.div`
-    width: 709px;
-    height: 40px;
+    width: 100%;
+    height: 45px;
     padding: 11px 15px;
+    text-align: center;
     border-radius: 26px;
     border: 1px solid #dadada;
     color: #8f8e93;
     font-size: 16px;
+    box-shadow: 0px 4px 8px 0px rgba(76, 225, 161, 0.5);
 `
 export const PetSearchInput = styled.input`
     width: 407px;

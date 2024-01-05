@@ -4,15 +4,22 @@ import * as ST from './style'
 import * as StP from './pageStyle'
 import { Pagination, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Shop, getShopType, getShops } from '../../../apis/api/api'
+import { HiSearch } from 'react-icons/hi'
+import { PiQuestionLight } from 'react-icons/pi'
+import { Shop, getShopType, getShops, getSearchShop } from '../../../apis/api/api'
 import { useQuery } from 'react-query'
+import ModalPortal from '../../modal/ModalPortal'
+import AddShopModal from '../../modal/AddShopModal'
 
 const ShopsList: React.FC = () => {
-    
     const navigate = useNavigate()
 
+    // 검색어
+    const [searchShop, setSearchShop] = useState<string>('')
     // 현재 활성화된 카테고리(.active 스타일 설정용)
-    const [nowCategory, setNowCategory] = useState('ALL')
+    const [nowCategory, setNowCategory] = useState<string>('ALL')
+
+    const [modalOn, setModalOn] = useState(false)
 
     // 서버에서 받은 전체 목록
     const [shopList, setShopList] = useState<Shop[]>([])
@@ -26,6 +33,10 @@ const ShopsList: React.FC = () => {
     const indexOfLastShop: number = page * shopsPerPage
     const indexOfFirstShop: number = indexOfLastShop - shopsPerPage
     const shopListLength = shopList.length
+
+    const handleModal = () => {
+        setModalOn(!modalOn)
+    }
 
     const handlePageChange = (page: number) => {
         setPage(page)
@@ -49,15 +60,20 @@ const ShopsList: React.FC = () => {
     useEffect(() => {
         const reversedShops = [...shopList].reverse()
 
-        // 영업시간 및 전화번호 필드가 있는지 확인하고 필요한 형식으로 변환
-        const updatedShops = reversedShops.map((shop) => ({
-            ...shop,
-            shopTime: `${shop.shopStartTime} - ${shop.shopEndTime}`, // 가정한 필드 이름
-            shopTel: `${shop.shopTel1}-${shop.shopTel2}-${shop.shopTel3}` // 가정한 필드 이름
-        }));
-
-        setCurrentShops(updatedShops.slice(indexOfFirstShop, indexOfLastShop))
+        setCurrentShops(reversedShops.slice(indexOfFirstShop, indexOfLastShop))
     }, [shopList, page])
+
+    // 검색
+    const searchHandler = async () => {
+        await getSearchShop({ keyword: searchShop }).then((data) => {
+            if (data) {
+                setShopList([...data])
+                console.log(data)
+            } else {
+                alert('해당하는 검색 결과가 없습니다.')
+            }
+        })
+    }
 
     // 카테고리 별 API호출
     const roomTypeHandler = (type: string) => {
@@ -86,17 +102,28 @@ const ShopsList: React.FC = () => {
         <ST.Container>
             <ST.TitleBackContainer>
                 <ST.ShopListH2>가게</ST.ShopListH2>
-                <ST.ShopP>내 강아지에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
+                <ST.ShopP>내 반려동물에게 딱 맞는 가게를 찾아 이용해보세요!</ST.ShopP>
             </ST.TitleBackContainer>
             <ST.ShopSearchContainer>
-                <ST.ShopSearchCondition>가게 종류 ▾</ST.ShopSearchCondition>
-                <ST.ShopSearchInput type="text" value={'검색기능 준비중입니다'} placeholder="" readOnly/>
-                <ST.SearchBtn>검색</ST.SearchBtn>
+                {/* <ST.ShopSearchCondition>정보 검색</ST.ShopSearchCondition> */}
+                <ST.ShopSearchBox>
+                    <HiSearch style={search} />
+                    <ST.ShopSearchInput
+                        type="text"
+                        value={searchShop}
+                        onChange={(e) => setSearchShop(e.target.value)}
+                        placeholder=""
+                    />
+                    <ST.SearchBtn onClick={searchHandler}>검색</ST.SearchBtn>
+                </ST.ShopSearchBox>
             </ST.ShopSearchContainer>
 
             <ST.ShopListContainer>
-                <ST.ShopListH3>가게 조회</ST.ShopListH3>
+                <ST.ShopListH3>
+                    가게 <PiQuestionLight onMouseOver={handleModal} style={question} />
+                </ST.ShopListH3>
 
+                <ModalPortal>{modalOn && <AddShopModal onClose={handleModal} />}</ModalPortal>
                 <ST.ShopCategoryUl>
                     <ST.ShopCategoryLi
                         onClick={() => roomTypeHandler('ALL')}
@@ -142,7 +169,7 @@ const ShopsList: React.FC = () => {
                                 <ST.CardBodyDiv className="card-body">
                                     <ST.ShopListH4 className="card-title">{shop.shopName}</ST.ShopListH4>
                                     <ST.ShopGrid>
-                                    <ST.BodyTimeP className="card-text">영업시간</ST.BodyTimeP>
+                                        <ST.BodyTimeP className="card-text">영업시간</ST.BodyTimeP>
                                         <ST.BodyTimeInfoP className="card-text">
                                             {shop.shopStartTime} ~ {shop.shopEndTime}
                                         </ST.BodyTimeInfoP>
@@ -154,7 +181,8 @@ const ShopsList: React.FC = () => {
                                         <ST.BodyAddressInfoP className="card-text">
                                             {shop.shopAddress}
                                         </ST.BodyAddressInfoP>
-                                        <ST.CardBodyP className="card-text">#hashtag</ST.CardBodyP>
+                                        <ST.CardBodyP className="card-text">리뷰 수</ST.CardBodyP>
+                                        <ST.CardBodyNumP className="card-text">{shop.reviewCount}</ST.CardBodyNumP>
                                     </ST.ShopGrid>
                                 </ST.CardBodyDiv>
                             </ST.ShopBox>
@@ -188,4 +216,18 @@ const cardCol = {
     padding: '0px',
     margin: '0px',
     width: '358px',
+}
+
+const search = {
+    width: '36px',
+    height: '36px',
+    color: '#00bd8f',
+}
+
+const question = {
+    width: '36px',
+    height: '36px',
+    marginTop: '-4px',
+    color: '#8F8E93',
+    // backgroundColor: '#FAFAFA',
 }

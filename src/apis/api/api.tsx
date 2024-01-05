@@ -1,18 +1,6 @@
 import { Chatroom } from '../../components/Chat/ChatList'
 import instance from '../instance'
 
-// export interface Shop {
-//     shopId: number
-//     userId: number
-//     shopName: string
-//     shopTime: string
-//     shopTel: string
-//     shopAddress: string
-//     shopType: string
-//     shopDescribe: string
-//     imageUrls: string[]
-// }
-
 export interface Shop {
     shopId: number
     userId: number
@@ -22,12 +10,11 @@ export interface Shop {
     shopTel1: string
     shopTel2: string
     shopTel3: string
-    // shopTime: string
-    // shopTel: string
     shopAddress: string
     shopType: string
     shopDescribe: string
     // shopTags?: string[]
+    reviewCount: number
     imageUrls: string[]
 }
 
@@ -44,8 +31,6 @@ export interface shopResponseDto {
     shopTel1: string
     shopTel2: string
     shopTel3: string
-    // shopTime: string
-    // shopTel: string
     shopAddress: string
     shopType: string
     shopDescribe: string
@@ -200,3 +185,12 @@ export const getShopLocation = async (keyword: string) => {
 }
 
 
+// Shop 검색 (전체목록페이지)
+export const getSearchShop = async (query: { keyword: string }) => {
+    try {
+        const res = await instance.get('/api/shops/search', { params: query })
+        return res.data.result
+    } catch (err) {
+        console.log(err)
+    }
+}

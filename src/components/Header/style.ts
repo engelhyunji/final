@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface LogoProps {
+    $logoUrl: string
+}
+
 export const HeaderWrap = styled.div`
     width: 100%;
     height: 88px;
@@ -19,34 +23,23 @@ export const HeaderContainer = styled.div`
     background-color: #fff;
     color: #fff;
 `
-
-export const Logo = styled.div`
-    /* width: 280px; */
+export const LogoBox = styled.div`
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+`
+export const Logo = styled.div<LogoProps>`
+    width: 88px;
+    height: 88px;
+    background: no-repeat center/100% url(${props => props.$logoUrl});
     display: flex;
     align-items: center;
-    cursor: pointer;
 `
 
-export const LogoH1 = styled.h1`
-    font-size: 33px;
-    color: white;
-    font-family: Pretendard-Bold;
-    text-shadow: 
-        -2px -2px 0 #1dcb8e,  
-        1px -2px 0 #1dcb8e,
-        -1px 1px 0 #1dcb8e,
-        1px 1px 0 #1dcb8e; 
-`
-
-
-export const LogoImg = styled.img`
-    width: 56px;
-    margin: 0 20px;
-`
-export const LogoImg1 = styled.img`
-    width: 56px;
-    height: 20px;
-    margin: 0 20px;
+export const LogoH1 = styled.h1<LogoProps>`
+    width: 120px;
+    background: no-repeat center 22px/100% url(${props => props.$logoUrl});
 `
 
 export const GNBDiv = styled.div`
@@ -57,11 +50,11 @@ export const GNBDiv = styled.div`
 
 export const LogoutBtn = styled.button`
     margin-left: 20px;
-    font-family: Pretendard-Medium;
-    background-color: #00BD8F;
-    color: #fff;
+    width: 90px;
+    height: 34px;
+    color: #00BD8e;
+    font-family: Pretendard-regular;
+    background-color: #e9e9e6;
     border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    cursor: pointer;
+    border-radius: 3px;
 `

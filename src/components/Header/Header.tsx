@@ -8,17 +8,19 @@ const Header: React.FC = () => {
     const navigate = useNavigate()
     const { isLogin, logout } = useAuth()
 
-    const logoUrl = './warwar.png'
-    // const logoUrl1 = './warwar-name.png'
+    // const logoUrl = './LogoVer1.png'
+    // const logoTypoUrl = './TypoBeige.png'
+    const logoUrl = 'https://moon-test1-bucket.s3.ap-northeast-2.amazonaws.com/LogoVer1.png'
+    const logoTypoUrl = 'https://moon-test1-bucket.s3.ap-northeast-2.amazonaws.com/TypoBeige.png'
 
     return (
         <ST.HeaderWrap>
             <ST.HeaderContainer>
-                <ST.Logo onClick={() => navigate('/')}>
-                    <ST.LogoImg src={logoUrl} alt="logo" />
-                    {/* <ST.LogoH1>와르와르</ST.LogoH1> */}
-                    {/* <ST.LogoImg1 src={logoUrl1} alt="logo" /> */}
-                </ST.Logo>
+                <ST.LogoBox onClick={() => navigate('/')}>
+                    <ST.Logo $logoUrl={logoUrl}></ST.Logo>
+                    <ST.LogoH1 $logoUrl={logoTypoUrl}></ST.LogoH1>
+                </ST.LogoBox>
+
                 <ST.GNBDiv>
                     <NoLineLink to="/petlist">
                         <h5>반려동물</h5>
