@@ -10,7 +10,7 @@ export interface PetDetails {
     petInfo: string
     imageUrls: string[]
     petLikes: number // 좋아요 수
-    registration_date: string;
+    // registration_date: string;
 }
 
 export interface ApiResponse<T> {
@@ -41,7 +41,7 @@ export const unlikePet = async (petId: number): Promise<number> => {
 }
 
 // 펫 조회
-export const fetchPetsWithCursor = async (cursor?: string, limit: number = 10) => {
+export const fetchPetsWithCursor = async (cursor?: string, limit: number = 20) => {
     const url = cursor ? `/api/pets?lastPetId=${cursor}&limit=${limit}` : `/api/pets?limit=${limit}`
     try {
         const response = await instance.get<ApiResponse<PetDetails[]>>(url)

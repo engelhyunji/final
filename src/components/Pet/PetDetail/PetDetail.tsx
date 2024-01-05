@@ -62,40 +62,25 @@ const PetDetail: React.FC = () => {
 
     useEffect(() => {
         const fetchPetData = async () => {
-            setIsLoading(true);
-            setError(null);
-    
+            setIsLoading(true)
+            setError(null)
+
             try {
-                if (petId) {
-                    const response = await fetchPetDetail(petId);
-                    console.log('API Response:', response); // API 전체 응답 로그 출력
-                    if (response && response.isSuccess) {
-                        if (response.result && response.result.data) {
-                            setPet(response.result.data); // 'data' 프로퍼티를 상태에 설정
-                            console.log('Fetched Pet Data:', response.result.data); // API 응답 로그
-                        } else {
-                            console.log('No pet data in response');
-                            setError('Pet data not found in response.');
-                        }
-                    } else {
-                        setError('Error fetching pet data.');
-                    }
+                const response = await fetchPetDetail(petId)
+                if (response && response.isSuccess) {
+                    setPet(response.result)
                 } else {
-                    setError('Pet ID is missing.');
+                    console.error('Error:', response?.message)
                 }
             } catch (error) {
-                console.error('Error fetching pet data:', error);
-                setError('Error fetching pet data from API.');
-            } finally {
-                setIsLoading(false);
+                console.error('Error:', error)
             }
-        };
-    
-        if (petId) {
-            fetchPetData();
         }
-    }, [petId]);
-    
+
+        if (petId) {
+            fetchPetData()
+        }
+    }, [petId])
 
     useEffect(() => {
         console.log('Current Pet State:', pet) // 상태 업데이트 후 로그 출력
