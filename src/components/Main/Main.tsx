@@ -20,10 +20,8 @@ const Main: React.FC = () => {
                     <ST.BannerImage />
                     <ST.BtnContainer>
                         <ST.Warp>
-                            <ST.Text2>
-                                반려동물과 함께하는 매칭서비스, 와르와르 <br />
-                                <ST.Text3>가게 또는 강아지를 등록해보세요!</ST.Text3>
-                            </ST.Text2>
+                            <ST.Text2>반려동물과 함께하는 매칭서비스, 와르와르</ST.Text2>
+                            <ST.Text3>가게 또는 강아지를 등록해보세요!</ST.Text3>
                         </ST.Warp>
                         {isLogin ? (
                             <>
@@ -37,10 +35,9 @@ const Main: React.FC = () => {
                                         <br />
                                         사장님이라면?
                                     </ST.Text1>
-                                    <br />
                                     <ST.Text>가게 등록하기 ⇀</ST.Text>
                                 </ST.ShopBtn>
-                                <ST.PetBtn
+                                <ST.ShopBtn
                                     onClick={() => {
                                         navigate('/pet')
                                     }}
@@ -50,9 +47,8 @@ const Main: React.FC = () => {
                                         <br />
                                         키우는 중이라면?
                                     </ST.Text1>
-                                    <br />
                                     <ST.Text>강아지 등록하기 ⇀</ST.Text>
-                                </ST.PetBtn>
+                                </ST.ShopBtn>
                             </>
                         ) : (
                             <>
@@ -67,10 +63,9 @@ const Main: React.FC = () => {
                                         <br />
                                         실시간으로 소통하자
                                     </ST.Text1>
-                                    <br />
                                     <ST.Text>채팅하러 가기 ⇀</ST.Text>
                                 </ST.ShopBtn>
-                                <ST.PetBtn
+                                <ST.ShopBtn
                                     onClick={() => {
                                         navigate('/signup')
                                     }}
@@ -80,9 +75,8 @@ const Main: React.FC = () => {
                                         <br />
                                         또는 강아지가 있다면?
                                     </ST.Text1>
-                                    <br />
                                     <ST.Text>등록하기 ⇀</ST.Text>
-                                </ST.PetBtn>
+                                </ST.ShopBtn>
                             </>
                         )}
                     </ST.BtnContainer>
@@ -90,30 +84,28 @@ const Main: React.FC = () => {
 
                 <ST.OverlayContainer2>
                     <ST.TopWrapper>
-                        <ST.PetContent2>
-                            <ST.PetTextWrapper2>
-                                <ST.PetText>가게</ST.PetText>
-                                <ST.PetText1>
-                                    실시간으로 뜨는
-                                    <br />
-                                    곳들을 보여드려요
-                                </ST.PetText1>
-                                {/* <ST.PetText2>더보기 ⇀</ST.PetText2> */}
-                                <ST.Wrap1>
-                                    <NoLineLink to={`/shopslist`}>
-                                        <ST.PetText2>더보기 ⇀</ST.PetText2>
-                                    </NoLineLink>
-                                </ST.Wrap1>
-                            </ST.PetTextWrapper2>
-                            <Category />
-                        </ST.PetContent2>
+                        <ST.TextWrapper>
+                            <ST.PetText>가게</ST.PetText>
+                            <ST.PetText1>
+                                실시간으로 뜨는
+                                <br />
+                                곳들을 보여드려요
+                            </ST.PetText1>
+                            {/* <ST.PetText2>더보기 ⇀</ST.PetText2> */}
+                            <ST.Wrap1>
+                                <NoLineLink to={`/shopslist`}>
+                                    <ST.PetText2>더보기 ⇀</ST.PetText2>
+                                </NoLineLink>
+                            </ST.Wrap1>
+                        </ST.TextWrapper>
+                        <Category />
                     </ST.TopWrapper>
                 </ST.OverlayContainer2>
 
                 <ST.OverlayContainer>
                     <ST.PetContent>
-                        <ST.PetTextWrapper>
-                            <ST.PetTextP>반려동물</ST.PetTextP>
+                        <ST.TextWrapper>
+                            <ST.PetText>반려동물</ST.PetText>
                             <ST.PetText3>
                                 다들 우리 강아지
                                 <br /> 보고 가세요!
@@ -124,7 +116,7 @@ const Main: React.FC = () => {
                                     <ST.PetText5>더보기 ⇀</ST.PetText5>
                                 </NoLineLink>
                             </ST.Wrap1>
-                        </ST.PetTextWrapper>
+                        </ST.TextWrapper>
                     </ST.PetContent>
                     <MainTop />
                 </ST.OverlayContainer>
