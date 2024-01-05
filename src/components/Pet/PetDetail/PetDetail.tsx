@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useParams } from 'react-router-dom'
-import * as ST from './style'
 import instance from '../../../apis/instance'
 
 export interface PetDetails {

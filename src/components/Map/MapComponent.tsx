@@ -57,7 +57,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const [keyword, setKeyword] = useState('');
     const [message, setMessage] = useState('');
     const [selectedPlaceIndex, setSelectedPlaceIndex] = useState<number | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [placesPerPage] = useState(3);
     const map = useRef<any>(null); // Changed the type to 'any' to address the panTo error
@@ -105,7 +105,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     };
 
     const handleListItemClick = (marker: ShopPostData, index: number) => {
-        setIsModalOpen(true);
+        // setIsModalOpen(true);
         setInfo(marker);
         setSelectedPlaceIndex(index);
 
