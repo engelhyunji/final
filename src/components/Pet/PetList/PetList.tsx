@@ -86,23 +86,23 @@ const PetList: React.FC = () => {
     const fetchPetsData = async () => {
         setIsLoading(true)
         setError(null)
-        try {
-            const initialPets = await fetchPetsWithCursor()
+        // try {
+        //     const initialPets = await fetchPetsWithCursor()
 
-            // 클라이언트 측에서 등록된 순서대로 정렬
-            const sortedPets = initialPets.slice().sort((a, b) => {
-                // a와 b의 등록 날짜를 비교하여 정렬
-                return new Date(b.registration_date).getTime() - new Date(a.registration_date).getTime()
-            })
+        //     // 클라이언트 측에서 등록된 순서대로 정렬
+        //     const sortedPets = initialPets.slice().sort((a, b) => {
+        //         // a와 b의 등록 날짜를 비교하여 정렬
+        //         return new Date(b.registration_date).getTime() - new Date(a.registration_date).getTime()
+        //     })
 
-            setPets(sortedPets)
-            setNextCursor(sortedPets[sortedPets.length - 1]?.petId.toString())
-        } catch (error) {
-            console.error('Error:', error)
-            setError('API call failed.')
-        } finally {
-            setIsLoading(false)
-        }
+        //     setPets(sortedPets)
+        //     setNextCursor(sortedPets[sortedPets.length - 1]?.petId.toString())
+        // } catch (error) {
+        //     console.error('Error:', error)
+        //     setError('API call failed.')
+        // } finally {
+        //     setIsLoading(false)
+        // }
     }
 
     useEffect(() => {

@@ -106,7 +106,6 @@ const PetDetail: React.FC = () => {
                     const response = await fetchPetDetail(petId);
                     console.log('API Response:', response);
                     if (response && response.isSuccess) {
-                        // response.result 대신 response.result.data를 사용하여 상태 설정
                         setPet(response.result.data);
                         // setPet(response.result);
                         console.log('Fetched Pet Data:', response.result.data);
