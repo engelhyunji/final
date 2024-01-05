@@ -8,8 +8,10 @@ const Header: React.FC = () => {
     const navigate = useNavigate()
     const { isLogin, logout } = useAuth()
 
-    const logoUrl = './LogoVer1.png'
-    const logoTypoUrl = './TypoBeige.png'
+    // const logoUrl = './LogoVer1.png'
+    // const logoTypoUrl = './TypoBeige.png'
+    const logoUrl = 'https://moon-test1-bucket.s3.ap-northeast-2.amazonaws.com/LogoVer1.png'
+    const logoTypoUrl = 'https://moon-test1-bucket.s3.ap-northeast-2.amazonaws.com/TypoBeige.png'
 
     return (
         <ST.HeaderWrap>
