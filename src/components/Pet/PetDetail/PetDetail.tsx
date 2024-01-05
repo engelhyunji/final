@@ -71,7 +71,7 @@ const PetDetail: React.FC = () => {
                     console.log('API Response:', response);
                     if (response && response.isSuccess) {
                         if (response.result) {
-                            setPet(response.result); // 이 부분을 수정합니다.
+                            setPet(response.result.data); // 이 부분을 수정합니다.
                             console.log('Fetched Pet Data:', response.result);
                         } else {
                             console.log('No pet data in response');
