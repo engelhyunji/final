@@ -69,7 +69,7 @@ const Shops: React.FC = () => {
     }, []);
 
     // 주소 검색 디바운스 적용
-    const delayedQuery = useCallback(_.debounce(async (q) => {
+    const delayedQuery = useCallback(_.debounce(async (q: string) => {
         try {
             const coords = await convertAddressToCoords(q);
             console.log('변환된 좌표:', coords); // 콘솔에서 확인
@@ -181,7 +181,7 @@ const Shops: React.FC = () => {
             return false
         } else {
             try {
-                const response = await instance.post(`/api/shops`, formData, {
+                const response = await instance.post(`/api/shops`, FormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },

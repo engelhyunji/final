@@ -202,7 +202,7 @@ const Pet: React.FC = () => {
                 </ST.PetInputBox>
 
                 {registrationStatus && (
-                    <ST.StatusMessage message={registrationStatus}>{registrationStatus}</ST.StatusMessage>
+                    <ST.Error>{registrationStatus}</ST.Error>
                 )}
 
                 <ST.PetBtn type="submit">입력 완료</ST.PetBtn>

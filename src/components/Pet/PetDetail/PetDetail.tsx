@@ -24,41 +24,78 @@ const PetDetail: React.FC = () => {
         setIsModalOpen(false)
     }
 
+    // useEffect(() => {
+    //     const fetchPetData = async () => {
+    //         setIsLoading(true)
+    //         setError(null)
+
+    //         try {
+    //             if (petId) {
+    //                 const response = await fetchPetDetail(petId)
+    //                 console.log('API Response:', response) // API 전체 응답 로그 출력
+    //                 if (response && response.isSuccess) {
+    //                     if (response.result) {
+    //                         setPet(response.result) // 데이터를 상태에 설정
+    //                         console.log('Fetched Pet Data:', response.result) // API 응답 로그
+    //                     } else {
+    //                         console.log('No pet data in response')
+    //                         setError('Pet data not found in response.')
+    //                     }
+    //                 } else {
+    //                     setError('Pet.')
+    //                 }
+    //             } else {
+    //                 setError('Pet ID.')
+    //             }
+    //         } catch (error) {
+    //             console.error('Error :', error)
+    //             setError('API.')
+    //         } finally {
+    //             setIsLoading(false)
+    //         }
+    //     }
+
+    //     if (petId) {
+    //         fetchPetData()
+    //     }
+    // }, [petId])
+
     useEffect(() => {
         const fetchPetData = async () => {
-            setIsLoading(true)
-            setError(null)
-
+            setIsLoading(true);
+            setError(null);
+    
             try {
                 if (petId) {
-                    const response = await fetchPetDetail(petId)
-                    console.log('API Response:', response) // API 전체 응답 로그 출력
+                    const response = await fetchPetDetail(petId);
+                    console.log('API Response:', response); // API 전체 응답 로그 출력
                     if (response && response.isSuccess) {
-                        if (response.result) {
-                            setPet(response.result) // 데이터를 상태에 설정
-                            console.log('Fetched Pet Data:', response.result) // API 응답 로그
+                        if (response.result && response.result.data) {
+                            setPet(response.result.data); // 'data' 프로퍼티를 상태에 설정
+                            console.log('Fetched Pet Data:', response.result.data); // API 응답 로그
                         } else {
-                            console.log('No pet data in response')
-                            setError('Pet data not found in response.')
+                            console.log('No pet data in response');
+                            setError('Pet data not found in response.');
                         }
                     } else {
-                        setError('Pet.')
+                        setError('Error fetching pet data.');
                     }
                 } else {
-                    setError('Pet ID.')
+                    setError('Pet ID is missing.');
                 }
             } catch (error) {
-                console.error('Error :', error)
-                setError('API.')
+                console.error('Error fetching pet data:', error);
+                setError('Error fetching pet data from API.');
             } finally {
-                setIsLoading(false)
+                setIsLoading(false);
             }
-        }
-
+        };
+    
         if (petId) {
-            fetchPetData()
+            fetchPetData();
         }
-    }, [petId])
+    }, [petId]);
+    
 
     useEffect(() => {
         console.log('Current Pet State:', pet) // 상태 업데이트 후 로그 출력

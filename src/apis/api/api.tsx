@@ -36,6 +36,8 @@ export interface shopResponseDto {
     shopDescribe: string
     imageUrls: string
     reviews: Review[]
+    latitude: 0
+    longitude: 0
 }
 export interface Review {
     reviewId: number
@@ -145,45 +147,54 @@ export const getMyChatRoom = async () => {
 
 // 지도 백엔드랑 연동 - 특정 가게의 위치 정보를 가져오는 함수
 // 특정 가게의 위치 정보를 가져오는 함수
-// export const getShopLocation = async (shopId: number) => {
+
+// export const getShopLocation = async (keyword: string) => {
 //     try {
-//         // const response = await instance.get(`/api/shops/${shopId}/map`)
 //         const response = await instance.get(`/api/shops`)
-//         if (response.data && response.data.data) {
-//             return response.data.data // 위치 정보 반환
+//         if (response.data && response.data.result) {
+//             // 가게 목록에서 첫 번째 가게의 위치 정보를 가져온다고 가정
+//             const firstShop = response.data.result[0];
+//             if (firstShop) {
+//                 // 위치 정보 반환
+//                 return {
+//                     latitude: firstShop.latitude,
+//                     longitude: firstShop.longitude
+//                 };
+//             } else {
+//                 throw new Error('검색 결과에서 가게를 찾을 수 없습니다.');
+//             }
 //         } else {
-//             throw new Error('위치 정보가 없습니다.')
+//             throw new Error('위치 정보가 없습니다.');
 //         }
 //     } catch (error) {
-//         console.error('위치 정보 조회 에러:', error)
-//         throw error
+//         console.error('위치 정보 조회 에러:', error);
+//         throw error;
 //     }
 // }
 
-export const getShopLocation = async (keyword: string) => {
+export const getShopLocation = async () => {
     try {
         const response = await instance.get(`/api/shops`)
         if (response.data && response.data.result) {
             // 가게 목록에서 첫 번째 가게의 위치 정보를 가져온다고 가정
-            const firstShop = response.data.result[0];
+            const firstShop = response.data.result[0]
             if (firstShop) {
                 // 위치 정보 반환
                 return {
                     latitude: firstShop.latitude,
-                    longitude: firstShop.longitude
-                };
+                    longitude: firstShop.longitude,
+                }
             } else {
-                throw new Error('검색 결과에서 가게를 찾을 수 없습니다.');
+                throw new Error('검색 결과에서 가게를 찾을 수 없습니다.')
             }
         } else {
-            throw new Error('위치 정보가 없습니다.');
+            throw new Error('위치 정보가 없습니다.')
         }
     } catch (error) {
-        console.error('위치 정보 조회 에러:', error);
-        throw error;
+        console.error('위치 정보 조회 에러:', error)
+        throw error
     }
 }
-
 
 // Shop 검색 (전체목록페이지)
 export const getSearchShop = async (query: { keyword: string }) => {

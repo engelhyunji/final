@@ -21,6 +21,8 @@ const ShopsModify: React.FC = () => {
         shopAddress: '',
         shopType: '',
         shopDescribe: '',
+        latitude: 0,
+        longitude: 0,
     })
     const describeLimit: number = 100
 
@@ -38,15 +40,17 @@ const ShopsModify: React.FC = () => {
             // 등록 및 수정에는 받은 데이터와 다른 형식으로 전달하기 때문
             const transformedShopData: ShopPostData | null = data?.shopResponseDto
                 ? {
-                      shopName: data.shopResponseDto.shopName,
-                      shopStartTime: data.shopResponseDto.shopStartTime,
-                      shopEndTime: data.shopResponseDto.shopEndTime,
-                      shopTel1: data.shopResponseDto.shopTel1,
-                      shopTel2: data.shopResponseDto.shopTel2,
-                      shopTel3: data.shopResponseDto.shopTel3,
-                      shopAddress: data.shopResponseDto.shopAddress,
-                      shopType: data.shopResponseDto.shopType,
-                      shopDescribe: data.shopResponseDto.shopDescribe,
+                      shopName: data.shopResponseDto.shopName || '',
+                      shopStartTime: data.shopResponseDto.shopStartTime || '',
+                      shopEndTime: data.shopResponseDto.shopEndTime || '',
+                      shopTel1: data.shopResponseDto.shopTel1 || '',
+                      shopTel2: data.shopResponseDto.shopTel2 || '',
+                      shopTel3: data.shopResponseDto.shopTel3 || '',
+                      shopAddress: data.shopResponseDto.shopAddress || '',
+                      shopType: data.shopResponseDto.shopType || '',
+                      shopDescribe: data.shopResponseDto.shopDescribe || '',
+                      latitude: data.shopResponseDto.latitude || 0,
+                      longitude: data.shopResponseDto.longitude || 0,
                   }
                 : null
             // 기존 데이터 담기
@@ -271,7 +275,10 @@ const ShopsModify: React.FC = () => {
                 </ST.ShopInputBox>
 
                 <ST.ShopInputBox>
-                    <ST.Label>가게 소개를 적어주세요</ST.Label> <ST.desLimit>{shopRequestDto.shopDescribe.length}/{describeLimit}</ST.desLimit>
+                    <ST.Label>가게 소개를 적어주세요</ST.Label>{' '}
+                    <ST.desLimit>
+                        {shopRequestDto.shopDescribe.length}/{describeLimit}
+                    </ST.desLimit>
                     <ST.DescInput
                         name="shopDescribe"
                         value={shopRequestDto.shopDescribe}

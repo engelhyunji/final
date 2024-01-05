@@ -293,6 +293,7 @@ export const ListItem = styled.div`
         border-radius: 7px;
         width: 380px;
         padding-left: 10px;
+
     }
 `
 
@@ -324,3 +325,6 @@ export const SearchAndListContainer = styled.div`
     width: 100%;
     justify-content: space-between;
 `
+
+
+

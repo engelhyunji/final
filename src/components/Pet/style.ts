@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { StatusMessageProps } from './Pet'
+// import { StatusMessageProps } from './Pet'
 import { Dropdown } from 'react-bootstrap'
 
 export const Container = styled.div`
@@ -120,16 +120,16 @@ export const Select = styled.select`
     border: 1px solid #ccc;
     border-radius: 4px;
 `
-
-export const StatusMessage = styled.p<StatusMessageProps>`
-    padding: 0.5rem;
-    margin-top: 1rem;
-    text-align: center;
-    color: red;
-    background-color: #fff;
-    border-radius: 4px;
-    display: ${(props) => (props.message ? 'block' : 'none')};
-`
+// 스타일 일단 지워놓기.
+// export const StatusMessage = styled.p<StatusMessageProps>`
+//     padding: 0.5rem;
+//     margin-top: 1rem;
+//     text-align: center;
+//     color: red;
+//     background-color: #fff;
+//     border-radius: 4px;
+//     display: ${(props) => (props.message ? 'block' : 'none')};
+// `
 
 export const Wrap = styled.div`
     width: 100%;

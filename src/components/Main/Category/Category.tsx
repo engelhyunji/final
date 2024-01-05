@@ -24,7 +24,7 @@ interface ShopInfo {
 
 const Category: React.FC = () => {
     const [shops, setShops] = useState<ShopInfo[]>([])
-    const [selectedCategory, setSelectedCategory] = useState<ShopType>('GROOMING')
+    const [selectedCategory, setSelectedCategory] = useState<string>('GROOMING')
     const navigate = useNavigate()
 
     const categories = [
@@ -134,8 +134,8 @@ const Category: React.FC = () => {
                 {categories.map((category, index) => (
                     <ST.CategoryItem
                         key={index}
-                        $isSelected={category.value === selectedCategory}
-                        onClick={() => handleCategoryClick(category.value)}
+                        $isSelected={category.value === (selectedCategory as string)}
+                        onClick={() => handleCategoryClick(category.value as ShopType)}
                     >
                         <p>{category.displayName}</p>
                     </ST.CategoryItem>
