@@ -15,9 +15,12 @@ export const addReview = async (shopId: number, comment: string, shopName: strin
                 // 리뷰 작성은 한개만 가능
             } else if (error.response.data.code === 4508) {
                 alert(`작성하신 리뷰가 ${error.response.data.message}`)
-            } else {
-                alert('리뷰 등록을 할 수 없습니다')
             }
+        } // 리뷰 글자수 2~50 제한
+        else if (error.response.data.code === 400) {
+            alert(error.response.data.message)
+        } else {
+            alert('리뷰 등록을 할 수 없습니다')
         }
     }
 }
