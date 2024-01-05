@@ -127,9 +127,9 @@ const PetDetail: React.FC = () => {
                     const response = await fetchPetDetail(petId);
                     console.log('API Response:', response);
                     if (response && response.isSuccess) {
-                        setPet(response.result.data);
+                        setPet(response.result);
                         // setPet(response.result);
-                        console.log('Fetched Pet Data:', response.result.data);
+                        console.log('Fetched Pet Data:', response.result);
                     } else {
                         console.log('No pet data in response');
                         setError('Pet data not found in response.');
