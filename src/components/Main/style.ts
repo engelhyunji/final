@@ -303,26 +303,22 @@ export const MainTopWrapper = styled.div`
     align-items: center; // 이미지 내부 아이템을 중앙 정렬합니다.
 `
 export const OverlayContainer = styled.div`
+    width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
-    padding: 50px;
 `
 
-export const PetBackImage = styled.img`
+export const PetBackImage = styled.div`
     position: absolute;
-    width: 2765px;
-    top: 50%;
+    width: 1440px;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, 15%);
     z-index: -1;
-    max-width: 100%;
     height: 969px;
     background-image: url('/PetBack.png');
-    filter: blur(10.25px);
-    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
 `
 export const Bottom = styled.div`
     padding-top: 50px; // 위쪽 여백
