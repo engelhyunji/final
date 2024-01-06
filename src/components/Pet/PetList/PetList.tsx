@@ -21,8 +21,8 @@ const PetList: React.FC = () => {
 
     const result = await fetchPets();
 
-    if (result && result.isSuccess) {
-        setPets(result.result);
+    if (result) {
+        setPets(result.data);
     } else {
         setError('펫 목록을 불러오는 데 실패했습니다.');
     }
