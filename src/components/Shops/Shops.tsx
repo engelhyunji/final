@@ -1,27 +1,27 @@
-import React, { useState, ChangeEvent, FormEvent, useRef, useEffect, useCallback } from 'react';
-import * as ST from './style';
-import instance from '../../apis/instance';
-import { useNavigate } from 'react-router-dom';
-import { Dropdown } from 'react-bootstrap';
-import BackWave from '../BackWave';
-import _ from 'lodash';
+import React, { useState, ChangeEvent, FormEvent, useRef, useEffect, useCallback } from 'react'
+import * as ST from './style'
+import instance from '../../apis/instance'
+import { useNavigate } from 'react-router-dom'
+import { Dropdown } from 'react-bootstrap'
+import BackWave from '../BackWave'
+import _ from 'lodash'
 
 export interface ShopPostData {
-    shopName: string;
-    shopStartTime: string;
-    shopEndTime: string;
-    shopTel1: string;
-    shopTel2: string;
-    shopTel3: string;
-    shopAddress: string;
-    shopType: string;
-    shopDescribe: string;
-    latitude: number; // 추가된 필드
-    longitude: number; // 추가된 필드
+    shopName: string
+    shopStartTime: string
+    shopEndTime: string
+    shopTel1: string
+    shopTel2: string
+    shopTel3: string
+    shopAddress: string
+    shopType: string
+    shopDescribe: string
+    latitude: number // 추가된 필드
+    longitude: number // 추가된 필드
 }
 
 const Shops: React.FC = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const [shopRequestDto, setShopRequestDto] = useState<ShopPostData>({
         shopName: '',
         shopStartTime: '',
@@ -34,93 +34,96 @@ const Shops: React.FC = () => {
         shopDescribe: '',
         latitude: 0,
         longitude: 0,
-    });
+    })
 
-    const describeLimit: number = 100;
-    const [imgUrl, setImgUrl] = useState<string>('');
-    const [uploadImage, setUploadImage] = useState<File>(new File([], ''));
-    const tel2Input = useRef<HTMLInputElement>(null);
-    const tel3Input = useRef<HTMLInputElement>(null);
+    const describeLimit: number = 100
+    const [imgUrl, setImgUrl] = useState<string>('')
+    const [uploadImage, setUploadImage] = useState<File>(new File([], ''))
+    const tel2Input = useRef<HTMLInputElement>(null)
+    const tel3Input = useRef<HTMLInputElement>(null)
 
     const convertAddressToCoords = async (address: string): Promise<{ latitude: number; longitude: number }> => {
         return new Promise((resolve, reject) => {
-            const geocoder = new window.kakao.maps.services.Geocoder();
+            const geocoder = new window.kakao.maps.services.Geocoder()
             geocoder.addressSearch(address, function (result, status) {
                 if (status === window.kakao.maps.services.Status.OK && result[0]) {
-                    const latitude = parseFloat(result[0].y);
-                    const longitude = parseFloat(result[0].x);
-                    resolve({ latitude, longitude });
+                    const latitude = parseFloat(result[0].y)
+                    const longitude = parseFloat(result[0].x)
+                    resolve({ latitude, longitude })
                 } else {
-                    reject(new Error(`주소 변환 실패: ${address}`));
+                    reject(new Error(`주소 변환 실패: ${address}`))
                 }
-            });
-        });
-    };
+            })
+        })
+    }
 
     useEffect(() => {
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=30e58bfb3907dffb16196ae237d38d8&libraries=services`;
-        document.head.appendChild(script);
+        const script = document.createElement('script')
+        script.async = true
+        script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=30e58bfb3907dffb16196ae237d38d8&libraries=services`
+        document.head.appendChild(script)
 
         script.onload = () => {
             // 스크립트 로드 완료 후 kakao.maps 서비스를 사용할 수 있음
-        };
-    }, []);
+        }
+    }, [])
 
     // 주소 검색 디바운스 적용
-    const delayedQuery = useCallback(_.debounce(async (q: string) => {
-        try {
-            const coords = await convertAddressToCoords(q);
-            console.log('변환된 좌표:', coords); // 콘솔에서 확인
-            setShopRequestDto((prevData) => ({
-                ...prevData,
-                shopAddress: q,
-                latitude: coords.latitude,
-                longitude: coords.longitude
-            }));
-        } catch (error) {
-            console.error('주소 변환 에러:', error);
-            alert('주소 변환에 실패했습니다. 정확한 주소를 입력해주세요.');
-        }
-    }, 1000), []);
+    const delayedQuery = useCallback(
+        _.debounce(async (q: string) => {
+            try {
+                const coords = await convertAddressToCoords(q)
+                console.log('변환된 좌표:', coords) // 콘솔에서 확인
+                setShopRequestDto((prevData) => ({
+                    ...prevData,
+                    shopAddress: q,
+                    latitude: coords.latitude,
+                    longitude: coords.longitude,
+                }))
+            } catch (error) {
+                console.error('주소 변환 에러:', error)
+                alert('주소 변환에 실패했습니다. 정확한 주소를 입력해주세요.')
+            }
+        }, 1000),
+        [],
+    )
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target
 
         if (name === 'shopTel1' || name === 'shopTel2' || name === 'shopTel3') {
             // 숫자만 최대 4자리 입력 정규식
-            const telRegEx = /^[0-9\b -]{0,4}$/;
+            const telRegEx = /^[0-9\b -]{0,4}$/
             if (telRegEx.test(value)) {
                 // 전화번호(shopTel) 각 부분 업데이트
                 if (name === 'shopTel1' && value.length < 5) {
                     setShopRequestDto((prevData) => ({
                         ...prevData,
                         shopTel1: value,
-                    }));
+                    }))
                     // 4자리도 입력 가능하지만 많은 경우인 3자리에서 포커스 이동
-                    if (value.length === 3) tel2Input.current?.focus();
+                    if (value.length === 3) tel2Input.current?.focus()
                 }
                 if (name === 'shopTel2') {
                     setShopRequestDto((prevData) => ({
                         ...prevData,
                         shopTel2: value,
-                    }));
-                    if (value.length === 4) tel3Input.current?.focus();
+                    }))
+                    if (value.length === 4) tel3Input.current?.focus()
                 }
                 if (name === 'shopTel3') {
                     setShopRequestDto((prevData) => ({
                         ...prevData,
                         shopTel3: value,
-                    }));
+                    }))
                 }
             }
         } else if (name === 'shopAddress') {
             setShopRequestDto((prevData) => ({
                 ...prevData,
-                [name]: value
-            }));
-            delayedQuery(value);
+                [name]: value,
+            }))
+            delayedQuery(value)
         } else {
             // 가게 이름, 위치, 설명 - 글자 수 제한
             if (name === 'shopName' && value.length > 20) {
@@ -137,33 +140,50 @@ const Shops: React.FC = () => {
                 [name]: value,
             }))
         }
-    };
+    }
 
     const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
-            const file = e.target.files[0];
-            const reader = new FileReader();
+            const file = e.target.files[0]
+            const reader = new FileReader()
             reader.onload = () => {
-                const result = reader.result as string;
+                const result = reader.result as string
                 // 이미지 업데이트
-                setImgUrl(result);
-                setUploadImage(file);
-            };
-            reader.readAsDataURL(e.target.files[0]);
+                setImgUrl(result)
+                setUploadImage(file)
+            }
+            reader.readAsDataURL(e.target.files[0])
         }
-    };
+    }
+
+    // 이미지 드래그 앤 드롭
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        e.currentTarget.style.border = '2px solid #00BD8e'
+    }
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        e.currentTarget.style.border = 'none'
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            const file = e.dataTransfer.files[0]
+            setUploadImage(file)
+            const reader = new FileReader()
+            reader.onloadend = () => setImgUrl(reader.result as string)
+            reader.readAsDataURL(file)
+        }
+    }
 
     // shopType (드롭다운 토글 값) 업데이트
     const handleDropdownChange = (value: string): void => {
         setShopRequestDto((prevData) => ({
             ...prevData,
             shopType: value,
-        }));
-    };
+        }))
+    }
 
     // 등록하기
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+        e.preventDefault()
 
         // 빈 값 체크
         if (
@@ -197,15 +217,15 @@ const Shops: React.FC = () => {
         }
 
         try {
-            const formData = new FormData();
+            const formData = new FormData()
             // 기존 데이터 추가
             Object.entries(shopRequestDto).forEach(([key, value]) => {
-                formData.append(key, value.toString());
-            });
+                formData.append(key, value.toString())
+            })
 
             // 이미지 파일 추가
             if (uploadImage) {
-                formData.append('imageUrl', uploadImage);
+                formData.append('imageUrl', uploadImage)
             }
 
             // 요청 전송
@@ -213,17 +233,17 @@ const Shops: React.FC = () => {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
-            });
+            })
 
-            console.log('가게 등록 response:', response.data);
-            navigate('/shopslist');
+            console.log('가게 등록 response:', response.data)
+            navigate('/shopslist')
         } catch (error: any) {
             if (error.response.data.code === 4506) {
                 alert(error.response.data.message)
             }
             console.error('가게 등록 에러 :', error)
         }
-    };
+    }
 
     return (
         <ST.Container>
@@ -343,7 +363,7 @@ const Shops: React.FC = () => {
                         onChange={handleImageFileChange}
                         style={{ display: 'none' }}
                     />
-                    <ST.ImgWrap>
+                    <ST.ImgWrap onDragOver={handleDragOver} onDrop={handleDrop}>
                         <ST.ImgLabel htmlFor="image">
                             {!imgUrl && (
                                 <>
