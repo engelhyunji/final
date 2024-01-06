@@ -65,8 +65,27 @@
 
 import React, { useState, useEffect } from 'react';
 import * as ST from './style';
-import { fetchPets, PetDetails } from '../../../apis/api/petlist';
 import { useNavigate } from 'react-router-dom';
+import instance from '../../../apis/instance'; // instance import 추가
+
+export interface PetDetails {
+    userId: number;
+    petId: number;
+    nickname: string;
+    petName: string;
+    petGender: string;
+    petKind: string;
+    petInfo: string;
+    imageUrls: string[];
+    petLikes: number;
+}
+
+export interface ApiResponse {
+    isSuccess: boolean;
+    code: number;
+    message: string;
+    result: PetDetails[];
+}
 
 const MainTop: React.FC = () => {
     const [pets, setPets] = useState<PetDetails[]>([]);
@@ -75,39 +94,38 @@ const MainTop: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchPetsData = async () => {
+        const fetchPets = async () => {
             setIsLoading(true);
             setError(null);
     
             try {
-                const response = await fetchPets();
-                if (response && response.isSuccess) {
-                    setPets(response.result); // 데이터를 상태에 설정
-                    console.log('mainpet', response.result);
+                const response = await instance.get<ApiResponse>('/api/pets');
+                if (response.data.isSuccess) {
+                    setPets(response.data.result);
                 } else {
-                    setError('펫 목록을 불러오는 데 실패했습니다.');
+                    throw new Error(`Error: ${response.data.message}`);
                 }
             } catch (error) {
-                console.error('API 호출 중 오류 발생:', error);
-                setError('API 호출에 실패했습니다.');
+                console.error('Error:', error);
+                setError('Failed to load pets.');
             } finally {
                 setIsLoading(false);
             }
         };
     
-        fetchPetsData();
+        fetchPets();
     }, []);
 
     if (isLoading) {
-        return <ST.TopContainer>로딩 중...</ST.TopContainer>;
+        return <ST.TopContainer>Loading...</ST.TopContainer>;
     }
 
     if (error) {
-        return <ST.TopContainer>오류: {error}</ST.TopContainer>;
+        return <ST.TopContainer>Error: {error}</ST.TopContainer>;
     }
 
     if (pets.length === 0) {
-        return <ST.TopContainer>등록된 애완동물이 없습니다.</ST.TopContainer>;
+        return <ST.TopContainer>No pets registered.</ST.TopContainer>;
     }
 
     return (
@@ -115,7 +133,9 @@ const MainTop: React.FC = () => {
             <ST.Content>
                 {pets.slice(0, 6).map((pet) => (
                     <ST.Inside key={pet.petId} onClick={() => navigate(`/pet/${pet.petId}`)}>
-                        <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
+                        {pet.imageUrls && pet.imageUrls.length > 0 && (
+                            <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} image`} />
+                        )}
                     </ST.Inside>
                 ))}
             </ST.Content>
