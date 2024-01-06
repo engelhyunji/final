@@ -185,7 +185,7 @@ export const ImgCard1 = styled.div`
 export const ImgCard = styled.div`
     margin-top: 33px;
     width: 448px;
-    height: 208px;
+    height: 238px;
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 35px;
