@@ -1,79 +1,113 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from 'react-router-dom'
-import { ApiResponse } from '../../../apis/api/petlist'
-import { PetDetails } from '../../../apis/api/petlist'
 import * as ST from './style'
 import instance from '../../../apis/instance'
 
-const PetList: React.FC = () => {
-    const [pets, setPets] = useState<PetDetails[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+export interface PetDetails {
+    userId: number
+    petId: number
+    nickname: string
+    petName: string
+    petGender: string
+    petKind: string
+    petInfo: string
+    imageUrls: string[]
+    petLikes: number
+}
 
-    const navigate = useNavigate();
+export interface ApiResponse {
+    isSuccess: boolean
+    code: number
+    message: string
+    result: PetDetails[]
+}
+
+const PetList: React.FC = () => {
+    const [pets, setPets] = useState<PetDetails[]>([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    const navigate = useNavigate()
 
     const handlePetClick = (petId: number) => {
-        navigate(`/pet/${petId}`);
+        navigate(`/pet/${petId}`)
+    }
+
+    // 좋아요 추가 함수
+    const addLike = async (petId: number) => {
+        try {
+            await instance.post(`/api/pets/${petId}/like`)
+            setPets((currentPets) =>
+                currentPets.map((pet) => (pet.petId === petId ? { ...pet, petLikes: pet.petLikes + 1 } : pet)),
+            )
+        } catch (error) {
+            console.error('좋아요 추가 중 에러 발생:', error)
+        }
+    }
+
+    // 좋아요 취소 함수
+    const removeLike = async (petId: number) => {
+        try {
+            await instance.delete(`/api/pets/${petId}/unlike`)
+            setPets((currentPets) =>
+                currentPets.map((pet) => (pet.petId === petId ? { ...pet, petLikes: pet.petLikes - 1 } : pet)),
+            )
+        } catch (error) {
+            console.error('좋아요 취소 중 에러 발생:', error)
+        }
     }
 
     const fetchPets = async () => {
-        setIsLoading(true);
-        setError(null);
+        setIsLoading(true)
+        setError(null)
 
         try {
-            const response = await instance.get<ApiResponse<{ data: PetDetails[] }>>('/api/pets');
-            if (response.data.isSuccess && response.data.result.data) {
-                setPets(response.data.result.data); // API 응답 구조에 맞게 상태 업데이트
+            const response = await instance.get<ApiResponse>('/api/pets')
+            console.log(response)
+            if (response.data.isSuccess) {
+                setPets(response.data.result)
             } else {
-                throw new Error(`오류 발생: ${response.data.message}`);
+                throw new Error(`오류 발생: ${response.data.message}`)
             }
         } catch (error) {
-            console.error('에러:', error);
-            setError('펫 목록을 불러오는 데 실패했습니다.');
+            console.error('에러:', error)
+            setError('펫 목록을 불러오는 데 실패했습니다.')
         } finally {
-            setIsLoading(false);
+            setIsLoading(false)
         }
-    };
+    }
 
     useEffect(() => {
-        fetchPets();
-    }, []);
+        fetchPets()
+    }, [])
 
     if (isLoading) {
-        return <div>로딩 중...</div>;
+        return <div>로딩 중...</div>
     }
 
     if (error) {
-        return <div>오류: {error}</div>;
+        return <div>오류: {error}</div>
     }
+
+    if (pets.length === 0) {
+        return <div>등록된 애완동물이 없습니다.</div>
+    }
+
     return (
         <ST.Container>
-            <ST.ProfileContainer>
-                <ST.TitleBackContainer>
-                <ST.PetListH2>Pet</ST.PetListH2>
-                    <ST.PetP>우리 애기 귀여운 거 나만 볼 수 없을 땐? 마이펫에 자랑하기!</ST.PetP>
-                </ST.TitleBackContainer>
-            </ST.ProfileContainer>
-            {/* <ST.PetSearchContainer>
-                <ST.PetSearchCondition>애견 이름</ST.PetSearchCondition>
-                <ST.PetSearchInput
-                    type="text"
-                    value={'검색기능 준비중입니다'}
-                    placeholder="검색기능 준비중입니다"
-                    readOnly // 검색 기능이 준비 중이므로 입력을 방지합니다.
-                    />
-                <ST.SearchBtn>검색</ST.SearchBtn>
-            </ST.PetSearchContainer> */}
-            <ST.PetListContainer>
-                <ST.PetListH3>Pet 조회</ST.PetListH3>
-            </ST.PetListContainer>
             <ST.Posts>
                 {pets.map((pet) => (
-                    <ST.PostContainer key={pet.petId} onClick={() => handlePetClick(pet.petId)}>
-                        {pet.imageUrls && pet.imageUrls[0] && (
-                            <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
+                    <ST.PostContainer key={pet.petId}>
+                        {pet.imageUrls && pet.imageUrls.length > 0 && (
+                            <ST.Img
+                                src={pet.imageUrls[0]}
+                                alt={`${pet.petName} 이미지`}
+                                onClick={() => handlePetClick(pet.petId)}
+                            />
                         )}
+                        <button onClick={() => addLike(pet.petId)}>좋아요 ({pet.petLikes})</button>
+                        <button onClick={() => removeLike(pet.petId)}>좋아요 취소</button>
                     </ST.PostContainer>
                 ))}
             </ST.Posts>
