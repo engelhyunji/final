@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import Slider from 'react-slick'
 
 type CategoryItemProps = {
     $isSelected: boolean
