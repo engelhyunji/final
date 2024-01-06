@@ -231,7 +231,6 @@ const My: React.FC = () => {
             {/* 등록된 가게 및 반려동물이 없을 때 */}
             {shops.length === 0 && pets.length === 0 && <Empty />}
 
-            {shops.length > 0 || pets.length > 0 || (
                 <ST.MyCategoryUl>
                     <ST.MyCategoryLi
                         onClick={() => MyCategoryHandler('shop')}
@@ -246,9 +245,8 @@ const My: React.FC = () => {
                         내 반려동물
                     </ST.MyCategoryLi>
                 </ST.MyCategoryUl>
-            )}
 
-            {myCategory === 'shop' && shops.length > 0 && (
+            {myCategory === 'shop' && (
                 <ST.ShopNPetSection>
                     <ST.MyUl>
                         {shops.map((shop) => (
@@ -303,7 +301,7 @@ const My: React.FC = () => {
                 </ST.ShopNPetSection>
             )}
 
-            {myCategory === 'pet' && pets.length > 0 && (
+            {myCategory === 'pet' && (
                 <ST.ShopNPetSection>
                     <ST.MyUl>
                         {pets.map((pet) => (
@@ -371,7 +369,6 @@ const My: React.FC = () => {
                                     </ST.MyChatP>
                                     <p>
                                         {chatroom.tags?.map((tag) => (
-                                            <>
                                                 <ST.TagWords
                                                     key={tag.name}
                                                     onClick={() => DeleteTag(chatroom.roomId, tag.name)}
@@ -379,7 +376,6 @@ const My: React.FC = () => {
                                                     {tag.name && `#${tag.name}`}
                                                     <AiFillMinusCircle style={TagMinus} />
                                                 </ST.TagWords>
-                                            </>
                                         ))}
                                     </p>
                                 </ST.MyChatDiv>
