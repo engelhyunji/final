@@ -9,7 +9,7 @@ export interface PetDetails {
     nickname: string
     petName: string
     petGender: 'MALE' | 'FEMALE'
-    petKind: 'SMALL' | 'MEDIUM' | 'LARGE'
+    // petKind: 'SMALL' | 'MEDIUM' | 'LARGE'
     petInfo: string
     imageUrls: string[]
     petLikes: number // 좋아요 수
