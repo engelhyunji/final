@@ -1,4 +1,5 @@
 ![Brochure_수정1](https://github.com/engelhyunji/final/assets/147478174/f94f141f-bf5a-4bc4-b06d-3718dc36e494)
+![Logo file_1](https://github.com/engelhyunji/final/assets/147478174/21f44e9f-e376-442f-91b4-02811f058c56)
 
 
 # 🐶 와르와르 FE Github
