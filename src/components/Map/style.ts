@@ -289,7 +289,7 @@ export const ListItem = styled.div`
     }
 
     &.active {
-        background-color: #4ce1a1;
+        /* background-color: #4ce1a1; */
         border-radius: 7px;
         width: 380px;
         padding-left: 10px;
