@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
-import { fetchPets } from '../../../apis/api/petlist'; // fetchPets 함수 추가
-import { PetDetails } from '../../../apis/api/pet';
+import React, { useState, useEffect } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { useNavigate } from 'react-router-dom'
+import { ApiResponse } from '../../../apis/api/petlist'
+import { PetDetails } from '../../../apis/api/petlist'
+import * as ST from './style'
+import instance from '../../../apis/instance'
 
 const PetList: React.FC = () => {
     const [pets, setPets] = useState<PetDetails[]>([]);
@@ -15,29 +17,28 @@ const PetList: React.FC = () => {
         navigate(`/pet/${petId}`);
     }
 
-    const fetchPetsData = async () => {
-    setIsLoading(true);
-    setError(null);
+    const fetchPets = async () => {
+        setIsLoading(true);
+        setError(null);
 
-    const result = await fetchPets();
-
-    if (result && result.isSuccess) {
-        setPets(result.result);
-    } else {
-        setError('펫 목록을 불러오는 데 실패했습니다.');
-    }
-
-    setIsLoading(false);
-}
-
+        try {
+            const response = await instance.get<ApiResponse<{ data: PetDetails[] }>>('/api/pets');
+            if (response.data.isSuccess && response.data.result.data) {
+                setPets(response.data.result.data); // API 응답 구조에 맞게 상태 업데이트
+            } else {
+                throw new Error(`오류 발생: ${response.data.message}`);
+            }
+        } catch (error) {
+            console.error('에러:', error);
+            setError('펫 목록을 불러오는 데 실패했습니다.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
-        fetchPetsData();
+        fetchPets();
     }, []);
-
-    const handleFetchPetsClick = () => {
-        fetchPetsData();
-    }
 
     if (isLoading) {
         return <div>로딩 중...</div>;
@@ -46,38 +47,38 @@ const PetList: React.FC = () => {
     if (error) {
         return <div>오류: {error}</div>;
     }
-
     return (
-        <div>
-            <p>애완동물 목록</p>
-            <button onClick={handleFetchPetsClick}>전체 조회</button>
-            <div>
+        <ST.Container>
+            <ST.ProfileContainer>
+                <ST.TitleBackContainer>
+                <ST.PetListH2>Pet</ST.PetListH2>
+                    <ST.PetP>우리 애기 귀여운 거 나만 볼 수 없을 땐? 마이펫에 자랑하기!</ST.PetP>
+                </ST.TitleBackContainer>
+            </ST.ProfileContainer>
+            {/* <ST.PetSearchContainer>
+                <ST.PetSearchCondition>애견 이름</ST.PetSearchCondition>
+                <ST.PetSearchInput
+                    type="text"
+                    value={'검색기능 준비중입니다'}
+                    placeholder="검색기능 준비중입니다"
+                    readOnly // 검색 기능이 준비 중이므로 입력을 방지합니다.
+                    />
+                <ST.SearchBtn>검색</ST.SearchBtn>
+            </ST.PetSearchContainer> */}
+            <ST.PetListContainer>
+                <ST.PetListH3>Pet 조회</ST.PetListH3>
+            </ST.PetListContainer>
+            <ST.Posts>
                 {pets.map((pet) => (
-                    <div key={pet.petId} onClick={() => handlePetClick(pet.petId)}>
+                    <ST.PostContainer key={pet.petId} onClick={() => handlePetClick(pet.petId)}>
                         {pet.imageUrls && pet.imageUrls[0] && (
-                            <img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
+                            <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
                         )}
-
-                        <div>
-                            <p>
-                                <label>애완동물 이름:</label> {pet.petName}
-                            </p>
-                            <p>
-                                <label>애완동물 성별:</label> {pet.petGender === 'MALE' ? '남아' : '여아'}
-                            </p>
-                            <p>
-                                <label>애완동물 종류:</label>{' '}
-                                {pet.petKind === 'SMALL' ? '소형견' : pet.petKind === 'MEDIUM' ? '중형견' : '대형견'}
-                            </p>
-                            <p>
-                                <label>애완동물 특이사항:</label> {pet.petInfo}
-                            </p>
-                        </div>
-                    </div>
+                    </ST.PostContainer>
                 ))}
-            </div>
-        </div>
+            </ST.Posts>
+        </ST.Container>
     )
 }
 
-export default PetList;
+export default PetList

@@ -9,7 +9,7 @@ export interface PetDetails {
     petKind: 'SMALL' | 'MEDIUM' | 'LARGE'
     petInfo: string
     imageUrls: string[]
-    petLikes: number // 좋아요 수
+    // petLikes: number // 좋아요 수
 }
 
 // export interface ApiResponse<T> {
@@ -79,9 +79,10 @@ export const fetchPetsWithCursor = async (cursor?: string, limit: number = 1) =>
 // 펫 조회
 export const fetchPets = async (): Promise<{ message: string; data: PetDetails[] } | null> => {
     try {
-        const response = await instance.get<{ message: string; data: PetDetails[] }>('api/pets')
-
+        const response = await instance.get<{ message: string; data: PetDetails[] }>('/api/pets')
+        console.log(response)
         if (response.status === 200) {
+            
             return response.data
         } else {
             throw new Error(`오류 발생: ${response.status}`)
