@@ -16,9 +16,9 @@ const MainTop: React.FC = () => {
     
             try {
                 const response = await fetchPets();
-                if (response && response.isSuccess && response.result && Array.isArray(response.result.data)) {
-                    setPets(response.result.data); // 데이터를 상태에 설정
-                    console.log('mainpet', response.result.data);
+                if (response && Array.isArray(response.data)) {
+                    setPets(response.data); // 데이터를 상태에 설정
+                    console.log('mainpet', response.data);
                 } else {
                     setError('펫 목록을 불러오는 데 실패했습니다.');
                 }
