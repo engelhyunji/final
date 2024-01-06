@@ -44,8 +44,11 @@
 ![image](https://github.com/engelhyunji/final/assets/147478174/834e3c8d-bc6b-4327-9e90-d8eec125c9b0)
 
 # 🐾 User Flow
-
+<details>
+  <summary>User Flow</summary> 
+  
 ![image](https://github.com/engelhyunji/final/assets/147478174/0e154dda-eccb-4c9c-9b7c-6f6a30f021ac)
+</details>
 
 
 # 🐾 ERD
@@ -152,7 +155,6 @@
 # 🐾  [데모영상](https://youtu.be/nUkjb7pTXLo)
 
 
----
 <details>
 <summary> ✅유저피드백 및 개선사항</summary>
 
