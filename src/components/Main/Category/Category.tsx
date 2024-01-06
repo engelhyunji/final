@@ -118,18 +118,6 @@ const Category: React.FC = () => {
 
     return (
         <ST.CategoryContainer>
-            {/* <ST.CategoryList>
-                {['GROOMING', 'HOSPITAL', 'CAFE', 'ETC'].map((category, index) => (
-                // {['애견미용실', '동물병원', '애견카페', '기타'].map((category, index) => (
-                    <ST.CategoryItem
-                        key={index}
-                        $isSelected={category === selectedCategory}
-                        onClick={() => handleCategoryClick(category as ShopType)}
-                    >
-                        <p>{category}</p>
-                    </ST.CategoryItem>
-                ))}
-            </ST.CategoryList> */}
             <ST.CategoryList>
                 {categories.map((category, index) => (
                     <ST.CategoryItem
@@ -141,25 +129,26 @@ const Category: React.FC = () => {
                     </ST.CategoryItem>
                 ))}
             </ST.CategoryList>
-
-            {shops.length > 0 && (
-                <Slider {...settings}>
-                    {filteredShops.map((shop, index) => (
-                        <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
-                            <ST.ShopCard
-                                onClick={() => navigate(`/shops/${shop.shopId}`)} // 상세 페이지로 이동
-                            >
-                                {shop.imageUrls?.map((url, imgIdx) => (
-                                    <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
-                                ))}
-                                <p>{shop.shopName}</p>
-                                <p>업종: {shop.shopType}</p>
-                                <p>주소: {shop.shopAddress}</p>
-                            </ST.ShopCard>
-                        </div>
-                    ))}
-                </Slider>
-            )}
+            <ST.ShopList>
+                {shops.length > 0 && (
+                    <Slider {...settings}>
+                        {filteredShops.map((shop, index) => (
+                            <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
+                                <ST.ShopCard
+                                    onClick={() => navigate(`/shops/${shop.shopId}`)} // 상세 페이지로 이동
+                                >
+                                    {shop.imageUrls?.map((url, imgIdx) => (
+                                        <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
+                                    ))}
+                                    <p>{shop.shopName}</p>
+                                    <p>업종: {shop.shopType}</p>
+                                    <p>주소: {shop.shopAddress}</p>
+                                </ST.ShopCard>
+                            </div>
+                        ))}
+                    </Slider>
+                )}
+            </ST.ShopList>
         </ST.CategoryContainer>
     )
 }
