@@ -149,7 +149,7 @@
 
 
 
-# 🐾  [데모영상](https://hanghae99.slack.com/files/U05UC18R5TJ/F06CMSLENBX/_________________________1_________________________-1.mp4)
+# 🐾  [데모영상](https://youtu.be/nUkjb7pTXLo)
 
 
 ---
