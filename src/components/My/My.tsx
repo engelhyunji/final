@@ -231,7 +231,7 @@ const My: React.FC = () => {
             {/* 등록된 가게 및 반려동물이 없을 때 */}
             {shops.length === 0 && pets.length === 0 && <Empty />}
 
-            {shops.length > 0 && pets.length > 0 && (
+            {shops.length > 0 || pets.length > 0 || (
                 <ST.MyCategoryUl>
                     <ST.MyCategoryLi
                         onClick={() => MyCategoryHandler('shop')}
