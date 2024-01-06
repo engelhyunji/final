@@ -1,6 +1,5 @@
 ![Brochure_수정1](https://github.com/engelhyunji/final/assets/147478174/f94f141f-bf5a-4bc4-b06d-3718dc36e494)
 
----
 
 # 🐶 와르와르 FE Github
 # 🐶 와르와르 [서비스 링크](https://final-pi-five.vercel.app/)
@@ -41,9 +40,11 @@
 
 
 # 🐾 아키텍처
+
 ![image](https://github.com/engelhyunji/final/assets/147478174/834e3c8d-bc6b-4327-9e90-d8eec125c9b0)
 
 # 🐾 User Flow
+
 ![진짜최종유저을로우](
 https://github.com/mooooonmin/test_project/assets/118891828/4c706a98-4bfc-4610-b44a-a1eacad81eef
 )
@@ -51,6 +52,7 @@ https://github.com/mooooonmin/test_project/assets/118891828/4c706a98-4bfc-4610-b
 # 🐾 ERD
 <details>
   <summary>ERD</summary> 
+  
 ![image](https://github.com/engelhyunji/final/assets/147478174/55a967b4-e915-4395-998a-69bcb91b4dd7)
 </details>
 
@@ -58,16 +60,18 @@ https://github.com/mooooonmin/test_project/assets/118891828/4c706a98-4bfc-4610-b
 ## 가게 및 반려동물 등록
 <details>
   <summary>가게 및 반려동물 등록</summary> 
-- 로그인한 사용자에 한하여 나의 가게 또는 반려동물을 이미지와 함께 **등록**할 수 있습니다.
+- 로그인한 사용자에 한하여 나의 가게 또는 반려동물을 이미지와 함께 **등록**할 수 있습니다.<br>
 - 등록한 가게 또는 반려동물은 각 목록페이지에 게시되어 공유됩니다.<br>
+  
 ![image](https://github.com/engelhyunji/final/assets/147478174/d89ad0b9-f305-4471-94a3-55679c0ed34f)
 </details>
 
 ## 가게 리뷰 작성 및 리뷰 추천
 <details>
   <summary>가게 리뷰 작성 및 리뷰 추천</summary>
-- 가게에 리뷰를 등록하여 사용자들끼리 정보를 공유할 수 있습니다.
+- 가게에 리뷰를 등록하여 사용자들끼리 정보를 공유할 수 있습니다.<br>
 - 가게에 달린 리뷰 중 도움이 된 리뷰에 추천을 할 수 있습니다.<br>
+  
 ![image](https://github.com/engelhyunji/final/assets/147478174/c12938c8-262a-41f6-b4b3-7291edf40ae0)
 </details>
 
@@ -75,6 +79,7 @@ https://github.com/mooooonmin/test_project/assets/118891828/4c706a98-4bfc-4610-b
 <details>
   <summary>가게 검색</summary>
 - 가게 이름, 위치, 소개 정보를 대상으로 키워드를 검색하여 해당하는 결과를 찾아볼 수 있습니다.<br>
+  
 ![image](https://github.com/engelhyunji/final/assets/147478174/60f949ac-beb2-46f7-8555-82f683df2232)
 </details>
 
@@ -82,17 +87,19 @@ https://github.com/mooooonmin/test_project/assets/118891828/4c706a98-4bfc-4610-b
 <details>
   <summary>지도</summary>
 - 가게의 위치정보를 바탕으로 카카오api 지도 상에서 가게 검색, 목록 조회가 가능합니다.<br>
+  
 ![image](https://github.com/engelhyunji/final/assets/147478174/e264b37f-708f-4e68-a09a-b0e7def24b64)
 </details>
 
 ## 실시간 채팅
 <details>
   <summary>실시간 채팅</summary>
-- 채팅방 전체목록을 볼 수 있고 각 방의 최근 메세지와 등록된 해시태그가 보여집니다.
-- 인기 해시태그 7개가 나열되어있고 각 태그를 클릭하면 해당하는 채팅방 확인이 가능합니다.
-- 계정 당 두개의 새로운 채팅방을 생성할 수 있고 참여하고픈 채팅방에 입장할 수 있습니다.
-- 같은 채팅방에 입장한 유저와 실시간 채팅을 할 수 있습니다.
+- 채팅방 전체목록을 볼 수 있고 각 방의 최근 메세지와 등록된 해시태그가 보여집니다.<br>
+- 인기 해시태그 7개가 나열되어있고 각 태그를 클릭하면 해당하는 채팅방 확인이 가능합니다.<br>
+- 계정 당 두개의 새로운 채팅방을 생성할 수 있고 참여하고픈 채팅방에 입장할 수 있습니다.<br>
+- 같은 채팅방에 입장한 유저와 실시간 채팅을 할 수 있습니다.<br>
 - 채팅참여자와 각 참여자가 등록한 반려동물을 확인할 수 있습니다.<br>
+  
 ![채팅 예시 이미지](https://github.com/engelhyunji/final/assets/147478174/9196ee1a-178c-482c-ae2b-3d55358197b8)
 </details>
 
@@ -142,8 +149,6 @@ https://github.com/mooooonmin/test_project/assets/118891828/4c706a98-4bfc-4610-b
 </details>
 
 
-
----
 
 # 🐾  *데모영상*
 
