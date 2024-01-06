@@ -15,7 +15,6 @@ const Main: React.FC = () => {
     return (
         <>
             <ST.Container>
-                {/* <ST.MainContainer> */}
                 <ST.BannerContainer>
                     <ST.BannerImage />
                     <ST.BtnContainer>
@@ -120,8 +119,7 @@ const Main: React.FC = () => {
                     </ST.PetContent>
                     <MainTop />
                 </ST.OverlayContainer>
-                <ST.PetBackImage alt="" />
-                {/* </ST.MainContainer> */}
+                <ST.PetBackImage />
                 <ST.Bottom />
             </ST.Container>
         </>
