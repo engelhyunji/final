@@ -10,18 +10,25 @@ export interface PetDetails {
     petInfo: string
     imageUrls: string[]
     petLikes: number // 좋아요 수
-    registration_date: string;
 }
 
+// export interface ApiResponse<T> {
+//     isSuccess: boolean
+//     code: number
+//     message: string
+//     result: {
+//         data: T
+//         nextPage: string | null
+//     }
+// }
+
 export interface ApiResponse<T> {
-    isSuccess: boolean
-    code: number
-    message: string
-    result: {
-        data: T
-        nextPage: string | null
-    }
+    isSuccess: boolean;
+    code: number;
+    message: string;
+    result: T;
 }
+
 
 // interface LikeResponse {
 //     message: string
@@ -45,12 +52,18 @@ export const fetchPetsWithCursor = async (cursor?: string, limit: number = 1) =>
     const url = cursor ? `/api/pets?lastPetId=${cursor}&limit=${limit}` : `/api/pets?limit=${limit}`
     try {
         const response = await instance.get<ApiResponse<PetDetails[]>>(url)
-        return response.data.result.data
+        if (response.data.isSuccess) {
+            // return response.data.result.data
+            return response.data
+        } else {
+            throw new Error(`오류 발생: ${response.data.message}`)
+        }
     } catch (error) {
         console.error('펫 목록 조회 오류:', error)
         throw error
     }
 }
+
 
 // // Pet 등록
 // export const fetchPetDetails = async () => {
@@ -64,9 +77,10 @@ export const fetchPetsWithCursor = async (cursor?: string, limit: number = 1) =>
 // }
 
 // 펫 조회
-export const fetchPets = async (): Promise<ApiResponse<PetDetails[]> | null> => {
+export const fetchPets = async (): Promise<{ message: string; data: PetDetails[] } | null> => {
     try {
-        const response = await instance.get<ApiResponse<PetDetails[]>>('/api/pets')
+        const response = await instance.get<{ message: string; data: PetDetails[] }>('api/pets')
+
         if (response.status === 200) {
             return response.data
         } else {
