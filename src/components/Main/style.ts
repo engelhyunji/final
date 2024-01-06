@@ -2,16 +2,14 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     width: 1440px;
-    overflow-y: hidden; // 가로 스크롤바가 생기지 않도록 숨깁니다. */
-    position: relative; // 이미지가 기준이 될 수 있도록 설정
+    position: relative;
     min-height: 100vh;
     margin: 0 auto;
     font-family: Pretendard-regular;
 `
 
-
 export const BannerContainer = styled.div`
-    height: 450px;
+    height: 420px;
     overflow: hidden;
     position: relative;
 `
@@ -38,7 +36,6 @@ export const BtnContainer = styled.div`
     padding-top: 100px;
 `
 export const Warp = styled.div`
-    /* margin-top: 100px; */
     margin-right: 150px;
     font-family: Pretendard-bold;
 `
@@ -65,7 +62,7 @@ export const ShopBtn = styled.button`
     font-size: 20px;
     color: #00bd8f;
     background-color: #fff;
-    
+
     border: none;
     border-radius: 18px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -91,6 +88,8 @@ export const TextWrapper = styled.div`
     flex-direction: column;
     align-items: left;
     margin-right: 59px;
+    position: relative;
+    
 `
 
 export const PetText = styled.div`
@@ -103,7 +102,7 @@ export const PetText1 = styled.div`
     line-height: 20px;
     width: 149px;
     margin-top: 10px;
-    color: #8F8E93;
+    color: #8f8e93;
 `
 
 export const PetText2 = styled.div`
@@ -133,7 +132,6 @@ export const PetText3 = styled.div`
     white-space: normal;
 `
 
-
 export const PetText4 = styled.div`
     font-size: 30px;
     font-weight: 700;
@@ -144,13 +142,10 @@ export const PetText4 = styled.div`
     font-family: Pretendard Variable;
 `
 
-
-
 export const PetContent = styled.div`
     display: flex;
     align-items: center;
 `
-
 
 export const MainTopWrapper = styled.div`
     display: flex; // 이미지도 flex 아이템으로 만듭니다.
@@ -162,22 +157,24 @@ export const OverlayContainer = styled.div`
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    
 `
 
 export const PetBackImage = styled.div`
     position: absolute;
-    width: 1440px;
-    top: 45%;
+    width: 2812px;
+    top: 39%;
     left: 50%;
     transform: translate(-50%, 15%);
     z-index: -1;
     height: 969px;
-    background-image: url('/PetBack.png');
-    background-repeat: no-repeat;
+    /* background-image: url('/PetBackWide.png');
+    background-repeat: no-repeat; */
+    background: no-repeat center/100% url('/PetBackWide.png');
 `
 export const Bottom = styled.div`
     padding-top: 50px;
-    padding-bottom: 230px;
+    padding-bottom: 180px;
 `
 
 export const OverlayContainer2 = styled.div`
@@ -185,13 +182,13 @@ export const OverlayContainer2 = styled.div`
     justify-content: space-between;
     flex-direction: row;
     padding: 50px;
+    background: repeat-x center/50% url('/mainItem.png');
 `
 
 // export const PetContent2 = styled.div`
 //     display: flex;
 //     align-items: center;
 // `
-
 
 export const Wrap1 = styled.div`
     display: flex;
