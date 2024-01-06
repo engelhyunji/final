@@ -95,23 +95,43 @@ const PetList: React.FC = () => {
     }
 
     return (
+        // <ST.Container>
+        //     <ST.Posts>
+        //         {pets.map((pet) => (
+        //             <ST.PostContainer key={pet.petId}>
+        //                 {pet.imageUrls && pet.imageUrls.length > 0 && (
+        //                     <ST.Img
+        //                         src={pet.imageUrls[0]}
+        //                         alt={`${pet.petName} 이미지`}
+        //                         onClick={() => handlePetClick(pet.petId)}
+        //                     />
+        //                 )}
+        //                 <button onClick={() => addLike(pet.petId)}>좋아요 ({pet.petLikes})</button>
+        //                 <button onClick={() => removeLike(pet.petId)}>좋아요 취소</button>
+        //             </ST.PostContainer>
+        //         ))}
+        //     </ST.Posts>
+        // </ST.Container>
         <ST.Container>
-            <ST.Posts>
-                {pets.map((pet) => (
-                    <ST.PostContainer key={pet.petId}>
-                        {pet.imageUrls && pet.imageUrls.length > 0 && (
-                            <ST.Img
-                                src={pet.imageUrls[0]}
-                                alt={`${pet.petName} 이미지`}
-                                onClick={() => handlePetClick(pet.petId)}
-                            />
-                        )}
-                        <button onClick={() => addLike(pet.petId)}>좋아요 ({pet.petLikes})</button>
-                        <button onClick={() => removeLike(pet.petId)}>좋아요 취소</button>
-                    </ST.PostContainer>
-                ))}
-            </ST.Posts>
-        </ST.Container>
+        <ST.ProfileContainer>
+            <ST.TitleBackContainer>
+                <ST.PetListH2>강아지</ST.PetListH2>
+                <ST.PetP>우리 강아지 귀여운 거 나만 볼 수 없을 땐? 요기에 자랑하기!</ST.PetP>
+            </ST.TitleBackContainer>
+        </ST.ProfileContainer>
+
+        <ST.Posts>
+            {pets.map((pet) => (
+                <ST.PostContainer key={pet.petId} onClick={() => handlePetClick(pet.petId)}>
+                    {pet.imageUrls && pet.imageUrls[0] && (
+                        <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
+                    )}
+                    <button onClick={() => addLike(pet.petId)}>좋아요 ({pet.petLikes})</button>
+                    <button onClick={() => removeLike(pet.petId)}>좋아요 취소</button>
+                </ST.PostContainer>
+            ))}
+        </ST.Posts>
+    </ST.Container>
     )
 }
 
