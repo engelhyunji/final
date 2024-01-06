@@ -14,21 +14,23 @@ export const CategoryList = styled.div`
     display: flex;
     justify-content: center;
     gap: 60px;
-    width: 900px;
-    margin-bottom: 20px;
-    color: #a5aaac;
+    width: 900px; 
+    margin-bottom: 30px;
+    color: #4CE1A1;
+    
 `
 
 export const CategoryItem = styled.div<CategoryItemProps>`
     cursor: pointer;
     padding: 10px 20px;
     border-radius: 112px;
+    border: 1px solid #4CE1A1;
     transition: background-color 0.3s ease;
 
     ${(props) =>
         props.$isSelected &&
         css`
-            background-color: #1dcb8e;
+            background-color: #4CE1A1;
             color: white;
         `}
 `

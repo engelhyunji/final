@@ -9,7 +9,7 @@ export const Container = styled.div`
 `
 
 export const BannerContainer = styled.div`
-    height: 420px;
+    height: 380px;
     overflow: hidden;
     position: relative;
 `
@@ -163,24 +163,21 @@ export const OverlayContainer = styled.div`
 export const PetBackImage = styled.div`
     position: absolute;
     width: 2812px;
-    top: 39%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, 15%);
+    transform: translate(-50%, 0);
     z-index: -1;
-    height: 969px;
-    /* background-image: url('/PetBackWide.png');
-    background-repeat: no-repeat; */
+    height: 940px;
     background: no-repeat center/100% url('/PetBackWide.png');
 `
 export const Bottom = styled.div`
-    padding-top: 50px;
+    padding-top: 30px 0 50px;
     padding-bottom: 180px;
 `
 
 export const OverlayContainer2 = styled.div`
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
     padding: 50px;
     background: repeat-x center/50% url('/mainItem.png');
 `
