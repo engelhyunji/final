@@ -45,9 +45,8 @@
 
 # 🐾 User Flow
 
-![진짜최종유저을로우](
-https://github.com/mooooonmin/test_project/assets/118891828/4c706a98-4bfc-4610-b44a-a1eacad81eef
-)
+![image](https://github.com/engelhyunji/final/assets/147478174/0e154dda-eccb-4c9c-9b7c-6f6a30f021ac)
+
 
 # 🐾 ERD
 <details>
@@ -150,7 +149,8 @@ https://github.com/mooooonmin/test_project/assets/118891828/4c706a98-4bfc-4610-b
 
 
 
-# 🐾  *데모영상*
+# 🐾  [데모영상](https://hanghae99.slack.com/files/U05UC18R5TJ/F06CMSLENBX/_________________________1_________________________-1.mp4)
+
 
 ---
 <details>
