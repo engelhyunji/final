@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import * as ST from './style';
+import * as ST from './style'
 import { useParams } from 'react-router-dom'
 import instance from '../../../apis/instance'
 
@@ -119,33 +119,44 @@ const PetDetail: React.FC = () => {
         //         ))}
         //     </div>
         // </div>
-        <ST.ProfileContainer> {/* 스타일 컴포넌트 사용 */}
-            <ST.DetailCard> {/* 스타일 컴포넌트 사용 */}
+        <ST.ProfileContainer>
+            {' '}
+            {/* 스타일 컴포넌트 사용 */}
+            <ST.DetailCard>
+                {' '}
+                {/* 스타일 컴포넌트 사용 */}
                 {pet.imageUrls.slice(0, 1).map((url, index) => (
-                    <ST.ImgCard key={index}> {/* 스타일 컴포넌트 사용 */}
+                    <ST.ImgCard key={index}>
+                        {' '}
+                        {/* 스타일 컴포넌트 사용 */}
                         <ST.Img2 src={url} alt={`${pet.petName} 이미지`} /> {/* 스타일 컴포넌트 사용 */}
                     </ST.ImgCard>
                 ))}
-
-                <ST.TextContainer> {/* 스타일 컴포넌트 사용 */}
+                <ST.TextContainer>
+                    {' '}
+                    {/* 스타일 컴포넌트 사용 */}
                     <ST.Name>{pet.petName}</ST.Name> {/* 스타일 컴포넌트 사용 */}
                     <ST.TextContainer2>
-
-                        <ST.DetailLabel>특징 </ST.DetailLabel> {/* 스타일 컴포넌트 사용 */}
-                        <ST.H3>{pet.petInfo}</ST.H3> {/* 스타일 컴포넌트 사용 */}
-                        <ST.DetailLabel>크기 </ST.DetailLabel> {/* 스타일 컴포넌트 사용 */}
-                        <ST.H3>{pet.petKind}</ST.H3> {/* 스타일 컴포넌트 사용 */}
-                        <ST.DetailLabel>성별 </ST.DetailLabel> {/* 스타일 컴포넌트 사용 */}
-                        <ST.H3>{pet.petGender}</ST.H3> {/* 스타일 컴포넌트 사용 */}
+                        <ST.TextContainer3>
+                            <ST.DetailLabel>특징 </ST.DetailLabel> {/* 스타일 컴포넌트 사용 */}
+                            <ST.H3>{pet.petInfo}</ST.H3> {/* 스타일 컴포넌트 사용 */}
+                            <ST.DetailLabel>크기 </ST.DetailLabel> {/* 스타일 컴포넌트 사용 */}
+                            <ST.H3>{pet.petKind}</ST.H3> {/* 스타일 컴포넌트 사용 */}
+                            <br />
+                            <ST.DetailLabel>성별 </ST.DetailLabel> {/* 스타일 컴포넌트 사용 */}
+                            <ST.H3>{pet.petGender}</ST.H3> {/* 스타일 컴포넌트 사용 */}
+                        </ST.TextContainer3>
                     </ST.TextContainer2>
-
                     {/* 기타 상세 정보 */}
                 </ST.TextContainer>
             </ST.DetailCard>
-
-            <ST.Posts> {/* 스타일 컴포넌트 사용 */}
+            <ST.Posts>
+                {' '}
+                {/* 스타일 컴포넌트 사용 */}
                 {pet.imageUrls.map((url, index) => (
-                    <ST.ImgCard1 key={index}> {/* 스타일 컴포넌트 사용 */}
+                    <ST.ImgCard1 key={index}>
+                        {' '}
+                        {/* 스타일 컴포넌트 사용 */}
                         <ST.Img src={url} alt={`${pet.petName} 이미지`} /> {/* 스타일 컴포넌트 사용 */}
                     </ST.ImgCard1>
                 ))}
