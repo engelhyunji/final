@@ -129,10 +129,16 @@ const PetDetail: React.FC = () => {
 
                 <ST.TextContainer> {/* 스타일 컴포넌트 사용 */}
                     <ST.Name>{pet.petName}</ST.Name> {/* 스타일 컴포넌트 사용 */}
-                    <ST.DetailText> {/* 스타일 컴포넌트 사용 */}
-                        <ST.DetailLabel>특징 - </ST.DetailLabel> {/* 스타일 컴포넌트 사용 */}
+                    <ST.TextContainer2>
+
+                        <ST.DetailLabel>특징 </ST.DetailLabel> {/* 스타일 컴포넌트 사용 */}
                         <ST.H3>{pet.petInfo}</ST.H3> {/* 스타일 컴포넌트 사용 */}
-                    </ST.DetailText>
+                        <ST.DetailLabel>크기 </ST.DetailLabel> {/* 스타일 컴포넌트 사용 */}
+                        <ST.H3>{pet.petKind}</ST.H3> {/* 스타일 컴포넌트 사용 */}
+                        <ST.DetailLabel>성별 </ST.DetailLabel> {/* 스타일 컴포넌트 사용 */}
+                        <ST.H3>{pet.petGender}</ST.H3> {/* 스타일 컴포넌트 사용 */}
+                    </ST.TextContainer2>
+
                     {/* 기타 상세 정보 */}
                 </ST.TextContainer>
             </ST.DetailCard>

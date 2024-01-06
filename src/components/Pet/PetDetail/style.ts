@@ -111,7 +111,7 @@ export const Name = styled.h1`
 export const DetailLabel = styled.span`
     color: var(--Gray3, #575756);
     font-family: Pretendard Variable;
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: 24px; /* 120% */
@@ -130,6 +130,16 @@ export const TextContainer = styled.p`
     flex-wrap: wrap;
     align-items: center;
     gap: 15px;
+    flex-direction: row;
+    justify-content: start;
+    margin-top: 10px;
+`
+export const TextContainer2 = styled.p`
+    padding-left: 170px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
     flex-direction: column;
     justify-content: start;
     margin-top: 10px;
@@ -138,7 +148,7 @@ export const TextContainer = styled.p`
 export const H3 = styled.p`
     color: var(--Gray3, #575756);
     font-family: 'Pretendard Variable', sans-serif;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 24px;
 `
