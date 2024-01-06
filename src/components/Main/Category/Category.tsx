@@ -71,7 +71,7 @@ const Category: React.FC = () => {
         slidesToScroll: 1,
         slidesToShow: Math.min(3, filteredShops.length),
         autoplay: true,
-        autoplaySpeed: 1700,
+        autoplaySpeed: 3000,
         responsive: [
             {
                 breakpoint: 1024,
@@ -141,8 +141,8 @@ const Category: React.FC = () => {
                                         <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
                                     ))}
                                     <p>{shop.shopName}</p>
-                                    <p>업종: {shop.shopType}</p>
-                                    <p>주소: {shop.shopAddress}</p>
+                                    <p>{shop.shopType==='ETC' ? '기타' : shop.shopType==='CAFE' ? '카페' : shop.shopType==='GROOMING'?'애견 미용' :'동물병원'}</p>
+                                    <p>위치: {shop.shopAddress}</p>
                                 </ST.ShopCard>
                             </div>
                         ))}

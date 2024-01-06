@@ -112,7 +112,7 @@ const Main: React.FC = () => {
                             {/* <ST.PetText2>더보기 ⇀</ST.PetText2> */}
                             <ST.Wrap1>
                                 <NoLineLink to={`/petlist`}>
-                                    <ST.PetText5>더보기 ⇀</ST.PetText5>
+                                    <ST.PetText2>더보기 ⇀</ST.PetText2>
                                 </NoLineLink>
                             </ST.Wrap1>
                         </ST.TextWrapper>
