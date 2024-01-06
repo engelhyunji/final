@@ -6,19 +6,10 @@ type CategoryItemProps = {
 }
 
 export const CategoryContainer = styled.div`
-    max-width: 1280px;
-    margin: 200px auto 50px;
-    width: 100%;
-    margin-top: 0;
-    margin-left: 10px;
-    padding-right: 190px;
+    max-width: 1200px;
+    margin: 0 auto;
 `
 
-export const Text = styled.h2`
-    font-size: 17px;
-    margin-bottom: 30px;
-    /*  */
-`
 
 export const CategoryList = styled.div`
     display: flex;
@@ -45,9 +36,7 @@ export const CategoryItem = styled.div<CategoryItemProps>`
 `
 
 export const ShopList = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    width: 90%;
 `
 
 export const ShopItem = styled.div`
@@ -95,45 +84,6 @@ export const ShopItem = styled.div`
 //     }
 // `
 
-export const StyledSlide = styled(Slider)`
-    max-width: 100%;
-    margin: 0 auto;
-
-    .slick-slide {
-        padding: 0 5px;
-    }
-
-    .slick-prev,
-    .slick-next {
-        display: block;
-        background: #ddd;
-        border-radius: 50%;
-        padding: 10px;
-        &:hover {
-            background: #ccc;
-        }
-    }
-
-    .slick-list {
-        margin: 0;
-    }
-
-    .slick-track {
-        display: flex;
-        align-items: center;
-        gap: 0px;
-    }
-
-    .slick-prev {
-        left: 10px;
-        z-index: 1;
-    }
-
-    .slick-next {
-        right: 10px;
-        z-index: 1;
-    }
-`
 
 // export const ShopCard = styled.div`
 //     padding: 20px;
