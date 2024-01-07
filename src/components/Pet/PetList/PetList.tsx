@@ -25,7 +25,6 @@ export interface ApiResponse {
 
 const PetList: React.FC = () => {
     const [pets, setPets] = useState<PetDetails[]>([])
-    const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
     const navigate = useNavigate()
@@ -59,7 +58,6 @@ const PetList: React.FC = () => {
     }
 
     const fetchPets = async () => {
-        setIsLoading(true)
         setError(null)
 
         try {
@@ -73,8 +71,6 @@ const PetList: React.FC = () => {
         } catch (error) {
             console.error('에러:', error)
             setError('펫 목록을 불러오는 데 실패했습니다.')
-        } finally {
-            setIsLoading(false)
         }
     }
 
@@ -82,56 +78,31 @@ const PetList: React.FC = () => {
         fetchPets()
     }, [])
 
-    if (isLoading) {
-        return <div>로딩 중...</div>
-    }
-
     if (error) {
         return <div>오류: {error}</div>
     }
 
-    if (pets.length === 0) {
-        return <div>등록된 애완동물이 없습니다.</div>
-    }
-
     return (
-        // <ST.Container>
-        //     <ST.Posts>
-        //         {pets.map((pet) => (
-        //             <ST.PostContainer key={pet.petId}>
-        //                 {pet.imageUrls && pet.imageUrls.length > 0 && (
-        //                     <ST.Img
-        //                         src={pet.imageUrls[0]}
-        //                         alt={`${pet.petName} 이미지`}
-        //                         onClick={() => handlePetClick(pet.petId)}
-        //                     />
-        //                 )}
-        //                 <button onClick={() => addLike(pet.petId)}>좋아요 ({pet.petLikes})</button>
-        //                 <button onClick={() => removeLike(pet.petId)}>좋아요 취소</button>
-        //             </ST.PostContainer>
-        //         ))}
-        //     </ST.Posts>
-        // </ST.Container>
         <ST.Container>
-        <ST.ProfileContainer>
-            <ST.TitleBackContainer>
-                <ST.PetListH2>강아지</ST.PetListH2>
-                <ST.PetP>우리 강아지 귀여운 거 나만 볼 수 없을 땐? 요기에 자랑하기!</ST.PetP>
-            </ST.TitleBackContainer>
-        </ST.ProfileContainer>
+            <ST.ProfileContainer>
+                <ST.TitleBackContainer>
+                    <ST.PetListH2>반려동물</ST.PetListH2>
+                    <ST.PetP>우리 강아지 귀여운 거 나만 볼 수 없을 땐? 요기에 자랑하기!</ST.PetP>
+                </ST.TitleBackContainer>
+            </ST.ProfileContainer>
 
-        <ST.Posts>
-            {pets.map((pet) => (
-                <ST.PostContainer key={pet.petId} onClick={() => handlePetClick(pet.petId)}>
-                    {pet.imageUrls && pet.imageUrls[0] && (
-                        <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
-                    )}
-                    <button onClick={() => addLike(pet.petId)}>좋아요 ({pet.petLikes})</button>
-                    <button onClick={() => removeLike(pet.petId)}>좋아요 취소</button>
-                </ST.PostContainer>
-            ))}
-        </ST.Posts>
-    </ST.Container>
+            <ST.Posts>
+                {pets.map((pet) => (
+                    <ST.PostContainer key={pet.petId} onClick={() => handlePetClick(pet.petId)}>
+                        {pet.imageUrls && pet.imageUrls[0] && (
+                            <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
+                        )}
+                        <button onClick={() => addLike(pet.petId)}>좋아요 ({pet.petLikes})</button>
+                        <button onClick={() => removeLike(pet.petId)}>좋아요 취소</button>
+                    </ST.PostContainer>
+                ))}
+            </ST.Posts>
+        </ST.Container>
     )
 }
 

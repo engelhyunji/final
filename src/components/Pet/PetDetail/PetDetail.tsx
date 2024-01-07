@@ -26,7 +26,6 @@ export interface ApiResponse<T> {
 
 const PetDetail: React.FC = () => {
     const [pet, setPet] = useState<PetDetails | null>(null)
-    const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const { petId } = useParams<{ petId: string }>()
 
@@ -46,7 +45,6 @@ const PetDetail: React.FC = () => {
 
     useEffect(() => {
         const fetchPetData = async () => {
-            setIsLoading(true)
             setError(null)
 
             try {
@@ -63,8 +61,6 @@ const PetDetail: React.FC = () => {
             } catch (error) {
                 console.error('Error fetching pet data:', error)
                 setError('Error fetching pet data from API.')
-            } finally {
-                setIsLoading(false)
             }
         }
 
@@ -73,12 +69,8 @@ const PetDetail: React.FC = () => {
         }
     }, [petId])
 
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
-
     if (!pet) {
-        return <div>No pet data available.</div>
+        return <div></div>
     }
 
     if (error) {

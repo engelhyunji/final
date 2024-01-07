@@ -9,7 +9,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     overflow-x: hidden;
     margin-bottom: 10px;
     margin-left: 7px;
