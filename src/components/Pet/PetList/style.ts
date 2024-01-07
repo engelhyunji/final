@@ -1,25 +1,6 @@
 import styled from 'styled-components'
 import Pagination from 'react-bootstrap/Pagination';
 
-export const StyledPagination = styled(Pagination)`
-    .page-item .page-link {
-        background-color: transparent;
-        color: gray;
-        border: none;
-
-        &:hover {
-            background-color: transparent;
-            color: gray;
-        }
-    }
-
-    .page-item.active .page-link {
-        color: gray;
-        background-color: transparent;
-        border: none;
-    }
-`;
-
 export const Container = styled.div`
     max-width: 1440px;
     margin: 0 auto;
@@ -28,6 +9,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
 `
 export const TitleBackContainer = styled.div`
     width: 100%;
@@ -275,3 +257,23 @@ export const PetName = styled.div`
 export const PetKind = styled.div`
     font-size: 14px;
 `
+export const StyledPagination = styled(Pagination)`
+    margin-bottom: 30px;
+    .page-item .page-link {
+        font-size: 17px;
+        background-color: transparent;
+        color: gray;
+        border: none;
+
+        &:hover {
+            background-color: transparent;
+            color: gray;
+        }
+    }
+
+    .page-item.active .page-link {
+        color: gray;
+        background-color: transparent;
+        border: none;
+    }
+`;
