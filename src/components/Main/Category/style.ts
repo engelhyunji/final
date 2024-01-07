@@ -1,12 +1,11 @@
 import styled, { css } from 'styled-components'
-import Slider from 'react-slick'
 
 type CategoryItemProps = {
     $isSelected: boolean
 }
 
 export const CategoryContainer = styled.div`
-    max-width: 1200px;
+    width: 80%;
     margin: 0 auto;
 `
 
@@ -15,22 +14,23 @@ export const CategoryList = styled.div`
     display: flex;
     justify-content: center;
     gap: 60px;
-    width: 900px;
-    margin-bottom: 20px;
-    color: #a5aaac;
+    width: 900px; 
+    margin-bottom: 30px;
+    color: #4CE1A1;
+    
 `
 
 export const CategoryItem = styled.div<CategoryItemProps>`
-    margin: 0 3px;
     cursor: pointer;
     padding: 10px 20px;
     border-radius: 112px;
+    border: 1px solid #4CE1A1;
     transition: background-color 0.3s ease;
 
     ${(props) =>
         props.$isSelected &&
         css`
-            background-color: #1dcb8e;
+            background-color: #4CE1A1;
             color: white;
         `}
 `
@@ -125,14 +125,7 @@ export const ShopInfo = styled.div`
     margin: 0 10px;
 `
 
-export const StyledSlickSlider = styled(Slider)`
-    .slick-slide > div {
-        margin: 0 10px;
-    }
-`
-
 export const Image = styled.img`
-    width: 30px;
     width: 100%;
     height: auto;
 `
@@ -198,25 +191,27 @@ export const Arrow = styled.div`
 // `
 
 export const ShopCard = styled.div`
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    width: 100%;
     max-width: 250px;
     height: 300px;
+    margin: 10px;
+    padding: 20px;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px;
     transition: transform 0.3s ease;
 
     &:hover {
         transform: scale(1.05);
 
         img {
-            filter: brightness(0.7);
+            filter: brightness(0.8);
         }
     }
 
@@ -229,9 +224,10 @@ export const ShopCard = styled.div`
     img {
         width: 100%;
         height: 100%;
-        max-height: 60%;
+        max-height: 65%;
+        margin-bottom: 12px;
+
         border-radius: 5px;
-        margin-top: 10px;
         object-fit: cover;
         transition: filter 0.3s ease;
     }

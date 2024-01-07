@@ -90,7 +90,6 @@ const Main: React.FC = () => {
                                 <br />
                                 곳들을 보여드려요
                             </ST.PetText1>
-                            {/* <ST.PetText2>더보기 ⇀</ST.PetText2> */}
                             <ST.Wrap1>
                                 <NoLineLink to={`/shopslist`}>
                                     <ST.PetText2>더보기 ⇀</ST.PetText2>
@@ -109,10 +108,9 @@ const Main: React.FC = () => {
                                 다들 우리 강아지
                                 <br /> 보고 가세요!
                             </ST.PetText3>
-                            {/* <ST.PetText2>더보기 ⇀</ST.PetText2> */}
                             <ST.Wrap1>
                                 <NoLineLink to={`/petlist`}>
-                                    <ST.PetText5>더보기 ⇀</ST.PetText5>
+                                    <ST.PetText2>더보기 ⇀</ST.PetText2>
                                 </NoLineLink>
                             </ST.Wrap1>
                         </ST.TextWrapper>

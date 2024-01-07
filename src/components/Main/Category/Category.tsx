@@ -7,23 +7,24 @@ import { Image } from '../../Pet/PetList/style'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useNavigate } from 'react-router-dom'
+import { Shop } from '../../../apis/api/api'
 
 type ShopType = 'GROOMING' | 'HOSPITAL' | 'CAFE' | 'ETC'
 
-interface ShopInfo {
-    shopId?: number
-    userId?: number
-    shopName?: string
-    shopTime?: string
-    shopTel?: string
-    shopAddress?: string
-    shopType?: ShopType
-    shopDescribe?: string
-    imageUrls?: string[]
-}
+// interface ShopInfo {
+//     shopId?: number
+//     userId?: number
+//     shopName?: string
+//     shopTime?: string
+//     shopTel?: string
+//     shopAddress?: string
+//     shopType?: ShopType
+//     shopDescribe?: string
+//     imageUrls?: string[]
+// }
 
 const Category: React.FC = () => {
-    const [shops, setShops] = useState<ShopInfo[]>([])
+    const [shops, setShops] = useState<Shop[]>([])
     const [selectedCategory, setSelectedCategory] = useState<string>('GROOMING')
     const navigate = useNavigate()
 
@@ -37,7 +38,7 @@ const Category: React.FC = () => {
     useEffect(() => {
         const fetchShops = async () => {
             try {
-                const response = await instance.get<{ result: ShopInfo[] }>('/api/shops')
+                const response = await instance.get<{ result: Shop[] }>('/api/shops')
                 setShops(response.data.result || [])
                 console.log('Shops:', response.data.result)
             } catch (error) {
@@ -71,7 +72,7 @@ const Category: React.FC = () => {
         slidesToScroll: 1,
         slidesToShow: Math.min(3, filteredShops.length),
         autoplay: true,
-        autoplaySpeed: 1700,
+        autoplaySpeed: 3000,
         responsive: [
             {
                 breakpoint: 1024,
@@ -141,8 +142,9 @@ const Category: React.FC = () => {
                                         <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
                                     ))}
                                     <p>{shop.shopName}</p>
-                                    <p>업종: {shop.shopType}</p>
-                                    <p>주소: {shop.shopAddress}</p>
+                                    <p>{shop.shopStartTime} - {shop.shopEndTime}</p>
+                                    {/* <p>{shop.shopType==='ETC' ? '기타' : shop.shopType==='CAFE' ? '카페' : shop.shopType==='GROOMING'?'애견 미용' :'동물병원'}</p> */}
+                                    <p>{shop.shopAddress}</p>
                                 </ST.ShopCard>
                             </div>
                         ))}
