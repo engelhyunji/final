@@ -1,4 +1,24 @@
 import styled from 'styled-components'
+import Pagination from 'react-bootstrap/Pagination';
+
+export const StyledPagination = styled(Pagination)`
+    .page-item .page-link {
+        background-color: transparent;
+        color: gray;
+        border: none;
+
+        &:hover {
+            background-color: transparent;
+            color: gray;
+        }
+    }
+
+    .page-item.active .page-link {
+        color: gray;
+        background-color: transparent;
+        border: none;
+    }
+`;
 
 export const Container = styled.div`
     max-width: 1440px;

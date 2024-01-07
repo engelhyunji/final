@@ -112,7 +112,7 @@ const PetList: React.FC = () => {
                 ))}
             </ST.Posts>
 
-            <Pagination>
+            <ST.StyledPagination>
                 <Pagination.Prev onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} />
                 {Array.from({ length: Math.ceil(pets.length / petsPerPage) }, (_, index) => (
                     <Pagination.Item
@@ -127,7 +127,7 @@ const PetList: React.FC = () => {
                     onClick={() => paginate(currentPage + 1)}
                     disabled={currentPage === Math.ceil(pets.length / petsPerPage)}
                 />
-            </Pagination>
+            </ST.StyledPagination>
         </ST.Container>
     )
 }
