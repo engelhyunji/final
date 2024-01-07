@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 1440px;
+    width: 100%;
     position: relative;
     min-height: 100vh;
     margin: 0 auto;
@@ -15,9 +15,7 @@ export const BannerContainer = styled.div`
 `
 
 export const BannerImage = styled.div`
-    background-image: url('/MainBanner.png');
-    background-position: center;
-    background-size: cover;
+    background: no-repeat center/100% 430px url('/MainBanner.png');
     width: 100%;
     height: 430px;
     z-index: -1;
@@ -162,13 +160,13 @@ export const OverlayContainer = styled.div`
 
 export const PetBackImage = styled.div`
     position: absolute;
-    width: 2812px;
+    width: 100%;
+    height: 938px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: -1;
-    height: 940px;
-    background: no-repeat center/100% url('/PetBackWide.png');
+    background: no-repeat center/100% 938px url('/MainPet.png');
 `
 export const Bottom = styled.div`
     padding-top: 30px 0 50px;
@@ -178,6 +176,8 @@ export const Bottom = styled.div`
 export const OverlayContainer2 = styled.div`
     display: flex;
     justify-content: space-between;
+    width: 1440px;
+    margin: 0 auto;
     padding: 50px;
     background: repeat-x center/50% url('/mainItem.png');
 `
@@ -192,7 +192,6 @@ export const Wrap1 = styled.div`
     justify-content: center;
 
     &:hover {
-        // 마우스 오버 시 스타일 변경
         text-decoration: underline; // 텍스트 밑줄
     }
 `
