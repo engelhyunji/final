@@ -32,7 +32,7 @@ const Main: React.FC = () => {
                                     <ST.Text1>
                                         가게를 운영하는
                                         <br />
-                                        사장님이라면?
+                                        사장님이라면? 
                                     </ST.Text1>
                                     <ST.Text>가게 등록하기 ⇀</ST.Text>
                                 </ST.ShopBtn>
@@ -84,7 +84,7 @@ const Main: React.FC = () => {
                 <ST.OverlayContainer2>
                     <ST.TopWrapper>
                         <ST.TextWrapper>
-                            <ST.PetText>가게</ST.PetText>
+                            <ST.ShopText>가게</ST.ShopText>
                             <ST.PetText1>
                                 실시간으로 뜨는
                                 <br />
@@ -102,7 +102,7 @@ const Main: React.FC = () => {
 
                 <ST.OverlayContainer>
                     <ST.PetContent>
-                        <ST.TextWrapper>
+                        <ST.TextWrapper1>
                             <ST.PetText>반려동물</ST.PetText>
                             <ST.PetText3>
                                 다들 우리 강아지
@@ -113,7 +113,7 @@ const Main: React.FC = () => {
                                     <ST.PetText2>더보기 ⇀</ST.PetText2>
                                 </NoLineLink>
                             </ST.Wrap1>
-                        </ST.TextWrapper>
+                        </ST.TextWrapper1>
                     </ST.PetContent>
                     <MainTop />
                 </ST.OverlayContainer>

@@ -5,7 +5,7 @@ type CategoryItemProps = {
 }
 
 export const CategoryContainer = styled.div`
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 `
 
@@ -13,8 +13,10 @@ export const CategoryContainer = styled.div`
 export const CategoryList = styled.div`
     display: flex;
     justify-content: center;
-    gap: 60px;
+    gap: 20px;
     width: 900px; 
+    padding-left: 70px;
+    margin-left: 50px;
     margin-bottom: 30px;
     color: #4CE1A1;
     
@@ -37,6 +39,7 @@ export const CategoryItem = styled.div<CategoryItemProps>`
 
 export const ShopList = styled.div`
     width: 90%;
+    padding-left: 100px;
 `
 
 export const ShopItem = styled.div`
@@ -44,82 +47,6 @@ export const ShopItem = styled.div`
     flex-wrap: wrap;
     gap: 10px;
 `
-
-// export const StyledSlide = styled(Slider)`
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     flex-direction: row;
-//     margin: 0 -10px;
-//     width: 90px;
-
-//     .slick-slide {
-//         margin: 0 10px;
-//         transition: transform 0.3s ease;
-//     }
-
-//     .slick-prev,
-//     .slick-next {
-//         display: block;
-//         background: #ddd;
-//         border-radius: 50%;
-//         padding: 300%;
-//         &:hover {
-//             background: #ccc;
-//         }
-//     }
-
-//     .slick-list {
-//         margin: 0 -1px;
-//     }
-
-//     .slick-slide > div {
-//         padding: 0 -2px;
-//     }
-
-//     .slick-track {
-//         display: flex;
-//         align-items: center;
-//         gap: 10px;
-//     }
-// `
-
-
-// export const ShopCard = styled.div`
-//     padding: 20px;
-//     border: 1px solid #ddd;
-//     border-radius: 10px;
-//     /* width: 100%; */
-//     height: 300px;
-//     max-width: 250px;
-//     min-width: 250px;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     background-color: white;
-//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-//     margin: 10px auto;
-//     transition: transform 0.3s ease;
-
-//     &:hover {
-//         transform: scale(1.05);
-//     }
-
-//     p {
-//         margin-top: 10px;
-//         font-size: 14px;
-//         text-align: center;
-//     }
-
-//     img {
-//         width: 100%;
-//         height: 300%;
-//         max-height: 60%;
-//         border-radius: 5px;
-//         margin-top: 10px;
-//         object-fit: cover;
-//     }
-// `
 
 export const ShopInfo = styled.div`
     margin: 0 10px;
@@ -155,43 +82,9 @@ export const Arrow = styled.div`
     }
 `
 
-// export const ShopCard = styled.div`
-//     padding: 20px;
-//     border: 1px solid #ddd;
-//     border-radius: 10px;
-//     width: 100%;
-//     height: 300px;
-//     max-width: 250px;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     background-color: white;
-//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-//     margin: 10px auto;
-//     transition: transform 0.3s ease;
-
-//     &:hover {
-//         transform: scale(1.05);
-//     }
-
-//     p {
-//         margin-top: 10px;
-//         font-size: 14px;
-//         text-align: center;
-//     }
-
-//     img {
-//         width: 100%;
-//         height: 300%;
-//         max-height: 60%;
-//         border-radius: 5px;
-//         margin-top: 10px;
-//         object-fit: cover;
-//     }
-// `
-
 export const ShopCard = styled.div`
-    max-width: 250px;
+    /* max-width: 250px; */
+    width: 250px;
     height: 300px;
     margin: 10px;
     padding: 20px;

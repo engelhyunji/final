@@ -85,9 +85,16 @@ export const TextWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: left;
-    margin-right: 59px;
+    margin-right: 1px;
     position: relative;
-    
+`
+
+export const TextWrapper1 = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding-left: 100px;
+    position: relative;
 `
 
 export const PetText = styled.div`
@@ -95,6 +102,13 @@ export const PetText = styled.div`
     line-height: 36px;
     font-family: Pretendard-bold;
 `
+
+export const ShopText = styled.div`
+    font-size: 30px;
+    line-height: 36px;
+    font-family: Pretendard-bold;
+`
+
 export const PetText1 = styled.div`
     font-size: 18px;
     line-height: 20px;
@@ -143,6 +157,7 @@ export const PetText4 = styled.div`
 export const PetContent = styled.div`
     display: flex;
     align-items: center;
+    margin-left: -110px;
 `
 
 export const MainTopWrapper = styled.div`

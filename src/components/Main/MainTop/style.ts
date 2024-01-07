@@ -24,6 +24,8 @@ export const Inside = styled.div`
     box-shadow: 3.339px 3.339px 16.693px 0px rgba(0, 0, 0, 0.25);
     cursor: pointer;
     position: relative;
+    width: 320px;
+
 
     &:nth-child(odd) {
         /* align-self: flex-start; */

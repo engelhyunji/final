@@ -72,7 +72,7 @@ const Category: React.FC = () => {
         slidesToScroll: 1,
         slidesToShow: Math.min(3, filteredShops.length),
         autoplay: true,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 2500,
         responsive: [
             {
                 breakpoint: 1024,
