@@ -25,8 +25,8 @@ export const ModalContainer = styled.div`
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 90%;
-    max-width: 600px; // Instagram-like width
-    margin: auto; // Center the modal
+    max-width: 600px; 
+    margin: auto;
 `
 
 export const H2 = styled.div`
@@ -50,7 +50,7 @@ export const SearchContainer = styled.div`
 `
 
 export const ListMapContainer = styled.div`
-    flex: 1; /* 남은 공간을 모두 채우도록 설정 */
+    flex: 1; 
     margin-top: 20px;
     background: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -95,7 +95,7 @@ export const Button = styled.button`
 `
 
 export const ListContainer = styled.div`
-    flex: 1; /* 남은 공간을 모두 채우도록 설정 */
+    flex: 1; 
     margin-top: 20px;
     background: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -105,7 +105,7 @@ export const ListContainer = styled.div`
 `
 
 export const MapContainer = styled.div`
-    flex: 2; /* 남은 공간을 모두 채우도록 설정 */
+    flex: 2; 
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -122,27 +122,6 @@ export const InfoWindowContent = styled.div`
 export const ResultsContainer = styled.div`
     margin-top: 20px;
 `
-// export const ListContainer = styled.div`
-//     width: 100%;
-//     margin-top: 20px;
-//     background: white;
-//     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-//     border-radius: 8px;
-//     overflow: hidden;
-// `
-
-// export const ListItem = styled.div`
-//     padding: 10px 15px;
-//     border-bottom: 1px solid #ddd;
-//     &:last-child {
-//         border-bottom: none;
-//     }
-//     cursor: pointer;
-//     &:hover {
-//         background-color: #f3f3f3;
-//     }
-// `
-
 export const Text = styled.div`
     padding: 1px;
     padding-left: 9px;
@@ -153,7 +132,7 @@ export const Text = styled.div`
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
-    line-height: 20px; /* 111.111% */
+    line-height: 20px; 
     white-space: normal;
     position: relative;
     text-align: left;
@@ -167,14 +146,14 @@ export const CustomOverlayStyle = styled.div`
     padding: 8px 12px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     position: absolute;
-    transform: translate(-50%, -100%); /* 정확한 위치 조정을 위해 */
+    transform: translate(-50%, -100%);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
     color: #333;
     white-space: nowrap;
-    pointer-events: none; /* 마커 위 텍스트 상자에 마우스 이벤트 무시 */
+    pointer-events: none; 
 `
 export const AddressText = styled.div`
     padding: 1px;
@@ -249,7 +228,7 @@ export const PhoneText = styled.div`
 export const Img = styled.div``
 export const Image = styled.div`
     width: 100%;
-    max-width: 500px; // Restrict image width for larger screens
+    max-width: 500px; 
     height: auto;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -262,7 +241,7 @@ export const ImageContainer = styled.div`
 `
 export const Image1 = styled.div`
     width: 100%;
-    max-width: 400px; // 이미지의 최대 너비를 설정합니다.
+    max-width: 400px; 
     height: auto;
     margin-bottom: 20px;
     border-radius: 8px;
@@ -289,7 +268,6 @@ export const ListItem = styled.div`
     }
 
     &.active {
-        /* background-color: #4ce1a1; */
         border-radius: 7px;
         width: 380px;
         padding-left: 10px;
@@ -298,7 +276,6 @@ export const ListItem = styled.div`
 `
 
 export const PageNumber = styled.div`
-    /* 페이지 번호 스타일을 정의하세요. */
     display: inline-block;
     margin-right: 5px;
     cursor: pointer;

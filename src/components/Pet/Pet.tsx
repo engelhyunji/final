@@ -9,7 +9,6 @@ import BackWave from '../BackWave'
 import { ApiResponse } from '../../apis/api/petlist'
 
 const Pet: React.FC = () => {
-    // 상태 관리 변수들
     const [petName, setPetName] = useState<string>('')
     const [petGender, setPetGender] = useState<'MALE' | 'FEMALE'>('MALE')
     const [petKind, setPetKind] = useState<'SMALL' | 'MEDIUM' | 'LARGE'>('SMALL')
@@ -23,7 +22,6 @@ const Pet: React.FC = () => {
 
     const navigate = useNavigate()
 
-    // 이벤트 핸들러 함수들
     const handleGenderChange = (gender: 'MALE' | 'FEMALE') => {
         setPetGender(gender)
     }
@@ -34,7 +32,6 @@ const Pet: React.FC = () => {
         const newInfo = e.target.value
         setPetInfo(newInfo)
 
-        // Check if pet info exceeds 50 characters
         if (newInfo.length > 50) {
             setPetInfoError('펫 정보는 50글자 이내로 입력해주세요.')
         } else {

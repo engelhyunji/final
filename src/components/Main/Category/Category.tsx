@@ -59,14 +59,12 @@ const Category: React.FC = () => {
         setSelectedCategory(categoryValue)
     }
 
-    // 'infinite' 속성을 'filteredShops'의 길이에 따라 조정
     const isSliderInfinite = filteredShops.length > 3
 
     const settings = {
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
         dots: true,
-        // infinite: filteredShops.length > 3,
         infinite: isSliderInfinite,
         speed: 100,
         slidesToScroll: 1,
@@ -93,13 +91,6 @@ const Category: React.FC = () => {
             },
         ],
     }
-
-    // const groupedShops = filteredShops.reduce<ShopInfo[][]>((result, _value, index, array) => {
-    //     if (index % 3 === 0) {
-    //         result.push(array.slice(index, index + 3))
-    //     }
-    //     return result
-    // }, [])
 
     interface ArrowProps {
         className?: string
@@ -143,7 +134,6 @@ const Category: React.FC = () => {
                                     ))}
                                     <p>{shop.shopName}</p>
                                     <p>{shop.shopStartTime} - {shop.shopEndTime}</p>
-                                    {/* <p>{shop.shopType==='ETC' ? '기타' : shop.shopType==='CAFE' ? '카페' : shop.shopType==='GROOMING'?'애견 미용' :'동물병원'}</p> */}
                                     <p>{shop.shopAddress}</p>
                                 </ST.ShopCard>
                             </div>

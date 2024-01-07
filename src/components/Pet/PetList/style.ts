@@ -20,7 +20,7 @@ export const TitleBackContainer = styled.div`
 
     &::before {
         content: '';
-        z-index: -1; 
+        z-index: -1;
         width: 100%;
         height: 325px;
         position: absolute;
@@ -68,7 +68,6 @@ export const PetListH2 = styled.h2`
 `
 export const ShopP = styled.p`
     margin: 0 0 10px;
-    /* z-index: 2; */
 
     color: #fff;
     text-align: center;
@@ -77,16 +76,18 @@ export const ShopP = styled.p`
 
 export const Button = styled.button`
     background: linear-gradient(45deg, #fffbb4 0%, #4df9b1 25%, #ffffcf 50%, #00bd8f 75%, #00f8a9 100%);
-    color: #333; 
-    text-shadow: 1px 1px 2px #fff; 
-    padding: 15px 25px; 
+    color: #333;
+    text-shadow: 1px 1px 2px #fff;
+    padding: 15px 25px;
     border: none;
     border-radius: 30px;
     font-family: Pretendard-medium;
-    font-size: 18px; 
+    font-size: 18px;
     font-weight: 450;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
     text-align: center;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     display: inline-block;
@@ -95,15 +96,14 @@ export const Button = styled.button`
 
     &:hover {
         background: linear-gradient(45deg, #fffbb4 0%, #4df9b1 25%, #00bd8f 50%, #ffffcf 75%, #00f8a9 100%);
-        transform: scale(1.05); 
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); 
+        transform: scale(1.05);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
 
     &:focus {
         outline: none;
     }
-`;
-
+`
 
 export const Posts = styled.div`
     margin: auto;
@@ -144,11 +144,8 @@ export const PostContainer = styled.div`
     background: #fafafa;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-    &:hover {
-        opacity: 0.8;
-        & > button {
-            display: block; 
-        }
+    &:hover > div {
+        display: block;
     }
 `
 
@@ -161,7 +158,6 @@ export const Image = styled.img``
 
 export const PetSearchContainer = styled.div`
     width: 725px;
-    /* height: 131px; */
     padding: 19px 33px;
 
     border-radius: 7px;
@@ -236,4 +232,26 @@ export const LikeButton = styled.button`
     &:hover {
         display: flex;
     }
+`
+
+export const PetInfo = styled.div`
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(150, 150, 150, 0.7);
+    color: white;
+    padding: 20px;
+    font-size: 20px;
+    font-family: Pretendard Variable;
+    text-align: center;
+`
+
+export const PetName = styled.div`
+    font-weight: bold;
+`
+
+export const PetKind = styled.div`
+    font-size: 14px;
 `

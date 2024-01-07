@@ -156,7 +156,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
 
         setInfo(currentPlaces[0]);
         setSelectedPlaceIndex(0);
-    }, [markers, currentPage, placesPerPage]); // Include 'markers' and 'currentPage' as dependencies
+    }, [markers, currentPage, placesPerPage]); 
 
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(markers.length / placesPerPage); i++) {

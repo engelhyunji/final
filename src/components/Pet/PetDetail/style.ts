@@ -106,7 +106,7 @@ export const Name = styled.h1`
     font-size: 30px;
     font-style: normal;
     font-weight: 700;
-    line-height: 36px; /* 120% */
+    line-height: 36px; 
 `
 
 export const DetailLabel = styled.span`
@@ -115,7 +115,7 @@ export const DetailLabel = styled.span`
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; /* 120% */
+    line-height: 24px; 
     display: flex;
     flex-direction: row;
 `

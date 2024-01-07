@@ -83,7 +83,6 @@ export const Arrow = styled.div`
 `
 
 export const ShopCard = styled.div`
-    /* max-width: 250px; */
     width: 250px;
     height: 300px;
     margin: 10px;

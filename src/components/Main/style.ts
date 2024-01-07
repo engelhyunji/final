@@ -46,7 +46,7 @@ export const Text3 = styled.h2`
     color: #353535;
     margin-top: 10px;
     font-size: 30px;
-    line-height: 36px; /* 120% */
+    line-height: 36px;
 `
 
 export const ShopBtn = styled.button`
@@ -138,7 +138,6 @@ export const PetText3 = styled.div`
     text-align: left;
     width: 149px;
     height: 40px;
-    /* text-align: center; */
     color: var(--Gray3, #575756);
     margin-top: 10px;
     white-space: normal;
@@ -161,9 +160,9 @@ export const PetContent = styled.div`
 `
 
 export const MainTopWrapper = styled.div`
-    display: flex; // 이미지도 flex 아이템으로 만듭니다.
-    flex-direction: column; // 이미지 내부 아이템을 수직으로 나열합니다.
-    align-items: center; // 이미지 내부 아이템을 중앙 정렬합니다.
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
 `
 export const OverlayContainer = styled.div`
     width: 1200px;
@@ -197,16 +196,12 @@ export const OverlayContainer2 = styled.div`
     background: repeat-x center/50% url('/mainItem.png');
 `
 
-// export const PetContent2 = styled.div`
-//     display: flex;
-//     align-items: center;
-// `
 
 export const Wrap1 = styled.div`
     display: flex;
     justify-content: center;
 
     &:hover {
-        text-decoration: underline; // 텍스트 밑줄
+        text-decoration: underline; 
     }
 `

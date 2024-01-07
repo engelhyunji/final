@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import * as ST from './style'
 import instance from '../../../apis/instance'
 import Pagination from 'react-bootstrap/Pagination'
-import './Pagination.css'
 
 export interface PetDetails {
     userId: number
@@ -29,7 +28,7 @@ const PetList: React.FC = () => {
     const [pets, setPets] = useState<PetDetails[]>([])
     const [error, setError] = useState<string | null>(null)
     const [currentPage, setCurrentPage] = useState<number>(1)
-    const [petsPerPage] = useState<number>(16)
+    const petsPerPage = 16
     const [isSortedByNewest, setIsSortedByNewest] = useState(false)
 
     const sortPetsByNewest = (pets: PetDetails[]): PetDetails[] => {
@@ -108,27 +107,25 @@ const PetList: React.FC = () => {
                         {pet.imageUrls && pet.imageUrls[0] && (
                             <ST.Img src={pet.imageUrls[0]} alt={`${pet.petName} 이미지`} />
                         )}
-                        {/* <ST.LikeButton
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                pet.petLikes > 0 ? removeLike(pet.petId) : addLike(pet.petId)
-                            }}
-                        >
-                            {pet.petLikes > 0 ? `♡` : `♥`}
-                        </ST.LikeButton> */}
+                        <ST.PetInfo>{pet.petName}</ST.PetInfo>
                     </ST.PostContainer>
                 ))}
             </ST.Posts>
+
             <Pagination>
                 <Pagination.Prev onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} />
-                {Array.from({ length: Math.ceil(pets.length / 16) }, (_, index) => (
-                    <Pagination.Item key={index} active={index + 1 === currentPage} onClick={() => paginate(index + 1)}>
+                {Array.from({ length: Math.ceil(pets.length / petsPerPage) }, (_, index) => (
+                    <Pagination.Item
+                        key={index + 1}
+                        active={index + 1 === currentPage}
+                        onClick={() => paginate(index + 1)}
+                    >
                         {index + 1}
                     </Pagination.Item>
                 ))}
                 <Pagination.Next
                     onClick={() => paginate(currentPage + 1)}
-                    disabled={currentPage === Math.ceil(pets.length / 12)}
+                    disabled={currentPage === Math.ceil(pets.length / petsPerPage)}
                 />
             </Pagination>
         </ST.Container>

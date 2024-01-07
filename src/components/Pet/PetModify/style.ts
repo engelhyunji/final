@@ -38,11 +38,11 @@ export const Label = styled.label`
 
 export const PetInputBox = styled.div`
     margin: 30px 0;
-    width: 100%; // 부모 요소 너비에 맞춤
+    width: 100%; 
 `
 
 export const DescInput = styled.textarea`
-    width: 474px; // 직접적으로 가로 길이 설정
+    width: 474px; 
     height: 102px;
     margin-top: 10px;
     min-height: 145px;
@@ -80,13 +80,13 @@ export const Input = styled.input`
 
 export const ButtonContainer = styled.div`
     display: flex;
-    width: 100%; // 부모 요소 너비에 맞춤
+    width: 100%; 
     justify-content: space-between;
     margin-top: 10px;
 `
 
 export const Button = styled.button`
-    flex: 1; // 모든 버튼이 동일한 크기를 가짐
+    flex: 1; 
     padding: 15px;
     border: none;
     border-radius: 5px;
@@ -127,7 +127,7 @@ export const ImgWrap = styled.div`
 `
 
 export const ImgLabel = styled.label`
-    width: 100%; // 부모 요소 너비에 맞춤
+    width: 100%; 
     cursor: pointer;
 
     display: flex;
@@ -182,12 +182,11 @@ export const StDropdown = styled(Dropdown)`
 
     .dropdown-menu {
         width: 100%;
-        min-height: 120px; // 드롭다운 메뉴의 최소 높이 설정
-
+        min-height: 120px; 
         .dropdown-item {
             font-size: 14px;
             color: #333;
-            padding: 10px 20px; // 드롭다운 아이템의 패딩 증가
+            padding: 10px 20px; 
         }
 
         .dropdown-item:hover {
@@ -196,20 +195,6 @@ export const StDropdown = styled(Dropdown)`
     }
 `
 
-// export const ImageContainer = styled.div`
-//     border-radius: 10px; /* 원하는 둥글게 모서리 값으로 조정하세요 */
-//     overflow: hidden;
-//     width: 200px; /* 이미지 컨테이너의 너비를 조정하세요 */
-//     height: 200px; /* 이미지 컨테이너의 높이를 조정하세요 */
-//     position: relative;
-// `
-// export const FileIcon = styled.div`
-//     border-radius: 10px; /* 원하는 둥글게 모서리 값으로 조정하세요 */
-//     overflow: hidden;
-//     width: 200px; /* 이미지 컨테이너의 너비를 조정하세요 */
-//     height: 200px; /* 이미지 컨테이너의 높이를 조정하세요 */
-//     position: relative;
-// `
 
 export const ImageContainer = styled.div`
     border-radius: 10px;

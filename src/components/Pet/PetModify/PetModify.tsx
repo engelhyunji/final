@@ -36,12 +36,6 @@ const PetModify: React.FC = () => {
         }
     }, [petId])
 
-    // const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    //     if (petDetail) {
-    //         setPetDetail({ ...petDetail, [e.target.name]: e.target.value })
-    //     }
-    // }
-
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
         if (name === 'petName' && value.length > 10) {
@@ -250,7 +244,6 @@ const PetModify: React.FC = () => {
                     </ST.ImgWrap>
                 </ST.PetInputBox>
 
-                {/* {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" />} */}
                 <ST.ButtonContainer>
                     <ST.Button type="submit">입력 수정</ST.Button>
                     <ST.Button onClick={handleDelete}>입력 삭제</ST.Button>
