@@ -2,19 +2,12 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     max-width: 1440px;
-    width: 100%;
     margin: 0 auto;
     position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    /* overflow-y: scroll; */
-    overflow-x: hidden;
-    margin-bottom: 10px;
-    margin-left: 7px;
-
-    margin: 0 auto;
 `
 export const TitleBackContainer = styled.div`
     width: 100%;
@@ -25,18 +18,11 @@ export const TitleBackContainer = styled.div`
     color: #fff;
     font-family: Pretendard-medium;
 
-    /* linear-gradient(검정색 필터로 활용) */
-    /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); */
-
-    // 가상 요소 만들어서 배경만 흐리게
     &::before {
         content: '';
-        z-index: -1; /* 콘텐츠 뒤로 */
-        /* max-width: 1450px; */
+        z-index: -1; 
         width: 100%;
-        /* height: 100%; */
         height: 325px;
-        /* 부모 기준으로 위치 맞춰야 높이 적용됨 */
         position: absolute;
         top: 0;
         left: 0;
@@ -60,7 +46,6 @@ export const TitleBackContainer = styled.div`
 
 export const ProfileContainer = styled.div`
     width: 100%;
-    /* padding: 20px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -90,15 +75,48 @@ export const ShopP = styled.p`
     font-family: Pretendard-regular;
 `
 
-export const Button = styled.button``
+export const Button = styled.button`
+    background: linear-gradient(45deg, #fffbb4 0%, #4df9b1 25%, #ffffcf 50%, #00bd8f 75%, #00f8a9 100%);
+    color: #333; 
+    text-shadow: 1px 1px 2px #fff; 
+    padding: 15px 25px; 
+    border: none;
+    border-radius: 30px;
+    font-family: Pretendard-medium;
+    font-size: 18px; 
+    font-weight: 450;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    display: inline-block;
+    font-family: Pretendard;
+    margin: 10px;
+
+    &:hover {
+        background: linear-gradient(45deg, #fffbb4 0%, #4df9b1 25%, #00bd8f 50%, #ffffcf 75%, #00f8a9 100%);
+        transform: scale(1.05); 
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); 
+    }
+
+    &:focus {
+        outline: none;
+    }
+`;
+
 
 export const Posts = styled.div`
+    margin: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     display: grid;
     grid-template-columns: repeat(4, minmax(250px, 1fr));
-    grid-gap: 15px; // Space between posts
-    padding: 120px; // Padding around the grid
+    grid-gap: 15px;
+    padding: 120px;
     width: 100%;
-    margin-top: 20px;
+    margin-top: -100px;
 `
 export const PetListContainer = styled.div`
     max-width: 1200px;
@@ -129,7 +147,7 @@ export const PostContainer = styled.div`
     &:hover {
         opacity: 0.8;
         & > button {
-            display: block; // 호버 시 좋아요 버튼 표시
+            display: block; 
         }
     }
 `
@@ -201,15 +219,21 @@ export const Peth3 = styled.div`
 `
 export const LikeButton = styled.button`
     position: absolute;
-    top: 50%; // 중앙으로 정렬
-    left: 50%; // 중앙으로 정렬
-    transform: translate(-50%, -50%); // 중앙 정렬 조정
-    background: rgba(0, 0, 0, 0.6); // 반투명 배경
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
     border: none;
     font-size: 30px;
     color: white;
     cursor: pointer;
-    display: none; // 기본적으로 숨김
     padding: 10px 20px;
     border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        display: flex;
+    }
 `
