@@ -130,3 +130,8 @@ export const ShopCard = styled.div`
         transition: filter 0.3s ease;
     }
 `
+export const StyledSlider = styled.div`
+.slick-dots li:nth-child(n + 5) {
+    display: none;
+}
+`;
