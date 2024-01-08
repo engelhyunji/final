@@ -113,12 +113,18 @@ const PetDetail: React.FC = () => {
                     <ST.TextContainer2>
                         <ST.TextContainer3>
                             <ST.MultiLineText>
-                                <ST.DetailLabel>특징 </ST.DetailLabel>
-                                <ST.TextLabel>{pet.petInfo}</ST.TextLabel>
-                                <ST.DetailLabel>크기 </ST.DetailLabel>
-                                <ST.TextLabel>{translatePetKind(pet.petKind)}</ST.TextLabel>
-                                <ST.DetailLabel>성별 </ST.DetailLabel>
-                                <ST.TextLabel>{translatePetGender(pet.petGender)}</ST.TextLabel>
+                                <ST.TextContent>
+                                    <ST.DetailLabel>특징 </ST.DetailLabel>
+                                    <ST.TextLabel>{pet.petInfo}</ST.TextLabel>
+                                </ST.TextContent>
+                                <ST.TextContent>
+                                    <ST.DetailLabel>크기 </ST.DetailLabel>
+                                    <ST.TextLabel>{translatePetKind(pet.petKind)}</ST.TextLabel>
+                                </ST.TextContent>
+                                <ST.TextContent>
+                                    <ST.DetailLabel>성별 </ST.DetailLabel>
+                                    <ST.TextLabel>{translatePetGender(pet.petGender)}</ST.TextLabel>
+                                </ST.TextContent>
                             </ST.MultiLineText>
                         </ST.TextContainer3>
                     </ST.TextContainer2>

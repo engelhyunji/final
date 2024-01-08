@@ -130,9 +130,9 @@ export const MultiLineText = styled.div`
 export const TextContainer = styled.p`
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 15px;
-    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    flex-direction: column;
     justify-content: start;
     margin-top: 10px;
 `
@@ -158,11 +158,17 @@ export const TextContainer3 = styled.p`
 export const TextLabel = styled.p`
     color: var(--Gray3, #575756);
     font-family: 'Pretendard Variable', sans-serif;
-    font-size: 15px;
+    font-size: 19px;
     font-weight: 400;
     line-height: 24px;
     display: flex;
     white-space: normal;
+`
+export const TextContent = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 `
 
 export const Posts = styled.div`
