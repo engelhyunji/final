@@ -28,6 +28,30 @@ const PetDetail: React.FC = () => {
     const [error, setError] = useState<string | null>(null)
     const { petId } = useParams<{ petId: string }>()
 
+    const translatePetGender = (gender: 'MALE' | 'FEMALE') => {
+        switch (gender) {
+            case 'MALE':
+                return '남아'
+            case 'FEMALE':
+                return '여아'
+            default:
+                return gender
+        }
+    }
+
+    const translatePetKind = (kind: 'SMALL' | 'MEDIUM' | 'LARGE') => {
+        switch (kind) {
+            case 'SMALL':
+                return '소형견'
+            case 'MEDIUM':
+                return '중형견'
+            case 'LARGE':
+                return '대형견'
+            default:
+                return kind
+        }
+    }
+
     const fetchPetDetail = async (petId: string): Promise<ApiResponse<PetDetails> | null> => {
         try {
             const response = await instance.get<ApiResponse<PetDetails>>(`/api/pets/${petId}`)
@@ -85,16 +109,17 @@ const PetDetail: React.FC = () => {
                     </ST.ImgCard>
                 ))}
                 <ST.TextContainer>
-                    <ST.Name>{pet.petName}</ST.Name> 
+                    <ST.Name>{pet.petName}</ST.Name>
                     <ST.TextContainer2>
                         <ST.TextContainer3>
-                            <ST.DetailLabel>특징 </ST.DetailLabel> 
-                            <ST.H3>{pet.petInfo}</ST.H3> 
-                            <ST.DetailLabel>크기 </ST.DetailLabel> 
-                            <ST.H3>{pet.petKind}</ST.H3> 
-                            <br />
-                            <ST.DetailLabel>성별 </ST.DetailLabel> 
-                            <ST.H3>{pet.petGender}</ST.H3> 
+                            <ST.MultiLineText>
+                                <ST.DetailLabel>특징 </ST.DetailLabel>
+                                <ST.TextLabel>{pet.petInfo}</ST.TextLabel>
+                                <ST.DetailLabel>크기 </ST.DetailLabel>
+                                <ST.TextLabel>{translatePetKind(pet.petKind)}</ST.TextLabel>
+                                <ST.DetailLabel>성별 </ST.DetailLabel>
+                                <ST.TextLabel>{translatePetGender(pet.petGender)}</ST.TextLabel>
+                            </ST.MultiLineText>
                         </ST.TextContainer3>
                     </ST.TextContainer2>
                 </ST.TextContainer>
@@ -102,7 +127,7 @@ const PetDetail: React.FC = () => {
             <ST.Posts>
                 {pet.imageUrls.map((url, index) => (
                     <ST.ImgCard1 key={index}>
-                        <ST.Img src={url} alt={`${pet.petName} 이미지`} /> 
+                        <ST.Img src={url} alt={`${pet.petName} 이미지`} />
                     </ST.ImgCard1>
                 ))}
             </ST.Posts>

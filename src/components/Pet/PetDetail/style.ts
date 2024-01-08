@@ -1,12 +1,11 @@
 import styled from 'styled-components'
 
 export const Wrap = styled.div`
-    max-width: 1440px;
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 export const Wrap2 = styled.div`
     width: 30%;
@@ -20,9 +19,11 @@ export const Wrap2 = styled.div`
 export const ProfileContainer = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
+    overflow-x: hidden;
+    width: 100%;
     gap: 20px;
     background: #fff;
     border-radius: 10px;
@@ -31,12 +32,11 @@ export const ProfileContainer = styled.div`
 `
 
 export const Text = styled.div`
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 16px;
     color: #333;
-    margin-bottom: 15px;
     text-align: center;
 `
+
 export const Text1 = styled.div`
     font-size: 15px;
     font-weight: bold;
@@ -81,41 +81,37 @@ export const DetailCard = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 120px;
-    margin-top: 35px;
-    justify-content: center;
-    background: #fff;
+    justify-content: space-around;
     border-radius: 15px;
-    font-family: 'Pretendard Variable', sans-serif;
-    width: 100%;
-    width: 1200px;
-    height: 276px;
-    flex-shrink: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-image: url('/PetDetail.png');
-    background-size: cover;
-    background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    padding: 20px;
+    margin: 30px auto;
+    width: 90%;
 `
 
 export const Name = styled.h1`
-    /* gap: 10px; */
     padding-left: 170px;
     font-size: 24px;
     color: #000;
     font-family: Pretendard Variable;
-    font-size: 30px;
+    font-size: 35px;
     font-style: normal;
+    text-align: center;
     font-weight: 700;
-    line-height: 36px; 
+    line-height: 36px;
 `
 
 export const DetailLabel = styled.span`
     color: var(--Gray3, #575756);
     font-family: Pretendard Variable;
-    font-size: 15px;
+    font-size: 20px;
     font-style: normal;
-    font-weight: 400;
-    line-height: 24px; 
+    font-weight: 600;
+    line-height: 24px;
     display: flex;
     flex-direction: row;
 `
@@ -127,6 +123,10 @@ export const DetailText = styled.p`
     color: #666;
     font-size: 18px;
 `
+export const MultiLineText = styled.div`
+    white-space: pre-line;
+`
+
 export const TextContainer = styled.p`
     display: flex;
     flex-wrap: wrap;
@@ -155,14 +155,13 @@ export const TextContainer3 = styled.p`
     justify-content: start;
 `
 
-export const H3 = styled.p`
+export const TextLabel = styled.p`
     color: var(--Gray3, #575756);
     font-family: 'Pretendard Variable', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 400;
     line-height: 24px;
     display: flex;
-    flex-direction: row;
     white-space: normal;
 `
 
@@ -171,8 +170,10 @@ export const Posts = styled.div`
     grid-template-columns: repeat(4, minmax(250px, 1fr));
     grid-gap: 15px;
     padding: 120px;
+    height: 100%;
     width: 100%;
     margin-top: 10px;
+    margin-left: 100px;
 `
 
 export const ImgCard1 = styled.div`
@@ -183,22 +184,22 @@ export const ImgCard1 = styled.div`
     margin-right: 100px;
 `
 export const ImgCard = styled.div`
+    float: left;
     margin-top: 33px;
-    width: 448px;
-    height: 238px;
+    width: 348px;
+    height: 300px;
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 35px;
-    margin-left: 190px;
+    margin-left: 390px;
+    margin-right: 10px;
 `
 
 export const Img = styled.img`
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    &:hover {
-        opacity: 0.8;
-    }
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
 `
 
 export const Img2 = styled.img`
