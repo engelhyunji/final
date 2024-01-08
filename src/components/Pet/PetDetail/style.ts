@@ -84,7 +84,7 @@ export const DetailCard = styled.div`
     justify-content: center;
     /* background: #fff; */
     border-radius: 15px;
-    font-family: 'Pretendard Variable', sans-serif;
+    /* font-family: 'Pretendard Variable', sans-serif; */
     width: 100%;
     width: 1200px;
     height: 276px;
