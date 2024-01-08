@@ -25,7 +25,7 @@ export const Text = styled.h2`
 
 export const Form = styled.form`
     max-width: 474px;
-    width: 100%; // 가로 너비 일관성 유지
+    width: 100%;
     margin: 50px auto;
     z-index: 2;
 `

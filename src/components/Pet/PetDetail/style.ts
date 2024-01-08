@@ -260,4 +260,5 @@ export const ImageContainer = styled.div`
     align-items: center;
     margin-right: -129px;
     padding-left: 290px;
+    background-repeat: no-repeat; 
 `
