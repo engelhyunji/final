@@ -1,40 +1,40 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Wrap = styled.div`
-    max-width: 100vw;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-`;
-
+`
 export const Wrap2 = styled.div`
-    width: 100%; /* 화면 너비에 맞게 조정 */
+    width: 30%;
     margin: 20px auto;
+    padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    background: #fff;
-`;
+`
 
 export const ProfileContainer = styled.div`
     display: flex;
+    background: url('./PetDetail.png');
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     margin-bottom: 2rem;
-`;
+    background: url('/path/to/your/background/image.jpg') center/cover no-repeat; // 이미지 경로를 확인하고 수정하세요
+    border-radius: 10px;
+`
 
 export const Text = styled.div`
     font-size: 16px;
     color: #333;
     text-align: center;
-`;
+`
 
 export const Text1 = styled.div`
     font-size: 15px;
@@ -45,14 +45,14 @@ export const Text1 = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-`;
+`
 
 export const PetItem = styled.div`
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     height: 450px;
-`;
+`
 
 export const Button = styled.div`
     display: inline-block;
@@ -68,13 +68,13 @@ export const Button = styled.div`
     &:hover {
         background-color: #17b07e;
     }
-`;
+`
 
 export const Image = styled.img`
     max-width: 100%;
     height: auto;
     border-radius: 10px;
-`;
+`
 
 export const DetailCard = styled.div`
     display: flex;
@@ -87,8 +87,9 @@ export const DetailCard = styled.div`
     padding: 20px;
     margin: 30px auto;
     width: 90%;
-    max-width: 800px;
-`;
+    width: 90%;
+    max-width: 1200px;
+`
 
 export const Name = styled.h1`
     padding-left: 110px;
@@ -100,7 +101,7 @@ export const Name = styled.h1`
     text-align: center;
     font-weight: 700;
     line-height: 36px;
-`;
+`
 
 export const DetailLabel = styled.span`
     color: var(--Gray3, #575756);
@@ -109,7 +110,7 @@ export const DetailLabel = styled.span`
     font-style: normal;
     font-weight: 600;
     line-height: 24px;
-`;
+`
 
 export const DetailText = styled.p`
     display: flex;
@@ -117,11 +118,10 @@ export const DetailText = styled.p`
     gap: 10px;
     color: #666;
     font-size: 18px;
-`;
-
+`
 export const MultiLineText = styled.div`
     white-space: pre-line;
-`;
+`
 
 export const TextContainer = styled.p`
     flex: 2;
@@ -130,28 +130,25 @@ export const TextContainer = styled.p`
     align-items: center;
     align-items: flex-start;
     justify-content: center;
-    margin-left: 20px;
-    padding: 10px;
-`;
-
+`
 export const TextContainer2 = styled.p`
-    /* padding-left: 170px; 제거 */
+    padding-left: 170px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-`;
+`
 
 export const TextContainer3 = styled.p`
-    /* padding-right: 450px; 제거 */
+    padding-right: 450px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 15px;
     flex-direction: row;
     justify-content: center;
-`;
+`
 
 export const TextLabel = styled.p`
     color: var(--Gray3, #575756);
@@ -160,8 +157,7 @@ export const TextLabel = styled.p`
     font-weight: 400;
     line-height: 24px;
     white-space: normal;
-`;
-
+`
 export const TextContent = styled.div`
     display: flex;
     flex-direction: row;
@@ -169,7 +165,7 @@ export const TextContent = styled.div`
     gap: 10px;
     padding-left: 100px;
     margin-top: 10px;
-`;
+`
 
 export const Posts = styled.div`
     display: grid;
@@ -179,17 +175,16 @@ export const Posts = styled.div`
     height: 100%;
     width: 100%;
     margin-top: 10px;
-    margin-left: 0; 
-`;
+    margin-left: 100px;
+`
 
 export const ImgCard1 = styled.div`
     width: 290px;
     overflow: hidden;
-    padding-left: 0; 
-    margin-left: 0; 
-    margin-right: 0; 
-`;
-
+    padding-left: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+`
 export const ImgCard = styled.div`
     float: left;
     margin-top: 33px;
@@ -198,25 +193,24 @@ export const ImgCard = styled.div`
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 35px;
-    margin-left: 0; 
-    margin-right: 0; 
-`;
+    margin-left: 390px;
+    margin-right: 10px;
+`
 
 export const Img = styled.img`
     width: 100%;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
-    
-`;
+`
 
 export const Img2 = styled.img`
-    max-width: 100%;
-    max-height: 300px;
+    width: 208px;
+    height: 208px;
     border-radius: 50%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
+    object-fit: cover;
+`
 export const ModalContent = styled.div`
     position: relative;
     max-width: 600px;
@@ -231,13 +225,13 @@ export const ModalContent = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-`;
+`
 
 export const ModalImage = styled.img`
     max-width: 100%;
     max-height: 75vh;
     border-radius: 10px;
-`;
+`
 
 export const CloseButton = styled.button`
     position: absolute;
@@ -254,11 +248,12 @@ export const CloseButton = styled.button`
     &:hover {
         background-color: #f0f0f0;
     }
-`;
-
+`
 export const ImageContainer = styled.div`
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-`;
+    margin-right: -129px;
+    padding-left: 200px;
+`
