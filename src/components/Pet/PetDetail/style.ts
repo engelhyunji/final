@@ -82,7 +82,7 @@ export const DetailCard = styled.div`
     margin-left: 120px;
     margin-top: 35px;
     justify-content: center;
-    background: #fff;
+    /* background: #fff; */
     border-radius: 15px;
     font-family: 'Pretendard Variable', sans-serif;
     width: 100%;
