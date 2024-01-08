@@ -60,7 +60,7 @@
 </details>
 
 # 🐾 주요기능
-## 가게 및 반려동물 등록
+### 가게 및 반려동물 등록
 <details>
   <summary>가게 및 반려동물 등록</summary> 
 - 로그인한 사용자에 한하여 나의 가게 또는 반려동물을 이미지와 함께 **등록**할 수 있습니다.<br>
@@ -69,7 +69,7 @@
 ![image](https://github.com/engelhyunji/final/assets/147478174/d89ad0b9-f305-4471-94a3-55679c0ed34f)
 </details>
 
-## 가게 리뷰 작성 및 리뷰 추천
+### 가게 리뷰 작성 및 리뷰 추천
 <details>
   <summary>가게 리뷰 작성 및 리뷰 추천</summary>
 - 가게에 리뷰를 등록하여 사용자들끼리 정보를 공유할 수 있습니다.<br>
@@ -78,7 +78,7 @@
 ![image](https://github.com/engelhyunji/final/assets/147478174/c12938c8-262a-41f6-b4b3-7291edf40ae0)
 </details>
 
-## 가게 검색
+### 가게 검색
 <details>
   <summary>가게 검색</summary>
 - 가게 이름, 위치, 소개 정보를 대상으로 키워드를 검색하여 해당하는 결과를 찾아볼 수 있습니다.<br>
@@ -86,7 +86,7 @@
 ![image](https://github.com/engelhyunji/final/assets/147478174/60f949ac-beb2-46f7-8555-82f683df2232)
 </details>
 
-## 지도
+### 지도
 <details>
   <summary>지도</summary>
 - 가게의 위치정보를 바탕으로 카카오api 지도 상에서 가게 검색, 목록 조회가 가능합니다.<br>
@@ -94,7 +94,7 @@
 ![image](https://github.com/engelhyunji/final/assets/147478174/e264b37f-708f-4e68-a09a-b0e7def24b64)
 </details>
 
-## 실시간 채팅
+### 실시간 채팅
 <details>
   <summary>실시간 채팅</summary>
 - 채팅방 전체목록을 볼 수 있고 각 방의 최근 메세지와 등록된 해시태그가 보여집니다.<br>
