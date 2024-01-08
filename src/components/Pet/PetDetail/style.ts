@@ -112,8 +112,6 @@ export const DetailLabel = styled.span`
     font-style: normal;
     font-weight: 600;
     line-height: 24px;
-    display: flex;
-    flex-direction: row;
 `
 
 export const DetailText = styled.p`
@@ -132,7 +130,7 @@ export const TextContainer = styled.p`
     flex-wrap: wrap;
     align-items: flex-start;
     gap: 10px;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: start;
     margin-top: 10px;
 `
@@ -161,7 +159,6 @@ export const TextLabel = styled.p`
     font-size: 19px;
     font-weight: 400;
     line-height: 24px;
-    display: flex;
     white-space: normal;
 `
 export const TextContent = styled.div`
