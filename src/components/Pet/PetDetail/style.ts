@@ -22,12 +22,10 @@ export const ProfileContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 20px;
-    overflow-x: hidden;
-    width: 100%;
-    gap: 20px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
     margin-bottom: 2rem;
 `
 
@@ -81,16 +79,14 @@ export const DetailCard = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-image: url('/PetDetail.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+    background: #fff;
     padding: 20px;
     margin: 30px auto;
     width: 90%;
+    max-width: 800px;
 `
 
 export const Name = styled.h1`
@@ -126,13 +122,12 @@ export const MultiLineText = styled.div`
 `
 
 export const TextContainer = styled.p`
+    flex: 2;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    flex-direction: row;
-    justify-content: start;
-    margin-top: 10px;
+    justify-content: center;
+    margin-left: 20px;
 `
 export const TextContainer2 = styled.p`
     padding-left: 170px;
@@ -206,13 +201,10 @@ export const Img = styled.img`
 `
 
 export const Img2 = styled.img`
-    width: 100%;
-    height: 100%;
-    display: block;
+    max-width: 100%;
+    max-height: 300px;
     border-radius: 50%;
-    &:hover {
-        opacity: 0.8;
-    }
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `
 export const ModalContent = styled.div`
     position: relative;
@@ -251,4 +243,10 @@ export const CloseButton = styled.button`
     &:hover {
         background-color: #f0f0f0;
     }
+`
+export const ImageContainer = styled.div`
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `

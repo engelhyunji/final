@@ -102,34 +102,30 @@ const PetDetail: React.FC = () => {
 
     return (
         <ST.ProfileContainer>
-            <ST.DetailCard>
+        <ST.DetailCard>
+            <ST.ImageContainer>
                 {pet.imageUrls.slice(0, 1).map((url, index) => (
-                    <ST.ImgCard key={index}>
-                        <ST.Img2 src={url} alt={`${pet.petName} 이미지`} />
-                    </ST.ImgCard>
+                    <ST.Img2 key={index} src={url} alt={`${pet.petName} 이미지`} />
                 ))}
-                <ST.TextContainer>
-                    <ST.Name>{pet.petName}</ST.Name>
-                    <ST.TextContainer2>
-                        <ST.TextContainer3>
-                            <ST.MultiLineText>
-                                <ST.TextContent>
-                                    <ST.DetailLabel>특징 </ST.DetailLabel>
-                                    <ST.TextLabel>{pet.petInfo}</ST.TextLabel>
-                                </ST.TextContent>
-                                <ST.TextContent>
-                                    <ST.DetailLabel>크기 </ST.DetailLabel>
-                                    <ST.TextLabel>{translatePetKind(pet.petKind)}</ST.TextLabel>
-                                </ST.TextContent>
-                                <ST.TextContent>
-                                    <ST.DetailLabel>성별 </ST.DetailLabel>
-                                    <ST.TextLabel>{translatePetGender(pet.petGender)}</ST.TextLabel>
-                                </ST.TextContent>
-                            </ST.MultiLineText>
-                        </ST.TextContainer3>
-                    </ST.TextContainer2>
-                </ST.TextContainer>
-            </ST.DetailCard>
+            </ST.ImageContainer>
+            <ST.TextContainer>
+                <ST.Name>{pet.petName}</ST.Name>
+                <ST.MultiLineText>
+                    <ST.TextContent>
+                        <ST.DetailLabel>특징: </ST.DetailLabel>
+                        <ST.TextLabel>{pet.petInfo}</ST.TextLabel>
+                    </ST.TextContent>
+                    <ST.TextContent>
+                        <ST.DetailLabel>크기: </ST.DetailLabel>
+                        <ST.TextLabel>{translatePetKind(pet.petKind)}</ST.TextLabel>
+                    </ST.TextContent>
+                    <ST.TextContent>
+                        <ST.DetailLabel>성별: </ST.DetailLabel>
+                        <ST.TextLabel>{translatePetGender(pet.petGender)}</ST.TextLabel>
+                    </ST.TextContent>
+                </ST.MultiLineText>
+            </ST.TextContainer>
+        </ST.DetailCard>
             <ST.Posts>
                 {pet.imageUrls.map((url, index) => (
                     <ST.ImgCard1 key={index}>
