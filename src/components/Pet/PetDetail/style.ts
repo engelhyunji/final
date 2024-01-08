@@ -26,7 +26,6 @@ export const ProfileContainer = styled.div`
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     margin-bottom: 2rem;
-    background: url('/path/to/your/background/image.jpg') center/cover no-repeat; // 이미지 경로를 확인하고 수정하세요
     border-radius: 10px;
 `
 
@@ -80,15 +79,20 @@ export const DetailCard = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-left: 120px;
+    margin-top: 35px;
     justify-content: center;
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     background: #fff;
-    padding: 20px;
-    margin: 30px auto;
-    width: 90%;
-    width: 90%;
-    max-width: 1200px;
+    border-radius: 15px;
+    font-family: 'Pretendard Variable', sans-serif;
+    width: 100%;
+    width: 1200px;
+    height: 276px;
+    flex-shrink: 0;
+    background-image: url('/PetDetail.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 `
 
 export const Name = styled.h1`
@@ -255,5 +259,5 @@ export const ImageContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin-right: -129px;
-    padding-left: 200px;
+    padding-left: 290px;
 `
