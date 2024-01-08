@@ -109,8 +109,8 @@ const PetDetail: React.FC = () => {
                 ))}
             </ST.ImageContainer>
             <ST.TextContainer>
-                <ST.Name>{pet.petName}</ST.Name>
                 <ST.MultiLineText>
+                <ST.Name>{pet.petName}</ST.Name>
                     <ST.TextContent>
                         <ST.DetailLabel>특징: </ST.DetailLabel>
                         <ST.TextLabel>{pet.petInfo}</ST.TextLabel>

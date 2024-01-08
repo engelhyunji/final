@@ -81,7 +81,7 @@ export const DetailCard = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     background: #fff;
     padding: 20px;
     margin: 30px auto;
@@ -90,7 +90,7 @@ export const DetailCard = styled.div`
 `
 
 export const Name = styled.h1`
-    padding-left: 170px;
+    padding-left: 110px;
     font-size: 24px;
     color: #000;
     font-family: Pretendard Variable;
@@ -125,9 +125,11 @@ export const TextContainer = styled.p`
     flex: 2;
     display: flex;
     flex-direction: column;
+    align-items: center;
     align-items: flex-start;
     justify-content: center;
     margin-left: 20px;
+    padding: 10px;
 `
 export const TextContainer2 = styled.p`
     padding-left: 170px;
@@ -135,7 +137,7 @@ export const TextContainer2 = styled.p`
     flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
 `
 
 export const TextContainer3 = styled.p`
@@ -145,7 +147,7 @@ export const TextContainer3 = styled.p`
     align-items: center;
     gap: 15px;
     flex-direction: row;
-    justify-content: start;
+    justify-content: center;
 `
 
 export const TextLabel = styled.p`
@@ -161,6 +163,8 @@ export const TextContent = styled.div`
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    padding-left: 100px;
+    margin-top: 10px;
 `
 
 export const Posts = styled.div`
@@ -249,4 +253,5 @@ export const ImageContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 100px;
 `
