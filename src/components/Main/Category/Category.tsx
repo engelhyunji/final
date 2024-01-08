@@ -40,6 +40,7 @@ const Category: React.FC = () => {
             try {
                 const response = await instance.get<{ result: Shop[] }>('/api/shops')
                 setShops(response.data.result || [])
+                
                 console.log('Shops:', response.data.result)
             } catch (error) {
                 console.error('가게 정보를 불러오는데 실패했습니다.', error)
@@ -122,24 +123,28 @@ const Category: React.FC = () => {
                 ))}
             </ST.CategoryList>
             <ST.ShopList>
-                {shops.length > 0 && (
-                    <Slider {...settings}>
-                        {filteredShops.map((shop, index) => (
-                            <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
-                                <ST.ShopCard
-                                    onClick={() => navigate(`/shops/${shop.shopId}`)} // 상세 페이지로 이동
-                                >
-                                    {shop.imageUrls?.map((url, imgIdx) => (
-                                        <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
-                                    ))}
-                                    <p>{shop.shopName}</p>
-                                    <p>{shop.shopStartTime} - {shop.shopEndTime}</p>
-                                    <p>{shop.shopAddress}</p>
-                                </ST.ShopCard>
-                            </div>
-                        ))}
-                    </Slider>
-                )}
+                {/* <ST.CustomSlider> */}
+                    {shops.length > 0 && (
+                        <Slider {...settings}>
+                            {filteredShops.map((shop, index) => (
+                                <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <ST.ShopCard
+                                        onClick={() => navigate(`/shops/${shop.shopId}`)} // 상세 페이지로 이동
+                                    >
+                                        {shop.imageUrls?.map((url, imgIdx) => (
+                                            <Image key={imgIdx} src={url} alt={`${shop.shopName} 이미지`} />
+                                        ))}
+                                        <p>{shop.shopName}</p>
+                                        <p>
+                                            {shop.shopStartTime} - {shop.shopEndTime}
+                                        </p>
+                                        <p>{shop.shopAddress}</p>
+                                    </ST.ShopCard>
+                                </div>
+                            ))}
+                        </Slider>
+                    )}
+                {/* </ST.CustomSlider> */}
             </ST.ShopList>
         </ST.CategoryContainer>
     )

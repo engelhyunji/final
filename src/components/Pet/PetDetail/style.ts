@@ -17,7 +17,7 @@ export const Wrap2 = styled.div`
 
 export const ProfileContainer = styled.div`
     display: flex;
-    background: url('./PetDetail.png');
+    /* background: url('./PetDetail.png'); */
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -260,5 +260,5 @@ export const ImageContainer = styled.div`
     align-items: center;
     margin-right: -129px;
     padding-left: 290px;
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
 `

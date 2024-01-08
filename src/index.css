@@ -128,4 +128,6 @@ table {
     text-align: center;
 }
 
-
+.slick-dots li:nth-child(n + 5) {
+    display: none;
+}

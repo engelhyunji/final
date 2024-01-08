@@ -1,3 +1,4 @@
+import Slider from 'react-slick'
 import styled, { css } from 'styled-components'
 
 type CategoryItemProps = {
@@ -9,33 +10,38 @@ export const CategoryContainer = styled.div`
     margin: 0 auto;
 `
 
-
 export const CategoryList = styled.div`
     display: flex;
     justify-content: center;
     gap: 20px;
-    width: 900px; 
+    width: 900px;
     padding-left: 70px;
     margin-left: 50px;
     margin-bottom: 30px;
-    color: #4CE1A1;
-    
+    color: #4ce1a1;
 `
 
 export const CategoryItem = styled.div<CategoryItemProps>`
     cursor: pointer;
     padding: 10px 20px;
     border-radius: 112px;
-    border: 1px solid #4CE1A1;
+    border: 1px solid #4ce1a1;
     transition: background-color 0.3s ease;
 
     ${(props) =>
         props.$isSelected &&
         css`
-            background-color: #4CE1A1;
+            background-color: #4ce1a1;
             color: white;
         `}
 `
+
+export const CustomSlider = styled(Slider)`
+    .slick-dots li:nth-child(n+5) {
+        display: none;
+    }
+`;
+
 
 export const ShopList = styled.div`
     width: 90%;

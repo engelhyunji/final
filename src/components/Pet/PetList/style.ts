@@ -258,7 +258,7 @@ export const PetKind = styled.div`
     font-size: 14px;
 `
 export const StyledPagination = styled(Pagination)`
-    margin-bottom: 30px;
+    margin-bottom: 60px;
     .page-item .page-link {
         font-size: 17px;
         background-color: transparent;
