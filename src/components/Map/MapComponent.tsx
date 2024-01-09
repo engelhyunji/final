@@ -59,8 +59,8 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
     const [selectedPlaceIndex, setSelectedPlaceIndex] = useState<number | null>(null);
     // const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [placesPerPage] = useState(3);
-    const map = useRef<any>(null); // Changed the type to 'any' to address the panTo error
+    const [placesPerPage] = useState(2);
+    const map = useRef<any>(null);
     const navigate = useNavigate();
 
     const defaultCoords = { lat: 37.5665, lng: 126.978 };
