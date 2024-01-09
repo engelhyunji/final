@@ -69,20 +69,26 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
         }
     }
 
+    // 디바운싱 적용
+    let timer = 0
     // 리뷰 추천
     const RecommendHandler = (reviewId: number) => {
+        clearTimeout(timer)
         const recommendReview = { ...recommend }
-        // 추천 안한 리뷰일 때 : 추천
-        if (recommendReview[reviewId] === undefined || recommendReview[reviewId] === false) {
-            recommendMutation.mutate(reviewId)
-            recommendReview[reviewId] = true
+        // 디바운싱 기준 시간 0.5초
+        timer = window.setTimeout(() => {
+            // 추천 안한 리뷰일 때 : 추천
+            if (recommendReview[reviewId] === undefined || recommendReview[reviewId] === false) {
+                recommendMutation.mutate(reviewId)
+                recommendReview[reviewId] = true
 
-            // 추천 한 리뷰일 때 : 추천취소
-        } else {
-            cancelRecommendMutation.mutate(reviewId)
-            recommendReview[reviewId] = false
-        }
-        setRecommend(recommendReview)
+                // 추천 한 리뷰일 때 : 추천취소
+            } else {
+                cancelRecommendMutation.mutate(reviewId)
+                recommendReview[reviewId] = false
+            }
+            setRecommend(recommendReview)
+        }, 500)
     }
 
     // 리뷰 삭제
@@ -99,7 +105,12 @@ const Reviews: React.FC<ReviewsProps> = ({ detailShopData }) => {
                 <>
                     <ST.ReviewInputP>
                         {/* <span>후기 작성</span> */}
-                        <ST.ReviewInput type="text" value={comment} onChange={(e) => setComment(e.target.value)} placeholder='방문 후기를 입력해주세요'/>
+                        <ST.ReviewInput
+                            type="text"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                            placeholder="방문 후기를 입력해주세요"
+                        />
                         {comment.length > reviewLimit ? (
                             <ST.ReviewLength>
                                 {comment.length}/{reviewLimit}
