@@ -72,7 +72,7 @@ instance.interceptors.response.use(
     },
     (error) => {
         // 토큰 만료 에러 처리 (401 Unauthorized)
-        if (error.response.status === 4103 && !isTokenExpired) {
+        if ((error.response.data.code === 5203 || error.response.status === 4103) && !isTokenExpired) {
             // 경고창을 한 번만 표시하기 위해 플래그 설정
             isTokenExpired = true
             // 모든 정보 삭제
