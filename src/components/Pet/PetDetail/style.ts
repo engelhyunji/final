@@ -24,7 +24,7 @@ export const ProfileContainer = styled.div`
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    width: 1440px;
     margin-bottom: 2rem;
     border-radius: 10px;
 `

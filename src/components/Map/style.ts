@@ -25,7 +25,7 @@ export const ModalContainer = styled.div`
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 90%;
-    max-width: 600px; 
+    max-width: 600px;
     margin: auto;
 `
 
@@ -50,7 +50,7 @@ export const SearchContainer = styled.div`
 `
 
 export const ListMapContainer = styled.div`
-    flex: 1; 
+    flex: 1;
     margin-top: 20px;
     background: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -95,7 +95,7 @@ export const Button = styled.button`
 `
 
 export const ListContainer = styled.div`
-    flex: 1; 
+    flex: 1;
     margin-top: 20px;
     background: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -105,7 +105,7 @@ export const ListContainer = styled.div`
 `
 
 export const MapContainer = styled.div`
-    flex: 2; 
+    flex: 2;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -121,6 +121,8 @@ export const InfoWindowContent = styled.div`
 
 export const ResultsContainer = styled.div`
     margin-top: 20px;
+    overflow-y: auto;
+    max-height: 719px; 
 `
 export const Text = styled.div`
     padding: 1px;
@@ -132,7 +134,7 @@ export const Text = styled.div`
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
-    line-height: 20px; 
+    line-height: 20px;
     white-space: normal;
     position: relative;
     text-align: left;
@@ -153,7 +155,7 @@ export const CustomOverlayStyle = styled.div`
     font-size: 14px;
     color: #333;
     white-space: nowrap;
-    pointer-events: none; 
+    pointer-events: none;
 `
 export const AddressText = styled.div`
     padding: 1px;
@@ -228,7 +230,7 @@ export const PhoneText = styled.div`
 export const Img = styled.div``
 export const Image = styled.div`
     width: 100%;
-    max-width: 500px; 
+    max-width: 500px;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -241,7 +243,7 @@ export const ImageContainer = styled.div`
 `
 export const Image1 = styled.div`
     width: 100%;
-    max-width: 400px; 
+    max-width: 400px;
     height: auto;
     margin-bottom: 20px;
     border-radius: 8px;
@@ -271,7 +273,6 @@ export const ListItem = styled.div`
         border-radius: 7px;
         width: 380px;
         padding-left: 10px;
-
     }
 `
 
@@ -302,6 +303,3 @@ export const SearchAndListContainer = styled.div`
     width: 100%;
     justify-content: space-between;
 `
-
-
-
