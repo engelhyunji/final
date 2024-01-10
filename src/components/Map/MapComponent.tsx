@@ -1,27 +1,27 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Modal from 'react-modal';
-import { Map, MapMarker, MapInfoWindow } from 'react-kakao-maps-sdk';
-import * as ST from './style';
-import instance from '../../apis/instance';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useRef } from 'react'
+import Modal from 'react-modal'
+import { Map, MapMarker, MapInfoWindow } from 'react-kakao-maps-sdk'
+import * as ST from './style'
+import instance from '../../apis/instance'
+import { useNavigate } from 'react-router-dom'
 
-Modal.setAppElement('#root');
+Modal.setAppElement('#root')
 
 export interface ShopPostData {
-    shopId: number;
-    userId: number;
-    shopName: string;
-    shopStartTime: string;
-    shopEndTime: string;
-    shopTel1: string;
-    shopTel2: string;
-    shopTel3: string;
-    shopAddress: string;
-    shopType: string;
-    shopDescribe: string;
-    latitude: number;
-    longitude: number;
-    imageUrls: string[];
+    shopId: number
+    userId: number
+    shopName: string
+    shopStartTime: string
+    shopEndTime: string
+    shopTel1: string
+    shopTel2: string
+    shopTel3: string
+    shopAddress: string
+    shopType: string
+    shopDescribe: string
+    latitude: number
+    longitude: number
+    imageUrls: string[]
 }
 
 // const customModalStyles = {
@@ -45,122 +45,122 @@ export interface ShopPostData {
 //     },
 // };
 
-Modal.setAppElement('#root');
+Modal.setAppElement('#root')
 
 interface MapComponentProps {
-    coords: { lat: number; lng: number };
+    coords: { lat: number; lng: number }
 }
 
 const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
-    const [info, setInfo] = useState<ShopPostData | null>(null);
-    const [markers, setMarkers] = useState<ShopPostData[]>([]);
-    const [keyword, setKeyword] = useState('');
-    const [message, setMessage] = useState('');
-    const [selectedPlaceIndex, setSelectedPlaceIndex] = useState<number | null>(null);
+    const [info, setInfo] = useState<ShopPostData | null>(null)
+    const [markers, setMarkers] = useState<ShopPostData[]>([])
+    const [keyword, setKeyword] = useState('')
+    const [message, setMessage] = useState('')
+    const [selectedPlaceIndex, setSelectedPlaceIndex] = useState<number | null>(null)
     // const [isModalOpen, setIsModalOpen] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [placesPerPage] = useState(2);
-    const map = useRef<any>(null);
-    const navigate = useNavigate();
+    const [currentPage, setCurrentPage] = useState(1)
+    const [placesPerPage] = useState(2)
+    const map = useRef<any>(null)
+    const navigate = useNavigate()
 
-    const defaultCoords = { lat: 37.5665, lng: 126.978 };
+    const defaultCoords = { lat: 37.5665, lng: 126.978 }
 
     const navigateToShopList = () => {
-        navigate('/shopslist');
-    };
+        navigate('/shopslist')
+    }
 
     const initializeMap = () => {
-        const container = map.current;
-        if (!container) return;
+        const container = map.current
+        if (!container) return
 
         const options = {
             center: new window.kakao.maps.LatLng(coords.lat || defaultCoords.lat, coords.lng || defaultCoords.lng),
             level: 3,
-        };
-        map.current = new window.kakao.maps.Map(container, options);
-    };
+        }
+        map.current = new window.kakao.maps.Map(container, options)
+    }
 
     const searchPlaces = async () => {
         if (!keyword.trim()) {
-            alert('가게목록을 조회하시고 검색어를 입력해주세요!');
-            return;
+            alert('가게목록을 조회하시고 검색어를 입력해주세요!')
+            return
         }
 
         try {
-            const response = await instance.get(`/api/shops?keyword=${encodeURIComponent(keyword)}`);
+            const response = await instance.get(`/api/shops?keyword=${encodeURIComponent(keyword)}`)
             if (response.status === 200) {
-                const shopsData: ShopPostData[] = response.data.result;
+                const shopsData: ShopPostData[] = response.data.result
                 // 필터링된 데이터만 마커로 표시
                 const filteredMarkers = shopsData.filter(
-                    (shop) => shop.shopName.includes(keyword) || shop.shopAddress.includes(keyword)
-                );
-                setMarkers(filteredMarkers);
-                setMessage('');
+                    (shop) => shop.shopName.includes(keyword) || shop.shopAddress.includes(keyword),
+                )
+                setMarkers(filteredMarkers)
+                setMessage('')
             } else {
-                console.error('가게 데이터 가져오기 오류:', response.statusText);
+                console.error('가게 데이터 가져오기 오류:', response.statusText)
             }
         } catch (error) {
-            console.error('가게 데이터 가져오기 오류:', error);
+            console.error('가게 데이터 가져오기 오류:', error)
         }
-    };
+    }
 
     const handleListItemClick = (marker: ShopPostData, index: number) => {
         // setIsModalOpen(true);
-        setInfo(marker);
-        setSelectedPlaceIndex(index);
+        setInfo(marker)
+        setSelectedPlaceIndex(index)
 
         if (map.current) {
             map.current.panTo(
                 new window.kakao.maps.LatLng(
                     marker.latitude ?? defaultCoords.lat,
-                    marker.longitude ?? defaultCoords.lng
-                )
-            );
+                    marker.longitude ?? defaultCoords.lng,
+                ),
+            )
         }
-    };
+    }
 
     useEffect(() => {
         if (window.kakao && window.kakao.maps) {
-            initializeMap();
+            initializeMap()
         } else {
-            const script = document.createElement('script');
-            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=30e58bfb3907dffb16196ae237d38d8&libraries=services';
-            document.head.appendChild(script);
+            const script = document.createElement('script')
+            script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=30e58bfb3907dffb16196ae237d38d8&libraries=services'
+            document.head.appendChild(script)
 
             script.onload = () => {
-                initializeMap();
-            };
+                initializeMap()
+            }
 
             const fetchShops = async () => {
                 try {
-                    const response = await instance.get('/api/shops');
+                    const response = await instance.get('/api/shops')
                     if (response.status === 200) {
-                        const shopsData: ShopPostData[] = response.data.result;
-                        setMarkers(shopsData);
+                        const shopsData: ShopPostData[] = response.data.result
+                        setMarkers(shopsData)
                     } else {
-                        console.error('가게 데이터 가져오기 오류:', response.statusText);
+                        console.error('가게 데이터 가져오기 오류:', response.statusText)
                     }
                 } catch (error) {
-                    console.error('가게 데이터 가져오기 오류:', error);
+                    console.error('가게 데이터 가져오기 오류:', error)
                 }
-            };
+            }
 
-            fetchShops();
+            fetchShops()
         }
-    }, [coords]); // Include 'coords' as a dependency
+    }, [coords]) // Include 'coords' as a dependency
 
     useEffect(() => {
-        const indexOfLastPlace = currentPage * placesPerPage;
-        const indexOfFirstPlace = indexOfLastPlace - placesPerPage;
-        const currentPlaces = markers.slice(indexOfFirstPlace, indexOfLastPlace);
+        const indexOfLastPlace = currentPage * placesPerPage
+        const indexOfFirstPlace = indexOfLastPlace - placesPerPage
+        const currentPlaces = markers.slice(indexOfFirstPlace, indexOfLastPlace)
 
-        setInfo(currentPlaces[0]);
-        setSelectedPlaceIndex(0);
-    }, [markers, currentPage, placesPerPage]); 
+        setInfo(currentPlaces[0])
+        setSelectedPlaceIndex(0)
+    }, [markers, currentPage, placesPerPage])
 
-    const pageNumbers = [];
+    const pageNumbers = []
     for (let i = 1; i <= Math.ceil(markers.length / placesPerPage); i++) {
-        pageNumbers.push(i);
+        pageNumbers.push(i)
     }
 
     return (
@@ -170,8 +170,8 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                     <ST.Input
                         value={keyword}
                         onChange={(e) => {
-                            setKeyword(e.target.value);
-                            setMessage('');
+                            setKeyword(e.target.value)
+                            setMessage('')
                         }}
                         placeholder="검색할 애견샵을 입력해보세요🐶"
                     />
@@ -184,38 +184,41 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                     </ST.Wrap1>
                     {message && <div style={{ color: 'red' }}>{message}</div>}
                     <ST.ResultsContainer>
-                        {markers.map((marker, index) => (
-                            <ST.ListItem
-                                key={`place-${index}`}
-                                onClick={() => handleListItemClick(marker, index)}
-                                className={index === selectedPlaceIndex ? 'active' : ''}
-                            >
-                                <ST.Text>{marker.shopName}</ST.Text>
-                                <ST.Image1>
-                                    {marker.imageUrls && marker.imageUrls.length > 0 && (
-                                        <img
-                                            src={marker.imageUrls[0]}
-                                            alt={marker.shopName}
-                                            style={{ width: '350px', height: '190px', borderRadius: '7px' }}
-                                        />
-                                    )}
-                                </ST.Image1>
-                                <ST.AddressText>
-                                    <strong>주소:</strong> {marker.shopAddress}
-                                </ST.AddressText>
-                                <ST.Wrap>
-                                    <ST.ShopTime>
-                                        <strong>영업시간:</strong> {`${marker.shopStartTime} - ${marker.shopEndTime}`}
-                                    </ST.ShopTime>
-                                    {marker.shopTel1 && marker.shopTel2 && marker.shopTel3 && (
-                                        <ST.PhoneText>
-                                            <strong>전화번호:</strong>{' '}
-                                            {`${marker.shopTel1}-${marker.shopTel2}-${marker.shopTel3}`}
-                                        </ST.PhoneText>
-                                    )}
-                                </ST.Wrap>
-                            </ST.ListItem>
-                        ))}
+                        {markers
+                            .slice((currentPage - 1) * placesPerPage, currentPage * placesPerPage)
+                            .map((marker, index) => (
+                                <ST.ListItem
+                                    key={`place-${index}`}
+                                    onClick={() => handleListItemClick(marker, index)}
+                                    className={index === selectedPlaceIndex ? 'active' : ''}
+                                >
+                                    <ST.Text>{marker.shopName}</ST.Text>
+                                    <ST.Image1>
+                                        {marker.imageUrls && marker.imageUrls.length > 0 && (
+                                            <img
+                                                src={marker.imageUrls[0]}
+                                                alt={marker.shopName}
+                                                style={{ width: '350px', height: '190px', borderRadius: '7px' }}
+                                            />
+                                        )}
+                                    </ST.Image1>
+                                    <ST.AddressText>
+                                        <strong>주소:</strong> {marker.shopAddress}
+                                    </ST.AddressText>
+                                    <ST.Wrap>
+                                        <ST.ShopTime>
+                                            <strong>영업시간:</strong>{' '}
+                                            {`${marker.shopStartTime} - ${marker.shopEndTime}`}
+                                        </ST.ShopTime>
+                                        {marker.shopTel1 && marker.shopTel2 && marker.shopTel3 && (
+                                            <ST.PhoneText>
+                                                <strong>전화번호:</strong>{' '}
+                                                {`${marker.shopTel1}-${marker.shopTel2}-${marker.shopTel3}`}
+                                            </ST.PhoneText>
+                                        )}
+                                    </ST.Wrap>
+                                </ST.ListItem>
+                            ))}
                     </ST.ResultsContainer>
                     <ST.Pagination>
                         {pageNumbers.map((number) => (
@@ -273,7 +276,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
                 </Map>
             </ST.MapContainer>
         </ST.Layout>
-    );
-};
+    )
+}
 
-export default MapComponent;
+export default MapComponent
