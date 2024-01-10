@@ -90,10 +90,15 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
             const response = await instance.get(`/api/shops?keyword=${encodeURIComponent(keyword)}`)
             if (response.status === 200) {
                 const shopsData: ShopPostData[] = response.data.result
-                // 필터링된 데이터만 마커로 표시
                 const filteredMarkers = shopsData.filter(
                     (shop) => shop.shopName.includes(keyword) || shop.shopAddress.includes(keyword),
                 )
+
+                if (filteredMarkers.length === 0) {
+                    alert('해당 키워드가 없습니다. 목록을 조회하시고 다시 검색해주세요')
+                    return
+                }
+
                 setMarkers(filteredMarkers)
                 setMessage('')
             } else {
