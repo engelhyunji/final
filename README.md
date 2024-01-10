@@ -92,6 +92,7 @@
 <details>
   <summary>지도</summary>
 - 등록한 가게의 위치 및 정보를 바탕으로 카카오api 지도 상에서 가게 위치 조회(마커, 인포윈도우), 키워드 검색 및 목록 조회가 가능합니다.<br>
+- 목록에서 해당 가게를 클릭하면 지도에서 가게의 위치로 이동하여 표시합니다.
   
 ![screencapture-localhost-5173-map-2024-01-11-06_22_40](https://github.com/engelhyunji/final/assets/145903783/9e24e46d-9a15-49fe-8ac5-f06de16b1a4a)
 
