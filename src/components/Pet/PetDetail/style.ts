@@ -1,32 +1,23 @@
 import styled from 'styled-components'
 
-export const Wrap = styled.div`
-    max-width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`
 export const Wrap2 = styled.div`
     width: 30%;
     margin: 20px auto;
-    padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
 `
 
 export const ProfileContainer = styled.div`
     display: flex;
-    /* background: url('./PetDetail.png'); */
+    flex-direction: row;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    border-radius: 10px;
+    height: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 1440px;
-    margin-bottom: 2rem;
-    border-radius: 10px;
+    width: 100%;
+    margin: auto;
+    background-color: #fff;
+    padding-bottom: 50%;
 `
 
 export const Text = styled.div`
@@ -47,8 +38,6 @@ export const Text1 = styled.div`
 `
 
 export const PetItem = styled.div`
-    border: 1px solid #ccc;
-    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     height: 450px;
 `
@@ -61,7 +50,7 @@ export const Button = styled.div`
     top: 50%;
     bottom: 50%;
     width: 60px;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     text-decoration: none;
     font-weight: bold;
     &:hover {
@@ -77,34 +66,39 @@ export const Image = styled.img`
 
 export const DetailCard = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    margin-left: 120px;
-    margin-top: 35px;
     justify-content: center;
-    /* background: #fff; */
-    border-radius: 15px;
+    margin: 0 auto;
+    justify-content: center;
+    background: #fff;
     font-family: 'Pretendard Variable', sans-serif;
     width: 100%;
-    width: 1200px;
-    height: 276px;
+    max-width: 1440px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
+    height: 276px;
     background-image: url('/PetDetail.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    position: relative;
+    z-index: 10;
+    top: 0;
 `
 
 export const Name = styled.h1`
-    padding-left: 110px;
-    font-size: 24px;
     color: #000;
     font-family: Pretendard Variable;
-    font-size: 35px;
+    font-size: 36px;
     font-style: normal;
-    text-align: center;
     font-weight: 700;
-    line-height: 36px;
+    line-height: 36px; /* 100% */
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 20px;
 `
 
 export const DetailLabel = styled.span`
@@ -112,8 +106,17 @@ export const DetailLabel = styled.span`
     font-family: Pretendard Variable;
     font-size: 20px;
     font-style: normal;
-    font-weight: 600;
-    line-height: 24px;
+    font-weight: 400;
+    line-height: 24px; /* 120% */
+`
+export const DetailLabel1 = styled.span`
+    color: var(--Gray3, #575756);
+    font-family: Pretendard Variable;
+    font-size: 20px;
+    font-style: normal;
+    margin-left: -17px;
+    font-weight: 400;
+    line-height: 24px; /* 120% */
 `
 
 export const DetailText = styled.p`
@@ -125,15 +128,25 @@ export const DetailText = styled.p`
 `
 export const MultiLineText = styled.div`
     white-space: pre-line;
+    margin-top: 86px;
 `
 
 export const TextContainer = styled.p`
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-items: flex-start;
-    justify-content: center;
+    position: absolute;
+    top: 100%;
+    margin-top: -43px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--Gray-1, #dadada);
+    background: #fff;
+    box-shadow: 7px 7px 15px 0px rgba(0, 0, 0, 0.25);
+    width: 630px;
+    height: 349px;
+    flex-shrink: 0;
 `
 export const TextContainer2 = styled.p`
     padding-left: 170px;
@@ -156,19 +169,29 @@ export const TextContainer3 = styled.p`
 
 export const TextLabel = styled.p`
     color: var(--Gray3, #575756);
-    font-family: 'Pretendard Variable', sans-serif;
-    font-size: 19px;
-    font-weight: 400;
-    line-height: 24px;
-    white-space: normal;
+    font-family: Pretendard Variable;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */
+    gap: 20px;
+`
+export const TextLabel1 = styled.p`
+    color: var(--Gray3, #575756);
+    font-family: Pretendard Variable;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */
+    gap: 20px;
 `
 export const TextContent = styled.div`
-    display: flex;
-    flex-direction: row;
+    margin: 0 auto;
     align-items: center;
-    gap: 10px;
-    padding-left: 100px;
-    margin-top: 10px;
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+    margin-top: 7px;
 `
 
 export const Posts = styled.div`
@@ -194,7 +217,6 @@ export const ImgCard = styled.div`
     margin-top: 33px;
     width: 348px;
     height: 300px;
-    border-radius: 10px;
     overflow: hidden;
     margin-bottom: 35px;
     margin-left: 390px;
@@ -203,16 +225,15 @@ export const ImgCard = styled.div`
 
 export const Img = styled.img`
     width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
+    height: 100%;
+    object-fit: cover;
 `
 
 export const Img2 = styled.img`
-    width: 208px;
-    height: 208px;
+    width: 317px;
+    height: 317px;
     border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.25);
     object-fit: cover;
 `
 export const ModalContent = styled.div`
@@ -223,7 +244,7 @@ export const ModalContent = styled.div`
     width: 90vw;
     max-height: 80vh;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    /* border-radius: 10px; */
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -234,7 +255,7 @@ export const ModalContent = styled.div`
 export const ModalImage = styled.img`
     max-width: 100%;
     max-height: 75vh;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 `
 
 export const CloseButton = styled.button`
@@ -254,11 +275,13 @@ export const CloseButton = styled.button`
     }
 `
 export const ImageContainer = styled.div`
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: -129px;
-    padding-left: 290px;
-    background-repeat: no-repeat;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: -9rem;
+    background-size: cover;
+    background-position: center;
+    z-index: 10;
+    position: absolute;
+    margin-top: 100px;
 `
