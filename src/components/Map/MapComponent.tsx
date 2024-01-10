@@ -96,7 +96,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
 
                 if (filteredMarkers.length === 0) {
                     // 키워드
-                    alert('해당 키워드가 없습니다. 목록을 조회하시고 다시 검색해주세요')
+                    alert('해당 키워드가 없습니다. 목록을 조회하시고 다시 검색해주세요.')
                     return
                 }
 
