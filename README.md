@@ -91,7 +91,6 @@
   <summary>지도</summary>
 - 가게의 위치정보를 바탕으로 카카오api 지도 상에서 가게 검색, 목록 조회가 가능합니다.<br>
   
-![image](https://github.com/engelhyunji/final/assets/147478174/e264b37f-708f-4e68-a09a-b0e7def24b64)
 ![screencapture-localhost-5173-map-2024-01-11-06_22_40](https://github.com/engelhyunji/final/assets/145903783/9e24e46d-9a15-49fe-8ac5-f06de16b1a4a)
 
 </details>
