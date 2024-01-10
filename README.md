@@ -60,14 +60,15 @@
 </details>
 
 # 🐾 주요기능
-### 가게 및 반려동물 등록
+### 가게 및 반려동물 등록 및 목록
 <details>
   <summary>가게 및 반려동물 등록</summary> 
 - 로그인한 사용자에 한하여 나의 가게 또는 반려동물을 이미지와 함께 **등록**할 수 있습니다.<br>
 - 등록한 가게 또는 반려동물은 각 목록페이지에 게시되어 공유됩니다.<br>
 - 가게의 주소를 입력하면 곧 바로 위도, 경도로 반환하여 등록할 수 있습니다.
   
-![image](https://github.com/engelhyunji/final/assets/147478174/d89ad0b9-f305-4471-94a3-55679c0ed34f)
+![MergedImages](https://github.com/engelhyunji/final/assets/145903783/f705439e-8852-4398-af04-d24e9efc5e51)
+
 </details>
 
 ### 가게 리뷰 작성 및 리뷰 추천
