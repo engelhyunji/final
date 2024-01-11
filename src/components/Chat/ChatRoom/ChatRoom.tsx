@@ -70,7 +70,7 @@ const ChatRoom: React.FC = () => {
     // 웹소켓 연결 후 하트비트 전송 설정
     useEffect(() => {
         const heartbeatInterval = setInterval(sendHeartbeat, 5000) // 5초마다 전송
-        return () => clearInterval(heartbeatInterval) // 컴포넌트 언마운트 시 인터벌 정지
+        return () => clearInterval(heartbeatInterval)
     }, [])
 
     useEffect(() => {
@@ -117,7 +117,6 @@ const ChatRoom: React.FC = () => {
                     console.log('connect !')
 
                     if (message.body) {
-                        // 다른 메시지 유형 (ENTER, QUIT, TALK)에 따라 적절하게 처리
                         const msg = JSON.parse(message.body)
                         setMessages((prevMessages) => [...prevMessages, msg])
 
@@ -132,17 +131,7 @@ const ChatRoom: React.FC = () => {
                 headers,
             )
         }
-        // client.current.subscribe(
-        //     `/sub/chat/room/${roomId}`,
-        //     (message: any) => {
-        //         console.log('connect !')
-        //         if (message.body) {
-        //             const msg = JSON.parse(message.body)
-        //             setMessages((prevMessages) => [...prevMessages, msg])
-        //         }
-        //     },
-        //     headers,
-        // )
+        
     }
 
     // 하트비트 메시지 전송 함수
@@ -159,7 +148,6 @@ const ChatRoom: React.FC = () => {
         })
     }
 
-    
 
     const connectWebSocket = () => {
         client.current = new Stomp.Client({
