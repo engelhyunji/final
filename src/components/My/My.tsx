@@ -13,9 +13,10 @@ import { ApiResponse, deletePet } from '../../apis/api/petmodify'
 import { Chatroom } from '../Chat/ChatList'
 import { AddHash, deleteHash } from '../../apis/api/tag'
 import Empty from './Empty'
+import ModalPortal from '../modal/ModalPortal'
+import LeaveUserModal from '../modal/LeaveUserModal'
 
 const My: React.FC = () => {
-    const { logout } = useAuth()
     const navigate = useNavigate()
     const nickname = localStorage.getItem('nickname')
 
@@ -26,6 +27,13 @@ const My: React.FC = () => {
     const [shops, setShops] = useState<Shop[]>([])
     const [pets, setPets] = useState<Pet[]>([])
     const [chatRooms, setChatRooms] = useState<Chatroom[]>([])
+
+    const [modalOn, setModalOn] = useState(false)
+
+    const handleModal = () => {
+        setModalOn(!modalOn)
+    }
+
 
     useEffect(() => {
         getMyShop()
@@ -142,23 +150,6 @@ const My: React.FC = () => {
     const enterRoom = (roomId: string): void => {
         if (confirm('채팅방에 입장하시겠습니까?')) {
             navigate(`/chat/room/enter/${roomId}`)
-        }
-    }
-
-    const LeaveUserHandler = async () => {
-        if (confirm('정말로 탈퇴하실건가요?😿')) {
-            const password = prompt('비밀번호를 입력하시면 회원탈퇴가 완료됩니다🙊')
-            if (password) {
-                try {
-                    await instance.delete('/api/user/delete', { data: { password } })
-                    logout()
-                    alert('회원탈퇴가 완료되었습니다')
-                    navigate('/')
-                } catch (err) {
-                    console.log(err)
-                    alert('탈퇴실패 비밀번호가 틀렸습니다')
-                }
-            }
         }
     }
 
@@ -401,11 +392,11 @@ const My: React.FC = () => {
                 </ST.ShopNPetSection>
             )}
 
-            
-
-            <ST.MyChatBtn onClick={LeaveUserHandler} $color="#8F8E93" $backColor="#E9E9E6">
+            <ST.MyChatBtn onClick={handleModal} $color="#8F8E93" $backColor="#E9E9E6">
                 탈퇴하기
             </ST.MyChatBtn>
+            <ModalPortal>{modalOn && <LeaveUserModal onClose={handleModal} />}</ModalPortal>
+
         </ST.MyContainer>
     )
 }
