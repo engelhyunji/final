@@ -38,11 +38,10 @@ const MainTop: React.FC = () => {
                 if (response.data.isSuccess) {
                     setPets(response.data.result);
                 } else {
-                    throw new Error(`Error: ${response.data.message}`);
+                    throw new Error(`에러: ${response.data.message}`);
                 }
             } catch (error) {
-                console.error('Error:', error);
-                setError('Failed to load pets.');
+                setError('펫정보를 찾을 수 없습니다.');
             } finally {
                 setIsLoading(false);
             }

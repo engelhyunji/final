@@ -51,7 +51,6 @@ const Category: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        console.log('Current shops state:', shops)
     }, [shops])
 
     const filteredShops = shops.filter((shop) => shop.shopType === selectedCategory)

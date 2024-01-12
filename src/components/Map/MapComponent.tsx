@@ -153,7 +153,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ coords }) => {
 
             fetchShops()
         }
-    }, [coords]) // Include 'coords' as a dependency
+    }, [coords])
 
     useEffect(() => {
         const indexOfLastPlace = currentPage * placesPerPage
