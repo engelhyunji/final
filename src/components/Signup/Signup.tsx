@@ -13,6 +13,9 @@ export interface UserData {
 
 const Signup: React.FC = () => {
     const navigate = useNavigate()
+    // 인증코드 전송 후 로딩 중 안내
+    const [loading, setLoading] = useState(false)
+
     const [code, setCode] = useState('')
     // 인증코드 5분 타이머 컨트롤
     const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false)
@@ -40,6 +43,7 @@ const Signup: React.FC = () => {
         const emailEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i
         if (emailEx.test(email)) {
             try {
+                setLoading(true)
                 await instance.post('/api/user/email', { email })
                 alert('이메일로 인증코드가 발송되었습니다.')
                 setIsTimerRunning(true)
@@ -48,6 +52,8 @@ const Signup: React.FC = () => {
             } catch (err: any) {
                 console.log('이메일 전송에러 :', err)
                 alert(err.response.data.message)
+            } finally {
+                setLoading(false)
             }
         } else {
             alert('이메일 형식이 맞지 않습니다.')
@@ -91,7 +97,7 @@ const Signup: React.FC = () => {
             alert('정보를 모두 입력해주세요😺')
             return false
 
-        // 비밀번호 유효성
+            // 비밀번호 유효성
         } else if (userData.password.length < 4 || userData.password.length > 12) {
             alert('비밀번호는 4자리 ~ 12자리로 입력해주세요.')
             return false
@@ -101,11 +107,9 @@ const Signup: React.FC = () => {
         } else if (num < 0 || eng < 0) {
             alert('숫자, 영문을 혼합하여 입력해주세요.')
             return false
-
         } else if (userData.nickname.length < 1 || userData.nickname.length > 10) {
             alert('닉네임은 1~10자로 입력해주세요.')
             return false
-
         } else if (userData.phoneNumber.length < 10 || userData.phoneNumber.length > 11) {
             alert('전화번호는 10~11자리로 입력해주세요.')
             return false
@@ -137,7 +141,13 @@ const Signup: React.FC = () => {
                         />
                     </ST.SignupInputBox>
 
-                    <ST.SignupEBtn onClick={() => emailVerify(userData.email)} disabled={isEmailVerified} style={{ color: isEmailVerified ? '#fff' : '#00bd8f' }}>인증코드 발송</ST.SignupEBtn>
+                    <ST.SignupEBtn
+                        onClick={() => emailVerify(userData.email)}
+                        disabled={isEmailVerified}
+                        style={{ color: isEmailVerified ? '#fff' : '#00bd8f' }}
+                    >
+                        {loading ? '인증코드 전송 중...' : '인증코드 발송'}
+                    </ST.SignupEBtn>
 
                     <ST.VerifyBox>
                         <ST.SignupInputDiv>
@@ -151,7 +161,13 @@ const Signup: React.FC = () => {
                             />
                             {isTimerRunning && <Timer key={timerKey} mm={'5'} ss={'0'} isRunning={isTimerRunning} />}
                         </ST.SignupInputDiv>
-                        <ST.ComfirmBtn onClick={() => codeVerify(userData.email, code)} disabled={isEmailVerified}  style={{ color: isEmailVerified ? '#fff' : '#00bd8f' }}>확인</ST.ComfirmBtn>
+                        <ST.ComfirmBtn
+                            onClick={() => codeVerify(userData.email, code)}
+                            disabled={isEmailVerified}
+                            style={{ color: isEmailVerified ? '#fff' : '#00bd8f' }}
+                        >
+                            확인
+                        </ST.ComfirmBtn>
                     </ST.VerifyBox>
 
                     <ST.SignupInputBox>
