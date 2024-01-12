@@ -82,7 +82,6 @@ const PetDetail: React.FC = () => {
                     setError('Pet ID.')
                 }
             } catch (error) {
-                console.error('에러', error)
                 setError('에러')
             }
         }

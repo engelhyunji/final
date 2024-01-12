@@ -62,7 +62,6 @@ const PetList: React.FC = () => {
                 throw new Error(`오류 발생: ${response.data.message}`)
             }
         } catch (error) {
-            console.error('에러:', error)
             setError('펫 목록을 불러오는 데 실패했습니다.')
         }
     }
