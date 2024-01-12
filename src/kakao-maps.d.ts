@@ -119,10 +119,10 @@ declare global {
     interface Window {
         kakao: {
             maps: {
-                LatLng: typeof kakao.maps.LatLng;  // Referencing the type directly from kakao.maps
-                Map: typeof kakao.maps.Map;       // Referencing the type directly from kakao.maps
+                LatLng: typeof kakao.maps.LatLng;  
+                Map: typeof kakao.maps.Map;      
                 services: {
-                    Places: typeof kakao.maps.services.Places;  // Referencing the type directly from kakao.maps
+                    Places: typeof kakao.maps.services.Places; 
                     Status: typeof kakao.maps.services.Status;
                 };
             };
